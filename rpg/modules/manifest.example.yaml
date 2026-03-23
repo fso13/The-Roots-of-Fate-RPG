@@ -1,0 +1,30 @@
+# Манифест кампании: какие модули активны.
+# Скопируйте в manifest.yaml и правьте под стол.
+
+campaign:
+  name: "Пример кампании"
+  dice_type: "d6"   # единственный тип кубиков: d6 | d8 | d10 | d12
+
+modules:
+  core: true
+  tactical_combat: true    # глава 02 — упрощённый бой
+  talent_trees: true       # глава 03
+  magic: true              # глава 04 — магия как атака
+  equipment: true          # глава 05
+  bestiary: true           # глава 06
+  wounds: false            # глава 07 — детальный учёт ран
+  crits_and_fumbles: false # глава 08 — криты и промахи 6+6 / 1+1
+  character_progression: true  # глава 09 — создание и уровни (рекомендуется true)
+
+  # Фэнтези: дополнительные тексты (не обязательны для ядра)
+  fantasy_spells: true     # fantasy/01-zaklinaniya.md
+  fantasy_skills: true     # fantasy/02-talanty-i-navyki.md
+  fantasy_gear: true       # fantasy/03-snaryazhenie.md
+  fantasy_bestiary: true   # fantasy/04-bestiariy.md
+
+  firearms: false
+  vehicles: false
+
+custom_modules:
+  - path: "./my_modules/sea_faring"
+    enabled: false
