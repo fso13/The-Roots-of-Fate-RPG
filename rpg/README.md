@@ -17,6 +17,7 @@
 | [08-krity-i-promahi.md](08-krity-i-promahi.md) | *Модуль:* криты и промахи по паре кубиков |
 | [09-sozdanie-i-uroven.md](09-sozdanie-i-uroven.md) | Создание персонажа и левел-ап |
 | [10-sostoyaniya.md](10-sostoyaniya.md) | *Модуль:* состояния (сбитый с ног, оглушённый, разоружён и т.д.) |
+| [11-otryady.md](11-otryady.md) | *Модуль:* бой с отрядами (группы одинаковых монстров, суммарные раны, массовые атаки) |
 | [modules/manifest.example.yaml](modules/manifest.example.yaml) | Пример манифеста |
 
 ### Фэнтези (дополнительные главы)

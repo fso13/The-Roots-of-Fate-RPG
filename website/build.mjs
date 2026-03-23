@@ -23,6 +23,7 @@ const PAGE_TO_MODULE = {
   "08-krity-i-promahi.html": "crits_and_fumbles",
   "09-sozdanie-i-uroven.html": "character_progression",
   "10-sostoyaniya.html": "states",
+  "11-otryady.html": "squads",
   "fantasy/01-zaklinaniya.html": "fantasy_spells",
   "fantasy/02-talanty-i-navyki.html": "fantasy_skills",
   "fantasy/03-snaryazhenie.html": "fantasy_gear",
