@@ -16,6 +16,7 @@
 | [07-rany.md](07-rany.md) | *Модуль:* учёт ран (опционально) |
 | [08-krity-i-promahi.md](08-krity-i-promahi.md) | *Модуль:* криты и промахи по паре кубиков |
 | [09-sozdanie-i-uroven.md](09-sozdanie-i-uroven.md) | Создание персонажа и левел-ап |
+| [10-sostoyaniya.md](10-sostoyaniya.md) | *Модуль:* состояния (сбитый с ног, оглушённый, разоружён и т.д.) |
 | [modules/manifest.example.yaml](modules/manifest.example.yaml) | Пример манифеста |
 
 ### Фэнтези (дополнительные главы)
@@ -26,6 +27,7 @@
 | [fantasy/02-talanty-i-navyki.md](fantasy/02-talanty-i-navyki.md) | Навыки (бой, социал, знания) и деревья талантов |
 | [fantasy/03-snaryazhenie.md](fantasy/03-snaryazhenie.md) | Расширенное снаряжение |
 | [fantasy/04-bestiariy.md](fantasy/04-bestiariy.md) | Фэнтези-бестиарий (стиль HoMM V + классика) |
+| [fantasy/05-inventar.md](fantasy/05-inventar.md) | Инвентарь: сетка сумки 10×4, слоты экипировки |
 
 ### Приключения
 

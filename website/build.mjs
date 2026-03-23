@@ -22,10 +22,12 @@ const PAGE_TO_MODULE = {
   "07-rany.html": "wounds",
   "08-krity-i-promahi.html": "crits_and_fumbles",
   "09-sozdanie-i-uroven.html": "character_progression",
+  "10-sostoyaniya.html": "states",
   "fantasy/01-zaklinaniya.html": "fantasy_spells",
   "fantasy/02-talanty-i-navyki.html": "fantasy_skills",
   "fantasy/03-snaryazhenie.html": "fantasy_gear",
   "fantasy/04-bestiariy.html": "fantasy_bestiary",
+  "fantasy/05-inventar.html": "fantasy_inventory",
 };
 
 marked.use({ gfm: true });
@@ -62,6 +64,41 @@ function fixMdLinks(html) {
   });
 }
 
+/** Создаёт slug для якоря из текста заголовка (без HTML) */
+function slugify(text) {
+  const stripped = text.replace(/<[^>]+>/g, "").trim();
+  return stripped
+    .toLowerCase()
+    .replace(/\s+/g, "-")
+    .replace(/[^\p{L}\p{N}-]/gu, "")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "") || "section";
+}
+
+/** Извлекает h2/h3, добавляет id, возвращает { html, toc } */
+function extractHeadingsAndAddIds(html) {
+  const toc = [];
+  const seen = new Map();
+
+  function ensureUniqueId(baseId) {
+    const count = (seen.get(baseId) || 0) + 1;
+    seen.set(baseId, count);
+    return count === 1 ? baseId : `${baseId}-${count}`;
+  }
+
+  const modified = html.replace(
+    /<(h[23])>([\s\S]*?)<\/\1>/gi,
+    (match, tag, inner) => {
+      const level = parseInt(tag.charAt(1), 10);
+      const id = ensureUniqueId(slugify(inner));
+      toc.push({ level, text: inner.replace(/<[^>]+>/g, "").trim(), id });
+      return `<${tag} id="${id}">${inner}</${tag}>`;
+    }
+  );
+
+  return { html: modified, toc };
+}
+
 function depthOf(relPath) {
   return relPath.split("/").length - 1;
 }
@@ -71,7 +108,7 @@ function cssPrefix(relHtmlPath) {
   return d === 0 ? "" : "../".repeat(d);
 }
 
-function wrapPage({ title, bodyHtml, relPath, navGroups, activeSlug, extraScripts = "" }) {
+function wrapPage({ title, bodyHtml, relPath, navGroups, activeSlug, toc = [], extraScripts = "" }) {
   const prefix = cssPrefix(relPath);
   const navHtml = navGroups
     .map((group) => {
@@ -88,6 +125,27 @@ function wrapPage({ title, bodyHtml, relPath, navGroups, activeSlug, extraScript
       return itemsHtml;
     })
     .join("\n");
+
+  const tocHtml =
+    toc.length > 0
+      ? toc
+          .map((item) => {
+            const cls = item.level === 3 ? "toc-item toc-item-h3" : "toc-item toc-item-h2";
+            return `<a class="${cls}" href="#${escapeHtml(item.id)}">${escapeHtml(item.text)}</a>`;
+          })
+          .join("\n")
+      : "";
+
+  const tocSidebar =
+    tocHtml
+      ? `
+    <aside class="toc-sidebar">
+      <div class="toc-sidebar-inner">
+        <div class="toc-sidebar-title">На странице</div>
+        <nav class="toc-nav">${tocHtml}</nav>
+      </div>
+    </aside>`
+      : "";
 
   return `<!DOCTYPE html>
 <html lang="ru">
@@ -111,7 +169,7 @@ function wrapPage({ title, bodyHtml, relPath, navGroups, activeSlug, extraScript
       <a href="${prefix}nastroyki.html">Настройки</a>
     </nav>
   </header>
-  <div class="layout-doc">
+  <div class="layout-doc${tocSidebar ? " layout-doc-with-toc" : ""}">
     <aside class="sidebar">
       <div class="sidebar-inner">
         <div class="sidebar-title">Разделы</div>
@@ -120,7 +178,7 @@ function wrapPage({ title, bodyHtml, relPath, navGroups, activeSlug, extraScript
     </aside>
     <article class="doc-main">
       ${bodyHtml}
-    </article>
+    </article>${tocSidebar}
   </div>
   <footer class="site-footer">
     <p>Модульная настольная РПГ «Корни судьбы» · <a href="https://gitlab.com/fso13/me-rpg">Исходники на GitLab</a></p>
@@ -162,6 +220,12 @@ function main() {
     fs.cpSync(advMaps, path.join(OUT, "adventure", "maps"), { recursive: true });
   }
 
+  const fantasyImages = path.join(RPG, "fantasy", "images");
+  if (fs.existsSync(fantasyImages)) {
+    fs.mkdirSync(path.join(OUT, "fantasy", "images"), { recursive: true });
+    fs.cpSync(fantasyImages, path.join(OUT, "fantasy", "images"), { recursive: true });
+  }
+
   const relFiles = walkMarkdown(RPG);
   const pageMeta = [];
 
@@ -200,7 +264,8 @@ function main() {
 
   for (const p of pageMeta) {
     const md = fs.readFileSync(path.join(RPG, p.rel), "utf8");
-    const bodyHtml = fixMdLinks(marked.parse(md));
+    const rawBody = fixMdLinks(marked.parse(md));
+    const { html: bodyHtml, toc } = extractHeadingsAndAddIds(rawBody);
     const outPath = path.join(OUT, p.outRel);
     fs.mkdirSync(path.dirname(outPath), { recursive: true });
     const html = wrapPage({
@@ -209,6 +274,7 @@ function main() {
       relPath: p.outRel,
       navGroups,
       activeSlug: p.outRel,
+      toc,
     });
     fs.writeFileSync(outPath, html);
   }

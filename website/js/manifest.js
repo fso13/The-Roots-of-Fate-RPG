@@ -16,10 +16,12 @@
     wounds: "07-rany.html",
     crits_and_fumbles: "08-krity-i-promahi.html",
     character_progression: "09-sozdanie-i-uroven.html",
+    states: "10-sostoyaniya.html",
     fantasy_spells: "fantasy/01-zaklinaniya.html",
     fantasy_skills: "fantasy/02-talanty-i-navyki.html",
     fantasy_gear: "fantasy/03-snaryazhenie.html",
     fantasy_bestiary: "fantasy/04-bestiariy.html",
+    fantasy_inventory: "fantasy/05-inventar.html",
   };
 
   const DEFAULT_MODULES = {
@@ -31,11 +33,13 @@
     bestiary: true,
     wounds: false,
     crits_and_fumbles: false,
+    states: true,
     character_progression: true,
     fantasy_spells: true,
     fantasy_skills: true,
     fantasy_gear: true,
     fantasy_bestiary: true,
+    fantasy_inventory: true,
     firearms: false,
     vehicles: false,
   };
@@ -48,11 +52,13 @@
     bestiary: "Бестиарий (гл. 06)",
     wounds: "Модуль ран (гл. 07)",
     crits_and_fumbles: "Криты и промахи (гл. 08)",
+    states: "Состояния (гл. 10)",
     character_progression: "Создание персонажа (гл. 09)",
     fantasy_spells: "Фэнтези: заклинания",
     fantasy_skills: "Фэнтези: таланты и навыки",
     fantasy_gear: "Фэнтези: снаряжение",
     fantasy_bestiary: "Фэнтези: бестиарий",
+    fantasy_inventory: "Фэнтези: инвентарь",
     firearms: "Огнестрел",
     vehicles: "Транспорт",
   };

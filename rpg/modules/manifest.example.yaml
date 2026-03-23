@@ -14,6 +14,7 @@ modules:
   bestiary: true           # глава 06
   wounds: false            # глава 07 — детальный учёт ран
   crits_and_fumbles: false # глава 08 — криты и промахи 6+6 / 1+1
+  states: true             # глава 10 — состояния: сбитый с ног, оглушённый, разоружён и т.д.
   character_progression: true  # глава 09 — создание и уровни (рекомендуется true)
 
   # Фэнтези: дополнительные тексты (не обязательны для ядра)
@@ -21,6 +22,7 @@ modules:
   fantasy_skills: true     # fantasy/02-talanty-i-navyki.md
   fantasy_gear: true       # fantasy/03-snaryazhenie.md
   fantasy_bestiary: true   # fantasy/04-bestiariy.md
+  fantasy_inventory: true  # fantasy/05-inventar.md — сетка сумки, слоты, второй комплект за спиной
 
   firearms: false
   vehicles: false

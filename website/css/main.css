@@ -121,6 +121,11 @@ a:hover {
   padding: 2rem 1rem 4rem;
 }
 
+/* С правой панелью «На странице» */
+.layout-doc-with-toc {
+  grid-template-columns: minmax(160px, 0.6fr) minmax(0, var(--max-read)) minmax(160px, 0.6fr);
+}
+
 .sidebar {
   grid-column: 1;
   padding-right: 1.5rem;
@@ -172,8 +177,66 @@ a:hover {
 }
 
 .sidebar .nav-group a {
+  padding: 0.35rem 0;
   padding-left: 0.5rem;
+}
+
+/* Правая панель: навигация по разделам страницы */
+.toc-sidebar {
+  grid-column: 3;
+  padding-left: 1.5rem;
+  text-align: left;
+  font-size: 0.88rem;
+}
+
+.toc-sidebar-inner {
+  position: sticky;
+  top: 5rem;
+  max-height: calc(100vh - 6rem);
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+.toc-sidebar-title {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--accent-dim);
+  margin-bottom: 0.75rem;
+}
+
+.toc-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.toc-nav a {
+  display: block;
+  padding: 0.3rem 0;
+  color: var(--ink-muted);
+  border: none;
+  line-height: 1.35;
+  transition: color 0.15s;
+}
+
+.toc-nav a:hover {
+  color: var(--accent);
+}
+
+.toc-item-h2 {
+  font-weight: 500;
+}
+
+.toc-item-h3 {
+  padding-left: 0.9rem;
   font-size: 0.85em;
+  color: var(--ink-muted);
+}
+
+.toc-item-h3:hover {
+  color: var(--accent);
 }
 
 .doc-main {
@@ -463,6 +526,27 @@ a:hover {
   margin: 1rem 0;
 }
 
+/* Схема инвентаря — центрирование и ограничение размера */
+.inventar-schema-fig {
+  text-align: center;
+  margin: 1.5rem 0;
+}
+
+.inventar-schema-fig img {
+  max-width: min(420px, 100%);
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media print {
+  .inventar-schema-fig img {
+    max-width: 95%;
+    max-height: 280px;
+    object-fit: contain;
+  }
+}
+
 .site-footer {
   text-align: center;
   padding: 2rem 1rem;
@@ -479,14 +563,16 @@ a:hover {
   color: var(--accent);
 }
 
-/* Мобильная: скрыть сайдбар или сделать сверху */
+/* Мобильная: скрыть сайдбары */
 @media (max-width: 960px) {
-  .layout-doc {
+  .layout-doc,
+  .layout-doc-with-toc {
     grid-template-columns: 1fr;
     padding: 1rem;
   }
 
-  .sidebar {
+  .sidebar,
+  .toc-sidebar {
     display: none;
   }
 

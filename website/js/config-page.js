@@ -10,11 +10,13 @@
     "bestiary",
     "wounds",
     "crits_and_fumbles",
+    "states",
     "character_progression",
     "fantasy_spells",
     "fantasy_skills",
     "fantasy_gear",
     "fantasy_bestiary",
+    "fantasy_inventory",
     "firearms",
     "vehicles",
   ];
@@ -43,7 +45,7 @@
       otherGroup.className = "config-group";
       otherGroup.innerHTML = '<div class="config-group-title">Прочее</div>';
 
-      const fantasyKeys = ["fantasy_spells", "fantasy_skills", "fantasy_gear", "fantasy_bestiary"];
+      const fantasyKeys = ["fantasy_spells", "fantasy_skills", "fantasy_gear", "fantasy_bestiary", "fantasy_inventory"];
       const otherKeys = ["firearms", "vehicles"];
 
       MODULES_ORDER.forEach((key) => {

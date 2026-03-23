@@ -225,6 +225,31 @@
   min-height: 9rem;
 }
 
+/* Инвентарь (модуль fantasy_inventory) */
+.sheet-inventory-fig {
+  margin: 0;
+  text-align: center;
+}
+
+.sheet-inventory-fig img {
+  max-width: min(420px, 100%);
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 3px;
+}
+
+.sheet-inventory-fig figcaption {
+  font-size: 0.8rem;
+  color: var(--ink-muted);
+  margin-top: 0.5rem;
+}
+
+.sheet-inventory-fig figcaption a {
+  color: var(--accent);
+}
+
 /* Шпаргалка */
 .sheet-cheatsheet {
   font-size: 0.85rem;
@@ -421,14 +446,27 @@
     grid-row: 3;
   }
 
-  .sheet-notes {
+  .sheet-inventory {
     grid-column: 1 / -1;
     grid-row: 4;
   }
 
-  .sheet-cheatsheet {
+  .sheet-inventory-fig img {
+    max-width: 95%;
+    max-height: 280px;
+    object-fit: contain;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .sheet-notes {
     grid-column: 1 / -1;
     grid-row: 5;
+  }
+
+  .sheet-cheatsheet {
+    grid-column: 1 / -1;
+    grid-row: 6;
     padding: 3px 6px;
   }
 
@@ -542,7 +580,7 @@
     padding-top: 2px;
     font-size: 6px;
     grid-column: 1 / -1;
-    grid-row: 6;
+    grid-row: 7;
   }
 
   .sheet-footer p {
