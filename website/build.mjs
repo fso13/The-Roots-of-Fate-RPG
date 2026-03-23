@@ -10,6 +10,23 @@ const ROOT = path.join(__dirname, "..");
 const RPG = path.join(ROOT, "rpg");
 const OUT = path.join(ROOT, "public");
 const CSS_SRC = path.join(__dirname, "css", "main.css");
+const JS_MANIFEST = path.join(__dirname, "js", "manifest.js");
+
+// Соответствие страниц манифесту (modules в manifest.example.yaml)
+const PAGE_TO_MODULE = {
+  "02-boy.html": "tactical_combat",
+  "03-derevya-talantov.html": "talent_trees",
+  "04-magiya.html": "magic",
+  "05-snaryazhenie.html": "equipment",
+  "06-bestiariy.html": "bestiary",
+  "07-rany.html": "wounds",
+  "08-krity-i-promahi.html": "crits_and_fumbles",
+  "09-sozdanie-i-uroven.html": "character_progression",
+  "fantasy/01-zaklinaniya.html": "fantasy_spells",
+  "fantasy/02-talanty-i-navyki.html": "fantasy_skills",
+  "fantasy/03-snaryazhenie.html": "fantasy_gear",
+  "fantasy/04-bestiariy.html": "fantasy_bestiary",
+};
 
 marked.use({ gfm: true });
 
@@ -54,12 +71,21 @@ function cssPrefix(relHtmlPath) {
   return d === 0 ? "" : "../".repeat(d);
 }
 
-function wrapPage({ title, bodyHtml, relPath, navItems, activeSlug }) {
+function wrapPage({ title, bodyHtml, relPath, navGroups, activeSlug, extraScripts = "" }) {
   const prefix = cssPrefix(relPath);
-  const navHtml = navItems
-    .map((item) => {
-      const cls = item.href === activeSlug ? ' class="active"' : "";
-      return `<a href="${prefix}${item.href}"${cls}>${escapeHtml(item.short)}</a>`;
+  const navHtml = navGroups
+    .map((group) => {
+      const itemsHtml = group.items
+        .map((item) => {
+          const cls = item.href === activeSlug ? ' class="active"' : "";
+          const dataMod = item.module ? ` data-module="${escapeHtml(item.module)}"` : "";
+          return `<a href="${prefix}${item.href}"${cls}${dataMod}>${escapeHtml(item.short)}</a>`;
+        })
+        .join("\n");
+      if (group.title) {
+        return `<div class="nav-group"><div class="nav-group-title">${escapeHtml(group.title)}</div>${itemsHtml}</div>`;
+      }
+      return itemsHtml;
     })
     .join("\n");
 
@@ -81,6 +107,8 @@ function wrapPage({ title, bodyHtml, relPath, navItems, activeSlug }) {
     <nav class="nav-inline">
       <a href="${prefix}index.html">Главная</a>
       <a href="${prefix}oglavlenie.html">Оглавление</a>
+      <a href="${prefix}character-sheet.html">Лист персонажа</a>
+      <a href="${prefix}nastroyki.html">Настройки</a>
     </nav>
   </header>
   <div class="layout-doc">
@@ -97,6 +125,7 @@ function wrapPage({ title, bodyHtml, relPath, navItems, activeSlug }) {
   <footer class="site-footer">
     <p>Модульная настольная РПГ «Корни судьбы» · <a href="https://gitlab.com/fso13/me-rpg">Исходники на GitLab</a></p>
   </footer>
+  <script src="${prefix}js/manifest.js"></script>${extraScripts}
 </body>
 </html>`;
 }
@@ -118,8 +147,14 @@ function main() {
   fs.rmSync(OUT, { recursive: true, force: true });
   fs.mkdirSync(OUT, { recursive: true });
   fs.mkdirSync(path.join(OUT, "css"), { recursive: true });
+  fs.mkdirSync(path.join(OUT, "js"), { recursive: true });
   fs.mkdirSync(path.join(OUT, "fantasy"), { recursive: true });
   fs.copyFileSync(CSS_SRC, path.join(OUT, "css", "main.css"));
+  fs.copyFileSync(path.join(__dirname, "css", "character-sheet.css"), path.join(OUT, "css", "character-sheet.css"));
+  fs.copyFileSync(JS_MANIFEST, path.join(OUT, "js", "manifest.js"));
+  fs.copyFileSync(path.join(__dirname, "js", "config-page.js"), path.join(OUT, "js", "config-page.js"));
+  fs.copyFileSync(path.join(__dirname, "js", "character-sheet.js"), path.join(OUT, "js", "character-sheet.js"));
+  fs.copyFileSync(path.join(__dirname, "character-sheet.html"), path.join(OUT, "character-sheet.html"));
 
   const advMaps = path.join(RPG, "adventure", "maps");
   if (fs.existsSync(advMaps)) {
@@ -142,12 +177,26 @@ function main() {
     });
   }
 
-  const navItems = pageMeta
-    .filter((p) => !p.isReadme)
-    .map((p) => ({
+  const toNavItem = (p) => {
+    const mod = PAGE_TO_MODULE[p.outRel];
+    return {
       href: p.outRel,
       short: p.short.length > 44 ? p.short.slice(0, 42) + "…" : p.short,
-    }));
+      module: mod || null,
+    };
+  };
+
+  const core = pageMeta.filter(
+    (p) => !p.isReadme && !p.rel.startsWith("fantasy/") && !p.rel.startsWith("adventure/")
+  );
+  const fant = pageMeta.filter((p) => p.rel.startsWith("fantasy/"));
+  const adv = pageMeta.filter((p) => p.rel.startsWith("adventure/"));
+
+  const navGroups = [
+    { items: core.map(toNavItem) },
+    { title: "Фэнтези-модули", items: fant.map(toNavItem) },
+    { items: adv.map(toNavItem) },
+  ];
 
   for (const p of pageMeta) {
     const md = fs.readFileSync(path.join(RPG, p.rel), "utf8");
@@ -158,26 +207,23 @@ function main() {
       title: p.isReadme ? "Оглавление" : p.title,
       bodyHtml,
       relPath: p.outRel,
-      navItems,
+      navGroups,
       activeSlug: p.outRel,
     });
     fs.writeFileSync(outPath, html);
   }
 
   // Главная страница
-  const core = pageMeta.filter(
-    (p) => !p.isReadme && !p.rel.startsWith("fantasy/") && !p.rel.startsWith("adventure/")
-  );
-  const fant = pageMeta.filter((p) => p.rel.startsWith("fantasy/"));
-  const adv = pageMeta.filter((p) => p.rel.startsWith("adventure/"));
 
   const card = (p) => {
     const desc = p.short.replace(/"/g, "&quot;");
     let meta = "Правила";
     if (p.rel.startsWith("fantasy/")) meta = "Фэнтези";
     if (p.rel.startsWith("adventure/")) meta = "Приключение";
+    const mod = PAGE_TO_MODULE[p.outRel];
+    const dataMod = mod ? ` data-module="${mod}"` : "";
     return `
-    <a class="card" href="${p.outRel}">
+    <a class="card" href="${p.outRel}"${dataMod}>
       <div class="meta">${meta}</div>
       <h3>${escapeHtml(p.title)}</h3>
       <p>${escapeHtml(desc)}</p>
@@ -202,6 +248,8 @@ function main() {
     <nav class="nav-inline">
       <a href="index.html">Главная</a>
       <a href="oglavlenie.html">Оглавление</a>
+      <a href="character-sheet.html">Лист персонажа</a>
+      <a href="nastroyki.html">Настройки</a>
     </nav>
   </header>
   <section class="hero">
@@ -210,27 +258,53 @@ function main() {
     <p class="tagline">Модульная настольная ролевая игра. Единый кубик за столом, тактика без лишнего счёта, магия как атака — и тихая роскошь минимализма.</p>
     <a class="btn" href="oglavlenie.html">Читать правила</a>
   </section>
+  <section id="index-section-core">
   <h2 class="section-title">Основные главы</h2>
   <div class="card-grid">
     ${core.map(card).join("")}
   </div>
+  </section>
+  <section id="index-section-fantasy">
   <h2 class="section-title">Фэнтези-модули</h2>
   <div class="card-grid">
     ${fant.map(card).join("")}
   </div>
-  ${adv.length ? `<h2 class="section-title">Приключения</h2>
+  </section>
+  ${adv.length ? `<section id="index-section-adv">
+  <h2 class="section-title">Приключения</h2>
   <div class="card-grid">
     ${adv.map(card).join("")}
-  </div>` : ""}
+  </div>
+  </section>` : ""}
   <footer class="site-footer">
     <p>Собрано из Markdown · <a href="https://gitlab.com/fso13/me-rpg">GitLab</a> · Pages</p>
   </footer>
+  <script src="js/manifest.js"></script>
 </body>
 </html>`;
 
   fs.writeFileSync(path.join(OUT, "index.html"), indexHtml);
 
-  console.log("Built", pageMeta.length, "pages + index.html →", OUT);
+  // Страница настроек модулей
+  const configBody = `<h1>Настройки модулей</h1>
+<p>Включите или отключите разделы правил. Навигация обновится автоматически. Состояние сохраняется в браузере.</p>
+<div id="config-form" class="config-form"></div>
+<p class="config-actions">
+  <button type="button" id="config-save" class="btn btn-sm">Применить</button>
+  <button type="button" id="config-reset" class="btn btn-sm btn-muted">Сбросить по умолчанию</button>
+</p>`;
+
+  const configHtml = wrapPage({
+    title: "Настройки модулей",
+    bodyHtml: configBody,
+    relPath: "nastroyki.html",
+    navGroups,
+    activeSlug: null,
+    extraScripts: '\n  <script src="js/config-page.js"></script>',
+  });
+  fs.writeFileSync(path.join(OUT, "nastroyki.html"), configHtml);
+
+  console.log("Built", pageMeta.length, "pages + index.html + nastroyki.html →", OUT);
 }
 
 main();

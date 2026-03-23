@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Лист персонажа — Корни судьбы</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/character-sheet.css">
+  <script src="js/manifest.js"></script>
+</head>
+<body class="character-sheet-page">
+  <header class="site-header no-print">
+    <a class="brand" href="index.html">Корни судьбы</a>
+    <nav class="nav-inline">
+      <a href="index.html">Главная</a>
+      <a href="oglavlenie.html">Оглавление</a>
+      <a href="character-sheet.html">Лист персонажа</a>
+      <a href="nastroyki.html">Настройки</a>
+    </nav>
+  </header>
+  <header class="sheet-header">
+    <h1>Лист персонажа</h1>
+  </header>
+
+  <main class="sheet-body">
+    <section class="sheet-block sheet-basics">
+      <h2>Персонаж</h2>
+      <div class="sheet-row">
+        <label>Имя</label>
+        <input type="text" name="name" placeholder="Имя персонажа">
+      </div>
+      <div class="sheet-row">
+        <label>Происхождение</label>
+        <input type="text" name="origin" placeholder="Откуда родом">
+      </div>
+      <div class="sheet-row">
+        <label>Цель</label>
+        <input type="text" name="goal" placeholder="Чего ищет персонаж">
+      </div>
+      <div class="sheet-row sheet-row-inline">
+        <label>Уровень</label>
+        <input type="number" name="level" min="1" value="1" class="input-narrow">
+        <label>ОО</label>
+        <input type="number" name="oo" min="0" value="0" class="input-narrow" title="Очки опыта">
+      </div>
+    </section>
+
+    <section class="sheet-block sheet-attributes">
+      <h2>Атрибуты</h2>
+      <p class="sheet-hint">
+        Point-buy: 10 очков. 1→0, 2→1, 3→2, 4→4, 5→6. Потрачено: <span id="attr-spent">0</span>/10
+        <button type="button" id="attr-roll" class="btn btn-sm btn-muted no-print">Бросок 4×2d6</button>
+      </p>
+      <div class="attr-grid">
+        <div class="attr-item">
+          <label>Тело</label>
+          <input type="number" name="body" min="1" max="5" value="3" data-attr>
+        </div>
+        <div class="attr-item">
+          <label>Ловкость</label>
+          <input type="number" name="agility" min="1" max="5" value="3" data-attr>
+        </div>
+        <div class="attr-item">
+          <label>Разум</label>
+          <input type="number" name="mind" min="1" max="5" value="3" data-attr>
+        </div>
+        <div class="attr-item">
+          <label>Воля</label>
+          <input type="number" name="will" min="1" max="5" value="3" data-attr>
+        </div>
+      </div>
+    </section>
+
+    <section class="sheet-block sheet-resources">
+      <h2>Ресурсы</h2>
+      <div class="resource-grid">
+        <div class="resource-item">
+          <label>Стресс</label>
+          <span class="resource-track">
+            <input type="number" name="stress_current" min="0" value="0">
+            <span>/</span>
+            <input type="number" name="stress_max" min="0" value="9" readonly class="readonly">
+          </span>
+        </div>
+        <div class="resource-item">
+          <label>Раны</label>
+          <span class="resource-track">
+            <input type="number" name="wounds_current" min="0" value="0">
+            <span>/</span>
+            <input type="number" name="wounds_max" min="0" value="9" readonly class="readonly">
+          </span>
+        </div>
+        <div class="resource-item resource-optional" data-module="magic">
+          <label>Искры</label>
+          <span class="resource-track">
+            <input type="number" name="sparks_current" min="0" value="0">
+            <span>/</span>
+            <input type="number" name="sparks_max" min="0" value="6" readonly class="readonly">
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <section class="sheet-block sheet-skills">
+      <h2>Навыки</h2>
+      <p class="sheet-hint">Ранг 0–4. Старт: 1× ранг 2, 2× ранг 1</p>
+      <div class="skills-grid">
+        <div class="skill-category">
+          <h3>Боевые</h3>
+          <div class="skill-list">
+            <div class="skill-row"><span>Рукопашное оружие</span><input type="number" name="skill_melee" min="0" max="4" value="0"></div>
+            <div class="skill-row"><span>Двуручное оружие</span><input type="number" name="skill_2h" min="0" max="4" value="0"></div>
+            <div class="skill-row"><span>Оружие и щит</span><input type="number" name="skill_shield" min="0" max="4" value="0"></div>
+            <div class="skill-row"><span>Стрельба</span><input type="number" name="skill_ranged" min="0" max="4" value="0"></div>
+            <div class="skill-row"><span>Безоружный бой</span><input type="number" name="skill_unarmed" min="0" max="4" value="0"></div>
+          </div>
+        </div>
+        <div class="skill-category">
+          <h3>Социальные</h3>
+          <div class="skill-list">
+            <div class="skill-row"><span>Дипломатия</span><input type="number" name="skill_diplomacy" min="0" max="4" value="0"></div>
+            <div class="skill-row"><span>Запугивание</span><input type="number" name="skill_intimidate" min="0" max="4" value="0"></div>
+            <div class="skill-row"><span>Обман</span><input type="number" name="skill_deceive" min="0" max="4" value="0"></div>
+            <div class="skill-row"><span>Проницательность</span><input type="number" name="skill_insight" min="0" max="4" value="0"></div>
+          </div>
+        </div>
+        <div class="skill-category">
+          <h3>Знания и ремесло</h3>
+          <div class="skill-list">
+            <div class="skill-row"><span>История</span><input type="number" name="skill_history" min="0" max="4" value="0"></div>
+            <div class="skill-row"><span>Природа</span><input type="number" name="skill_nature" min="0" max="4" value="0"></div>
+            <div class="skill-row"><span>Анализ</span><input type="number" name="skill_analysis" min="0" max="4" value="0"></div>
+            <div class="skill-row"><span>Медицина</span><input type="number" name="skill_medicine" min="0" max="4" value="0"></div>
+          </div>
+        </div>
+        <div class="skill-category">
+          <h3>Путешествие</h3>
+          <div class="skill-list">
+            <div class="skill-row"><span>Атлетика</span><input type="number" name="skill_athletics" min="0" max="4" value="0"></div>
+            <div class="skill-row"><span>Скрытность</span><input type="number" name="skill_stealth" min="0" max="4" value="0"></div>
+            <div class="skill-row"><span>Внимание</span><input type="number" name="skill_perception" min="0" max="4" value="0"></div>
+            <div class="skill-row"><span>Выживание</span><input type="number" name="skill_survival" min="0" max="4" value="0"></div>
+            <div class="skill-row"><span>Взлом</span><input type="number" name="skill_lockpick" min="0" max="4" value="0"></div>
+          </div>
+        </div>
+        <div class="skill-category" data-module="magic">
+          <h3>Магия</h3>
+          <div class="skill-list">
+            <div class="skill-row"><span>Магия (ближняя)</span><input type="number" name="skill_magic_melee" min="0" max="4" value="0"></div>
+            <div class="skill-row"><span>Магия (дальняя)</span><input type="number" name="skill_magic_ranged" min="0" max="4" value="0"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sheet-block sheet-talents">
+      <h2>Таланты / узлы дерева</h2>
+      <textarea name="talents" rows="6" placeholder="Например: Каналный ниндзя I, Тихий шаг II..."></textarea>
+    </section>
+
+    <section class="sheet-block sheet-spells" data-module="magic">
+      <h2>Заклинания</h2>
+      <p class="sheet-hint">Школы, узлы и заклинания с бонусами (см. гл. 4 и fantasy/01-zaklinaniya)</p>
+      <textarea name="spells" rows="6" placeholder="Стихии: Вспышка пламени I (+1, 1 искра), Огненный щит II..."></textarea>
+    </section>
+
+    <section class="sheet-block sheet-equipment">
+      <h2>Снаряжение</h2>
+      <div class="sheet-row">
+        <label>Оружие</label>
+        <input type="text" name="weapon" placeholder="Меч +2, лук +2...">
+      </div>
+      <div class="sheet-row">
+        <label>Доспех</label>
+        <input type="text" name="armor" placeholder="Кожа +1, кольчуга +2...">
+      </div>
+      <div class="sheet-row">
+        <label>Щит</label>
+        <input type="text" name="shield" placeholder="+1 к ЧЦ против ближней атаки">
+      </div>
+      <div class="sheet-row">
+        <label>Прочее</label>
+        <input type="text" name="misc" placeholder="Верёвка, фонарь, 3 мелких предмета...">
+      </div>
+    </section>
+
+    <section class="sheet-block sheet-notes">
+      <h2>Заметки</h2>
+      <textarea name="notes" rows="8" placeholder="Связи, долги, цели кампании..."></textarea>
+    </section>
+
+    <section class="sheet-block sheet-cheatsheet">
+      <h2>Шпаргалка</h2>
+      <div class="cheatsheet-grid cheatsheet-grid-3">
+        <div class="cheatsheet-col">
+          <h3>Термины</h3>
+          <dl class="cheatsheet-dl">
+            <dt>ЧЦ</dt><dd>число цели (8–10 легко, 11–13 среднее, 14–16 сложно)</dd>
+            <dt>ОД</dt><dd>очки действия (2 за раунд)</dd>
+            <dt>ОО</dt><dd>очки опыта</dd>
+            <dt>Рукопашная</dt><dd>удар вплотную</dd>
+            <dt>Рядом</dt><dd>1 ОД → в Рукопашную</dd>
+            <dt>Даль</dt><dd>лук, метательное, дальняя магия</dd>
+          </dl>
+        </div>
+        <div class="cheatsheet-col">
+          <h3>Действия в бою</h3>
+          <dl class="cheatsheet-dl">
+            <dt>1 ОД</dt><dd>Атака (оружие или заклинание с уроном)</dd>
+            <dt>1 ОД</dt><dd>Сдвиг на шаг (Рядом ↔ Рукопашная, или в Даль / из Даль)</dd>
+            <dt>2 ОД</dt><dd>Сдвиг на два шага (например, Даль → Рукопашная)</dd>
+          </dl>
+        </div>
+        <div class="cheatsheet-col">
+          <h3>Формулы</h3>
+          <dl class="cheatsheet-dl">
+            <dt>Проверка</dt><dd>2d6 + атрибут + ранг ≥ ЧЦ</dd>
+            <dt>ЧЦ защиты</dt><dd>8 + Ловкость + доспех + щит</dd>
+            <dt>Урон</dt><dd>(итог атаки − ЧЦ защиты) + бонус оружия</dd>
+            <dt>Инициатива</dt><dd>2d6 + Ловкость</dd>
+            <dt>Стресс макс</dt><dd>6 + Тело</dd>
+            <dt>Раны макс</dt><dd>6 + Тело</dd>
+            <dt>Искры макс</dt><dd>3 + Воля</dd>
+          </dl>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="sheet-footer">
+    <p>«Корни судьбы» — модульная настольная РПГ · ЧЦ защиты = 8 + Ловкость + доспех</p>
+    <div class="sheet-actions no-print">
+      <button type="button" id="btn-print" class="btn">Печать / PDF</button>
+      <button type="button" id="btn-save" class="btn btn-muted">Сохранить в браузере</button>
+      <button type="button" id="btn-load" class="btn btn-muted">Загрузить</button>
+    </div>
+  </footer>
+
+  <script src="js/character-sheet.js"></script>
+</body>
+</html>

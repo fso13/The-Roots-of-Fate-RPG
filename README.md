@@ -4,7 +4,7 @@
 
 ## Веб-сайт и GitLab Pages
 
-Статическая версия правил: каталог [`website/`](website/) (стили, [`website/build.mjs`](website/build.mjs)). Сборка: `npm install` и `npm run build` — сначала **PNG карт** из SVG (`scripts/convert-adventure-maps.mjs`), затем HTML; результат в `public/`. Промпты для **нейросетей** (карта города и поля боя): [`rpg/adventure/prompts-topdown-maps.md`](rpg/adventure/prompts-topdown-maps.md).
+Статическая версия правил: каталог [`website/`](website/) (стили, [`website/build.mjs`](website/build.mjs)). Сборка: `npm install` и `npm run build` — сначала **PNG карт** из SVG (`scripts/convert-adventure-maps.mjs`), затем HTML; результат в `public/`.
 
 Пайплайн [`.gitlab-ci.yml`](.gitlab-ci.yml) на **Node 20** выполняет `npm ci` и `npm run build`, артефакт **Pages** — содержимое `public/`. После успешного job **Deploy → Pages** в настройках проекта GitLab сайт доступен по адресу вида `https://<namespace>.gitlab.io/<repo>/` (точный URL — в **Settings → Pages**).
 

@@ -32,12 +32,11 @@
 | Файл | Содержание |
 |------|------------|
 | [adventure/01-steklyannyy-zvon.md](adventure/01-steklyannyy-zvon.md) | Стартовое приключение на **2 сессии**: мистика, детектив, экшен, социалка |
-| [adventure/prompts-topdown-maps.md](adventure/prompts-topdown-maps.md) | **Промпты** для нейросетей: карта города и полей боя (вид сверху) |
 
 ## Быстрый старт
 
 1. Выберите **тип кубика** (рекомендация: **d6**).
 2. Скопируйте `modules/manifest.example.yaml` в `manifest.yaml` и отметьте модули (**rany**, **crits** — по желанию).
-3. Создание персонажа — [09-sozdanie-i-uroven.md](09-sozdanie-i-uroven.md).
+3. Создание персонажа — [09-sozdanie-i-uroven.md](09-sozdanie-i-uroven.md). **Интерактивный лист персонажа** — на сайте (раздел «Лист персонажа»).
 
 Партия-пример: **«Стеклянные волки»**, Торнвельд.
