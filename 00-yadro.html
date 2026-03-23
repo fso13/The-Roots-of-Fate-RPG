@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Корни судьбы — модульная настольная РПГ. Глава 0. Ядро системы">
+  <title>Глава 0. Ядро системы — Корни судьбы</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">Корни судьбы</a>
+    <nav class="nav-inline">
+      <a href="index.html">Главная</a>
+      <a href="oglavlenie.html">Оглавление</a>
+      <a href="character-sheet.html">Лист персонажа</a>
+      <a href="nastroyki.html">Настройки</a>
+    </nav>
+  </header>
+  <div class="layout-doc">
+    <aside class="sidebar">
+      <div class="sidebar-inner">
+        <div class="sidebar-title">Разделы</div>
+        <nav><a href="00-yadro.html" class="active">Глава 0. Ядро системы</a>
+<a href="01-moduli.html">Глава 1. Модульность</a>
+<a href="02-boy.html" data-module="tactical_combat">Глава 2. Бой (модуль)</a>
+<a href="03-derevya-talantov.html" data-module="talent_trees">Глава 3. Деревья талантов, навыки, ранги</a>
+<a href="04-magiya.html" data-module="magic">Глава 4. Магия (модуль)</a>
+<a href="05-snaryazhenie.html" data-module="equipment">Глава 5. Снаряжение</a>
+<a href="06-bestiariy.html" data-module="bestiary">Глава 6. Бестиарий</a>
+<a href="07-rany.html" data-module="wounds">Модуль: получение и учёт ран</a>
+<a href="08-krity-i-promahi.html" data-module="crits_and_fumbles">Модуль: критические попадания и промахи</a>
+<a href="09-sozdanie-i-uroven.html" data-module="character_progression">Создание персонажа и рост уровня</a>
+<div class="nav-group"><div class="nav-group-title">Фэнтези-модули</div><a href="fantasy/01-zaklinaniya.html" data-module="fantasy_spells">Фэнтези-модуль: заклинания</a>
+<a href="fantasy/02-talanty-i-navyki.html" data-module="fantasy_skills">Фэнтези-модуль: таланты и навыки</a>
+<a href="fantasy/03-snaryazhenie.html" data-module="fantasy_gear">Фэнтези-модуль: расширенное снаряжение</a>
+<a href="fantasy/04-bestiariy.html" data-module="fantasy_bestiary">Фэнтези-модуль: бестиарий</a></div>
+<a href="adventure/01-steklyannyy-zvon.html">Стартовое приключение: «Стеклянный звон»</a></nav>
+      </div>
+    </aside>
+    <article class="doc-main">
+      <h1>Глава 0. Ядро системы</h1>
+<h2>1. Принцип единого кубика</h2>
+<p>За столом используется <strong>ровно один тип кубиков</strong> — тот, что выбран при создании кампании (например, только <strong>d6</strong>). Все проверки, урон и особые эффекты переводятся в эту шкалу. Никаких смесей «d20 на атаку и d6 на урон».</p>
+<p><strong>Пул кубиков:</strong> для нетривиальной проверки игрок бросает <strong>базовое число кубиков</strong> (обычно 2, иногда 1 или 3 — см. модификаторы) одного типа и <strong>суммирует</strong> результат.</p>
+<p><strong>Число успехов (альтернативное чтение, то же железо):</strong> если удобнее считать не сумму, а «успехи», объявите при старте кампании: на каждом кубике <strong>граница успеха</strong> зависит от типа кубика:</p>
+<table>
+<thead>
+<tr>
+<th>Тип кубика</th>
+<th>Успех по умолчанию (если выбран режим «успехи»)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>d6</td>
+<td>5–6</td>
+</tr>
+<tr>
+<td>d8</td>
+<td>6–8</td>
+</tr>
+<tr>
+<td>d10</td>
+<td>8–10</td>
+</tr>
+<tr>
+<td>d12</td>
+<td>9–12</td>
+</tr>
+</tbody></table>
+<p><em>В одной кампании выберите <strong>один</strong> способ чтения пула (сумма или успехи) и придерживайтесь его.</em></p>
+<p>Далее в тексте по умолчанию: <strong>сумма 2d6 + модификаторы</strong> против <strong>числа цели (ЧЦ)</strong>.</p>
+<p><strong>Если выбран другой кубик</strong> (например, только <strong>d8</strong>): везде в правилах читайте <strong>2d6</strong> как <strong>2d8</strong> (или <strong>3d6</strong> как <strong>3d8</strong>). ЧЦ и урон в примерах рассчитаны под d6; при d8 прибавьте <strong>+2–3</strong> к типичным ЧЦ для той же «сложности ощущения», либо оставьте числа и примите более «качественный» разброс.</p>
+<h2>2. Атрибуты</h2>
+<p>Четыре атрибута, каждый <strong>от 1 до 5</strong> на старте (см. <a href="09-sozdanie-i-uroven.html">09-sozdanie-i-uroven.md</a> — броски или point-buy):</p>
+<table>
+<thead>
+<tr>
+<th>Атрибут</th>
+<th>Кратко</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Тело</strong></td>
+<td>Выносливость, сила, здоровье</td>
+</tr>
+<tr>
+<td><strong>Ловкость</strong></td>
+<td>Реакция, точность, скрытность</td>
+</tr>
+<tr>
+<td><strong>Разум</strong></td>
+<td>Анализ, знания, восприятие</td>
+</tr>
+<tr>
+<td><strong>Воля</strong></td>
+<td>Харизма, магия, сопротивление стрессу</td>
+</tr>
+</tbody></table>
+<h2>3. Навыки и ранги</h2>
+<p>Навык привязан к атрибуту. <strong>Ранг навыка</strong> — от 0 до 4.</p>
+<p><strong>Проверка навыка (базовая формула ядра):</strong><br><code>2d6 + значение атрибута + ранг навыка</code> (и другие модификаторы из модулей) <strong>≥ ЧЦ</strong>.</p>
+<p><em>Опция «пул»:</em> вместо фиксированных 2 кубиков можно играть <strong>(2 + ранг)к6</strong> и брать <strong>сумму лучших двух</strong> — тогда ранг увеличивает шанс, а не линейный модификатор. Зафиксируйте один вариант на кампанию.</p>
+<p>ЧЦ задаёт ведущий: простая задача 8–10, средняя 11–13, сложная 14–16, экстремальная 17+.</p>
+<h2>4. Стресс и вред</h2>
+<ul>
+<li><strong>Стресс</strong> — нематериальное давление (страх, усталость, моральный удар). Трекается отдельно от телесных <strong>ран</strong>.</li>
+<li><strong>Раны</strong> — физический урон; при превышении порога персонаж выбывает из строя (0 — без сознания, смерть — по договорённости).</li>
+</ul>
+<p>Конкретные шкалы задаются модулем боя; ядро предлагает: <strong>максимум стресса = 6 + Тело</strong>, <strong>максимум ран = 6 + Тело</strong> (или удвоенное Тело — на усмотрение стола).</p>
+<h2>5. Прогресс без «прокачки кубиком»</h2>
+<p>Между сессиями персонаж получает <strong>очки опыта (ОО)</strong> не случайно, а по итогам целей. ОО тратятся на <strong>узлы деревьев</strong> (глава 03) и <strong>ранги навыков</strong> по правилам включённых модулей.</p>
+<hr>
+<h2>Пример из партии: «Стеклянные волки», сессия 0</h2>
+<p><strong>Ведущий Лин</strong> объявляет: кубик кампании — <strong>только d6</strong>, проверки — <strong>2d6 + атрибут + ранг навыка</strong>.</p>
+<p><strong>Кай</strong> (ловкач) вскрывает старый замок у канала: Ловкость <strong>4</strong>, «Взлом» ранг <strong>2</strong> → <strong>2d6 + 6</strong>. Выпало 4 и 5, итого <strong>15</strong>. ЧЦ на этот замок <strong>12</strong> — замок открыт без шума.</p>
+<p><strong>Мира</strong> (учёный): Разум <strong>3</strong>, «История Торнвельда» ранг <strong>1</strong> читает надпись на стеклянной плите: <strong>2d6 + 4</strong>, ЧЦ <strong>10</strong>. Лин даёт <strong>+1 за помощь Кая</strong> — <strong>2d6 + 5</strong>, успех.
+</think>
+Упрощаю формулу броска в ядре для согласованности.</p>
+<p>&lt;｜tool▁calls▁begin｜&gt;&lt;｜tool▁call▁begin｜&gt;
+StrReplace</p>
+
+    </article>
+  </div>
+  <footer class="site-footer">
+    <p>Модульная настольная РПГ «Корни судьбы» · <a href="https://gitlab.com/fso13/me-rpg">Исходники на GitLab</a></p>
+  </footer>
+  <script src="js/manifest.js"></script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Корни судьбы — модульная настольная РПГ. Глава 3. Деревья талантов, навыки, ранги">
+  <title>Глава 3. Деревья талантов, навыки, ранги — Корни судьбы</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">Корни судьбы</a>
+    <nav class="nav-inline">
+      <a href="index.html">Главная</a>
+      <a href="oglavlenie.html">Оглавление</a>
+      <a href="character-sheet.html">Лист персонажа</a>
+      <a href="nastroyki.html">Настройки</a>
+    </nav>
+  </header>
+  <div class="layout-doc">
+    <aside class="sidebar">
+      <div class="sidebar-inner">
+        <div class="sidebar-title">Разделы</div>
+        <nav><a href="00-yadro.html">Глава 0. Ядро системы</a>
+<a href="01-moduli.html">Глава 1. Модульность</a>
+<a href="02-boy.html" data-module="tactical_combat">Глава 2. Бой (модуль)</a>
+<a href="03-derevya-talantov.html" class="active" data-module="talent_trees">Глава 3. Деревья талантов, навыки, ранги</a>
+<a href="04-magiya.html" data-module="magic">Глава 4. Магия (модуль)</a>
+<a href="05-snaryazhenie.html" data-module="equipment">Глава 5. Снаряжение</a>
+<a href="06-bestiariy.html" data-module="bestiary">Глава 6. Бестиарий</a>
+<a href="07-rany.html" data-module="wounds">Модуль: получение и учёт ран</a>
+<a href="08-krity-i-promahi.html" data-module="crits_and_fumbles">Модуль: критические попадания и промахи</a>
+<a href="09-sozdanie-i-uroven.html" data-module="character_progression">Создание персонажа и рост уровня</a>
+<div class="nav-group"><div class="nav-group-title">Фэнтези-модули</div><a href="fantasy/01-zaklinaniya.html" data-module="fantasy_spells">Фэнтези-модуль: заклинания</a>
+<a href="fantasy/02-talanty-i-navyki.html" data-module="fantasy_skills">Фэнтези-модуль: таланты и навыки</a>
+<a href="fantasy/03-snaryazhenie.html" data-module="fantasy_gear">Фэнтези-модуль: расширенное снаряжение</a>
+<a href="fantasy/04-bestiariy.html" data-module="fantasy_bestiary">Фэнтези-модуль: бестиарий</a></div>
+<a href="adventure/01-steklyannyy-zvon.html">Стартовое приключение: «Стеклянный звон»</a></nav>
+      </div>
+    </aside>
+    <article class="doc-main">
+      <h1>Глава 3. Деревья талантов, навыки, ранги</h1>
+<p><em>Модуль прогрессии. Требует ядро. Расширенные <strong>боевые и социальные</strong> навыки, деревья талантов (щит, двуручник, лидерство и т.д.): <a href="fantasy/02-talanty-i-navyki.html">fantasy/02-talanty-i-navyki.md</a>.</em></p>
+<h2>1. Структура дерева</h2>
+<p><strong>Дерево</strong> — набор <strong>узлов</strong>, соединённых рёбрами «требуется». Узел может относиться к <strong>архетипу</strong> (например, «Следопыт каналов») или быть <strong>общим</strong>.</p>
+<p>Каждый <strong>узел</strong>:</p>
+<ul>
+<li><strong>ID</strong> и короткое название.</li>
+<li><strong>Стоимость в ОО</strong> (обычно 1–3).</li>
+<li><strong>Ранг узла</strong> — <strong>I, II или III</strong> (три ступени).</li>
+<li><strong>Требования:</strong> предыдущие узлы, иногда минимальный ранг навыка или атрибута.</li>
+</ul>
+<p>Покупка: сначала <strong>I</strong>, затем <strong>II</strong> и <strong>III</strong> за доп. ОО.</p>
+<h2>2. Навыки и ранги</h2>
+<p>Базовый список — таблица в <a href="fantasy/02-talanty-i-navyki.html">fantasy/02-talanty-i-navyki.md</a> или короткий список в главе 0.</p>
+<p><strong>Ранг навыка</strong> повышается за <strong>ОО</strong> (цены настраиваются): например <strong>2 / 3 / 4 ОО</strong> за шаг <strong>1→2→3→4</strong>.</p>
+<p>Некоторые <strong>узлы</strong> дают <strong>+1 к максимальному рангу</strong> выбранного навыка.</p>
+<h2>3. Архетип и старт</h2>
+<p><strong>Один стартовый узел</strong> ранга <strong>I</strong> — бесплатно при создании (или за ОО — по жёсткости кампании). См. <a href="09-sozdanie-i-uroven.html">09-sozdanie-i-uroven.md</a>.</p>
+<h2>4. Пример ветки «Тень причалов»</h2>
+<pre><code>        [Каналный ниндзя I] — старт
+               │
+    ┌──────────┼──────────┐
+    ▼          ▼          ▼
+[Тихий шаг II] [Нож в плен II] [Чтение течений I]
+</code></pre>
+<ul>
+<li><strong>Каналный ниндзя I:</strong> +1 к максимальному рангу <strong>Скрытность</strong>.</li>
+<li><strong>Тихий шаг II:</strong> раз за сцену <strong>перед</strong> проверкой Скрытности можно <strong>перебросить один d6</strong> из пула (если используете перебросы).</li>
+<li><strong>Нож в плен II:</strong> при успешной <strong>рукопашной атаке</strong> с Ловкостью цель теряет <strong>1 искру</strong> (если у неё есть искры) или <strong>1 стресс</strong> — на выбор цели.</li>
+<li><strong>Чтение течений I:</strong> +1 к <strong>Выживание</strong> в городе.</li>
+</ul>
+<p>Не связывайте узлы с десятком мелких модификаторов — одна ясная польза на узел.</p>
+<h2>5. Общие узлы</h2>
+<p><strong>«Холодная голова»</strong> (Воля): раз за сессию <strong>снять 1 стресс</strong> без броска. Ранг II — два раза за сессию.</p>
+<p><strong>«Книжный запас»</strong> (Разум): раз за сессию <strong>автоуспех</strong> на проверку знания при наличии времени и источника.</p>
+<hr>
+<h2>Пример из партии: «Стеклянные волки»</h2>
+<p><strong>Кай</strong> тратит <strong>2 ОО</strong> на <strong>«Тихий шаг II»</strong>. На краже ключей перебрасывает <strong>один кубик</strong> — успех.</p>
+<p><strong>Мира</strong> повышает <strong>«История»</strong> за <strong>3 ОО</strong>. <strong>Орён</strong> копит ОО под узел <strong>Стихии</strong> в <a href="04-magiya.html">04-magiya.md</a>.</p>
+
+    </article>
+  </div>
+  <footer class="site-footer">
+    <p>Модульная настольная РПГ «Корни судьбы» · <a href="https://gitlab.com/fso13/me-rpg">Исходники на GitLab</a></p>
+  </footer>
+  <script src="js/manifest.js"></script>
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Корни судьбы — модульная настольная РПГ. Глава 4. Магия (модуль)">
+  <title>Глава 4. Магия (модуль) — Корни судьбы</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">Корни судьбы</a>
+    <nav class="nav-inline">
+      <a href="index.html">Главная</a>
+      <a href="oglavlenie.html">Оглавление</a>
+      <a href="character-sheet.html">Лист персонажа</a>
+      <a href="nastroyki.html">Настройки</a>
+    </nav>
+  </header>
+  <div class="layout-doc">
+    <aside class="sidebar">
+      <div class="sidebar-inner">
+        <div class="sidebar-title">Разделы</div>
+        <nav><a href="00-yadro.html">Глава 0. Ядро системы</a>
+<a href="01-moduli.html">Глава 1. Модульность</a>
+<a href="02-boy.html" data-module="tactical_combat">Глава 2. Бой (модуль)</a>
+<a href="03-derevya-talantov.html" data-module="talent_trees">Глава 3. Деревья талантов, навыки, ранги</a>
+<a href="04-magiya.html" class="active" data-module="magic">Глава 4. Магия (модуль)</a>
+<a href="05-snaryazhenie.html" data-module="equipment">Глава 5. Снаряжение</a>
+<a href="06-bestiariy.html" data-module="bestiary">Глава 6. Бестиарий</a>
+<a href="07-rany.html" data-module="wounds">Модуль: получение и учёт ран</a>
+<a href="08-krity-i-promahi.html" data-module="crits_and_fumbles">Модуль: критические попадания и промахи</a>
+<a href="09-sozdanie-i-uroven.html" data-module="character_progression">Создание персонажа и рост уровня</a>
+<div class="nav-group"><div class="nav-group-title">Фэнтези-модули</div><a href="fantasy/01-zaklinaniya.html" data-module="fantasy_spells">Фэнтези-модуль: заклинания</a>
+<a href="fantasy/02-talanty-i-navyki.html" data-module="fantasy_skills">Фэнтези-модуль: таланты и навыки</a>
+<a href="fantasy/03-snaryazhenie.html" data-module="fantasy_gear">Фэнтези-модуль: расширенное снаряжение</a>
+<a href="fantasy/04-bestiariy.html" data-module="fantasy_bestiary">Фэнтези-модуль: бестиарий</a></div>
+<a href="adventure/01-steklyannyy-zvon.html">Стартовое приключение: «Стеклянный звон»</a></nav>
+      </div>
+    </aside>
+    <article class="doc-main">
+      <h1>Глава 4. Магия (модуль)</h1>
+<p><em>Требует ядро и модуль боя для заклинаний-атак. Рекомендуется: <a href="fantasy/01-zaklinaniya.html">fantasy/01-zaklinaniya.md</a>.</em></p>
+<h2>1. Принцип: магия как атака</h2>
+<p>Если заклинание <strong>наносит урон</strong> цели, оно разрешается <strong>как атака</strong>, а не как отдельный «бросок против ЧЦ заклинания»:</p>
+<table>
+<thead>
+<tr>
+<th>Дистанция эффекта</th>
+<th>То же самое, что…</th>
+<th>Бросок атаки</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Рукопашная</strong> (касание, клинок энергии вплотную)</td>
+<td>рукопашное оружие</td>
+<td><code>2d6 + Тело или Ловкость + ранг «Магия (ближняя)»</code> <strong>или</strong> один общий <strong>«Магия»</strong> по договорённости стола</td>
+</tr>
+<tr>
+<td><strong>Даль</strong> (луч, снаряд, взрыв в дальности)</td>
+<td>дальняя атака</td>
+<td><code>2d6 + Ловкость + ранг «Магия (дальняя)»</code> <strong>или</strong> <strong>«Магия»</strong>, если не делите навык</td>
+</tr>
+</tbody></table>
+<p><strong>ЧЦ защиты</strong> цели — <strong>тот же</strong>, что и против стрел и ударов: <strong>8 + Ловкость + доспех + щит</strong> (и не более <strong>одного</strong> ситуативного +1, см. гл. 2).</p>
+<p><strong>Урон при попадании:</strong> как в главе 2 — <strong>(итог атаки − ЧЦ защиты) + бонус заклинания</strong>. В списках заклинаний <strong>+N</strong> — это <strong>бонус заклинания</strong> (аналог бонуса оружия). Второй кубик на урон не бросается.</p>
+<p><strong>ОД:</strong> заклинание с уроном стоит <strong>1 ОД</strong> (как атака), плюс <strong>1 искра</strong>, если в описании не сказано иное.</p>
+<p>Заклинания <strong>без урона</strong> (очарование, свет, телекинез мелкого предмета) по-прежнему: <strong>2d6 + Воля + ранг узла школы</strong> (или ранг «Магия») <strong>≥ ЧЦ</strong> задачи; <strong>искра</strong> по описанию.</p>
+<h2>2. Искры</h2>
+<p><strong>Максимум искр</strong> = <strong>3 + Воля</strong> (после длинного отдыха — полное восстановление).</p>
+<ul>
+<li><strong>Атака заклинанием:</strong> обычно <strong>−1 искра</strong> при касте (если в списке заклинаний не указано «бесплатно» или «2 искры»).</li>
+<li><strong>Неатакующее заклинание:</strong> <strong>−1 искра</strong> при неудаче искра потрачена; при успехе — по тексту заклинания.</li>
+</ul>
+<h2>3. Дерево школ (прокачка)</h2>
+<p>Узлы <strong>I–III</strong> покупаются за <strong>ОО</strong>; полные списки заклинаний — <a href="fantasy/01-zaklinaniya.html">fantasy/01-zaklinaniya.md</a>. Ниже <strong>четыре школы</strong> в духе классической схемы <em>Dragon Age</em> (стихии, дух, энтропия, сотворение).</p>
+<h3>Старт: <strong>«Первое соглашение»</strong> (I)</h3>
+<p>Даёт простые канты <strong>без урона</strong> на <strong>ЧЦ 11</strong> (свет, шорох). <strong>Магия (ближняя/дальняя)</strong> ранг <strong>0</strong> не даёт атакующих заклинаний — нужен следующий узел.</p>
+<h3>Школа <strong>Стихии</strong> <em>(огонь, холод, молния, земля)</em></h3>
+<table>
+<thead>
+<tr>
+<th>Узел</th>
+<th>Ранг</th>
+<th>Эффект</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Вспышка пламени</strong></td>
+<td>I</td>
+<td><strong>Дальняя атака:</strong> бонус заклинания <strong>+1</strong> (см. «Вспышка пламени» в списке)</td>
+</tr>
+<tr>
+<td><strong>Вспышка пламени</strong></td>
+<td>II</td>
+<td>доступ к <strong>Струя огня</strong> или <strong>Ледяной снаряд</strong> (бонус <strong>+2</strong>) — выберите линию</td>
+</tr>
+<tr>
+<td><strong>Каменный кулак</strong></td>
+<td>I</td>
+<td><strong>Дальняя атака</strong>, бонус <strong>+2</strong>, при попадании <strong>сдвиг</strong> цели на <strong>Рядом</strong></td>
+</tr>
+</tbody></table>
+<h3>Школа <strong>Дух</strong></h3>
+<table>
+<thead>
+<tr>
+<th>Узел</th>
+<th>Ранг</th>
+<th>Эффект</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Духовный болт</strong></td>
+<td>I</td>
+<td><strong>Дальняя атака</strong>, бонус <strong>+1</strong></td>
+</tr>
+<tr>
+<td><strong>Разрушение магии</strong></td>
+<td>I</td>
+<td>не атака: снять эффект чар (<strong>2d6 + Воля + ранг ≥ ЧЦ</strong>, см. список)</td>
+</tr>
+</tbody></table>
+<h3>Школа <strong>Энтропия</strong></h3>
+<table>
+<thead>
+<tr>
+<th>Узел</th>
+<th>Ранг</th>
+<th>Эффект</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Слабость</strong></td>
+<td>I</td>
+<td>дебафф по проверке (см. список), не бросок атаки по ЧЦ</td>
+</tr>
+<tr>
+<td><strong>Сбить с ног</strong></td>
+<td>I</td>
+<td><strong>Дальняя атака</strong>, бонус <strong>0</strong> — урон от <strong>(итог − ЧЦ)</strong>; при попадании <strong>сдвиг</strong> на <strong>Рядом</strong></td>
+</tr>
+</tbody></table>
+<h3>Школа <strong>Сотворение</strong></h3>
+<table>
+<thead>
+<tr>
+<th>Узел</th>
+<th>Ранг</th>
+<th>Эффект</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Преграда</strong></td>
+<td>I</td>
+<td>союзник <strong>+1 к ЧЦ</strong> до конца раунда (<strong>2d6 + Воля + ранг ≥ 11</strong>)</td>
+</tr>
+<tr>
+<td><strong>Лечение</strong></td>
+<td>I</td>
+<td>снять <strong>1 рана</strong> (<strong>≥ 10</strong>) у цели <strong>Рукопашная</strong></td>
+</tr>
+</tbody></table>
+<p>Связи узлов: <strong>Первое соглашение</strong> → любая школа <strong>I</strong> → <strong>II</strong> → <strong>III</strong> в линии (подробности в фэнтези-модуле).</p>
+<h2>4. Неудача атаки заклинанием</h2>
+<p>Промах — <strong>не</strong> тратит урон искру по желанию стола — <strong>часто искра всё равно потрачена</strong>; при <strong>1+1</strong> на d6 при включённом модуле <a href="08-krity-i-promahi.html">08-krity-i-promahi.md</a> — промах.</p>
+<h2>5. Навыки «Магия (ближняя)» и «Магия (дальняя)»</h2>
+<p>Подробнее и списки — <a href="fantasy/02-talanty-i-navyki.html">fantasy/02-talanty-i-navyki.md</a>. Можно играть <strong>одним</strong> навыком <strong>«Магия»</strong> для обоих типов атак.</p>
+<hr>
+<h2>Пример из партии: «Стеклянные волки»</h2>
+<p><strong>Орён</strong> с узлом <strong>«Вспышка пламени I»</strong> бьёт <strong>дальней магией</strong>: <strong>итог атаки 14</strong>, ЧЦ гарпии <strong>11</strong>. Урон = <strong>(14 − 11) + 1</strong> (бонус) = <strong>4</strong>, <strong>1 искра</strong>.</p>
+<p><strong>Слабость</strong> (энтропия, без атаки по ЧЦ): <strong>2d6 + Воля + ранг</strong> ≥ <strong>10 + Воля цели</strong> — отдельная проверка.</p>
+
+    </article>
+  </div>
+  <footer class="site-footer">
+    <p>Модульная настольная РПГ «Корни судьбы» · <a href="https://gitlab.com/fso13/me-rpg">Исходники на GitLab</a></p>
+  </footer>
+  <script src="js/manifest.js"></script>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Корни судьбы — модульная настольная РПГ. Модуль: критические попадания и промахи">
+  <title>Модуль: критические попадания и промахи — Корни судьбы</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">Корни судьбы</a>
+    <nav class="nav-inline">
+      <a href="index.html">Главная</a>
+      <a href="oglavlenie.html">Оглавление</a>
+      <a href="character-sheet.html">Лист персонажа</a>
+      <a href="nastroyki.html">Настройки</a>
+    </nav>
+  </header>
+  <div class="layout-doc">
+    <aside class="sidebar">
+      <div class="sidebar-inner">
+        <div class="sidebar-title">Разделы</div>
+        <nav><a href="00-yadro.html">Глава 0. Ядро системы</a>
+<a href="01-moduli.html">Глава 1. Модульность</a>
+<a href="02-boy.html" data-module="tactical_combat">Глава 2. Бой (модуль)</a>
+<a href="03-derevya-talantov.html" data-module="talent_trees">Глава 3. Деревья талантов, навыки, ранги</a>
+<a href="04-magiya.html" data-module="magic">Глава 4. Магия (модуль)</a>
+<a href="05-snaryazhenie.html" data-module="equipment">Глава 5. Снаряжение</a>
+<a href="06-bestiariy.html" data-module="bestiary">Глава 6. Бестиарий</a>
+<a href="07-rany.html" data-module="wounds">Модуль: получение и учёт ран</a>
+<a href="08-krity-i-promahi.html" class="active" data-module="crits_and_fumbles">Модуль: критические попадания и промахи</a>
+<a href="09-sozdanie-i-uroven.html" data-module="character_progression">Создание персонажа и рост уровня</a>
+<div class="nav-group"><div class="nav-group-title">Фэнтези-модули</div><a href="fantasy/01-zaklinaniya.html" data-module="fantasy_spells">Фэнтези-модуль: заклинания</a>
+<a href="fantasy/02-talanty-i-navyki.html" data-module="fantasy_skills">Фэнтези-модуль: таланты и навыки</a>
+<a href="fantasy/03-snaryazhenie.html" data-module="fantasy_gear">Фэнтези-модуль: расширенное снаряжение</a>
+<a href="fantasy/04-bestiariy.html" data-module="fantasy_bestiary">Фэнтези-модуль: бестиарий</a></div>
+<a href="adventure/01-steklyannyy-zvon.html">Стартовое приключение: «Стеклянный звон»</a></nav>
+      </div>
+    </aside>
+    <article class="doc-main">
+      <h1>Модуль: критические попадания и промахи</h1>
+<p><em>Опционально. Требует ядро. Использует тот же тип кубиков, что кампания.</em></p>
+<h2>1. Базовое правило (пара кубиков)</h2>
+<p>После броска <strong>2d6</strong> (или <strong>2d8</strong> и т.д.) в <strong>атаке</strong> смотрите пары граней:</p>
+<table>
+<thead>
+<tr>
+<th>Результат обоих кубиков</th>
+<th>Эффект (база)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Два максимума</strong> (6+6 на d6)</td>
+<td><strong>Крит</strong> — <strong>таблица критов</strong> (раздел 3)</td>
+</tr>
+<tr>
+<td><strong>Два минимума</strong> (1+1 на d6)</td>
+<td><strong>Провал</strong> — <strong>таблица провалов</strong> (раздел 4)</td>
+</tr>
+</tbody></table>
+<p><em>Если у вас не d6:</em> «максимум» = верхняя грань кубика, «минимум» = 1. Для <strong>таблиц 1d6</strong> ниже используйте <strong>тот же кубик кампании</strong>: на <strong>d8</strong> бросайте <strong>1d8</strong> и возьмите строки <strong>1–6</strong> (7–8 = переброс или «6» — по договорённости).</p>
+<h2>2. Заклинания-атаки</h2>
+<p>Тот же взгляд на <strong>кубики броска атаки</strong> магии (глава 4): при <strong>6+6</strong> / <strong>1+1</strong> применяйте таблицы; эффекты <strong>«оружие»</strong> читайте как <strong>заклинание</strong> (отдача = <strong>1 стресс</strong> или <strong>1 искра</strong>).</p>
+<h2>3. Таблица критов <em>(при двух максимумах)</em></h2>
+<p>Сначала считают <strong>обычный урон</strong> по формуле главы 2. Затем бросьте <strong>1d6</strong> и примените <strong>дополнительно</strong> (или выберите строку без броска — по договорённости):</p>
+<table>
+<thead>
+<tr>
+<th><strong>1d6</strong></th>
+<th>Дополнительный эффект крита</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>1</strong></td>
+<td><strong>+2</strong> к итоговому урону (простой крит)</td>
+</tr>
+<tr>
+<td><strong>2</strong></td>
+<td><strong>+1</strong> к урону и цель <strong>смещается</strong> на <strong>Рядом</strong> (опрокид, отброс)</td>
+</tr>
+<tr>
+<td><strong>3</strong></td>
+<td><strong>Разоружение:</strong> цель роняет оружие (или щит) — <strong>1 ОД</strong> поднять в следующем раунде</td>
+</tr>
+<tr>
+<td><strong>4</strong></td>
+<td>Цель получает <strong>1 стресс</strong> (оглушение, боль)</td>
+</tr>
+<tr>
+<td><strong>5</strong></td>
+<td>Бросок <strong>зоны</strong> по <a href="07-rany.html">07-rany.md</a>, раздел 4 — к этой зоне примените <strong>повреждена</strong> сразу (если модуль ран с зонами включён)</td>
+</tr>
+<tr>
+<td><strong>6</strong></td>
+<td><strong>+1</strong> к урону <strong>и</strong> выберите любой эффект из <strong>1–4</strong> (игрок или ведущий для NPC)</td>
+</tr>
+</tbody></table>
+<p><em>Если модуль зон ран <strong>не</strong> используется:</em> строка <strong>5</strong> = <strong>+2</strong> к урону вместо зоны.</p>
+<h2>4. Таблица провалов <em>(при двух минимумах)</em></h2>
+<table>
+<thead>
+<tr>
+<th><strong>1d6</strong></th>
+<th>Эффект провала</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>1</strong></td>
+<td>Полный <strong>промах</strong> — атака не попадает, даже если сумма ≥ ЧЦ</td>
+</tr>
+<tr>
+<td><strong>2</strong></td>
+<td>Промах <strong>и</strong> вы <strong>−1 ОД</strong> в <strong>следующем</strong> раунде (замах, усталость)</td>
+</tr>
+<tr>
+<td><strong>3</strong></td>
+<td>Атака попадает <strong>в вас</strong> на <strong>половину</strong> округлённого <strong>вниз</strong> вашего бонуса оружия (минимум <strong>1</strong> урон) — «отдача», удар об пол</td>
+</tr>
+<tr>
+<td><strong>4</strong></td>
+<td><strong>Оружие выпало:</strong> <strong>1 ОД</strong> чтобы поднять в <strong>Рукопашной</strong> (или <strong>Рядом</strong> к оружию)</td>
+</tr>
+<tr>
+<td><strong>5</strong></td>
+<td>Случайный союзник в <strong>Рядом</strong> с вами получает <strong>1</strong> урон (дружественный огонь) — если некого, повторите <strong>1d6</strong></td>
+</tr>
+<tr>
+<td><strong>6</strong></td>
+<td>Вы <strong>падаете</strong>: сместитесь на <strong>Рядом</strong> от ближайшего врага и <strong>−1</strong> к <strong>первой</strong> защите до вашего хода</td>
+</tr>
+</tbody></table>
+<p><em>Дальняя атака:</em> строки <strong>3–4</strong> замените на: <strong>3</strong> — <strong>1</strong> урон (тетива, обжог); <strong>4</strong> — <strong>нет стрел</strong> в этом выстреле (расход слота) или <strong>−1</strong> к следующей дальней атаке.</p>
+<h2>5. «Почти крит / почти провал» <em>(опционально)</em></h2>
+<table>
+<thead>
+<tr>
+<th>Кубики</th>
+<th>Эффект</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>5+6</strong> или <strong>6+5</strong></td>
+<td><strong>Лёгкий крит:</strong> <strong>+1</strong> к урону <strong>или</strong> перебросьте <strong>один</strong> d6 атаки (если ещё не объявлен итог)</td>
+</tr>
+<tr>
+<td><strong>1+2</strong> или <strong>2+1</strong></td>
+<td><strong>Заминка:</strong> <strong>−1</strong> к <strong>итогу</strong> этой атаки (ещё до сравнения с ЧЦ)</td>
+</tr>
+</tbody></table>
+<p>Отключите, если хотите только «чистые» 6+6 и 1+1.</p>
+<h2>6. Опция «мягче»</h2>
+<ul>
+<li><strong>1+1</strong> → <strong>−2 к итоговому урону</strong> вместо таблицы провалов (или один бросок <strong>1d6</strong> на таблице).</li>
+<li><strong>6+6</strong> → только <strong>+1</strong> к урону без таблицы критов.</li>
+</ul>
+<hr>
+<h2>Пример из партии: «Стеклянные волки»</h2>
+<p><strong>Кай</strong> на рукопашную: <strong>6 и 6</strong> — крит. Урон по формуле, затем <strong>1d6 = 4</strong> — цель <strong>1 стресс</strong>.</p>
+<p><strong>Гарпия</strong> бросает <strong>1 и 1</strong> — <strong>1d6 = 1</strong> — чистый промах.</p>
+
+    </article>
+  </div>
+  <footer class="site-footer">
+    <p>Модульная настольная РПГ «Корни судьбы» · <a href="https://gitlab.com/fso13/me-rpg">Исходники на GitLab</a></p>
+  </footer>
+  <script src="js/manifest.js"></script>
+</body>
+</html>

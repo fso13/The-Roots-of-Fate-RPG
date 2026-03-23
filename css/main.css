@@ -1,0 +1,497 @@
+/* Корни судьбы — минималистичный фэнтези */
+:root {
+  --bg-deep: #0c0e12;
+  --bg-panel: #141820;
+  --bg-elevated: #1a202c;
+  --ink: #e8e4dc;
+  --ink-muted: #9a9388;
+  --accent: #c9a962;
+  --accent-dim: #8a7548;
+  --line: rgba(201, 169, 98, 0.15);
+  --glow: rgba(201, 169, 98, 0.08);
+  --font-display: "Cormorant Garamond", "Georgia", serif;
+  --font-body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --radius: 4px;
+  --max-read: 52rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg-deep);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  line-height: 1.65;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Фон: тихий градиент + лёгкая сетка */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -20%, var(--glow), transparent 50%),
+    linear-gradient(180deg, var(--bg-deep) 0%, #0a0c10 100%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cpath d='M0 60h60M60 0v60' fill='none' stroke='%23c9a962' stroke-opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: -1;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+a:hover {
+  border-bottom-color: var(--accent-dim);
+  color: #dcc896;
+}
+
+/* ——— Layout ——— */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.5rem;
+  background: rgba(12, 14, 18, 0.85);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+
+.brand {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  border: none;
+}
+
+.brand:hover {
+  color: var(--accent);
+  border: none;
+}
+
+.nav-inline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-size: 0.92rem;
+}
+
+.nav-inline a {
+  color: var(--ink-muted);
+  border: none;
+}
+
+.nav-inline a:hover {
+  color: var(--accent);
+}
+
+.layout-doc {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, var(--max-read)) minmax(0, 1fr);
+  gap: 0;
+  padding: 2rem 1rem 4rem;
+}
+
+.sidebar {
+  grid-column: 1;
+  padding-right: 1.5rem;
+  text-align: right;
+  font-size: 0.88rem;
+}
+
+.sidebar-inner {
+  position: sticky;
+  top: 5rem;
+  max-height: calc(100vh - 6rem);
+  overflow-y: auto;
+  padding-left: 0.5rem;
+}
+
+.sidebar-title {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--accent-dim);
+  margin-bottom: 0.75rem;
+}
+
+.sidebar nav a {
+  display: block;
+  padding: 0.35rem 0;
+  color: var(--ink-muted);
+  border: none;
+  line-height: 1.35;
+}
+
+.sidebar nav a:hover,
+.sidebar nav a.active {
+  color: var(--accent);
+}
+
+.sidebar .nav-group {
+  margin-top: 0.75rem;
+}
+
+.sidebar .nav-group-title {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent-dim);
+  margin-bottom: 0.35rem;
+  padding-top: 0.25rem;
+}
+
+.sidebar .nav-group a {
+  padding-left: 0.5rem;
+  font-size: 0.85em;
+}
+
+.doc-main {
+  grid-column: 2;
+  background: var(--bg-panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 2rem 2.25rem 3rem;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.35);
+}
+
+/* ——— Hero (главная) ——— */
+.hero {
+  min-height: 72vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 3rem 1.5rem 4rem;
+}
+
+.hero-ornament {
+  width: 120px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  margin-bottom: 1.5rem;
+  opacity: 0.6;
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6vw, 3.75rem);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  margin: 0 0 0.5rem;
+  color: var(--ink);
+}
+
+.hero .tagline {
+  font-size: 1.15rem;
+  color: var(--ink-muted);
+  max-width: 28rem;
+  margin: 0 0 2rem;
+  font-weight: 400;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.65rem 1.75rem;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--bg-deep);
+  background: linear-gradient(180deg, #d4b76a, var(--accent));
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: filter 0.2s, transform 0.15s;
+}
+
+.btn:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+  border: none;
+  color: var(--bg-deep);
+}
+
+.btn-sm {
+  padding: 0.45rem 1.1rem;
+  font-size: 0.85rem;
+}
+
+.btn-muted {
+  background: var(--bg-elevated);
+  color: var(--ink-muted);
+}
+
+.btn-muted:hover {
+  background: #1e2633;
+  color: var(--accent);
+}
+
+/* ——— Страница настроек ——— */
+.config-form {
+  margin: 1.5rem 0;
+}
+
+.config-group {
+  margin-bottom: 1.5rem;
+}
+
+.config-group-title {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--accent-dim);
+  margin-bottom: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.config-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.4rem 0;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.config-checkbox input {
+  margin: 0;
+  accent-color: var(--accent);
+}
+
+.config-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+/* ——— Карточки глав ——— */
+.section-title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  text-align: center;
+  margin: 3rem 0 1.25rem;
+  color: var(--ink-muted);
+  font-weight: 500;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 1rem 3rem;
+}
+
+.card {
+  display: block;
+  padding: 1.25rem 1.35rem;
+  background: var(--bg-elevated);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.card:hover {
+  border-color: rgba(201, 169, 98, 0.35);
+  background: #1e2633;
+}
+
+.card h3 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  margin: 0 0 0.35rem;
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.card p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--ink-muted);
+  line-height: 1.45;
+}
+
+.card .meta {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent-dim);
+  margin-bottom: 0.5rem;
+}
+
+/* ——— Типографика контента ——— */
+.doc-main h1 {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0 0 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--line);
+  letter-spacing: 0.02em;
+}
+
+.doc-main h2 {
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  font-weight: 600;
+  margin: 2rem 0 0.75rem;
+  color: #efe9df;
+}
+
+.doc-main h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 1.5rem 0 0.5rem;
+  color: var(--accent);
+}
+
+.doc-main p {
+  margin: 0 0 1rem;
+}
+
+.doc-main ul,
+.doc-main ol {
+  margin: 0 0 1rem;
+  padding-left: 1.35rem;
+}
+
+.doc-main li {
+  margin-bottom: 0.35rem;
+}
+
+.doc-main blockquote {
+  margin: 1rem 0;
+  padding: 0.75rem 1rem;
+  border-left: 3px solid var(--accent-dim);
+  background: rgba(201, 169, 98, 0.05);
+  color: var(--ink-muted);
+}
+
+.doc-main code {
+  font-family: "JetBrains Mono", "Consolas", monospace;
+  font-size: 0.88em;
+  background: var(--bg-deep);
+  padding: 0.15em 0.4em;
+  border-radius: 3px;
+  color: #c9b896;
+}
+
+.doc-main pre {
+  background: var(--bg-deep);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1rem;
+  overflow-x: auto;
+  font-size: 0.88rem;
+}
+
+.doc-main pre code {
+  background: none;
+  padding: 0;
+}
+
+.doc-main table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0 1.5rem;
+  font-size: 0.92rem;
+}
+
+.doc-main th,
+.doc-main td {
+  border: 1px solid var(--line);
+  padding: 0.5rem 0.65rem;
+  text-align: left;
+}
+
+.doc-main th {
+  background: var(--bg-elevated);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.doc-main tr:nth-child(even) td {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.doc-main hr {
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--line), transparent);
+  margin: 2rem 0;
+}
+
+.doc-main img {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  margin: 1rem 0;
+}
+
+.site-footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  font-size: 0.85rem;
+  color: var(--ink-muted);
+  border-top: 1px solid var(--line);
+}
+
+.site-footer a {
+  color: var(--ink-muted);
+}
+
+.site-footer a:hover {
+  color: var(--accent);
+}
+
+/* Мобильная: скрыть сайдбар или сделать сверху */
+@media (max-width: 960px) {
+  .layout-doc {
+    grid-template-columns: 1fr;
+    padding: 1rem;
+  }
+
+  .sidebar {
+    display: none;
+  }
+
+  .doc-main {
+    grid-column: 1;
+    padding: 1.5rem 1.25rem 2rem;
+  }
+}

@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Корни судьбы — модульная настольная РПГ. Фэнтези-модуль: таланты и навыки">
+  <title>Фэнтези-модуль: таланты и навыки — Корни судьбы</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="../index.html">Корни судьбы</a>
+    <nav class="nav-inline">
+      <a href="../index.html">Главная</a>
+      <a href="../oglavlenie.html">Оглавление</a>
+      <a href="../character-sheet.html">Лист персонажа</a>
+      <a href="../nastroyki.html">Настройки</a>
+    </nav>
+  </header>
+  <div class="layout-doc">
+    <aside class="sidebar">
+      <div class="sidebar-inner">
+        <div class="sidebar-title">Разделы</div>
+        <nav><a href="../00-yadro.html">Глава 0. Ядро системы</a>
+<a href="../01-moduli.html">Глава 1. Модульность</a>
+<a href="../02-boy.html" data-module="tactical_combat">Глава 2. Бой (модуль)</a>
+<a href="../03-derevya-talantov.html" data-module="talent_trees">Глава 3. Деревья талантов, навыки, ранги</a>
+<a href="../04-magiya.html" data-module="magic">Глава 4. Магия (модуль)</a>
+<a href="../05-snaryazhenie.html" data-module="equipment">Глава 5. Снаряжение</a>
+<a href="../06-bestiariy.html" data-module="bestiary">Глава 6. Бестиарий</a>
+<a href="../07-rany.html" data-module="wounds">Модуль: получение и учёт ран</a>
+<a href="../08-krity-i-promahi.html" data-module="crits_and_fumbles">Модуль: критические попадания и промахи</a>
+<a href="../09-sozdanie-i-uroven.html" data-module="character_progression">Создание персонажа и рост уровня</a>
+<div class="nav-group"><div class="nav-group-title">Фэнтези-модули</div><a href="../fantasy/01-zaklinaniya.html" data-module="fantasy_spells">Фэнтези-модуль: заклинания</a>
+<a href="../fantasy/02-talanty-i-navyki.html" class="active" data-module="fantasy_skills">Фэнтези-модуль: таланты и навыки</a>
+<a href="../fantasy/03-snaryazhenie.html" data-module="fantasy_gear">Фэнтези-модуль: расширенное снаряжение</a>
+<a href="../fantasy/04-bestiariy.html" data-module="fantasy_bestiary">Фэнтези-модуль: бестиарий</a></div>
+<a href="../adventure/01-steklyannyy-zvon.html">Стартовое приключение: «Стеклянный звон»</a></nav>
+      </div>
+    </aside>
+    <article class="doc-main">
+      <h1>Фэнтези-модуль: таланты и навыки</h1>
+<p><em>Расширяет <a href="../03-derevya-talantov.html">03-derevya-talantov.md</a>. Структура боевых и социальных веток — в духе классических RPG вроде <em>Dragon Age</em> (воин / разбойник / маг и ветки убеждения).</em></p>
+<hr>
+<h2>1. Навыки: боевые</h2>
+<p>Используются в <strong>атаках</strong> (глава 2) или в <strong>сопротивлениях</strong> / особых ситуациях.</p>
+<table>
+<thead>
+<tr>
+<th>Навык</th>
+<th>Атрибут</th>
+<th>Применение</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Рукопашное оружие</strong></td>
+<td>Тело или Ловкость</td>
+<td>мечи, булавы, топоры одной руки, копья в ближнем бою</td>
+</tr>
+<tr>
+<td><strong>Двуручное оружие</strong></td>
+<td>Тело</td>
+<td>большие мечи, секиры, алебарды</td>
+</tr>
+<tr>
+<td><strong>Оружие и щит</strong></td>
+<td>Тело или Ловкость</td>
+<td>бой с щитом (атаки и иногда защита — по таланту)</td>
+</tr>
+<tr>
+<td><strong>Двойное оружие</strong></td>
+<td>Ловкость</td>
+<td>два клинка, кинжал + кинжал</td>
+</tr>
+<tr>
+<td><strong>Стрельба</strong></td>
+<td>Ловкость</td>
+<td>лук, арбалет, метательное</td>
+</tr>
+<tr>
+<td><strong>Безоружный бой</strong></td>
+<td>Тело или Ловкость</td>
+<td>кулаки, захваты</td>
+</tr>
+<tr>
+<td><strong>Тяжёлая броня</strong></td>
+<td>Тело</td>
+<td>действие в латах, длительный бой в полном доспехе (редкие проверки)</td>
+</tr>
+<tr>
+<td><strong>Лёгкая броня</strong></td>
+<td>Ловкость</td>
+<td>уклонение в коже/кольчуге, акробатика в бою</td>
+</tr>
+</tbody></table>
+<p><em>Если не хотите дробить оружие:</em> оставьте только <strong>«Рукопашная»</strong> и <strong>«Стрельба»</strong> — остальное закройте <strong>талантами</strong>.</p>
+<hr>
+<h2>2. Навыки: социальные и «столичные»</h2>
+<table>
+<thead>
+<tr>
+<th>Навык</th>
+<th>Атрибут</th>
+<th>Применение</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Дипломатия</strong></td>
+<td>Воля</td>
+<td>переговоры, мирные сделки, убеждение без угроз</td>
+</tr>
+<tr>
+<td><strong>Запугивание</strong></td>
+<td>Воля</td>
+<td>угрозы, допрос, давление силой</td>
+</tr>
+<tr>
+<td><strong>Обман</strong></td>
+<td>Воля</td>
+<td>ложь, маскировка личности, фокусы рук</td>
+</tr>
+<tr>
+<td><strong>Выступление</strong></td>
+<td>Воля</td>
+<td>речь, песня, театр — влияние через артистизм</td>
+</tr>
+<tr>
+<td><strong>Проницательность</strong></td>
+<td>Разум</td>
+<td>чтение намерений, ловля лжи, оценка слабого места</td>
+</tr>
+<tr>
+<td><strong>Этикет</strong></td>
+<td>Воля</td>
+<td>придворные правила, балы, гильдии</td>
+</tr>
+<tr>
+<td><strong>Торговля</strong></td>
+<td>Разум</td>
+<td>цены, скупка, оценка товара</td>
+</tr>
+<tr>
+<td><strong>Право и обычай</strong></td>
+<td>Разум</td>
+<td>законы городов, договоры, наследие</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>3. Навыки: знания и ремесло</h2>
+<table>
+<thead>
+<tr>
+<th>Навык</th>
+<th>Атрибут</th>
+<th>Применение</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>История</strong></td>
+<td>Разум</td>
+<td>древности, династии, войны</td>
+</tr>
+<tr>
+<td><strong>Природа</strong></td>
+<td>Разум</td>
+<td>звери, растения, погода, тропы</td>
+</tr>
+<tr>
+<td><strong>Религия</strong></td>
+<td>Воля</td>
+<td>обряды, догматы, иконография</td>
+</tr>
+<tr>
+<td><strong>Магические знания</strong></td>
+<td>Разум</td>
+<td>теория школ, артефакты, узнавание чар</td>
+</tr>
+<tr>
+<td><strong>Анализ</strong></td>
+<td>Разум</td>
+<td>улики, механизмы, «как это работает»</td>
+</tr>
+<tr>
+<td><strong>Ремесло</strong></td>
+<td>Разум</td>
+<td>кузня, кожа, стрелы; ремонт оружия</td>
+</tr>
+<tr>
+<td><strong>Алхимия</strong></td>
+<td>Разум</td>
+<td>зелья, яды, взрывчатые смеси (по допуску ведущего)</td>
+</tr>
+<tr>
+<td><strong>Медицина</strong></td>
+<td>Разум</td>
+<td>лечение ран, болезни, анатомия</td>
+</tr>
+<tr>
+<td><strong>Подделка</strong></td>
+<td>Ловкость</td>
+<td>документы, печати, ключи</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>4. Навыки: путешествие и скрытность</h2>
+<table>
+<thead>
+<tr>
+<th>Навык</th>
+<th>Атрибут</th>
+<th>Применение</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Атлетика</strong></td>
+<td>Тело</td>
+<td>лазанье, прыжки, плавание, толкать</td>
+</tr>
+<tr>
+<td><strong>Акробатика</strong></td>
+<td>Ловкость</td>
+<td>баланс, кувырки, падение с уроном меньше</td>
+</tr>
+<tr>
+<td><strong>Скрытность</strong></td>
+<td>Ловкость</td>
+<td>тень, тихий шаг</td>
+</tr>
+<tr>
+<td><strong>Внимание</strong></td>
+<td>Разум</td>
+<td>засечь засаду, деталь комнаты, след</td>
+</tr>
+<tr>
+<td><strong>Выживание</strong></td>
+<td>Тело</td>
+<td>лагерь, охота, не сдохнуть в степи</td>
+</tr>
+<tr>
+<td><strong>Взлом</strong></td>
+<td>Ловкость</td>
+<td>замки, защёлки</td>
+</tr>
+<tr>
+<td><strong>Верховая езда</strong></td>
+<td>Ловкость</td>
+<td>конь и иные скакуны</td>
+</tr>
+<tr>
+<td><strong>Навигация</strong></td>
+<td>Разум</td>
+<td>карты, звёзды, «куда идти»</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>5. Магия (как в главе 4)</h2>
+<table>
+<thead>
+<tr>
+<th>Навык</th>
+<th>Атрибут</th>
+<th>Применение</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Магия (ближняя)</strong></td>
+<td>Тело или Ловкость</td>
+<td>касание, клинок энергии вплотную</td>
+</tr>
+<tr>
+<td><strong>Магия (дальняя)</strong></td>
+<td>Ловкость</td>
+<td>лучи, взрывы на дистанции</td>
+</tr>
+<tr>
+<td><strong>Магия</strong> (общий)</td>
+<td>Воля</td>
+<td>один навык на все касты — по договорённости стола</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>6. Таланты: боевые деревья</h2>
+<p>Узлы <strong>I → II → III</strong> покупаются за <strong>ОО</strong>; в скобках — типичный бонус. Конкретные цифры согласуйте с ведущим.</p>
+<h3>Ветка <strong>Щит</strong> <em>(shield)</em></h3>
+<table>
+<thead>
+<tr>
+<th>Узел</th>
+<th>Ранг</th>
+<th>Эффект</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Удар щитом</strong></td>
+<td>I</td>
+<td>раз за сцену при <strong>успешной</strong> рукопашной атаке с щитом цель <strong>смещается</strong> на <strong>Рядом</strong> (на выбор)</td>
+</tr>
+<tr>
+<td><strong>Удар щитом</strong></td>
+<td>II</td>
+<td><strong>+1</strong> к <strong>итогу</strong> этой атаки (один раз за сцену)</td>
+</tr>
+<tr>
+<td><strong>Стена щита</strong></td>
+<td>I</td>
+<td>пока держите щит: <strong>+1 к ЧЦ</strong> против <strong>одной</strong> дальней атаки за раунд (объявляете заранее)</td>
+</tr>
+<tr>
+<td><strong>Стена щита</strong></td>
+<td>II</td>
+<td><strong>две</strong> дальние атаки за раунд</td>
+</tr>
+</tbody></table>
+<h3>Ветка <strong>Двуручник</strong> <em>(two-handed)</em></h3>
+<table>
+<thead>
+<tr>
+<th>Узел</th>
+<th>Ранг</th>
+<th>Эффект</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Мощный замах</strong></td>
+<td>I</td>
+<td>раз за сцену с <strong>двуручным</strong> оружием: <strong>+1</strong> к <strong>бонусу оружия</strong> в формуле урона</td>
+</tr>
+<tr>
+<td><strong>Мощный замах</strong></td>
+<td>II</td>
+<td><strong>+2</strong> вместо +1, но <strong>−1 ОД</strong> в следующем раунде (усталость)</td>
+</tr>
+<tr>
+<td><strong>Размах</strong></td>
+<td>I</td>
+<td>при попадании по цели <strong>в Рукопашной</strong> с вами вторая цель <strong>в Рядом</strong> получает <strong>половину</strong> урона (округление вниз) — по согласованию с ведущим</td>
+</tr>
+</tbody></table>
+<h3>Ветка <strong>Двойное оружие</strong> <em>(dual weapon)</em></h3>
+<table>
+<thead>
+<tr>
+<th>Узел</th>
+<th>Ранг</th>
+<th>Эффект</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Быстрые руки</strong></td>
+<td>I</td>
+<td>раз за раунд вторая <strong>рукопашная</strong> атака стоит <strong>1 ОД</strong> вместо запрета — <em>или</em> <strong>−1</strong> ко второй атаке (проще)</td>
+</tr>
+<tr>
+<td><strong>Быстрые руки</strong></td>
+<td>II</td>
+<td>второй бросок <strong>без</strong> −1, раз за раунд</td>
+</tr>
+<tr>
+<td><strong>Бой в паре</strong></td>
+<td>I</td>
+<td><strong>+1</strong> к <strong>итогу</strong> атаки, если в <strong>Рукопашной</strong> с тем же врагом есть союзник</td>
+</tr>
+</tbody></table>
+<h3>Ветка <strong>Стрелок</strong> <em>(archery)</em></h3>
+<table>
+<thead>
+<tr>
+<th>Узел</th>
+<th>Ранг</th>
+<th>Эффект</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Меткий выстрел</strong></td>
+<td>I</td>
+<td>раз за сцену <strong>дальняя</strong> атака: <strong>+1</strong> к <strong>итогу</strong> броска</td>
+</tr>
+<tr>
+<td><strong>Залп</strong></td>
+<td>II</td>
+<td>раз за сцену <strong>две</strong> цели в <strong>Рядом</strong> друг с другом — <strong>одна</strong> атака против <strong>средней</strong> ЧЦ; урон делится или полный по одной — по ведущему</td>
+</tr>
+<tr>
+<td><strong>Беглый выстрел</strong></td>
+<td>I</td>
+<td>после <strong>Сдвига</strong> в этом же ходу <strong>первая</strong> дальняя атака <strong>без</strong> штрафа (если вводите штраф за движение)</td>
+</tr>
+</tbody></table>
+<h3>Ветка <strong>Тень</strong> <em>(stealth — плут)</em></h3>
+<table>
+<thead>
+<tr>
+<th>Узел</th>
+<th>Ранг</th>
+<th>Эффект</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Внезапность</strong></td>
+<td>I</td>
+<td>первая атака из <strong>Скрытности</strong> в сцене: <strong>+1</strong> к <strong>итогу</strong></td>
+</tr>
+<tr>
+<td><strong>Внезапность</strong></td>
+<td>II</td>
+<td><strong>+2</strong>, раз за сессию</td>
+</tr>
+<tr>
+<td><strong>Скользкий</strong></td>
+<td>I</td>
+<td>раз за сцену <strong>перебросьте</strong> один d6 при проверке <strong>Скрытность</strong></td>
+</tr>
+</tbody></table>
+<hr>
+<h2>7. Таланты: социальные деревья</h2>
+<h3>Ветка <strong>Лидерство</strong> <em>(party buff)</em></h3>
+<table>
+<thead>
+<tr>
+<th>Узел</th>
+<th>Ранг</th>
+<th>Эффект</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Вдохновение</strong></td>
+<td>I</td>
+<td>раз за сцену союзник в <strong>Рядом</strong> <strong>+1</strong> к <strong>первой</strong> проверке (любой навык)</td>
+</tr>
+<tr>
+<td><strong>Вдохновение</strong></td>
+<td>II</td>
+<td><strong>два</strong> союзника или <strong>+2</strong> одному</td>
+</tr>
+<tr>
+<td><strong>Приказ</strong></td>
+<td>I</td>
+<td>в бою <strong>1 ОД</strong>: союзник <strong>немедленно</strong> <strong>Сдвигается</strong> на шаг (если логично)</td>
+</tr>
+</tbody></table>
+<h3>Ветка <strong>Переговоры</strong></h3>
+<table>
+<thead>
+<tr>
+<th>Узел</th>
+<th>Ранг</th>
+<th>Эффект</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Компромисс</strong></td>
+<td>I</td>
+<td>при <strong>провале</strong> <strong>Дипломатии</strong> раз за сцену <strong>перебросьте</strong> один d6</td>
+</tr>
+<tr>
+<td><strong>Угроза силой</strong></td>
+<td>I</td>
+<td>если перед этим был успешный <strong>Запугивание</strong>, первая <strong>Дипломатия</strong> в той же сцене <strong>+1</strong> к <strong>итогу</strong> (или наоборот — по роли)</td>
+</tr>
+<tr>
+<td><strong>Читать зал</strong></td>
+<td>I</td>
+<td><strong>Проницательность</strong>: раз за разговор <strong>задайте</strong> ведущему один <strong>да/нет</strong> о намерении NPC</td>
+</tr>
+</tbody></table>
+<h3>Ветка <strong>Обман и маскировка</strong></h3>
+<table>
+<thead>
+<tr>
+<th>Узел</th>
+<th>Ранг</th>
+<th>Эффект</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Двойная игра</strong></td>
+<td>I</td>
+<td>раз за сцену при <strong>Обмане</strong> один <strong>автоуспех</strong> мелкой детали (не всей лжи)</td>
+</tr>
+<tr>
+<td><strong>Незаметный жест</strong></td>
+<td>I</td>
+<td><strong>Скрытность</strong> в толпе: <strong>+1</strong> к <strong>итогу</strong>, раз за сцену</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>8. Стартовые архетипы (пример)</h2>
+<table>
+<thead>
+<tr>
+<th>Архетип</th>
+<th>Стартовый узел I (бесплатно)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Страж / воин</strong></td>
+<td><strong>Стена щита I</strong> <em>или</em> <strong>Мощный замах I</strong></td>
+</tr>
+<tr>
+<td><strong>Разбойник</strong></td>
+<td><strong>Внезапность I</strong> <em>или</em> <strong>Скользкий I</strong></td>
+</tr>
+<tr>
+<td><strong>Лучник</strong></td>
+<td><strong>Меткий выстрел I</strong></td>
+</tr>
+<tr>
+<td><strong>Маг</strong></td>
+<td><strong>Первое соглашение</strong> (глава 4) + доступ к школе <strong>Стихии</strong></td>
+</tr>
+<tr>
+<td><strong>Лидер</strong></td>
+<td><strong>Вдохновение I</strong></td>
+</tr>
+<tr>
+<td><strong>Интриган</strong></td>
+<td><strong>Читать зал I</strong></td>
+</tr>
+</tbody></table>
+<hr>
+<h2>Пример из партии: «Стеклянные волки»</h2>
+<p><strong>Кай</strong> (плут) берёт <strong>«Внезапность II»</strong>: из засады первая атака <strong>+2</strong> к итогу — урон заметно выше за счёт <strong>(итог − ЧЦ)</strong>.</p>
+<p><strong>Мира</strong> качает <strong>«Компромисс I»</strong>: провалила <strong>Дипломатию</strong> у стражи — <strong>переброс</strong> кубика, второй бросок спасает сцену.</p>
+<p><strong>Гарр</strong> с <strong>«Стеной щита II»</strong> держит дальний огонь гарпии, объявляя <strong>две</strong> защищённые атаки в раунд.</p>
+
+    </article>
+  </div>
+  <footer class="site-footer">
+    <p>Модульная настольная РПГ «Корни судьбы» · <a href="https://gitlab.com/fso13/me-rpg">Исходники на GitLab</a></p>
+  </footer>
+  <script src="../js/manifest.js"></script>
+</body>
+</html>

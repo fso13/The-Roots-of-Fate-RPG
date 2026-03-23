@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Корни судьбы — модульная настольная РПГ. Создание персонажа и рост уровня">
+  <title>Создание персонажа и рост уровня — Корни судьбы</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">Корни судьбы</a>
+    <nav class="nav-inline">
+      <a href="index.html">Главная</a>
+      <a href="oglavlenie.html">Оглавление</a>
+      <a href="character-sheet.html">Лист персонажа</a>
+      <a href="nastroyki.html">Настройки</a>
+    </nav>
+  </header>
+  <div class="layout-doc">
+    <aside class="sidebar">
+      <div class="sidebar-inner">
+        <div class="sidebar-title">Разделы</div>
+        <nav><a href="00-yadro.html">Глава 0. Ядро системы</a>
+<a href="01-moduli.html">Глава 1. Модульность</a>
+<a href="02-boy.html" data-module="tactical_combat">Глава 2. Бой (модуль)</a>
+<a href="03-derevya-talantov.html" data-module="talent_trees">Глава 3. Деревья талантов, навыки, ранги</a>
+<a href="04-magiya.html" data-module="magic">Глава 4. Магия (модуль)</a>
+<a href="05-snaryazhenie.html" data-module="equipment">Глава 5. Снаряжение</a>
+<a href="06-bestiariy.html" data-module="bestiary">Глава 6. Бестиарий</a>
+<a href="07-rany.html" data-module="wounds">Модуль: получение и учёт ран</a>
+<a href="08-krity-i-promahi.html" data-module="crits_and_fumbles">Модуль: критические попадания и промахи</a>
+<a href="09-sozdanie-i-uroven.html" class="active" data-module="character_progression">Создание персонажа и рост уровня</a>
+<div class="nav-group"><div class="nav-group-title">Фэнтези-модули</div><a href="fantasy/01-zaklinaniya.html" data-module="fantasy_spells">Фэнтези-модуль: заклинания</a>
+<a href="fantasy/02-talanty-i-navyki.html" data-module="fantasy_skills">Фэнтези-модуль: таланты и навыки</a>
+<a href="fantasy/03-snaryazhenie.html" data-module="fantasy_gear">Фэнтези-модуль: расширенное снаряжение</a>
+<a href="fantasy/04-bestiariy.html" data-module="fantasy_bestiary">Фэнтези-модуль: бестиарий</a></div>
+<a href="adventure/01-steklyannyy-zvon.html">Стартовое приключение: «Стеклянный звон»</a></nav>
+      </div>
+    </aside>
+    <article class="doc-main">
+      <h1>Создание персонажа и рост уровня</h1>
+<p><em>Требует ядро. Рекомендуется: <a href="03-derevya-talantov.html">03-derevya-talantov.md</a>, фэнтези-модули.</em></p>
+<h2>1. Создание персонажа</h2>
+<h3>Шаг 1. Концепт</h3>
+<p>Имя, происхождение, цель — свободно.</p>
+<h3>Шаг 2. Атрибуты</h3>
+<p>Четыре атрибута: <strong>Тело, Ловкость, Разум, Воля</strong>. Каждый <strong>от 1 до 5</strong> на старте. Выберите один из способов:</p>
+<p><strong>Вариант А. Броски кубиков.</strong> Бросьте <strong>4 × 2d6</strong> (по одному на каждый атрибут) и переведите по таблице:</p>
+<table>
+<thead>
+<tr>
+<th>Сумма 2d6</th>
+<th>Значение атрибута</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2–4</td>
+<td>1</td>
+</tr>
+<tr>
+<td>5–6</td>
+<td>2</td>
+</tr>
+<tr>
+<td>7–8</td>
+<td>3</td>
+</tr>
+<tr>
+<td>9–10</td>
+<td>4</td>
+</tr>
+<tr>
+<td>11–12</td>
+<td>5</td>
+</tr>
+</tbody></table>
+<p><strong>Вариант Б. Распределение по очкам.</strong> У вас есть <strong>10 очков</strong>. Стоимость каждого значения:</p>
+<table>
+<thead>
+<tr>
+<th>Значение</th>
+<th>Стоимость</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>2</td>
+<td>1</td>
+</tr>
+<tr>
+<td>3</td>
+<td>2</td>
+</tr>
+<tr>
+<td>4</td>
+<td>4</td>
+</tr>
+<tr>
+<td>5</td>
+<td>6</td>
+</tr>
+</tbody></table>
+<p>Например: значение <strong>4</strong> стоит <strong>4 очка</strong>; раздать 4/3/2/1 = 10 очков.</p>
+<h3>Шаг 3. Навыки</h3>
+<ul>
+<li>Выберите <strong>один навык</strong> с <strong>рангом 2</strong>, <strong>два навыка</strong> с <strong>рангом 1</strong>, остальные <strong>0</strong> (из списка ядра или расширенного — <a href="fantasy/02-talanty-i-navyki.html">fantasy/02-talanty-i-navyki.md</a>).</li>
+<li>Если включён <strong>магия</strong>: добавьте <strong>«Магия»</strong> ранг <strong>1</strong> <em>или</em> возьмите узел «Первое соглашение» (глава 4) — по правилам кампании.</li>
+</ul>
+<h3>Шаг 4. Таланты / дерево</h3>
+<p>Если включён модуль деревьев: <strong>один стартовый узел</strong> ранга <strong>I</strong> по выбранному архетипу <strong>бесплатно</strong> (или за <strong>3 ОО</strong> с нуля — жёсткий вариант).</p>
+<h3>Шаг 5. Ресурсы</h3>
+<ul>
+<li><strong>Стресс макс.</strong> = <strong>6 + Тело</strong> (или по модулю ран).</li>
+<li><strong>Раны макс.</strong> = <strong>6 + Тело</strong> (или модуль <a href="07-rany.html">07-rany.md</a>).</li>
+<li><strong>Искры</strong> (если магия): <strong>3 + Воля</strong>.</li>
+</ul>
+<h3>Шаг 6. Снаряжение</h3>
+<p>Старт: <strong>одно</strong> оружие по деньгам кампании, <strong>доспех</strong> на выбор в рамках допуска ведущего, <strong>набор путешественника</strong> (верёвка, фляга, огниво) + <strong>3 мелких предмета</strong>. Подробнее — глава 5 и <a href="fantasy/03-snaryazhenie.html">fantasy/03-snaryazhenie.md</a>.</p>
+<h2>2. Уровень и «левел-ап»</h2>
+<p><strong>Уровень</strong> персонажа — от <strong>1</strong> вверх. После <strong>значимой вехи</strong> (конец арки, 2–4 сессии — решает ведущий) проводится <strong>повышение уровня</strong>.</p>
+<h3>Что даёт +1 уровень</h3>
+<table>
+<thead>
+<tr>
+<th>Получаете</th>
+<th>Количество</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Очки опыта (ОО)</strong></td>
+<td><strong>3 ОО</strong> за уровень (фикс) <em>или</em> <strong>2 + бонус</strong> за ролевую цель — по договорённости</td>
+</tr>
+<tr>
+<td><strong>Атрибут</strong></td>
+<td><strong>один раз на всю кампанию на 4-м и 8-м уровне</strong> (пример): +1 к одному атрибуту (не выше 5 без особых правил)</td>
+</tr>
+<tr>
+<td><strong>Навык</strong></td>
+<td><strong>+1 ранг</strong> к одному навыку (не выше максимума 4; узлы дерева могут поднять потолок)</td>
+</tr>
+<tr>
+<td><strong>Талант</strong></td>
+<td>тратите <strong>ОО</strong> на узлы дерева — см. главу 3</td>
+</tr>
+<tr>
+<td><strong>Магия</strong></td>
+<td>при повышении уровня можно вложить ОО в <strong>узел школы</strong>; искры <strong>+0</strong> сами по себе, но узлы могут увеличить максимум искр (если так решено в гл. 4)</td>
+</tr>
+</tbody></table>
+<p><em>Упрощение:</em> на каждом уровне: <strong>3 ОО + один бесплатный ранг навыка</strong> (без покупки ОО за него). Атрибуты реже.</p>
+<h3>Таблица (пример прогрессии)</h3>
+<table>
+<thead>
+<tr>
+<th>Уровень</th>
+<th>ОО за веху</th>
+<th>Заметка</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>—</td>
+<td>создание</td>
+</tr>
+<tr>
+<td>2</td>
+<td>3 ОО</td>
+<td>первый ап</td>
+</tr>
+<tr>
+<td>3</td>
+<td>3 ОО</td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td>3 ОО + <strong>+1 атрибут</strong></td>
+<td>по опции выше</td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>Ведущий может заменить <strong>уровни</strong> на <strong>только ОО</strong> без цифры уровня — тогда этот файл читать как «что даёт пакет ОО».</p>
+<hr>
+<h2>Пример из партии: «Стеклянные волки»</h2>
+<p>Группа закрыла главу о канале. Ведущий объявляет <strong>уровень 2</strong>.</p>
+<p><strong>Кай</strong> получает <strong>3 ОО</strong>, тратит <strong>2</strong> на узел <strong>«Тихий шаг II»</strong>, <strong>1</strong> копит. Бесплатно кладёт <strong>+1 ранг</strong> в <strong>«Скрытность»</strong> (1→2).</p>
+<p><strong>Мира</strong> кладёт бесплатный ранг в <strong>«История»</strong>, <strong>3 ОО</strong> откладывает на магический узел (покупка позже).</p>
+
+    </article>
+  </div>
+  <footer class="site-footer">
+    <p>Модульная настольная РПГ «Корни судьбы» · <a href="https://gitlab.com/fso13/me-rpg">Исходники на GitLab</a></p>
+  </footer>
+  <script src="js/manifest.js"></script>
+</body>
+</html>

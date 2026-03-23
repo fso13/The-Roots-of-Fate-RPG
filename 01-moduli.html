@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Корни судьбы — модульная настольная РПГ. Глава 1. Модульность">
+  <title>Глава 1. Модульность — Корни судьбы</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">Корни судьбы</a>
+    <nav class="nav-inline">
+      <a href="index.html">Главная</a>
+      <a href="oglavlenie.html">Оглавление</a>
+      <a href="character-sheet.html">Лист персонажа</a>
+      <a href="nastroyki.html">Настройки</a>
+    </nav>
+  </header>
+  <div class="layout-doc">
+    <aside class="sidebar">
+      <div class="sidebar-inner">
+        <div class="sidebar-title">Разделы</div>
+        <nav><a href="00-yadro.html">Глава 0. Ядро системы</a>
+<a href="01-moduli.html" class="active">Глава 1. Модульность</a>
+<a href="02-boy.html" data-module="tactical_combat">Глава 2. Бой (модуль)</a>
+<a href="03-derevya-talantov.html" data-module="talent_trees">Глава 3. Деревья талантов, навыки, ранги</a>
+<a href="04-magiya.html" data-module="magic">Глава 4. Магия (модуль)</a>
+<a href="05-snaryazhenie.html" data-module="equipment">Глава 5. Снаряжение</a>
+<a href="06-bestiariy.html" data-module="bestiary">Глава 6. Бестиарий</a>
+<a href="07-rany.html" data-module="wounds">Модуль: получение и учёт ран</a>
+<a href="08-krity-i-promahi.html" data-module="crits_and_fumbles">Модуль: критические попадания и промахи</a>
+<a href="09-sozdanie-i-uroven.html" data-module="character_progression">Создание персонажа и рост уровня</a>
+<div class="nav-group"><div class="nav-group-title">Фэнтези-модули</div><a href="fantasy/01-zaklinaniya.html" data-module="fantasy_spells">Фэнтези-модуль: заклинания</a>
+<a href="fantasy/02-talanty-i-navyki.html" data-module="fantasy_skills">Фэнтези-модуль: таланты и навыки</a>
+<a href="fantasy/03-snaryazhenie.html" data-module="fantasy_gear">Фэнтези-модуль: расширенное снаряжение</a>
+<a href="fantasy/04-bestiariy.html" data-module="fantasy_bestiary">Фэнтези-модуль: бестиарий</a></div>
+<a href="adventure/01-steklyannyy-zvon.html">Стартовое приключение: «Стеклянный звон»</a></nav>
+      </div>
+    </aside>
+    <article class="doc-main">
+      <h1>Глава 1. Модульность</h1>
+<h2>1. Что такое модуль</h2>
+<p><strong>Модуль</strong> — согласованный пакет правил (один или несколько файлов), который можно <strong>включить</strong> или <strong>выключить</strong> без переписывания ядра. Ядро (глава 0) остаётся общим; модули добавляют слои: тактический бой, магия, расширенное снаряжение, бестиарий и т.д.</p>
+<h2>2. Манифест кампании</h2>
+<p>В начале кампании создаётся файл <strong><code>manifest.yaml</code></strong> (шаблон: <code>modules/manifest.example.yaml</code>):</p>
+<ul>
+<li><strong><code>dice_type</code></strong> — единственный тип кубиков за столом.</li>
+<li><strong><code>modules</code></strong> — словарь «имя модуля → true/false».</li>
+<li><strong><code>custom_modules</code></strong> — список путей к вашим папкам с правилами и флаги <code>enabled</code>.</li>
+</ul>
+<p>Если модуль <strong>выключен</strong>, его главы не используются; ведущий не предлагает связанные с ним опции, если только стол не договорится о «дом правил».</p>
+<h2>3. Как сделать свой модуль</h2>
+<ol>
+<li>Создайте папку, например <code>my_modules/название/</code>.</li>
+<li>Положите туда <strong><code>module.md</code></strong> с заголовком, зависимостями и разделами правил в том же стиле, что и официальные главы.</li>
+<li>Укажите в начале файла блок метаданных:</li>
+</ol>
+<pre><code class="language-yaml">---
+id: sea_faring
+requires: [core, equipment]
+replaces: []
+dice_notes: &quot;Все новые броски — только выбранный dice_type кампании.&quot;
+---
+</code></pre>
+<ol start="4">
+<li>Добавьте путь в <code>custom_modules</code> манифеста и <code>enabled: true</code>.</li>
+</ol>
+<p><strong>Правила совместимости:</strong> не вводите второй тип кубика; любой новый бросок переводите в пул из <strong>одинаковых</strong> кубиков кампании (см. главу 0).</p>
+<h2>4. Приоритет конфликтов</h2>
+<p>При противоречии: <strong>ядро</strong> → <strong>включённые официальные модули</strong> (в порядке важности в <code>manifest</code>) → <strong>кастомные модули</strong> (в порядке в списке). Стол может явно переопределить одну строку правил голосованием.</p>
+<hr>
+<h2>Пример из партии: «Стеклянные волки», подготовка</h2>
+<p>Группа включает <strong>magic</strong>, <strong>tactical_combat</strong>, <strong>equipment</strong>, <strong>bestiary</strong>, <strong>character_progression</strong>; для «лёгкого» боя не включает <strong>wounds</strong> и <strong>crits_and_fumbles</strong> — меньше таблиц. Фэнтези-флаги <strong>fantasy_</strong>* оставляют включёнными. Лин копирует манифест и правит флаги.</p>
+<p><strong>Орён</strong> (игрок): «Добавим домашний модуль — „Культы стекла“ — только флаги и ритуалы?» Лин создаёт <code>my_modules/glass_cults/module.md</code>, подключает в <code>custom_modules</code>. На сессии 1 при спорных ситуациях сначала читают ядро, потом магию, потом домашний модуль — так стол не ломает единый тип кубика.</p>
+
+    </article>
+  </div>
+  <footer class="site-footer">
+    <p>Модульная настольная РПГ «Корни судьбы» · <a href="https://gitlab.com/fso13/me-rpg">Исходники на GitLab</a></p>
+  </footer>
+  <script src="js/manifest.js"></script>
+</body>
+</html>

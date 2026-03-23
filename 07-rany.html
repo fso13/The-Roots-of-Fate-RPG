@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Корни судьбы — модульная настольная РПГ. Модуль: получение и учёт ран">
+  <title>Модуль: получение и учёт ран — Корни судьбы</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">Корни судьбы</a>
+    <nav class="nav-inline">
+      <a href="index.html">Главная</a>
+      <a href="oglavlenie.html">Оглавление</a>
+      <a href="character-sheet.html">Лист персонажа</a>
+      <a href="nastroyki.html">Настройки</a>
+    </nav>
+  </header>
+  <div class="layout-doc">
+    <aside class="sidebar">
+      <div class="sidebar-inner">
+        <div class="sidebar-title">Разделы</div>
+        <nav><a href="00-yadro.html">Глава 0. Ядро системы</a>
+<a href="01-moduli.html">Глава 1. Модульность</a>
+<a href="02-boy.html" data-module="tactical_combat">Глава 2. Бой (модуль)</a>
+<a href="03-derevya-talantov.html" data-module="talent_trees">Глава 3. Деревья талантов, навыки, ранги</a>
+<a href="04-magiya.html" data-module="magic">Глава 4. Магия (модуль)</a>
+<a href="05-snaryazhenie.html" data-module="equipment">Глава 5. Снаряжение</a>
+<a href="06-bestiariy.html" data-module="bestiary">Глава 6. Бестиарий</a>
+<a href="07-rany.html" class="active" data-module="wounds">Модуль: получение и учёт ран</a>
+<a href="08-krity-i-promahi.html" data-module="crits_and_fumbles">Модуль: критические попадания и промахи</a>
+<a href="09-sozdanie-i-uroven.html" data-module="character_progression">Создание персонажа и рост уровня</a>
+<div class="nav-group"><div class="nav-group-title">Фэнтези-модули</div><a href="fantasy/01-zaklinaniya.html" data-module="fantasy_spells">Фэнтези-модуль: заклинания</a>
+<a href="fantasy/02-talanty-i-navyki.html" data-module="fantasy_skills">Фэнтези-модуль: таланты и навыки</a>
+<a href="fantasy/03-snaryazhenie.html" data-module="fantasy_gear">Фэнтези-модуль: расширенное снаряжение</a>
+<a href="fantasy/04-bestiariy.html" data-module="fantasy_bestiary">Фэнтези-модуль: бестиарий</a></div>
+<a href="adventure/01-steklyannyy-zvon.html">Стартовое приключение: «Стеклянный звон»</a></nav>
+      </div>
+    </aside>
+    <article class="doc-main">
+      <h1>Модуль: получение и учёт ран</h1>
+<p><em>Опционально. Требует ядро; для боя — <a href="02-boy.html">02-boy.md</a>. Расширение: <strong>ранения частей тела</strong> — по желанию стола.</em></p>
+<p>Число <strong>нанесённых ран</strong> за атаку = <strong>урон</strong> по формуле главы 2: <strong>(итог атаки − ЧЦ защиты) + бонус оружия</strong> (и модификаторы критов, если включены).</p>
+<p>Если модуль <strong>выключен</strong>, при попадании просто отнимайте <strong>раны</strong> как единый ресурс (как в главе 0) без дополнительных правил.</p>
+<h2>1. Полоска ран</h2>
+<p><strong>Максимум ран</strong> = <strong>6 + Тело</strong> (или <strong>4 + Тело</strong> для «мягкой» кампании). При <strong>0 ран</strong> персонаж <strong>выбит</strong>: без сознания или смерть — по договорённости стола.</p>
+<h2>2. Типы ран (по желанию)</h2>
+<p>Когда атака наносит урон, ведущий или атакующий помечает <strong>тип</strong> (для ролевого эффекта):</p>
+<table>
+<thead>
+<tr>
+<th>Тип</th>
+<th>Пример последствия (нарратив, не стакается без модуля критов)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Лёгкая</strong></td>
+<td>царапина, −0 к броскам</td>
+</tr>
+<tr>
+<td><strong>Тяжёлая</strong></td>
+<td>шок: до конца сцены <strong>−1</strong> к первому броску Тела</td>
+</tr>
+<tr>
+<td><strong>Критическая</strong></td>
+<td>только если сработал <a href="08-krity-i-promahi.html">08-krity-i-promahi.md</a> или особое оружие</td>
+</tr>
+</tbody></table>
+<p>Игроки могут <strong>игнорировать</strong> типы и вести только число — модуль всё равно полезен для «сколько до падения».</p>
+<h2>3. Стабилизация (общий урон)</h2>
+<p>Вне боя или <strong>1 ОД</strong> в бою: проверка <strong>2d6 + Разум + «Медицина»</strong> (или Тело + Выживание) <strong>≥ 10</strong> — <strong>снять 1 рану</strong> у союзника <strong>Рукопашная/Рядом</strong> (не у себя без талантов).</p>
+<hr>
+<h2>4. Ранения частей тела <em>(опционально)</em></h2>
+<p>Используйте, если хотите <strong>не только</strong> общую полоску, но и <strong>руки, ноги, голову</strong>.</p>
+<h3>4.1. Зоны удара</h3>
+<table>
+<thead>
+<tr>
+<th><strong>1d6</strong></th>
+<th>Часть тела</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>1</strong></td>
+<td><strong>Голова</strong></td>
+</tr>
+<tr>
+<td><strong>2</strong></td>
+<td><strong>Грудь / спина</strong> (торс)</td>
+</tr>
+<tr>
+<td><strong>3</strong></td>
+<td><strong>Рука с оружием</strong> (ведущая)</td>
+</tr>
+<tr>
+<td><strong>4</strong></td>
+<td><strong>Другая рука</strong></td>
+</tr>
+<tr>
+<td><strong>5</strong></td>
+<td><strong>Нога</strong> (ведущая / опорная)</td>
+</tr>
+<tr>
+<td><strong>6</strong></td>
+<td><strong>Другая нога</strong></td>
+</tr>
+</tbody></table>
+<p><em>Существа без рук/с четырьмя лапами:</em> ведущий переназначает строки <strong>3–6</strong> (передние/задние лапы, хвост и т.д.).</p>
+<h3>4.2. Когда определять зону</h3>
+<table>
+<thead>
+<tr>
+<th>Способ</th>
+<th>Как</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Случайно</strong></td>
+<td>После <strong>любого успешного попадания</strong>, если стол включил локализацию: бросьте <strong>1d6</strong> по таблице выше.</td>
+</tr>
+<tr>
+<td><strong>Прицельный удар</strong></td>
+<td><strong>До</strong> броска атаки объявите зону. <strong>−2</strong> к <strong>итогу атаки</strong> (голова: <strong>−3</strong>). Если попадание есть — урон считается как обычно, но <strong>последствие</strong> (п. 4.3) применяется <strong>к этой</strong> зоне и на <strong>одну ступень суровее</strong> (см. ниже).</td>
+</tr>
+<tr>
+<td><strong>Крит по модулю <a href="08-krity-i-promahi.html">08-krity-i-promahi.md</a></strong></td>
+<td>Можно бросить зону и дать <strong>дополнительный</strong> эффект по зоне без прицела.</td>
+</tr>
+<tr>
+<td><strong>Удобное правило</strong></td>
+<td>Локализацию бросаете <strong>только</strong> если урон <strong>≥ 3</strong> за удар <strong>или</strong> был прицел <strong>или</strong> крит — чтобы не кидать каждый раз.</td>
+</tr>
+</tbody></table>
+<h3>4.3. Состояния конечности / зоны</h3>
+<p>Одна и та же зона может быть <strong>целой</strong>, <strong>повреждена</strong>, <strong>выведена</strong>. Отметьте на листе.</p>
+<table>
+<thead>
+<tr>
+<th>Состояние</th>
+<th>Что значит</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Целая</strong></td>
+<td>нет штрафов</td>
+</tr>
+<tr>
+<td><strong>Повреждена</strong></td>
+<td><strong>−1</strong> к проверкам, где участвует эта часть (рука — атаки/ловкость рук; нога — движение, Уклонение; голова — Разум/Воля на коротком отрезке; грудь — Тело)</td>
+</tr>
+<tr>
+<td><strong>Выведена</strong></td>
+<td>часть <strong>недоступна</strong>: рука роняет оружие / не держит щит; нога — <strong>половина ОД</strong> на <strong>Сдвиг</strong> или нельзя <strong>бежать</strong>; голова — <strong>1 стресс</strong> за раунд до стабилизации</td>
+</tr>
+</tbody></table>
+<p><strong>Голова — особый случай:</strong> второе попадание в <strong>повреждённую</strong> голову (или одно тяжёлое с прицелом) — ведущий может объявить <strong>нокаут</strong> или <strong>смерть</strong> (по жёсткости кампании).</p>
+<p><strong>Торс:</strong> «повреждён» = <strong>−1</strong> к Телу на проверках до лечения; «выведен» = персонаж <strong>выбывает</strong> из боя (кровотечение, шок).</p>
+<h3>4.4. Связь с числом ран</h3>
+<ul>
+<li><strong>Простой вариант:</strong> локализация — только <strong>ролевой</strong> штраф; <strong>раны</strong> снимаются с общего запаса как раньше.</li>
+<li><strong>Жёсткий вариант:</strong> при переходе зоны в <strong>«выведена»</strong> дополнительно <strong>−1</strong> к общей полоске ран (один раз за эпизод с этой зоны).</li>
+</ul>
+<p>Выберите <strong>один</strong> вариант на кампанию.</p>
+<h3>4.5. Лечение локальных ран</h3>
+<table>
+<thead>
+<tr>
+<th>Действие</th>
+<th>Проверка / условие</th>
+<th>Эффект</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Перевязка / шина</strong></td>
+<td><strong>1 ОД</strong> вне боя или <strong>2 ОД</strong> в бою; <strong>2d6 + Медицина ≥ 10</strong></td>
+<td><strong>повреждена</strong> → <strong>целая</strong> <strong>или</strong> <strong>выведена</strong> → <strong>повреждена</strong> (на выбор, одна зона)</td>
+</tr>
+<tr>
+<td><strong>Покой и уход</strong></td>
+<td>между сессиями / <strong>длинный отдых</strong></td>
+<td>все <strong>повреждённые</strong> зоны → <strong>целые</strong>, если не было <strong>выведено</strong></td>
+</tr>
+<tr>
+<td><strong>Хирургия</strong></td>
+<td><strong>Медицина ≥ 13</strong>, инструменты, <strong>1 час</strong></td>
+<td><strong>выведена</strong> конечность без ампутации → <strong>повреждена</strong></td>
+</tr>
+<tr>
+<td><strong>Магия</strong></td>
+<td>заклинания <strong>Сотворения</strong> (глава 4, списки)</td>
+<td>как <strong>сильное лечение</strong>, часто снимает и зону, и <strong>1–2 раны</strong> общих</td>
+</tr>
+<tr>
+<td><strong>Зелье лечения</strong></td>
+<td>по снаряжению</td>
+<td>обычно <strong>+1 рана</strong> общая; по согласованию — ещё <strong>одна</strong> зона на ступень вверх</td>
+</tr>
+</tbody></table>
+<p>Ампутация и протезы — <strong>нарратив</strong> и домашние правила.</p>
+<h2>5. Без лишнего счёта</h2>
+<p>Не вводите одновременно <strong>5 дебаффов</strong>. Если нужен штраф — один на сцену на персонажа <strong>или</strong> одна зона в фокусе.</p>
+<hr>
+<h2>Пример из партии: «Стеклянные волки»</h2>
+<p>У <strong>Миры</strong> <strong>2 раны</strong> из <strong>9</strong>. <strong>Гарр</strong> стабилизирует: <strong>Медицина</strong>, снимает <strong>1 рану</strong>.</p>
+<p>В другой сцене <strong>Кай</strong> получает прицельный удар в <strong>ногу</strong> (<strong>−2</strong> к итогу атаки врага, но попал). Зона <strong>нога</strong> → <strong>повреждена</strong>; Кай <strong>−1</strong> к первому <strong>Сдвигу</strong> в сцене. Между боями <strong>перевязка</strong> снимает пометку.</p>
+
+    </article>
+  </div>
+  <footer class="site-footer">
+    <p>Модульная настольная РПГ «Корни судьбы» · <a href="https://gitlab.com/fso13/me-rpg">Исходники на GitLab</a></p>
+  </footer>
+  <script src="js/manifest.js"></script>
+</body>
+</html>

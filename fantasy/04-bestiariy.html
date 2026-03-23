@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Корни судьбы — модульная настольная РПГ. Фэнтези-модуль: бестиарий">
+  <title>Фэнтези-модуль: бестиарий — Корни судьбы</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="../index.html">Корни судьбы</a>
+    <nav class="nav-inline">
+      <a href="../index.html">Главная</a>
+      <a href="../oglavlenie.html">Оглавление</a>
+      <a href="../character-sheet.html">Лист персонажа</a>
+      <a href="../nastroyki.html">Настройки</a>
+    </nav>
+  </header>
+  <div class="layout-doc">
+    <aside class="sidebar">
+      <div class="sidebar-inner">
+        <div class="sidebar-title">Разделы</div>
+        <nav><a href="../00-yadro.html">Глава 0. Ядро системы</a>
+<a href="../01-moduli.html">Глава 1. Модульность</a>
+<a href="../02-boy.html" data-module="tactical_combat">Глава 2. Бой (модуль)</a>
+<a href="../03-derevya-talantov.html" data-module="talent_trees">Глава 3. Деревья талантов, навыки, ранги</a>
+<a href="../04-magiya.html" data-module="magic">Глава 4. Магия (модуль)</a>
+<a href="../05-snaryazhenie.html" data-module="equipment">Глава 5. Снаряжение</a>
+<a href="../06-bestiariy.html" data-module="bestiary">Глава 6. Бестиарий</a>
+<a href="../07-rany.html" data-module="wounds">Модуль: получение и учёт ран</a>
+<a href="../08-krity-i-promahi.html" data-module="crits_and_fumbles">Модуль: критические попадания и промахи</a>
+<a href="../09-sozdanie-i-uroven.html" data-module="character_progression">Создание персонажа и рост уровня</a>
+<div class="nav-group"><div class="nav-group-title">Фэнтези-модули</div><a href="../fantasy/01-zaklinaniya.html" data-module="fantasy_spells">Фэнтези-модуль: заклинания</a>
+<a href="../fantasy/02-talanty-i-navyki.html" data-module="fantasy_skills">Фэнтези-модуль: таланты и навыки</a>
+<a href="../fantasy/03-snaryazhenie.html" data-module="fantasy_gear">Фэнтези-модуль: расширенное снаряжение</a>
+<a href="../fantasy/04-bestiariy.html" class="active" data-module="fantasy_bestiary">Фэнтези-модуль: бестиарий</a></div>
+<a href="../adventure/01-steklyannyy-zvon.html">Стартовое приключение: «Стеклянный звон»</a></nav>
+      </div>
+    </aside>
+    <article class="doc-main">
+      <h1>Фэнтези-модуль: бестиарий</h1>
+<p><em>Требует <a href="../06-bestiariy.html">06-bestiariy.md</a> и модуль боя. ЧЦ защиты: <strong>8 + Ловкость + доспех</strong>.</em></p>
+<p>Ниже существа <strong>в духе</strong> отрядов из серии <em>Heroes of Might and Magic</em> (V и др.) и <strong>классического фэнтези</strong> — это не официальные статы игры, а перевод в механику «Корней судьбы».</p>
+<p><strong>Обозначения:</strong> <strong>Бонус</strong> — слагаемое в <strong>(итог атаки − ЧЦ) + бонус</strong>. <strong>ЧЦ</strong> — если не указано, считайте сами из атрибутов и доспеха.</p>
+<hr>
+<h2>Небесный легион <em>(стиль Убежища / Haven)</em></h2>
+<h3>Ополченец</h3>
+<ul>
+<li><strong>Угроза:</strong> низкая  </li>
+<li><strong>Тело 2, Ловкость 2, Разум 1, Воля 1</strong>  </li>
+<li><strong>Раны 6</strong> · доспех кожа (+1)  </li>
+<li><strong>Копьё +1</strong>  </li>
+<li><strong>Особое:</strong> в отряде <strong>+1</strong> к <strong>Воле</strong> первой проверки в сцене (массовка).</li>
+</ul>
+<h3>Лучник</h3>
+<ul>
+<li><strong>Угроза:</strong> низкая  </li>
+<li><strong>Тело 2, Ловкость 3, Разум 1, Воля 1</strong>  </li>
+<li><strong>Раны 5</strong>  </li>
+<li><strong>Лук +2</strong>, <strong>Даль</strong>  </li>
+<li><strong>ЧЦ:</strong> 8+3+0 = <strong>11</strong></li>
+</ul>
+<h3>Рыцарь на коне</h3>
+<ul>
+<li><strong>Угроза:</strong> высокая  </li>
+<li><strong>Тело 4, Ловкость 2, Разум 2, Воля 3</strong>  </li>
+<li><strong>Раны 12</strong> · кольчуга (+2)  </li>
+<li><strong>Копьё +3</strong> при натиске первый раунд <strong>+1</strong> к <strong>итогу</strong> атаки  </li>
+<li><strong>Особое:</strong> <strong>Сдвиг</strong> из <strong>Даль</strong> в <strong>Рукопашную</strong> за <strong>1 ОД</strong> (конь).</li>
+</ul>
+<h3>Грифон</h3>
+<ul>
+<li><strong>Угроза:</strong> средняя  </li>
+<li><strong>Тело 3, Ловкость 4, Разум 1, Воля 2</strong>  </li>
+<li><strong>Раны 9</strong>  </li>
+<li><strong>Когти +2</strong>, <strong>клюв +1</strong> дальняя (бросок)  </li>
+<li><strong>Особое:</strong> <strong>Даль</strong> и <strong>Рукопашная</strong> без штрафа за смену зоны <strong>раз за раунд</strong>.</li>
+</ul>
+<h3>Небесный страж <em>(ангел — верхний эшелон)</em></h3>
+<ul>
+<li><strong>Угроза:</strong> очень высокая  </li>
+<li><strong>Тело 5, Ловкость 4, Разум 3, Воля 5</strong>  </li>
+<li><strong>Раны 16</strong> · божественный доспех (+3 к ЧЦ)  </li>
+<li><strong>Меч +3</strong>, <strong>крылья:</strong> <strong>Даль</strong> заклинание «световой удар» <strong>бонус +2</strong> (как магия)  </li>
+<li><strong>Особое:</strong> союзники <strong>Рядом</strong> <strong>+1</strong> к страху/морали (нарратив); иммун к обычному <strong>страху</strong> (стресс от запугивания — по ведущему).</li>
+</ul>
+<hr>
+<h2>Преисподняя <em>(Inferno)</em></h2>
+<h3>Бес</h3>
+<ul>
+<li><strong>Угроза:</strong> низкая  </li>
+<li><strong>Тело 1, Ловкость 3, Разум 1, Воля 2</strong>  </li>
+<li><strong>Раны 4</strong>  </li>
+<li><strong>Когти +1</strong>  </li>
+<li><strong>Особое:</strong> <strong>1 ОД</strong> — <strong>Сдвиг</strong> на два шага (стремительный).</li>
+</ul>
+<h3>Адская гончая</h3>
+<ul>
+<li><strong>Угроза:</strong> средняя  </li>
+<li><strong>Тело 3, Ловкость 4, Разум 1, Воля 2</strong>  </li>
+<li><strong>Раны 8</strong>  </li>
+<li><strong>Укус +2</strong>  </li>
+<li><strong>Особое:</strong> при попадании цель <strong>1 стресс</strong> (страх).</li>
+</ul>
+<h3>Порождение бездны <em>(демон среднего калибра)</em></h3>
+<ul>
+<li><strong>Угроза:</strong> высокая  </li>
+<li><strong>Тело 5, Ловкость 3, Разум 2, Воля 3</strong>  </li>
+<li><strong>Раны 14</strong>  </li>
+<li><strong>Когти +3</strong>, огненная аура: кто <strong>входит в Рукопашную</strong> — <strong>2d6 + Тело ≥ 12</strong> или <strong>1</strong> урон  </li>
+<li><strong>Особое:</strong> уязвимость к <strong>священной воде / свету</strong> — <strong>+1</strong> урон от таких источников.</li>
+</ul>
+<h3>Суккуб <em>(искусительница)</em></h3>
+<ul>
+<li><strong>Угроза:</strong> средняя  </li>
+<li><strong>Тело 2, Ловкость 3, Разум 3, Воля 4</strong>  </li>
+<li><strong>Раны 8</strong>  </li>
+<li><strong>Кнут +1</strong>, <strong>очарование:</strong> <strong>2d6 + Воля + ранг ≥ 11 + Воля цели</strong> — цель <strong>−1</strong> к <strong>итогу</strong> следующей атаки  </li>
+<li><strong>Особое:</strong> летает — <strong>Даль</strong> без штрафа.</li>
+</ul>
+<hr>
+<h2>Некрополис <em>(Necropolis)</em></h2>
+<h3>Скелет-воин</h3>
+<ul>
+<li><strong>Угроза:</strong> низкая  </li>
+<li><strong>Тело 2, Ловкость 2, Разум 0, Воля 1</strong>  </li>
+<li><strong>Раны 5</strong> · щит (+1 к ЧЦ)  </li>
+<li><strong>Копьё +1</strong>  </li>
+<li><strong>Особое:</strong> иммун к <strong>яду</strong>, <strong>удушью</strong>; <strong>святой урон</strong> <strong>+1</strong> к бонусу против них.</li>
+</ul>
+<h3>Вампир</h3>
+<ul>
+<li><strong>Угроза:</strong> высокая  </li>
+<li><strong>Тело 4, Ловкость 4, Разум 3, Воля 3</strong>  </li>
+<li><strong>Раны 11</strong>  </li>
+<li><strong>Когти +2</strong>  </li>
+<li><strong>Особое:</strong> при нанесении <strong>раны</strong> в <strong>Рукопашной</strong> — снимает <strong>1</strong> свою <strong>рану</strong> (раз за раунд); <strong>солнечный свет</strong> — <strong>−1</strong> ко всему.</li>
+</ul>
+<h3>Лич</h3>
+<ul>
+<li><strong>Угроза:</strong> очень высокая  </li>
+<li><strong>Тело 2, Ловкость 2, Разум 5, Воля 5</strong>  </li>
+<li><strong>Раны 10</strong>  </li>
+<li><strong>Посох +2</strong> (рукопашная), <strong>дальняя магия</strong> <strong>бонус +2</strong> (холод/дух)  </li>
+<li><strong>Особое:</strong> призыв <strong>2 скелета</strong> раз за сцену (миньоны с <strong>3 ранами</strong>).</li>
+</ul>
+<h3>Костяной дракон</h3>
+<ul>
+<li><strong>Угроза:</strong> босс  </li>
+<li><strong>Тело 6, Ловкость 2, Разум 1, Воля 4</strong>  </li>
+<li><strong>Раны 22</strong> · ЧЦ <strong>+2</strong> от костяного панциря  </li>
+<li><strong>Укус +4</strong>, <strong>дыхание смерти</strong> <strong>раз в 3 раунда</strong> по зоне <strong>Рядом</strong> — <strong>2d6 + Тело ≥ 14</strong> или <strong>2</strong> урона  </li>
+<li><strong>Особое:</strong> нежить — криты по <strong>серебру/свету</strong> с <a href="../08-krity-i-promahi.html">08-krity-i-promahi.md</a> на <strong>+1</strong> к таблице.</li>
+</ul>
+<hr>
+<h2>Подземелье <em>(Dungeon)</em></h2>
+<h3>Тёмный следопыт</h3>
+<ul>
+<li><strong>Угроза:</strong> средняя  </li>
+<li><strong>Тело 2, Ловкость 4, Разум 2, Воля 2</strong>  </li>
+<li><strong>Раны 7</strong>  </li>
+<li><strong>Две сабли +1</strong> (двойное оружие — вторая атака по талантам ведущего)  </li>
+<li><strong>Особое:</strong> <strong>Скрытность +2</strong> к итогу в тёмноте.</li>
+</ul>
+<h3>Минотавр</h3>
+<ul>
+<li><strong>Угроза:</strong> высокая  </li>
+<li><strong>Тело 5, Ловкость 2, Разум 1, Воля 2</strong>  </li>
+<li><strong>Раны 14</strong>  </li>
+<li><strong>Топор +3</strong>  </li>
+<li><strong>Особое:</strong> <strong>натиск</strong> — первый <strong>Сдвиг</strong> в сцене <strong>0 ОД</strong>.</li>
+</ul>
+<h3>Гидра</h3>
+<ul>
+<li><strong>Угроза:</strong> босс-мини  </li>
+<li><strong>Тело 6, Ловкость 2, Разум 0, Воля 2</strong>  </li>
+<li><strong>Раны 20</strong>  </li>
+<li><strong>Укусы +3</strong> (несколько голов — <strong>две</strong> атаки за раунд по <strong>1 ОД</strong> каждая или одна <strong>+2</strong> к бонусу — по ведущему)  </li>
+<li><strong>Особое:</strong> при отрубании головы — <strong>регенерация</strong>: <strong>+3 раны</strong> в конце раунда (пока не сожжён огнём).</li>
+</ul>
+<h3>Чёрный дракон</h3>
+<ul>
+<li><strong>Угроза:</strong> босс  </li>
+<li><strong>Тело 6, Ловкость 3, Разум 4, Воля 5</strong>  </li>
+<li><strong>Раны 25</strong> · ЧЦ высокий  </li>
+<li><strong>Укус +4</strong>, <strong>кислота</strong> <strong>Даль</strong> <strong>бонус +3</strong>  </li>
+<li><strong>Особое:</strong> иммун к <strong>собственной кислоте</strong>; магия — <strong>+1</strong> к сопротивлению.</li>
+</ul>
+<hr>
+<h2>Лесной союз <em>(Sylvan)</em></h2>
+<h3>Лесной эльф</h3>
+<ul>
+<li><strong>Угроза:</strong> средняя  </li>
+<li><strong>Тело 2, Ловкость 4, Разум 2, Воля 2</strong>  </li>
+<li><strong>Раны 7</strong>  </li>
+<li><strong>Лук +2</strong>  </li>
+<li><strong>Особое:</strong> в <strong>лесу</strong> <strong>+1</strong> к <strong>итогу</strong> дальней атаки.</li>
+</ul>
+<h3>Единорог</h3>
+<ul>
+<li><strong>Угроза:</strong> средняя  </li>
+<li><strong>Тело 4, Ловкость 3, Разум 1, Воля 3</strong>  </li>
+<li><strong>Раны 10</strong>  </li>
+<li><strong>Рог +2</strong>  </li>
+<li><strong>Особое:</strong> <strong>очарование зверей</strong> — раз за сцену <strong>Воля</strong> цели-зверя <strong>против 12</strong>.</li>
+</ul>
+<h3>Древень</h3>
+<ul>
+<li><strong>Угроза:</strong> высокая  </li>
+<li><strong>Тело 6, Ловкость 1, Разум 2, Воля 3</strong>  </li>
+<li><strong>Раны 18</strong>  </li>
+<li><strong>Удар ветвью +3</strong>  </li>
+<li><strong>Особое:</strong> уязвим к <strong>огню</strong> (<strong>+1</strong> урон от огня).</li>
+</ul>
+<hr>
+<h2>Академия <em>(Academy)</em></h2>
+<h3>Гремлин</h3>
+<ul>
+<li><strong>Угроза:</strong> низкая  </li>
+<li><strong>Тело 1, Ловкость 3, Разум 2, Воля 1</strong>  </li>
+<li><strong>Раны 4</strong>  </li>
+<li><strong>Метательный +1</strong>  </li>
+<li><strong>Особое:</strong> <strong>ловушка</strong> раз за сцену — <strong>2d6 + Ловкость ≥ 11</strong> или <strong>падение</strong>.</li>
+</ul>
+<h3>Стальной голем</h3>
+<ul>
+<li><strong>Угроза:</strong> высокая  </li>
+<li><strong>Тело 6, Ловкость 1, Разум 0, Воля 0</strong>  </li>
+<li><strong>Раны 16</strong> · ЧЦ <strong>+2</strong>  </li>
+<li><strong>Удар +3</strong>  </li>
+<li><strong>Особое:</strong> иммун к <strong>яду</strong>, <strong>страху</strong>; <strong>медленный</strong> — <strong>−1 ОД</strong> в первом раунде.</li>
+</ul>
+<h3>Архимаг <em>(NPC-босс)</em></h3>
+<ul>
+<li><strong>Угроза:</strong> очень высокая  </li>
+<li><strong>Тело 2, Ловкость 3, Разум 5, Воля 5</strong>  </li>
+<li><strong>Раны 9</strong>  </li>
+<li><strong>Посох +1</strong>, заклинания <strong>бонус +2</strong>–<strong>+3</strong> по школам  </li>
+<li><strong>Особое:</strong> <strong>щит маны</strong> — раз за сцену <strong>игнор 1</strong> урон.</li>
+</ul>
+<hr>
+<h2>Крепость гномов <em>(Fortress)</em></h2>
+<h3>Гном-страж</h3>
+<ul>
+<li><strong>Угроза:</strong> средняя  </li>
+<li><strong>Тело 4, Ловкость 2, Разум 2, Воля 3</strong>  </li>
+<li><strong>Раны 10</strong> · тяжёлый доспех (+3)  </li>
+<li><strong>Топор +2</strong>, <strong>щит</strong>  </li>
+<li><strong>Особое:</strong> <strong>+1</strong> к ЧЦ против <strong>оружия</strong> (опыт).</li>
+</ul>
+<h3>Всадник на медведе</h3>
+<ul>
+<li><strong>Угроза:</strong> высокая  </li>
+<li><strong>Тело 5, Ловкость 2, Разум 1, Воля 2</strong>  </li>
+<li><strong>Раны 14</strong>  </li>
+<li><strong>Копьё +3</strong>, медведь <strong>кусает +2</strong> второй атакой <strong>1 ОД</strong>  </li>
+<li><strong>Особое:</strong> в узком проходе медведь <strong>мешает</strong> — союзникам <strong>−1</strong> к дальним атакам сквозь зону.</li>
+</ul>
+<hr>
+<h2>Степные кланы <em>(Stronghold)</em></h2>
+<h3>Гоблин</h3>
+<ul>
+<li><strong>Угроза:</strong> низкая  </li>
+<li><strong>Тело 1, Ловкость 3, Разум 1, Воля 1</strong>  </li>
+<li><strong>Раны 4</strong>  </li>
+<li><strong>Короткий меч +1</strong>  </li>
+<li><strong>Особое:</strong> <strong>трусость</strong> — при <strong>половине ран</strong> <strong>сдвиг</strong> к <strong>Даль</strong> без атаки.</li>
+</ul>
+<h3>Орк-воин</h3>
+<ul>
+<li><strong>Угроза:</strong> средняя  </li>
+<li><strong>Тело 4, Ловкость 2, Разум 1, Воля 2</strong>  </li>
+<li><strong>Раны 9</strong>  </li>
+<li><strong>Секира +2</strong>  </li>
+<li><strong>Особое:</strong> <strong>ярость</strong> при ранении — <strong>+1</strong> к бонусу оружия до конца сцены (один раз).</li>
+</ul>
+<h3>Циклоп</h3>
+<ul>
+<li><strong>Угроза:</strong> высокая  </li>
+<li><strong>Тело 6, Ловкость 1, Разум 1, Воля 2</strong>  </li>
+<li><strong>Раны 16</strong>  </li>
+<li><strong>Бревно/камень +3</strong>, <strong>Даль</strong>  </li>
+<li><strong>Особое:</strong> <strong>слепота</strong> фланга — <strong>−2</strong> к атаке по целям <strong>Рядом</strong> с союзником циклопа.</li>
+</ul>
+<h3>Чудище <em>(бегемот)</em></h3>
+<ul>
+<li><strong>Угроза:</strong> босс-мини  </li>
+<li><strong>Тело 6, Ловкость 2, Разум 0, Воля 2</strong>  </li>
+<li><strong>Раны 22</strong>  </li>
+<li><strong>Клыки +4</strong>  </li>
+<li><strong>Особое:</strong> <strong>разрушение укрытий</strong> — укрытия не дают бонуса против него.</li>
+</ul>
+<hr>
+<h2>Классика фэнтези <em>(универсальные)</em></h2>
+<h3>Тролль</h3>
+<ul>
+<li><strong>Угроза:</strong> высокая  </li>
+<li><strong>Тело 5, Ловкость 2, Разум 1, Воля 1</strong>  </li>
+<li><strong>Раны 15</strong>  </li>
+<li><strong>Дубина +3</strong>  </li>
+<li><strong>Особое:</strong> <strong>регенерация 1</strong> рана в конце раунда, кроме <strong>огня/кислоты</strong>.</li>
+</ul>
+<h3>Гигантский паук</h3>
+<ul>
+<li><strong>Угроза:</strong> средняя  </li>
+<li><strong>Тело 3, Ловкость 3, Разум 0, Воля 1</strong>  </li>
+<li><strong>Раны 8</strong>  </li>
+<li><strong>Укус +2</strong>  </li>
+<li><strong>Особое:</strong> <strong>яд</strong> — при ране <strong>2d6 + Тело ≥ 11</strong> или <strong>1</strong> урон в следующем раунде.</li>
+</ul>
+<h3>Красный дракон (молодой)</h3>
+<ul>
+<li><strong>Угроза:</strong> босс  </li>
+<li><strong>Тело 5, Ловкость 3, Разум 3, Воля 4</strong>  </li>
+<li><strong>Раны 20</strong>  </li>
+<li><strong>Укус +3</strong>, <strong>дыхание огня</strong> <strong>бонус +3</strong>, <strong>Даль</strong>  </li>
+<li><strong>Особое:</strong> жадность — <strong>Влияние</strong> сокровищем <strong>+1</strong> к проверке.</li>
+</ul>
+<h3>Призрак</h3>
+<ul>
+<li><strong>Угроза:</strong> средняя  </li>
+<li><strong>Тело 0, Ловкость 3, Разум 2, Воля 3</strong>  </li>
+<li><strong>Раны</strong> — нежить: <strong>8</strong> «токсичных»  </li>
+<li><strong>Касание +1</strong> (холод)  </li>
+<li><strong>Особое:</strong> <strong>половина</strong> урона от обычного оружия; <strong>магия/серебро</strong> — полный.</li>
+</ul>
+<h3>Доппельгангер</h3>
+<ul>
+<li><strong>Угроза:</strong> зависит от копии  </li>
+<li><strong>Тело 3, Ловкость 3, Разум 3, Воля 3</strong>  </li>
+<li><strong>Раны 9</strong>  </li>
+<li><strong>Как у скопированного</strong> — копирует <strong>одного</strong> героя до <strong>конца сцены</strong>  </li>
+<li><strong>Особое:</strong> разоблачение <strong>Проницательность</strong> <strong>≥ 13</strong>.</li>
+</ul>
+<hr>
+<h2>Пример из партии: «Стеклянные волки»</h2>
+<p>Партия дерётся с <strong>орками</strong> и <strong>гоблинами</strong>. <strong>Гарр</strong> получает удар в <strong>ногу</strong> (случайный <strong>1d6</strong> после тяжёлого удара — модуль <a href="../07-rany.html">07-rany.md</a>): <strong>нога повреждена</strong>, <strong>−1</strong> к <strong>Сдвигу</strong>.</p>
+<p><strong>Орён</strong> бьёт <strong>огненным шаром</strong> по <strong>скелетам</strong>: <strong>+1</strong> к бонусу от <strong>святости</strong> фокуса не нужен — у скелетов уже пометка про свет.</p>
+
+    </article>
+  </div>
+  <footer class="site-footer">
+    <p>Модульная настольная РПГ «Корни судьбы» · <a href="https://gitlab.com/fso13/me-rpg">Исходники на GitLab</a></p>
+  </footer>
+  <script src="../js/manifest.js"></script>
+</body>
+</html>

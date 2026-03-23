@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Корни судьбы — модульная настольная РПГ. Фэнтези-модуль: заклинания">
+  <title>Фэнтези-модуль: заклинания — Корни судьбы</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="../index.html">Корни судьбы</a>
+    <nav class="nav-inline">
+      <a href="../index.html">Главная</a>
+      <a href="../oglavlenie.html">Оглавление</a>
+      <a href="../character-sheet.html">Лист персонажа</a>
+      <a href="../nastroyki.html">Настройки</a>
+    </nav>
+  </header>
+  <div class="layout-doc">
+    <aside class="sidebar">
+      <div class="sidebar-inner">
+        <div class="sidebar-title">Разделы</div>
+        <nav><a href="../00-yadro.html">Глава 0. Ядро системы</a>
+<a href="../01-moduli.html">Глава 1. Модульность</a>
+<a href="../02-boy.html" data-module="tactical_combat">Глава 2. Бой (модуль)</a>
+<a href="../03-derevya-talantov.html" data-module="talent_trees">Глава 3. Деревья талантов, навыки, ранги</a>
+<a href="../04-magiya.html" data-module="magic">Глава 4. Магия (модуль)</a>
+<a href="../05-snaryazhenie.html" data-module="equipment">Глава 5. Снаряжение</a>
+<a href="../06-bestiariy.html" data-module="bestiary">Глава 6. Бестиарий</a>
+<a href="../07-rany.html" data-module="wounds">Модуль: получение и учёт ран</a>
+<a href="../08-krity-i-promahi.html" data-module="crits_and_fumbles">Модуль: критические попадания и промахи</a>
+<a href="../09-sozdanie-i-uroven.html" data-module="character_progression">Создание персонажа и рост уровня</a>
+<div class="nav-group"><div class="nav-group-title">Фэнтези-модули</div><a href="../fantasy/01-zaklinaniya.html" class="active" data-module="fantasy_spells">Фэнтези-модуль: заклинания</a>
+<a href="../fantasy/02-talanty-i-navyki.html" data-module="fantasy_skills">Фэнтези-модуль: таланты и навыки</a>
+<a href="../fantasy/03-snaryazhenie.html" data-module="fantasy_gear">Фэнтези-модуль: расширенное снаряжение</a>
+<a href="../fantasy/04-bestiariy.html" data-module="fantasy_bestiary">Фэнтези-модуль: бестиарий</a></div>
+<a href="../adventure/01-steklyannyy-zvon.html">Стартовое приключение: «Стеклянный звон»</a></nav>
+      </div>
+    </aside>
+    <article class="doc-main">
+      <h1>Фэнтези-модуль: заклинания</h1>
+<p><em>Требует <a href="../04-magiya.html">04-magiya.md</a>. Один тип кубиков на всё.</em></p>
+<p>Ниже школы и названия <strong>в духе</strong> классической схемы <em>Dragon Age</em> (стихии, дух, энтропия, сотворение): это <strong>адаптация под эти правила</strong>, не официальный текст игры.</p>
+<p><strong>Обозначения</strong></p>
+<ul>
+<li><strong>+N</strong> — <strong>бонус заклинания</strong> в формуле <strong>(итог атаки − ЧЦ защиты) + N</strong> для атакующих заклинаний.</li>
+<li><strong>Даль</strong> / <strong>Рукопашная</strong> — тип атаки (главы 2 и 4).</li>
+<li><strong>Проверка:</strong> для заклинаний <strong>без урона</strong> — <strong>2d6 + Воля + ранг «Магия»</strong> (или ранг узла школы) <strong>≥ ЧЦ</strong>; ЧЦ задаёт ведущий или таблица ниже.</li>
+</ul>
+<hr>
+<h2>Школа <strong>Стихии</strong> <em>(аналог Primal)</em></h2>
+<p>Огонь, холод, молния, камень — прямой урон и контроль поля.</p>
+<h3>Огонь</h3>
+<table>
+<thead>
+<tr>
+<th>Заклинание</th>
+<th>Тип</th>
+<th>Бонус</th>
+<th>Искры</th>
+<th>Примечание</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Вспышка пламени</strong></td>
+<td>Даль</td>
+<td>+1</td>
+<td>1</td>
+<td>быстрый выстрел огнём</td>
+</tr>
+<tr>
+<td><strong>Струя огня</strong></td>
+<td>Даль</td>
+<td>+2</td>
+<td>1</td>
+<td>устойчивое пламя</td>
+</tr>
+<tr>
+<td><strong>Огненный шар</strong></td>
+<td>Даль</td>
+<td>+2</td>
+<td>2</td>
+<td>взрыв; по <strong>Рядом</strong> с целью можно ударить вторую цель <strong>бонус −1</strong> — по ведущему</td>
+</tr>
+<tr>
+<td><strong>Огненная стена</strong></td>
+<td>—</td>
+<td>—</td>
+<td>2</td>
+<td><strong>не атака:</strong> зона <strong>Даль</strong>, кто <strong>входит</strong> в раунд — <strong>2d6 + Ловкость ≥ 12</strong> или <strong>1 рана</strong> (огонь)</td>
+</tr>
+</tbody></table>
+<h3>Холод</h3>
+<table>
+<thead>
+<tr>
+<th>Заклинание</th>
+<th>Тип</th>
+<th>Бонус</th>
+<th>Искры</th>
+<th>Примечание</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Ледяной снаряд</strong></td>
+<td>Даль</td>
+<td>+1</td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Конус холода</strong></td>
+<td>Даль</td>
+<td>+2</td>
+<td>2</td>
+<td>по нескольким в <strong>Рядом</strong> — отдельный бросок на каждого или один против средней ЧЦ</td>
+</tr>
+<tr>
+<td><strong>Морозная преграда</strong></td>
+<td>—</td>
+<td>—</td>
+<td>1</td>
+<td><strong>Проверка ≥ 11:</strong> до конца раунда <strong>укрытие +1</strong> союзнику в <strong>Рукопашной</strong> с вами (нарратив — лёд)</td>
+</tr>
+</tbody></table>
+<h3>Молния</h3>
+<table>
+<thead>
+<tr>
+<th>Заклинание</th>
+<th>Тип</th>
+<th>Бонус</th>
+<th>Искры</th>
+<th>Примечание</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Искра молнии</strong></td>
+<td>Даль</td>
+<td>+1</td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Цепная молния</strong></td>
+<td>Даль</td>
+<td>+2</td>
+<td>2</td>
+<td>при попадании <strong>вторая цель в Рядом</strong> с первой — <strong>атака бонус −1</strong> (по ведущему)</td>
+</tr>
+<tr>
+<td><strong>Гром с небес</strong></td>
+<td>Даль</td>
+<td>+3</td>
+<td>3</td>
+<td>редкое, мощное</td>
+</tr>
+</tbody></table>
+<h3>Земля</h3>
+<table>
+<thead>
+<tr>
+<th>Заклинание</th>
+<th>Тип</th>
+<th>Бонус</th>
+<th>Искры</th>
+<th>Примечание</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Каменный кулак</strong></td>
+<td>Даль</td>
+<td>+2</td>
+<td>1</td>
+<td>отбрасывание: при попадании цель <strong>смещается</strong> на <strong>Рядом</strong></td>
+</tr>
+<tr>
+<td><strong>Оковы земли</strong></td>
+<td>—</td>
+<td>—</td>
+<td>2</td>
+<td><strong>Проверка ≥ 12:</strong> цель в <strong>Даль</strong> до конца раунда <strong>тратит +1 ОД</strong> на первый <strong>Сдвиг</strong> (сопротивление: <strong>2d6 + Тело ≥ ЧЦ каста</strong>)</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>Школа <strong>Дух</strong> <em>(аналог Spirit)</em></h2>
+<p>Сила разума, разрушение защиты, чистый урон силой.</p>
+<table>
+<thead>
+<tr>
+<th>Заклинание</th>
+<th>Тип</th>
+<th>Бонус</th>
+<th>Искры</th>
+<th>Примечание</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Духовный болт</strong></td>
+<td>Даль</td>
+<td>+1</td>
+<td>1</td>
+<td>универсальная «стрела» из силы</td>
+</tr>
+<tr>
+<td><strong>Разрушение магии</strong></td>
+<td>—</td>
+<td>—</td>
+<td>1</td>
+<td><strong>Проверка ≥ ЧЦ магии цели</strong> (10 + Воля врага или <strong>12</strong>): снять <strong>1</strong> эффект чар/баффа с цели</td>
+</tr>
+<tr>
+<td><strong>Вытягивание жизни</strong></td>
+<td>Рукопашная</td>
+<td>+1</td>
+<td>2</td>
+<td>при попадании вы <strong>снимаете 1 стресс</strong> (или <strong>1 рана</strong> у вас при модуле ран) — по балансу стола</td>
+</tr>
+<tr>
+<td><strong>Духовная вспышка</strong></td>
+<td>Даль</td>
+<td>+2</td>
+<td>2</td>
+<td>по нежити/духам ведущий может дать <strong>+1</strong> к бонусу</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>Школа <strong>Энтропия</strong> <em>(аналог Entropy)</em></h2>
+<p>Ослабление, страх, сон, яд — почти всё через <strong>проверки</strong>, не через «атаку по ЧЦ защиты».</p>
+<table>
+<thead>
+<tr>
+<th>Заклинание</th>
+<th>Проверка / эффект</th>
+<th>Искры</th>
+<th>Примечание</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Слабость</strong></td>
+<td><strong>2d6 + Воля + ранг ≥ 10 + Воля цели</strong></td>
+<td>1</td>
+<td>до конца сцены цель <strong>−1</strong> к <strong>итогу первой</strong> атаки в каждом раунде</td>
+</tr>
+<tr>
+<td><strong>Паралич</strong></td>
+<td><strong>≥ 12 + Воля цели</strong></td>
+<td>2</td>
+<td>цель <strong>пропускает 1 ОД</strong> в следующем раунде (или <strong>−2</strong> к первому броску)</td>
+</tr>
+<tr>
+<td><strong>Сон</strong></td>
+<td><strong>≥ 11 + Воля цели</strong></td>
+<td>2</td>
+<td>цель <strong>без сознания</strong> до удара или конца сцены (сопротивление — по сюжету)</td>
+</tr>
+<tr>
+<td><strong>Ужас</strong></td>
+<td><strong>≥ 11 + Воля цели</strong></td>
+<td>2</td>
+<td>цель <strong>1 стресс</strong> и <strong>сдвиг</strong> на <strong>Рядом</strong> от вас</td>
+</tr>
+<tr>
+<td><strong>Облако яда</strong></td>
+<td>зона <strong>Рядом</strong> с точкой: <strong>2d6 + Тело ≥ 13</strong> или <strong>1 рана</strong> в начале следующего раунда</td>
+<td>2</td>
+<td>не бросок атаки по ЧЦ — спасбросок</td>
+</tr>
+<tr>
+<td><strong>Проклятие стужи</strong></td>
+<td><strong>≥ 12</strong></td>
+<td>2</td>
+<td>цель <strong>−1 к ЧЦ защиты</strong> до конца боя</td>
+</tr>
+</tbody></table>
+<p><em>Урон ядом</em> можно свести к <strong>атаке</strong> с <strong>Низким бонусом</strong> + эффект «ещё 1 рана в начале следующего раунда» — по согласованию.</p>
+<hr>
+<h2>Школа <strong>Сотворение</strong> <em>(аналог Creation)</em></h2>
+<p>Лечение, защита, тактика поля.</p>
+<table>
+<thead>
+<tr>
+<th>Заклинание</th>
+<th>Проверка / эффект</th>
+<th>Искры</th>
+<th>Примечание</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Лечение</strong></td>
+<td><strong>≥ 10</strong></td>
+<td>1</td>
+<td>снять <strong>1 рана</strong> у цели <strong>Рукопашная</strong></td>
+</tr>
+<tr>
+<td><strong>Сильное лечение</strong></td>
+<td><strong>≥ 13</strong></td>
+<td>2</td>
+<td>снять <strong>2 раны</strong> (или <strong>2</strong> раза по <strong>1</strong> у двух союзников — по ведущему)</td>
+</tr>
+<tr>
+<td><strong>Преграда</strong></td>
+<td><strong>≥ 11</strong></td>
+<td>1</td>
+<td>союзник до конца раунда <strong>+1 к ЧЦ защиты</strong></td>
+</tr>
+<tr>
+<td><strong>Глиф паралича</strong></td>
+<td><strong>≥ 12</strong></td>
+<td>2</td>
+<td>на клетку/зону: кто <strong>входит</strong>, <strong>2d6 + Ловкость ≥ 13</strong> или <strong>пропуск 1 ОД</strong> в этом раунде</td>
+</tr>
+<tr>
+<td><strong>Скользкий пол</strong></td>
+<td><strong>≥ 10</strong></td>
+<td>1</td>
+<td>зона: кто <strong>бежит/сдвигается</strong>, <strong>2d6 + Ловкость ≥ 11</strong> или <strong>падает</strong> (нарратив: <strong>−1</strong> к первой атаке)</td>
+</tr>
+<tr>
+<td><strong>Героизм</strong></td>
+<td><strong>≥ 11</strong></td>
+<td>2</td>
+<td>союзник <strong>+1</strong> к <strong>итогу</strong> следующей <strong>атаки</strong> в течение 1 минуты</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>Быстрый выбор по стилю <em>Dragon Age</em></h2>
+<table>
+<thead>
+<tr>
+<th>Роль</th>
+<th>Школы и акцент</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Боевой маг</strong></td>
+<td>Стихии (огонь + молния), часть Духа</td>
+</tr>
+<tr>
+<td><strong>Контролёр</strong></td>
+<td>Энтропия + Сотворение (глифы, смазка)</td>
+</tr>
+<tr>
+<td><strong>Поддержка</strong></td>
+<td>Сотворение + Дух (развеивание)</td>
+</tr>
+<tr>
+<td><strong>«Некромантический» уклон</strong></td>
+<td>Энтропия + Дух (вытягивание жизни)</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>Пример из партии: «Стеклянные волки»</h2>
+<p><strong>Орён</strong> бьёт <strong>«Вспышка пламени»</strong> (<strong>бонус +1</strong>): <strong>итог атаки 13</strong>, ЧЦ <strong>11</strong> → урон <strong>(13 − 11) + 1 = 3</strong>.</p>
+<p><strong>Мира</strong> под прикрытием: союзник кастует <strong>«Преграду»</strong> на неё — <strong>2d6 + Воля + ранг ≥ 11</strong>, <strong>+1 к ЧЦ</strong> до конца раунда, <strong>1 искра</strong>.</p>
+
+    </article>
+  </div>
+  <footer class="site-footer">
+    <p>Модульная настольная РПГ «Корни судьбы» · <a href="https://gitlab.com/fso13/me-rpg">Исходники на GitLab</a></p>
+  </footer>
+  <script src="../js/manifest.js"></script>
+</body>
+</html>

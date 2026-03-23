@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Корни судьбы — модульная настольная РПГ. Глава 2. Бой (модуль)">
+  <title>Глава 2. Бой (модуль) — Корни судьбы</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">Корни судьбы</a>
+    <nav class="nav-inline">
+      <a href="index.html">Главная</a>
+      <a href="oglavlenie.html">Оглавление</a>
+      <a href="character-sheet.html">Лист персонажа</a>
+      <a href="nastroyki.html">Настройки</a>
+    </nav>
+  </header>
+  <div class="layout-doc">
+    <aside class="sidebar">
+      <div class="sidebar-inner">
+        <div class="sidebar-title">Разделы</div>
+        <nav><a href="00-yadro.html">Глава 0. Ядро системы</a>
+<a href="01-moduli.html">Глава 1. Модульность</a>
+<a href="02-boy.html" class="active" data-module="tactical_combat">Глава 2. Бой (модуль)</a>
+<a href="03-derevya-talantov.html" data-module="talent_trees">Глава 3. Деревья талантов, навыки, ранги</a>
+<a href="04-magiya.html" data-module="magic">Глава 4. Магия (модуль)</a>
+<a href="05-snaryazhenie.html" data-module="equipment">Глава 5. Снаряжение</a>
+<a href="06-bestiariy.html" data-module="bestiary">Глава 6. Бестиарий</a>
+<a href="07-rany.html" data-module="wounds">Модуль: получение и учёт ран</a>
+<a href="08-krity-i-promahi.html" data-module="crits_and_fumbles">Модуль: критические попадания и промахи</a>
+<a href="09-sozdanie-i-uroven.html" data-module="character_progression">Создание персонажа и рост уровня</a>
+<div class="nav-group"><div class="nav-group-title">Фэнтези-модули</div><a href="fantasy/01-zaklinaniya.html" data-module="fantasy_spells">Фэнтези-модуль: заклинания</a>
+<a href="fantasy/02-talanty-i-navyki.html" data-module="fantasy_skills">Фэнтези-модуль: таланты и навыки</a>
+<a href="fantasy/03-snaryazhenie.html" data-module="fantasy_gear">Фэнтези-модуль: расширенное снаряжение</a>
+<a href="fantasy/04-bestiariy.html" data-module="fantasy_bestiary">Фэнтези-модуль: бестиарий</a></div>
+<a href="adventure/01-steklyannyy-zvon.html">Стартовое приключение: «Стеклянный звон»</a></nav>
+      </div>
+    </aside>
+    <article class="doc-main">
+      <h1>Глава 2. Бой (модуль)</h1>
+<p><em>Требует: ядро. Рекомендуется: снаряжение.</em></p>
+<p><strong>Опционально:</strong> <a href="07-rany.html">07-rany.md</a> — детальная шкала ран; <a href="08-krity-i-promahi.html">08-krity-i-promahi.md</a> — криты и промахи.</p>
+<h2>1. Идея</h2>
+<p>Бой — про <strong>дистанцию</strong> и <strong>куда тратить 2 очка действия (ОД)</strong> за раунд. <strong>Один</strong> бросок на атаку: по нему и считается урон при попадании. Отдельно кубик на урон <strong>не</strong> кидается. Усложнения — через модули (раны, криты).</p>
+<h2>2. Дистанция (три положения)</h2>
+<p>Относительно <strong>цели</strong>, с которой вы взаимодействуете:</p>
+<table>
+<thead>
+<tr>
+<th>Положение</th>
+<th>Что можно</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Рукопашная</strong></td>
+<td>удар оружием ближнего боя, касание заклинанием</td>
+</tr>
+<tr>
+<td><strong>Рядом</strong></td>
+<td>за <strong>1 ОД</strong> перейти в <strong>Рукопашную</strong> к этой цели (или отойти в <strong>Даль</strong>)</td>
+</tr>
+<tr>
+<td><strong>Даль</strong></td>
+<td>атака луком, метательным, <strong>дальней магией с уроном</strong> (см. главу 4)</td>
+</tr>
+</tbody></table>
+<p><em>Упрощение:</em> не считаем гексы; ведущий решает, кто в каком положении к кому.</p>
+<h2>3. Ход</h2>
+<p>У каждого в начале раунда <strong>2 ОД</strong>.</p>
+<table>
+<thead>
+<tr>
+<th>Трата</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1 ОД</td>
+<td><strong>Атака</strong> (оружие или заклинание, наносящее урон — по правилам атаки)</td>
+</tr>
+<tr>
+<td>1 ОД</td>
+<td><strong>Сдвиг</strong> дистанции на один шаг (Рядом ↔ Рукопашная, или войти/выйти из <strong>Даль</strong> к выбранной цели, если логично)</td>
+</tr>
+<tr>
+<td>2 ОД</td>
+<td><strong>Сдвиг</strong> на два шага сразу (например, из Даль в Рукопашную в лоб) — по согласованию с ведущим</td>
+</tr>
+</tbody></table>
+<p><strong>Инициатива:</strong> один раз в начале боя: <strong>2d6 + Ловкость</strong>, порядок от большего к меньшему.</p>
+<h2>4. Атака и защита</h2>
+<h3>Оружие</h3>
+<ul>
+<li><strong>Рукопашная атака:</strong> <code>2d6 + Тело или Ловкость</code> (как при выборе оружия) + <strong>ранг навыка «Рукопашная»</strong> ≥ <strong>ЧЦ защиты</strong>.</li>
+<li><strong>Дальняя атака</strong> (лук, метательное): <code>2d6 + Ловкость + ранг «Стрельба/Метание»</code> ≥ <strong>ЧЦ защиты</strong>.</li>
+</ul>
+<h3>ЧЦ защиты цели</h3>
+<p><strong>ЧЦ защиты = 8 + Ловкость + бонус доспеха + бонус щита</strong> (если есть).</p>
+<p><em>Не более одного ситуативного бонуса к защите за атаку</em> (например, <strong>укрытие +1</strong>), чтобы не плодить счёт.</p>
+<h3>Урон при попадании</h3>
+<p>Сначала сравните <strong>итог атаки</strong> (полная сумма: <code>2d6 + модификаторы</code>) с <strong>ЧЦ защиты</strong> цели. Если <strong>итог ≥ ЧЦ</strong> — попадание.</p>
+<p><strong>Урон (в ранах или условных единицах) = (итог атаки − ЧЦ защиты) + бонус оружия.</strong></p>
+<ul>
+<li><strong>Итог атаки − ЧЦ</strong> — насколько атака «пробила» защиту (при ровном счёте это <strong>0</strong>).</li>
+<li><strong>Бонус оружия</strong> — число <strong>+N</strong> в описании оружия (глава 05); у заклинаний — <strong>бонус заклинания</strong> (глава 4).</li>
+</ul>
+<p><strong>Второй бросок на урон не делается</strong> — всё уже в одном броске атаки.</p>
+<p><em>Опция стола:</em> минимальный урон при любом попадании <strong>1</strong>, если не хотите ситуаций «попал, но 0 после вычитания» (редко при положительном бонусе оружия).</p>
+<h2>5. Заклинания с уроном</h2>
+<p>См. <a href="04-magiya.html">04-magiya.md</a>: такие заклинания считаются <strong>атакой</strong> (ближней или дальней — по описанию заклинания), с теми же ЧЦ защиты и тем же ОД.</p>
+<h2>6. Когда не бросать</h2>
+<p>Если угроза ничтожна или позиция абсурдна — ведущий объявляет <strong>автоуспех</strong> или <strong>автопровал</strong> без кубика.</p>
+<hr>
+<h2>Пример из партии: «Стеклянные волки», мост</h2>
+<p><strong>Гарпия</strong> в <strong>Даль</strong> от <strong>Миры</strong>. <strong>Гарр</strong> в <strong>Рукопашной</strong> с гарпией (удерживает мост). Гарпия тратит <strong>1 ОД</strong> на <strong>дальнюю атаку</strong> (перья): <strong>итог атаки 12</strong>, ЧЦ Миры <strong>11</strong>. Попадание. Урон = <strong>(12 − 11) + бонус оружия +1</strong> = <strong>2 раны</strong>.</p>
+<p><strong>Орён</strong> тратит <strong>1 ОД</strong> на <strong>дальнюю магическую атаку</strong> (школа <strong>Стихии</strong>, см. гл. 4 и <a href="fantasy/01-zaklinaniya.html">fantasy/01-zaklinaniya.md</a>): тот же расчёт, <strong>бонус заклинания</strong> вместо бонуса оружия, <strong>искра</strong> по правилам магии.</p>
+<p><strong>Кай</strong> тратит <strong>1 ОД</strong>, смещается из <strong>Рядом</strong> в <strong>Рукопашную</strong> к гарпии и бьёт: <strong>2d6 + Ловкость + Рукопашная</strong>.</p>
+
+    </article>
+  </div>
+  <footer class="site-footer">
+    <p>Модульная настольная РПГ «Корни судьбы» · <a href="https://gitlab.com/fso13/me-rpg">Исходники на GitLab</a></p>
+  </footer>
+  <script src="js/manifest.js"></script>
+</body>
+</html>
