@@ -1,17 +1,25 @@
-# GitHub Pages: статический сайт из rpg/*.md (аналог .gitlab-ci.yml)
+# GitHub Pages: статический сайт из rpg/*.md
 name: pages
 
 on:
   push:
     branches: [main, master]
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
-  pages:
+  build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     steps:
       - uses: actions/checkout@v4
 
@@ -23,10 +31,13 @@ jobs:
       - run: npm ci
       - run: npm run build
 
-      # Отключаем Jekyll, чтобы GitHub Pages отдавал статику как есть
-      - run: touch public/.nojekyll
-
-      - uses: peaceiris/actions-gh-pages@v4
+      - uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public
+          path: ./public
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: github-pages
+    steps:
+      - uses: actions/deploy-pages@v4
