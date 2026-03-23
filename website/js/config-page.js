@@ -11,6 +11,7 @@
     "wounds",
     "crits_and_fumbles",
     "states",
+    "squads",
     "character_progression",
     "fantasy_spells",
     "fantasy_skills",

@@ -35,7 +35,7 @@
     wounds: false,
     crits_and_fumbles: false,
     states: true,
-    squads: false,
+    squads: true,
     character_progression: true,
     fantasy_spells: true,
     fantasy_skills: true,
