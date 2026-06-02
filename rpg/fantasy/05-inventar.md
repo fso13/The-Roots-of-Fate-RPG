@@ -1,6 +1,6 @@
 # Фэнтези-модуль: инвентарь
 
-*Дополняет [03-snaryazhenie.md](03-snaryazhenie.md) и [05-snaryazhenie.md](../05-snaryazhenie.md). Даёт детальные ограничения: сетка сумки и слоты экипировки.*
+*Дополняет [Фэнтези-модуль: расширенное снаряжение](./03-snaryazhenie.md) и [Глава 5. Снаряжение](../05-snaryazhenie.md). Даёт детальные ограничения: сетка сумки и слоты экипировки.*
 
 <figure class="inventar-schema-fig">
   <img src="images/inventar-schema.png" alt="Схема инвентаря: слоты экипировки и сумка 10×4">

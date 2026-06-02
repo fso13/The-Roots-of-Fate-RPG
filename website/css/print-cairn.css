@@ -1,0 +1,293 @@
+/* Стиль Cairn (A5, Lora + заголовки в духе Minion Pro) — по мотивам русской «Книги игрока» */
+:root {
+  --paper: #faf8f4;
+  --ink: #1c1b19;
+  --ink-soft: #3d3a36;
+  --rule: #2a2826;
+  --font-body: "Lora", "Times New Roman", Georgia, serif;
+  --font-display: "EB Garamond", "Minion Pro", "Times New Roman", Georgia, serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 9.5pt;
+}
+
+body.print-cairn {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-body);
+  line-height: 1.48;
+  background: var(--paper);
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.print-cairn a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.print-cairn-cover {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2.5rem 2rem;
+  page-break-after: always;
+  position: relative;
+}
+
+.print-cairn-cover::before {
+  content: "";
+  position: absolute;
+  inset: 14mm;
+  border: 1px solid var(--rule);
+  pointer-events: none;
+}
+
+.print-cairn-cover-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 32rem;
+}
+
+.print-cairn-cover h1 {
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+  letter-spacing: 0.02em;
+  line-height: 1.15;
+}
+
+.print-cairn-cover .edition {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--ink-soft);
+  margin: 0 0 2rem;
+}
+
+.print-cairn-cover .tagline {
+  font-size: 1rem;
+  color: var(--ink-soft);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.print-cairn-main {
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.print-cairn-toc {
+  page-break-after: always;
+  padding: 0.5rem 0 1rem;
+}
+
+.print-cairn-toc h2 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-align: center;
+  margin: 0 0 1.25rem;
+}
+
+.print-cairn-toc ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.print-cairn-toc li {
+  margin: 0.28rem 0;
+  line-height: 1.35;
+}
+
+.print-cairn-toc li a {
+  text-decoration: none;
+  border-bottom: 1px dotted transparent;
+}
+
+.print-cairn-toc li a:hover {
+  border-bottom-color: var(--ink-soft);
+}
+
+.print-cairn-toc .toc-group {
+  margin: 1rem 0 0.35rem;
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-soft);
+}
+
+.chapter {
+  page-break-before: always;
+}
+
+.chapter-head {
+  text-align: center;
+  margin: 0 0 1.25rem;
+  padding-top: 0.25rem;
+}
+
+.chapter-head h1 {
+  font-family: var(--font-display);
+  font-size: 1.65rem;
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.2;
+  border: none;
+}
+
+.chapter-rule {
+  width: 2.5rem;
+  height: 1px;
+  background: var(--rule);
+  margin: 0.65rem auto 0;
+}
+
+.print-cairn h2 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 1.35rem 0 0.45rem;
+  line-height: 1.25;
+}
+
+.print-cairn h3 {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 1rem 0 0.35rem;
+}
+
+.print-cairn h4 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin: 0.85rem 0 0.3rem;
+}
+
+.print-cairn p,
+.print-cairn li {
+  margin: 0.35rem 0;
+  text-align: justify;
+  hyphens: auto;
+}
+
+.print-cairn strong {
+  font-weight: 700;
+}
+
+.print-cairn em {
+  font-style: italic;
+}
+
+.print-cairn ul,
+.print-cairn ol {
+  margin: 0.35rem 0;
+  padding-left: 1.15rem;
+}
+
+.print-cairn li p {
+  margin: 0.15rem 0;
+}
+
+.print-cairn table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.75rem 0;
+  font-size: 0.92em;
+}
+
+.print-cairn th,
+.print-cairn td {
+  border-bottom: 1px solid var(--rule);
+  padding: 0.35rem 0.45rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.print-cairn th {
+  font-weight: 700;
+  border-bottom-width: 2px;
+}
+
+.print-cairn tr:last-child td {
+  border-bottom: none;
+}
+
+.print-cairn pre {
+  font-family: var(--font-body);
+  font-size: 0.9em;
+  background: rgba(0, 0, 0, 0.04);
+  border-left: 2px solid var(--rule);
+  padding: 0.5rem 0.75rem;
+  margin: 0.65rem 0;
+  white-space: pre-wrap;
+}
+
+.print-cairn code {
+  font-size: 0.92em;
+}
+
+.print-cairn pre code {
+  background: none;
+  padding: 0;
+}
+
+.print-cairn blockquote {
+  margin: 0.65rem 0;
+  padding: 0 0 0 0.85rem;
+  border-left: 2px solid var(--rule);
+  color: var(--ink-soft);
+  font-style: italic;
+}
+
+.print-cairn hr {
+  border: none;
+  border-top: 1px solid var(--rule);
+  margin: 1rem 0;
+}
+
+.print-cairn img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0.75rem auto;
+}
+
+.inventar-schema-fig {
+  text-align: center;
+}
+
+.inventar-schema-fig img {
+  max-width: min(300px, 100%);
+}
+
+@media print {
+  .chapter-head,
+  .print-cairn h2,
+  .print-cairn h3 {
+    break-after: avoid;
+  }
+
+  .print-cairn table,
+  .print-cairn pre,
+  .print-cairn img,
+  .print-cairn blockquote {
+    break-inside: avoid;
+  }
+}

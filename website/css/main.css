@@ -259,6 +259,16 @@ a:hover {
   padding: 3rem 1.5rem 4rem;
 }
 
+.hero-emblem {
+  display: block;
+  width: min(13rem, 48vw);
+  height: auto;
+  margin: 0 auto 0.75rem;
+  object-fit: contain;
+  opacity: 1;
+  filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.45));
+}
+
 .hero-ornament {
   width: 120px;
   height: 1px;

@@ -4,6 +4,7 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 import { marked } from "marked";
+import { buildTitleByRel, fixMdLinks as humanizeMdLinks } from "./lib/book-build.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, "..");
@@ -215,6 +216,12 @@ function main() {
   fs.copyFileSync(path.join(__dirname, "js", "character-sheet.js"), path.join(OUT, "js", "character-sheet.js"));
   fs.copyFileSync(path.join(__dirname, "character-sheet.html"), path.join(OUT, "character-sheet.html"));
 
+  const siteImages = path.join(__dirname, "images");
+  if (fs.existsSync(siteImages)) {
+    fs.mkdirSync(path.join(OUT, "images"), { recursive: true });
+    fs.cpSync(siteImages, path.join(OUT, "images"), { recursive: true });
+  }
+
   const advMaps = path.join(RPG, "adventure", "maps");
   if (fs.existsSync(advMaps)) {
     fs.mkdirSync(path.join(OUT, "adventure", "maps"), { recursive: true });
@@ -228,6 +235,7 @@ function main() {
   }
 
   const relFiles = walkMarkdown(RPG);
+  const titleByRel = buildTitleByRel(relFiles);
   const pageMeta = [];
 
   for (const rel of relFiles) {
@@ -257,15 +265,19 @@ function main() {
   const fant = pageMeta.filter((p) => p.rel.startsWith("fantasy/"));
   const adv = pageMeta.filter((p) => p.rel.startsWith("adventure/"));
 
+  const HIDE_FROM_NAV = new Set(["kniga-polnaya.md", "kniga-homebrewery.md"]);
+  const isNavVisible = (p) => !HIDE_FROM_NAV.has(p.rel);
+
   const navGroups = [
-    { items: core.map(toNavItem) },
-    { title: "Фэнтези-модули", items: fant.map(toNavItem) },
-    { items: adv.map(toNavItem) },
+    { items: core.filter(isNavVisible).map(toNavItem) },
+    { title: "Фэнтези-модули", items: fant.filter(isNavVisible).map(toNavItem) },
+    { items: adv.filter(isNavVisible).map(toNavItem) },
   ];
 
   for (const p of pageMeta) {
     const md = fs.readFileSync(path.join(RPG, p.rel), "utf8");
-    const rawBody = fixMdLinks(marked.parse(md));
+    const mdForPage = humanizeMdLinks(md, (rel) => rel, { titleByRel, fromRel: p.rel });
+    const rawBody = fixMdLinks(marked.parse(mdForPage));
     const { html: bodyHtml, toc } = extractHeadingsAndAddIds(rawBody);
     const outPath = path.join(OUT, p.outRel);
     fs.mkdirSync(path.dirname(outPath), { recursive: true });
@@ -320,6 +332,7 @@ function main() {
     </nav>
   </header>
   <section class="hero">
+    <img class="hero-emblem" src="images/emblem-tree-d6.png" width="240" height="264" alt="Дерево с корнями, растущее из шестигранного кубика — символ игры">
     <div class="hero-ornament"></div>
     <h1>Корни судьбы</h1>
     <p class="tagline">Модульная настольная ролевая игра. Единый кубик за столом, тактика без лишнего счёта, магия как атака — и тихая роскошь минимализма.</p>

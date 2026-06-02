@@ -1,0 +1,132 @@
+/* Корни судьбы — стиль для Homebrewery (тема Blank + A5, в духе Cairn) */
+@import url("https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Lora:ital,wght@0,400;0,600;0,700;1,400&display=swap");
+
+.page {
+	width: 148mm;
+	height: 210mm;
+	background-color: #faf8f4;
+	font-family: "Lora", "Times New Roman", Georgia, serif;
+	font-size: 9.5pt;
+	line-height: 1.45;
+	color: #1c1b19;
+	column-count: 1;
+	padding-top: 1.2cm;
+	padding-bottom: 1.4cm;
+}
+
+.page h1 {
+	font-family: "EB Garamond", "Minion Pro", Georgia, serif;
+	font-size: 1.65em;
+	font-weight: 600;
+	text-align: center;
+	column-span: all;
+	margin-top: 0.2em;
+	margin-bottom: 0.35em;
+	break-after: avoid;
+}
+
+.page h2 {
+	font-family: "EB Garamond", Georgia, serif;
+	font-size: 1.2em;
+	font-weight: 600;
+	margin-top: 0.9em;
+	margin-bottom: 0.35em;
+	break-after: avoid-column;
+	border-bottom: 1px solid #2a2826;
+	padding-bottom: 0.15em;
+}
+
+.page h3 {
+	font-size: 1.05em;
+	font-weight: 700;
+	margin-top: 0.65em;
+	break-after: avoid-column;
+}
+
+.page p {
+	text-align: justify;
+}
+
+.page a {
+	color: inherit;
+}
+
+.page table {
+	width: 100%;
+	font-size: 0.92em;
+	border-collapse: collapse;
+	break-inside: avoid;
+}
+
+.page th,
+.page td {
+	border-bottom: 1px solid #2a2826;
+	padding: 0.2em 0.35em;
+	vertical-align: top;
+}
+
+.page th {
+	font-weight: 700;
+	border-bottom-width: 2px;
+}
+
+.page blockquote {
+	border-left: 2px solid #2a2826;
+	padding-left: 0.75em;
+	color: #3d3a36;
+	font-style: italic;
+}
+
+.page pre {
+	font-family: "Lora", Georgia, serif;
+	font-size: 0.9em;
+	background: rgba(0, 0, 0, 0.04);
+	border-left: 2px solid #2a2826;
+	padding: 0.4em 0.6em;
+	white-space: pre-wrap;
+}
+
+.page code {
+	font-family: "Lora", Georgia, serif;
+	font-size: 0.92em;
+}
+
+.page .descriptive {
+	background-color: #f0ebe3;
+	border: 1px solid #c9c4ba;
+	border-radius: 2px;
+	padding: 0.35em 0.6em;
+	margin: 0.5em 0;
+}
+
+.page .descriptive p {
+	margin: 0.15em 0;
+	text-align: left;
+}
+
+.page :is(.frontCover, .frontCover *) {
+	text-align: center;
+}
+
+.page .frontCover h1 {
+	font-size: 2.2em;
+	margin-top: 35%;
+}
+
+.page .frontCover h5 {
+	font-family: "Lora", Georgia, serif;
+	font-style: italic;
+	color: #3d3a36;
+	font-weight: 400;
+}
+
+.page img {
+	max-width: 100%;
+	height: auto;
+	display: block;
+	margin: 0.5em auto;
+}
+
+.page .wide img {
+	max-width: 95%;
+}

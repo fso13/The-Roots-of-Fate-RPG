@@ -1,0 +1,146 @@
+{
+  "styles": [
+    {
+      "id": "zhivopis",
+      "title": "Живописный",
+      "description": "Цветной акварельный стиль для стола и экрана"
+    },
+    {
+      "id": "graviura",
+      "title": "Гравюра",
+      "description": "Чёрно-белый стиль старых карт, удобен для печати"
+    }
+  ],
+  "categories": [
+    {
+      "id": "mebel",
+      "title": "Мебель",
+      "items": [
+        {
+          "id": "stol",
+          "title": "Стол",
+          "file": "stol.svg"
+        },
+        {
+          "id": "skameya",
+          "title": "Скамья",
+          "file": "skameya.svg"
+        },
+        {
+          "id": "krovat",
+          "title": "Кровать",
+          "file": "krovat.svg"
+        },
+        {
+          "id": "bochka",
+          "title": "Бочка",
+          "file": "bochka.svg"
+        }
+      ]
+    },
+    {
+      "id": "zdaniya",
+      "title": "Здания",
+      "items": [
+        {
+          "id": "dom",
+          "title": "Дом",
+          "file": "dom.svg"
+        },
+        {
+          "id": "bashnya",
+          "title": "Башня",
+          "file": "bashnya.svg"
+        },
+        {
+          "id": "hram",
+          "title": "Храм",
+          "file": "hram.svg"
+        },
+        {
+          "id": "vorota",
+          "title": "Ворота",
+          "file": "vorota.svg"
+        }
+      ]
+    },
+    {
+      "id": "landshaft",
+      "title": "Ландшафт",
+      "items": [
+        {
+          "id": "derevo",
+          "title": "Дерево",
+          "file": "derevo.svg"
+        },
+        {
+          "id": "holm",
+          "title": "Холм",
+          "file": "holm.svg"
+        },
+        {
+          "id": "reka",
+          "title": "Река",
+          "file": "reka.svg"
+        },
+        {
+          "id": "doroga",
+          "title": "Дорога",
+          "file": "doroga.svg"
+        }
+      ]
+    },
+    {
+      "id": "interer",
+      "title": "Интерьер",
+      "items": [
+        {
+          "id": "dver",
+          "title": "Дверь",
+          "file": "dver.svg"
+        },
+        {
+          "id": "lestnica",
+          "title": "Лестница",
+          "file": "lestnica.svg"
+        },
+        {
+          "id": "kolonna",
+          "title": "Колонна",
+          "file": "kolonna.svg"
+        },
+        {
+          "id": "lovushka",
+          "title": "Ловушка",
+          "file": "lovushka.svg"
+        }
+      ]
+    },
+    {
+      "id": "markery",
+      "title": "Маркеры",
+      "items": [
+        {
+          "id": "lager",
+          "title": "Лагерь",
+          "file": "lager.svg"
+        },
+        {
+          "id": "opasnost",
+          "title": "Опасность",
+          "file": "opasnost.svg"
+        },
+        {
+          "id": "sokrovishche",
+          "title": "Сокровище",
+          "file": "sokrovishche.svg"
+        },
+        {
+          "id": "personazh",
+          "title": "Герой / NPC",
+          "file": "personazh.svg"
+        }
+      ]
+    }
+  ]
+}

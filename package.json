@@ -4,12 +4,19 @@
   "type": "module",
   "scripts": {
     "build:maps": "node scripts/convert-adventure-maps.mjs",
-    "build": "node scripts/convert-adventure-maps.mjs && node website/build.mjs"
+    "build": "node scripts/convert-adventure-maps.mjs && node website/build.mjs",
+    "build:pdf": "npm run build && node scripts/build-pdf.mjs",
+    "build:pdf:cairn": "npm run build && node scripts/build-pdf-cairn.mjs",
+    "pdf": "npm run build:pdf",
+    "pdf:cairn": "npm run build:pdf:cairn",
+    "book:md": "node scripts/build-book-md.mjs",
+    "book:homebrewery": "node scripts/build-book-homebrewery.mjs"
   },
   "dependencies": {
     "marked": "^15.0.4"
   },
   "devDependencies": {
+    "playwright": "^1.52.0",
     "sharp": "^0.34.5"
   }
 }

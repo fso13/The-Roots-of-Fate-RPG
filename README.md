@@ -6,6 +6,26 @@
 
 Статическая версия правил: каталог [`website/`](website/) (стили, [`website/build.mjs`](website/build.mjs)). Сборка: `npm install` и `npm run build` — сначала **PNG карт** из SVG (`scripts/convert-adventure-maps.mjs`), затем HTML; результат в `public/`.
 
+**PDF правил** из тех же Markdown-файлов (`rpg/**/*.md`):
+
+```bash
+npm install
+npx playwright install chromium   # один раз
+npm run pdf
+```
+
+Итог: `public/koreni-sudby-pravila.pdf` (и `public/print-book.html` для предпросмотра). Без приключений: `node scripts/build-pdf.mjs --no-adventure`.
+
+**PDF в стиле Cairn** (A5, шрифт Lora, как в русской «Книге игрока» Cairn):
+
+```bash
+npm run pdf:cairn
+```
+
+Итог: `public/koreni-sudby-pravila-cairn.pdf`, предпросмотр: `public/print-book-cairn.html`.
+
+**The Homebrewery:** `npm run book:homebrewery` → [`rpg/kniga-homebrewery.md`](rpg/kniga-homebrewery.md). Скопируйте в [homebrewery.naturalcrit.com](https://homebrewery.naturalcrit.com/) (тема Blank, A5, в стиле Cairn).
+
 Пайплайн [`.gitlab-ci.yml`](.gitlab-ci.yml) на **Node 20** выполняет `npm ci` и `npm run build`, артефакт **Pages** — содержимое `public/`. После успешного job **Deploy → Pages** в настройках проекта GitLab сайт доступен по адресу вида `https://<namespace>.gitlab.io/<repo>/` (точный URL — в **Settings → Pages**).
 
 ## Getting started

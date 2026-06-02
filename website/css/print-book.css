@@ -1,0 +1,219 @@
+/* Сборка PDF: светлая «книжная» вёрстка (не тёмная тема сайта) */
+:root {
+  --ink: #1a1814;
+  --ink-muted: #4a4540;
+  --accent: #6b5420;
+  --line: #d4cfc4;
+  --font-display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --font-body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 11pt;
+}
+
+body.print-book {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-body);
+  line-height: 1.55;
+  background: #fff;
+}
+
+.print-book a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.print-book a:hover {
+  text-decoration: underline;
+}
+
+.print-cover {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 3rem 2rem;
+  page-break-after: always;
+}
+
+.print-cover h1 {
+  font-family: var(--font-display);
+  font-size: 2.75rem;
+  font-weight: 600;
+  margin: 0 0 0.75rem;
+  letter-spacing: 0.03em;
+}
+
+.print-cover .tagline {
+  font-size: 1.1rem;
+  color: var(--ink-muted);
+  max-width: 28rem;
+  margin: 0;
+}
+
+.print-book-main {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 0 1.25rem 2rem;
+}
+
+.print-toc {
+  page-break-after: always;
+  padding: 2rem 0 1rem;
+}
+
+.print-toc h2 {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  margin: 0 0 1.25rem;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 0.5rem;
+}
+
+.print-toc ol {
+  margin: 0;
+  padding-left: 1.35rem;
+}
+
+.print-toc li {
+  margin: 0.35rem 0;
+}
+
+.print-toc .toc-group {
+  margin: 1rem 0 0.5rem;
+  font-weight: 600;
+  color: var(--ink-muted);
+  list-style: none;
+  margin-left: -1.35rem;
+}
+
+.chapter {
+  page-break-before: always;
+  padding-top: 0.5rem;
+}
+
+.chapter:first-of-type {
+  page-break-before: auto;
+}
+
+.print-book h1 {
+  font-family: var(--font-display);
+  font-size: 1.85rem;
+  margin: 0 0 1rem;
+  line-height: 1.2;
+}
+
+.print-book h2 {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  margin: 1.75rem 0 0.65rem;
+  padding-top: 0.25rem;
+  border-top: 1px solid var(--line);
+}
+
+.print-book h3 {
+  font-size: 1.05rem;
+  margin: 1.25rem 0 0.5rem;
+}
+
+.print-book p,
+.print-book li {
+  margin: 0.5rem 0;
+}
+
+.print-book ul,
+.print-book ol {
+  margin: 0.5rem 0;
+  padding-left: 1.5rem;
+}
+
+.print-book table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: 0.92rem;
+}
+
+.print-book th,
+.print-book td {
+  border: 1px solid var(--line);
+  padding: 0.4rem 0.55rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.print-book th {
+  background: #f5f2eb;
+  font-weight: 600;
+}
+
+.print-book pre {
+  background: #f5f2eb;
+  border: 1px solid var(--line);
+  padding: 0.75rem 1rem;
+  overflow-x: auto;
+  font-size: 0.88rem;
+  border-radius: 3px;
+}
+
+.print-book code {
+  font-size: 0.9em;
+  background: #f0ebe0;
+  padding: 0.1em 0.35em;
+  border-radius: 2px;
+}
+
+.print-book pre code {
+  background: none;
+  padding: 0;
+}
+
+.print-book img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1rem auto;
+}
+
+.print-book blockquote {
+  margin: 1rem 0;
+  padding-left: 1rem;
+  border-left: 3px solid var(--line);
+  color: var(--ink-muted);
+}
+
+.print-book hr {
+  border: none;
+  border-top: 1px solid var(--line);
+  margin: 1.5rem 0;
+}
+
+.inventar-schema-fig {
+  text-align: center;
+}
+
+.inventar-schema-fig img {
+  max-width: min(360px, 100%);
+}
+
+@media print {
+  .chapter h2 {
+    break-after: avoid;
+  }
+
+  .print-book table,
+  .print-book pre,
+  .print-book img {
+    break-inside: avoid;
+  }
+}
