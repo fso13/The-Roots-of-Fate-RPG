@@ -80,10 +80,11 @@ export function wrapChapterHead(html) {
   });
 }
 
-export function buildChapterList(relFiles, { wrapHead = false } = {}) {
+export function buildChapterList(relFiles, { wrapHead = false, transformMd } = {}) {
   return relFiles.map((rel) => {
     const mdRaw = fs.readFileSync(path.join(RPG, rel), "utf8");
-    const md = relImageSrc(rel, mdRaw);
+    const mdBase = transformMd ? transformMd(rel, mdRaw) : mdRaw;
+    const md = relImageSrc(rel, mdBase);
     const title = extractTitle(md) || rel;
     const id = chapterId(rel);
     let body = fixHtmlAssetPaths(fixMdLinksForPdf(marked.parse(md)), rel);
@@ -93,12 +94,14 @@ export function buildChapterList(relFiles, { wrapHead = false } = {}) {
 }
 
 export function buildToc(chapters, { tocClass = "print-toc" } = {}) {
+  const isIntro = (c) =>
+    c.rel === "README.md" || c.rel === "README-igrok.md" || c.rel === "README-hranitel.md";
   const core = chapters.filter(
-    (c) => c.rel !== "README.md" && !c.rel.startsWith("fantasy/") && !c.rel.startsWith("adventure/")
+    (c) => !isIntro(c) && !c.rel.startsWith("fantasy/") && !c.rel.startsWith("adventure/")
   );
   const fantasy = chapters.filter((c) => c.rel.startsWith("fantasy/"));
   const adventure = chapters.filter((c) => c.rel.startsWith("adventure/"));
-  const readme = chapters.find((c) => c.rel === "README.md");
+  const readme = chapters.find((c) => isIntro(c));
 
   const section = (items) =>
     items.map((c) => `<li><a href="#${c.id}">${escapeHtml(c.title)}</a></li>`).join("\n");
@@ -182,6 +185,7 @@ export function parsePdfArgs(argv, defaults) {
   for (let i = 2; i < argv.length; i++) {
     const a = argv[i];
     if (a === "--no-adventure") opts.includeAdventure = false;
+    else if (a === "--audience" && argv[i + 1]) opts.audience = argv[++i];
     else if (a === "--output" && argv[i + 1]) opts.output = path.resolve(argv[++i]);
     else if (a === "--help" || a === "-h") {
       console.log(defaults.helpText || "");

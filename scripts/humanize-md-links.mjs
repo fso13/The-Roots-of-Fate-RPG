@@ -5,7 +5,12 @@ import path from "path";
 import { RPG, walkMarkdown } from "../website/lib/pdf-core.mjs";
 import { buildTitleByRel, fixMdLinks } from "../website/lib/book-build.mjs";
 
-const SKIP = new Set(["kniga-polnaya.md", "kniga-homebrewery.md"]);
+const SKIP = new Set([
+  "kniga-polnaya.md",
+  "kniga-homebrewery.md",
+  "kniga-igroka.md",
+  "kniga-hranitelya.md",
+]);
 
 function main() {
   const relFiles = walkMarkdown(RPG).filter((r) => !SKIP.has(r));

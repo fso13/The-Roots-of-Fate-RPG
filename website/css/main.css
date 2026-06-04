@@ -294,6 +294,13 @@ a:hover {
   font-weight: 400;
 }
 
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
 .btn {
   display: inline-block;
   padding: 0.65rem 1.75rem;
@@ -571,6 +578,55 @@ a:hover {
 
 .site-footer a:hover {
   color: var(--accent);
+}
+
+/* Ссылки на термины словаря */
+a.term {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 0.15em;
+  cursor: help;
+  position: relative;
+}
+
+a.term:hover,
+a.term:focus-visible {
+  color: var(--accent);
+  text-decoration-color: var(--accent);
+}
+
+a.term::after {
+  content: attr(data-tip);
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 0.35rem);
+  transform: translateX(-50%);
+  min-width: 10rem;
+  max-width: 18rem;
+  padding: 0.45rem 0.6rem;
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  line-height: 1.35;
+  text-align: left;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  white-space: normal;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.15s ease, visibility 0.15s ease;
+  z-index: 20;
+}
+
+a.term:hover::after,
+a.term:focus-visible::after {
+  opacity: 1;
+  visibility: visible;
 }
 
 /* Мобильная: скрыть сайдбары */

@@ -9,8 +9,14 @@
     "build:pdf:cairn": "npm run build && node scripts/build-pdf-cairn.mjs",
     "pdf": "npm run build:pdf",
     "pdf:cairn": "npm run build:pdf:cairn",
-    "book:md": "node scripts/build-book-md.mjs",
-    "book:homebrewery": "node scripts/build-book-homebrewery.mjs"
+    "pdf:igrok": "npm run build && node scripts/build-pdf.mjs --audience player",
+    "pdf:hranitel": "npm run build && node scripts/build-pdf.mjs --audience keeper",
+    "book:md": "node scripts/build-book-md.mjs --audience all",
+    "book:igrok": "node scripts/build-book-md.mjs --audience player",
+    "book:hranitel": "node scripts/build-book-md.mjs --audience keeper",
+    "book:homebrewery": "node scripts/build-book-homebrewery.mjs --audience all",
+    "book:homebrewery:igrok": "node scripts/build-book-homebrewery.mjs --audience player",
+    "book:homebrewery:hranitel": "node scripts/build-book-homebrewery.mjs --audience keeper"
   },
   "dependencies": {
     "marked": "^15.0.4"

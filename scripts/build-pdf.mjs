@@ -4,8 +4,6 @@ import fs from "fs";
 import path from "path";
 import {
   PUBLIC,
-  RPG,
-  walkMarkdown,
   buildChapterList,
   buildPrintHtml,
   renderPdf,
@@ -13,48 +11,70 @@ import {
   copyPrintCss,
   parsePdfArgs,
 } from "../website/lib/pdf-core.mjs";
+import {
+  listBookSources,
+  isReadmeFile,
+  stripReadmeForBook,
+  PDF_OUTPUT,
+  PDF_TITLE,
+} from "../website/lib/book-build.mjs";
 
 const OUT_HTML = path.join(PUBLIC, "print-book.html");
-const OUT_PDF = path.join(PUBLIC, "koreni-sudby-pravila.pdf");
 
 const FONT_LINKS = `
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">`;
 
-const COVER = `
+function coverHtml(audience) {
+  const title = PDF_TITLE[audience] || PDF_TITLE.all;
+  return `
   <div class="print-cover">
-    <h1>Корни судьбы</h1>
-    <p class="tagline">Модульная настольная ролевая игра</p>
+    <h1>${title}</h1>
+    <p class="tagline">Модульная настольная ролевая игра · только d6</p>
   </div>`;
+}
 
 const HELP = `Usage: node scripts/build-pdf.mjs [options]
 
-  --output <path>   PDF (default: public/koreni-sudby-pravila.pdf)
-  --no-adventure    Exclude adventure/*.md
+  --audience <all|player|keeper>  Какую книгу собрать (default: all)
+  --output <path>                 PDF file
+  --no-adventure                  Exclude adventure/*.md
 `;
 
 async function main() {
+  const audience = "all";
   const opts = parsePdfArgs(process.argv, {
-    output: OUT_PDF,
+    output: path.join(PUBLIC, PDF_OUTPUT.all),
     includeAdventure: true,
+    audience,
     helpText: HELP,
   });
+
+  if (!opts.audience) opts.audience = "all";
+  if (process.argv.indexOf("--output") === -1) {
+    opts.output = path.join(PUBLIC, PDF_OUTPUT[opts.audience] || PDF_OUTPUT.all);
+  }
 
   ensurePublicBuilt();
   copyPrintCss("print-book.css");
 
-  let relFiles = walkMarkdown(RPG);
-  if (!opts.includeAdventure) relFiles = relFiles.filter((r) => !r.startsWith("adventure/"));
+  const relFiles = listBookSources({
+    includeAdventure: opts.includeAdventure,
+    audience: opts.audience,
+  });
 
-  const chapters = buildChapterList(relFiles);
+  const chapters = buildChapterList(relFiles, {
+    transformMd: (rel, md) => (isReadmeFile(rel) ? stripReadmeForBook(md) : md),
+  });
+
   const html = buildPrintHtml({
     chapters,
-    title: "Корни судьбы — правила",
+    title: PDF_TITLE[opts.audience] || PDF_TITLE.all,
     bodyClass: "print-book",
     cssHref: "css/print-book.css",
     fontLinks: FONT_LINKS,
-    coverHtml: COVER,
+    coverHtml: coverHtml(opts.audience),
     mainClass: "print-book-main",
   });
 
@@ -74,6 +94,7 @@ async function main() {
   });
 
   console.log("PDF:", opts.output);
+  console.log("Audience:", opts.audience);
   console.log("HTML:", OUT_HTML);
   console.log("Chapters:", chapters.length);
 }

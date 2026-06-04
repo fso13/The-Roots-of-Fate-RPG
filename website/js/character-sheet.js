@@ -18,6 +18,8 @@
     });
 
     document.getElementById("btn-print")?.addEventListener("click", () => window.print());
+    window.addEventListener("beforeprint", stripPlaceholdersForPrint);
+    window.addEventListener("afterprint", restorePlaceholdersAfterPrint);
     document.getElementById("btn-save")?.addEventListener("click", saveToStorage);
     document.getElementById("btn-load")?.addEventListener("click", loadFromStorage);
     document.getElementById("attr-roll")?.addEventListener("click", rollAttributes);
@@ -117,6 +119,24 @@
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved) deserialize(saved);
     } catch (_) {}
+  }
+
+  function stripPlaceholdersForPrint() {
+    document
+      .querySelectorAll(".sheet-body input[placeholder], .sheet-body textarea[placeholder]")
+      .forEach((el) => {
+        el.dataset.savedPlaceholder = el.placeholder;
+        el.placeholder = "";
+      });
+  }
+
+  function restorePlaceholdersAfterPrint() {
+    document
+      .querySelectorAll(".sheet-body input[data-saved-placeholder], .sheet-body textarea[data-saved-placeholder]")
+      .forEach((el) => {
+        el.placeholder = el.dataset.savedPlaceholder;
+        delete el.dataset.savedPlaceholder;
+      });
   }
 
   if (document.readyState === "loading") {

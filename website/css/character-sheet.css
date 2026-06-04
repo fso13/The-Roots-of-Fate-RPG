@@ -3,7 +3,7 @@
   background: var(--bg-deep);
   color: var(--ink);
   padding: 1.5rem;
-  max-width: 900px;
+  max-width: 1100px;
   margin: 0 auto;
   font-family: var(--font-body);
 }
@@ -29,9 +29,95 @@
 }
 
 .sheet-body {
+  display: grid;
+  grid-template-columns: 1.35fr 0.85fr 0.85fr;
+  gap: 1.25rem;
+  align-items: stretch;
+}
+
+.sheet-basics,
+.sheet-attributes,
+.sheet-resources {
+  height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+}
+
+.sheet-basics {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.sheet-attributes {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.sheet-resources {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+.sheet-resources .resource-grid {
+  flex: 1;
+}
+
+.sheet-skills {
+  grid-column: 1 / -1;
+  grid-row: 2;
+}
+
+.sheet-magic-row,
+.sheet-gear-row {
+  display: contents;
+}
+
+.sheet-talents {
+  grid-column: 1;
+  grid-row: 3;
+}
+
+.sheet-spells {
+  grid-column: 1;
+  grid-row: 4;
+}
+
+.sheet-equipment {
+  grid-column: 1;
+  grid-row: 5;
+}
+
+.sheet-inventory {
+  grid-column: 2 / -1;
+  grid-row: 3 / 6;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+}
+
+.sheet-inventory .sheet-inventory-fig {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 0;
+}
+
+/* Без модуля инвентаря — левая колонка на всю ширину */
+.sheet-body:not(:has(.sheet-inventory:not([style*="display: none"]))) .sheet-talents,
+.sheet-body:not(:has(.sheet-inventory:not([style*="display: none"]))) .sheet-spells,
+.sheet-body:not(:has(.sheet-inventory:not([style*="display: none"]))) .sheet-equipment {
+  grid-column: 1 / -1;
+}
+
+.sheet-notes {
+  grid-column: 1 / -1;
+  grid-row: 6;
+}
+
+.sheet-cheatsheet {
+  grid-column: 1 / -1;
+  grid-row: 7;
 }
 
 .sheet-block {
@@ -116,37 +202,43 @@
   width: 3.5rem !important;
 }
 
-/* Атрибуты */
+/* Атрибуты — вертикальный список */
 .attr-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .attr-item {
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  text-align: left;
 }
 
 .attr-item label {
   display: block;
   font-size: 0.85rem;
-  margin-bottom: 0.3rem;
+  margin-bottom: 0;
   color: var(--ink-muted);
+  flex: 1;
 }
 
 .attr-item input {
   width: 3.5rem;
+  flex-shrink: 0;
   text-align: center;
   font-size: 1.25rem;
   padding: 0.35rem;
-  margin: 0 auto;
+  margin: 0;
 }
 
-/* Ресурсы */
+/* Ресурсы — вертикальный список */
 .resource-grid {
   display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
+  flex-direction: column;
+  gap: 0.75rem;
 }
 
 .resource-item {
@@ -217,12 +309,13 @@
   resize: vertical;
 }
 
-.sheet-talents textarea {
-  min-height: 7rem;
+.sheet-talents textarea,
+.sheet-spells textarea {
+  min-height: 10rem;
 }
 
 .sheet-notes textarea {
-  min-height: 9rem;
+  min-height: 12rem;
 }
 
 /* Инвентарь (модуль fantasy_inventory) */
@@ -315,75 +408,140 @@
   flex-wrap: wrap;
 }
 
-/* Печать — одна страница A4 */
-@media print {
-  @page {
-    size: A4;
-    margin: 6mm;
+.sheet-magic-row > .sheet-block,
+.sheet-gear-row > .sheet-block {
+  min-width: 0;
+}
+
+.sheet-gear-row .sheet-inventory-fig img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  object-fit: contain;
+}
+
+@media (max-width: 820px) {
+  .sheet-body {
+    grid-template-columns: 1fr;
   }
 
-  html, body {
-    background: white !important;
+  .sheet-basics,
+  .sheet-attributes,
+  .sheet-resources,
+  .sheet-skills,
+  .sheet-magic-row,
+  .sheet-gear-row,
+  .sheet-notes,
+  .sheet-cheatsheet {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .sheet-magic-row,
+  .sheet-gear-row {
+    grid-template-columns: 1fr;
+  }
+
+  .sheet-talents,
+  .sheet-spells,
+  .sheet-equipment,
+  .sheet-inventory {
+    grid-column: 1;
+    grid-row: auto;
+  }
+}
+
+/* Печать — один лист A4, тёмная тема, компактная сетка */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 5mm;
+  }
+
+  html,
+  body {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    background: var(--bg-deep) !important;
+    color: var(--ink) !important;
     min-height: auto !important;
+    font-size: 9.5px;
+    line-height: 1.3;
   }
 
   body::before,
   body::after {
+    display: block !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .no-print {
     display: none !important;
   }
 
+  .sheet-body input::placeholder,
+  .sheet-body textarea::placeholder {
+    color: transparent !important;
+    opacity: 0 !important;
+  }
+
   .character-sheet-page {
-    page-break-after: avoid;
-    page-break-inside: avoid;
-    background: white;
-    color: #222;
+    background: var(--bg-deep);
+    color: var(--ink);
     padding: 0;
     max-width: none;
-    font-size: 9px;
+    margin: 0;
   }
 
   .sheet-header {
-    margin-bottom: 4px;
+    margin-bottom: 3px;
     padding-bottom: 2px;
-    border-bottom: 1px solid #999;
+    border-bottom: 1px solid var(--line);
   }
 
   .sheet-header h1 {
-    font-size: 12px;
+    font-size: 14px;
     margin: 0;
   }
 
   .sheet-body {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: auto auto auto auto auto;
-    gap: 4px;
+    gap: 3px;
     align-content: start;
   }
 
-  .sheet-block {
-    background: #fff;
-    border: 1px solid #999;
-    border-radius: 0;
-    padding: 4px 6px;
-    box-shadow: none;
+  .sheet-magic-row,
+  .sheet-gear-row {
+    display: contents;
   }
 
-  .sheet-block h2 {
-    font-size: 8px;
-    margin: 0 0 3px;
-    color: #333;
-    letter-spacing: 0.04em;
+  .sheet-talents {
+    grid-column: 1;
+    grid-row: 3;
   }
 
-  .sheet-block h3 {
-    font-size: 7px;
-    margin: 2px 0 1px;
+  .sheet-spells {
+    grid-column: 1;
+    grid-row: 4;
   }
 
-  .sheet-hint {
-    font-size: 6px;
-    margin: -2px 0 2px;
+  .sheet-equipment {
+    grid-column: 1;
+    grid-row: 5;
+  }
+
+  .sheet-inventory {
+    grid-column: 2 / -1;
+    grid-row: 3 / 6;
+    align-self: stretch;
+  }
+
+  .sheet-body:not(:has(.sheet-inventory:not([style*="display: none"]))) .sheet-talents,
+  .sheet-body:not(:has(.sheet-inventory:not([style*="display: none"]))) .sheet-spells,
+  .sheet-body:not(:has(.sheet-inventory:not([style*="display: none"]))) .sheet-equipment {
+    grid-column: 1 / -1;
   }
 
   .sheet-basics {
@@ -401,102 +559,78 @@
     grid-row: 1;
   }
 
-  .sheet-resources .resource-grid {
-    gap: 4px;
-    flex-direction: column;
-  }
-
   .sheet-skills {
     grid-column: 1 / -1;
     grid-row: 2;
   }
 
-  .sheet-skills .skills-grid {
-    grid-template-columns: repeat(5, 1fr);
-    gap: 4px;
-    min-width: 0;
-  }
-
-  .sheet-skills .skill-category {
-    padding-left: 4px;
-    border-left-width: 1px;
-  }
-
-  .sheet-skills .skill-row {
-    gap: 2px;
-  }
-
-  .sheet-skills .skill-row span {
-    font-size: 7px;
-  }
-
-  .sheet-skills .skill-row input {
-    width: 16px;
-    padding: 1px;
-    font-size: 8px;
-  }
-
-  .sheet-talents {
-    grid-column: 1;
-    grid-row: 3;
-  }
-
-  .sheet-equipment {
-    grid-column: 2 / -1;
-    grid-row: 3;
-  }
-
-  .sheet-inventory {
-    grid-column: 1 / -1;
-    grid-row: 4;
-  }
-
-  .sheet-inventory-fig img {
-    max-width: 95%;
-    max-height: 280px;
-    object-fit: contain;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
   .sheet-notes {
     grid-column: 1 / -1;
-    grid-row: 5;
+    grid-row: 6;
   }
 
   .sheet-cheatsheet {
     grid-column: 1 / -1;
-    grid-row: 6;
-    padding: 3px 6px;
+    grid-row: 7;
   }
 
-  .sheet-cheatsheet h2 {
-    margin-bottom: 2px;
+  .sheet-basics,
+  .sheet-attributes,
+  .sheet-resources {
+    height: auto;
+    display: block;
   }
 
-  .cheatsheet-grid-3 {
-    grid-template-columns: 1fr 1fr 1fr;
+  .sheet-block {
+    background: var(--bg-panel);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 3px 5px;
+    box-shadow: none;
   }
 
-  .cheatsheet-grid {
-    gap: 6px;
+  .sheet-basics,
+  .sheet-attributes,
+  .sheet-resources {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    align-self: stretch;
   }
 
-  .cheatsheet-col h3 {
-    font-size: 6px;
+  .sheet-block h2 {
+    font-size: 9px;
+    margin: 0 0 2px;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+  }
+
+  .sheet-block h3 {
+    font-size: 8px;
+    margin: 1px 0;
+    color: var(--ink-muted);
+  }
+
+  .sheet-hint {
+    font-size: 7.5px;
+    margin: -1px 0 2px;
+    color: var(--ink-muted);
+  }
+
+  .sheet-attributes .sheet-hint {
+    font-size: 7px;
     margin: 0 0 1px;
   }
 
-  .cheatsheet-dl {
-    font-size: 6px;
+  .sheet-attributes .sheet-hint .no-print {
+    display: none !important;
   }
 
-  .cheatsheet-dl dt::after {
-    content: " — ";
+  .sheet-spells .sheet-hint {
+    display: none;
   }
 
-  .cheatsheet-dl dd {
-    margin: 0 0 1px;
+  .sheet-skills .sheet-hint {
+    display: none;
   }
 
   .sheet-row {
@@ -504,95 +638,163 @@
   }
 
   .sheet-row label {
-    font-size: 6px;
+    font-size: 7.5px;
     margin-bottom: 1px;
+    color: var(--ink-muted);
   }
 
   .sheet-row input,
-  .sheet-block textarea {
-    padding: 2px 3px;
-    font-size: 8px;
-    background: #f9f9f9;
-    border: 1px solid #999;
-    color: #222;
+  .sheet-block textarea,
+  .attr-item input,
+  .skill-row input,
+  .resource-track input {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    padding: 2px 4px;
+    font-size: 9px;
+    background: var(--bg-deep) !important;
+    border: 1px solid var(--line) !important;
+    color: var(--ink) !important;
     min-height: 0;
   }
 
   .sheet-block textarea {
-    min-height: 24px !important;
-    height: 24px;
-    rows: 2;
+    height: 36px !important;
+    min-height: 36px !important;
+    overflow: hidden;
+    resize: none;
+    line-height: 1.35;
   }
 
-  .sheet-talents textarea {
-    height: 36px;
-    min-height: 36px !important;
+  .sheet-talents textarea,
+  .sheet-spells textarea {
+    height: 52px !important;
+    min-height: 52px !important;
+    font-size: 9.5px;
   }
 
   .sheet-notes textarea {
-    height: 32px;
-    min-height: 32px !important;
+    height: 44px !important;
+    min-height: 44px !important;
+    font-size: 9.5px;
+  }
+
+  .resource-track input.readonly {
+    background: var(--bg-elevated) !important;
+    color: var(--ink-muted) !important;
+  }
+
+  .resource-track span {
+    color: var(--ink-muted);
   }
 
   .attr-grid {
-    gap: 4px;
+    gap: 2px;
   }
 
   .attr-item label {
-    font-size: 7px;
+    font-size: 7.5px;
     margin-bottom: 1px;
   }
 
   .attr-item input {
     width: 24px;
-    font-size: 10px;
-    padding: 2px;
+    font-size: 11px;
+    padding: 1px;
+  }
+
+  .resource-grid {
+    gap: 3px;
+    flex-direction: column;
   }
 
   .resource-item label {
-    font-size: 7px;
-    min-width: 3rem;
+    font-size: 7.5px;
+    min-width: 2.5rem;
   }
 
   .resource-track input {
-    width: 18px;
-    padding: 2px;
-    font-size: 8px;
-    background: #fff !important;
-    color: #222 !important;
-    border: 1px solid #999 !important;
+    width: 16px;
+    padding: 1px;
   }
 
-  .resource-track input.readonly {
-    background: #f5f5f5 !important;
-    color: #222 !important;
+  .skills-grid {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 3px;
   }
 
-  .attr-item input,
+  .skill-category {
+    border-left-width: 1px;
+    padding-left: 3px;
+  }
+
+  .skill-list {
+    gap: 1px;
+  }
+
+  .skill-row span {
+    font-size: 7.5px;
+  }
+
   .skill-row input {
-    background: #fff !important;
-    color: #222 !important;
-    border: 1px solid #999 !important;
+    width: 14px;
+    padding: 0;
+  }
+
+  .sheet-inventory-fig figcaption {
+    display: none;
+  }
+
+  .sheet-inventory-fig img {
+    max-width: 100%;
+    max-height: none;
+    height: auto;
+    object-fit: contain;
+    margin: 0 auto;
+  }
+
+  .cheatsheet-grid,
+  .cheatsheet-grid-3 {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 4px;
+  }
+
+  .cheatsheet-col h3 {
+    font-size: 7.5px;
+    margin: 0 0 1px;
+    color: var(--accent-dim);
+  }
+
+  .cheatsheet-dl {
+    font-size: 7px;
+  }
+
+  .cheatsheet-dl dt {
+    color: var(--accent);
+  }
+
+  .cheatsheet-dl dd {
+    color: var(--ink-muted);
+    margin: 0 0 1px;
   }
 
   .sheet-footer {
-    margin-top: 4px;
+    margin-top: 3px;
     padding-top: 2px;
-    font-size: 6px;
-    grid-column: 1 / -1;
-    grid-row: 7;
+    border-top: 1px solid var(--line);
+    font-size: 7px;
+    color: var(--ink-muted);
   }
 
   .sheet-footer p {
-    color: #666;
     margin: 0;
   }
 
   .input-narrow {
-    width: 24px !important;
+    width: 20px !important;
   }
 
-  .no-print {
-    display: none !important;
+  .sheet-row-inline {
+    gap: 0.5rem;
   }
 }

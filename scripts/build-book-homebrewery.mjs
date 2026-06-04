@@ -5,32 +5,40 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { RPG } from "../website/lib/pdf-core.mjs";
 import {
+  BOOK_OUTPUT,
   GITLAB_RAW,
   loadBookEntries,
   listBookSources,
   buildToc,
+  PDF_TITLE,
 } from "../website/lib/book-build.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, "..");
-const OUT = path.join(RPG, "kniga-homebrewery.md");
 const STYLE = path.join(ROOT, "website", "homebrewery", "style.css");
 
 function parseArgs(argv) {
-  const opts = { includeAdventure: true, output: OUT };
+  const opts = { includeAdventure: true, audience: "all", output: null };
   for (let i = 2; i < argv.length; i++) {
     if (argv[i] === "--no-adventure") opts.includeAdventure = false;
+    else if (argv[i] === "--audience" && argv[i + 1]) opts.audience = argv[++i];
     else if (argv[i] === "--output" && argv[i + 1]) opts.output = path.resolve(argv[++i]);
     else if (argv[i] === "--help" || argv[i] === "-h") {
       console.log(`Usage: node scripts/build-book-homebrewery.mjs [options]
 
-  --output <path>   Output file (default: rpg/kniga-homebrewery.md)
-  --no-adventure    Exclude adventure/*.md
+  --audience <all|player|keeper>  Какую книгу собрать (default: all)
+  --output <path>                 Output file
+  --no-adventure                  Exclude adventure/*.md
 
 Откройте https://homebrewery.naturalcrit.com/ → New → вставьте весь файл.
-В Properties выберите тему Blank (уже в metadata).
 `);
       process.exit(0);
+    }
+  }
+  if (!opts.output) {
+    opts.output = path.join(RPG, BOOK_OUTPUT[opts.audience] || BOOK_OUTPUT.all.replace("polnaya", "homebrewery"));
+    if (opts.audience === "all" && !argv.includes("--output")) {
+      opts.output = path.join(RPG, "kniga-homebrewery.md");
     }
   }
   return opts;
@@ -71,10 +79,11 @@ function transformForHomebrewery(md, relPath) {
     .join("");
 }
 
-function metadataBlock() {
+function metadataBlock(audience) {
+  const title = PDF_TITLE[audience] || PDF_TITLE.all;
   return `\`\`\`metadata
-title: Корни судьбы
-description: Модульная настольная РПГ — полные правила
+title: ${title}
+description: Модульная настольная РПГ — только d6
 author:
 systems: []
 language: ru
@@ -88,28 +97,33 @@ function styleBlock() {
   return `\`\`\`css\n${css}\n\`\`\``;
 }
 
+function isReadmeEntry(rel) {
+  return rel === "README.md" || rel === "README-igrok.md" || rel === "README-hranitel.md";
+}
+
 function main() {
   const opts = parseArgs(process.argv);
-  const relFiles = listBookSources(opts.includeAdventure);
+  const relFiles = listBookSources(opts);
   const entries = loadBookEntries(relFiles);
   const linkHash = (rel) => `#${entries.find((e) => e.rel === rel)?.hbAnchor || rel}`;
 
-  const readme = entries.find((e) => e.rel === "README.md");
+  const readme = entries.find((e) => e.rel.startsWith("README"));
   const toc = buildToc(entries, linkHash);
+  const bookTitle = PDF_TITLE[opts.audience] || PDF_TITLE.all;
 
   const parts = [
     "<!-- Сгенерировано: npm run book:homebrewery -->",
     "<!-- https://homebrewery.naturalcrit.com/ -->",
     "",
-    metadataBlock(),
+    metadataBlock(opts.audience),
     "",
     styleBlock(),
     "",
     "{{frontCover}}",
     "",
-    "# Корни судьбы",
+    `# ${bookTitle}`,
     "",
-    "##### Модульная настольная ролевая игра",
+    "##### Модульная настольная ролевая игра · только d6",
     "",
     "{{/frontCover}}",
     "",
@@ -124,13 +138,14 @@ function main() {
   parts.push("{{wide", "", toc, "", "}}", "", "\\page", "");
 
   for (const e of entries) {
-    if (e.rel === "README.md") continue;
+    if (isReadmeEntry(e.rel)) continue;
     parts.push("\\page", "", transformForHomebrewery(e.body, e.rel), "");
   }
 
   fs.writeFileSync(opts.output, parts.join("\n").trim() + "\n", "utf8");
   console.log("Written:", opts.output);
-  console.log("Chapters:", entries.filter((e) => e.rel !== "README.md").length);
+  console.log("Audience:", opts.audience);
+  console.log("Chapters:", entries.filter((e) => !isReadmeEntry(e.rel)).length);
   console.log("Откройте https://homebrewery.naturalcrit.com/ и вставьте содержимое файла.");
 }
 

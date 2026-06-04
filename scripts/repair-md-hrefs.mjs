@@ -4,7 +4,15 @@ import fs from "fs";
 import path from "path";
 import { RPG, walkMarkdown } from "../website/lib/pdf-core.mjs";
 
-const SKIP = new Set(["kniga-polnaya.md", "kniga-homebrewery.md"]);
+const SKIP = new Set([
+  "kniga-polnaya.md",
+  "kniga-homebrewery.md",
+  "kniga-igroka.md",
+  "kniga-hranitelya.md",
+  "README.md",
+  "README-igrok.md",
+  "README-hranitel.md",
+]);
 
 function isChapterHref(href) {
   if (!href || href.startsWith("#") || /^https?:/i.test(href)) return false;

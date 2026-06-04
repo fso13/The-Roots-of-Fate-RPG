@@ -4,7 +4,8 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 import { marked } from "marked";
-import { buildTitleByRel, fixMdLinks as humanizeMdLinks } from "./lib/book-build.mjs";
+import { buildTitleByRel, fixMdLinks as humanizeMdLinks, chapterAudience, PLAYER_CHAPTER_ORDER, KEEPER_CHAPTER_ORDER } from "./lib/book-build.mjs";
+import { linkGlossaryInHtml, glossaryHrefForPage } from "./lib/glossary.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, "..");
@@ -101,6 +102,22 @@ function extractHeadingsAndAddIds(html) {
   return { html: modified, toc };
 }
 
+function sortNavByChapterOrder(items, mdOrder) {
+  const hrefOrder = mdOrder.map((r) => r.replace(/\.md$/, ".html"));
+  const byKey = new Map(
+    items.map((item) => {
+      const key = typeof item === "string" ? item.replace(/\.md$/, ".html") : item.href || item.outRel;
+      return [key, item];
+    })
+  );
+  const sorted = hrefOrder.map((h) => byKey.get(h)).filter(Boolean);
+  const rest = items.filter((item) => {
+    const key = typeof item === "string" ? item.replace(/\.md$/, ".html") : item.href || item.outRel;
+    return !hrefOrder.includes(key);
+  });
+  return [...sorted, ...rest];
+}
+
 function depthOf(relPath) {
   return relPath.split("/").length - 1;
 }
@@ -167,6 +184,8 @@ function wrapPage({ title, bodyHtml, relPath, navGroups, activeSlug, toc = [], e
     <nav class="nav-inline">
       <a href="${prefix}index.html">Главная</a>
       <a href="${prefix}oglavlenie.html">Оглавление</a>
+      <a href="${prefix}oglavlenie-igroka.html">Игроку</a>
+      <a href="${prefix}oglavlenie-hranitelya.html">Хранителю</a>
       <a href="${prefix}character-sheet.html">Лист персонажа</a>
       <a href="${prefix}nastroyki.html">Настройки</a>
     </nav>
@@ -190,12 +209,25 @@ function wrapPage({ title, bodyHtml, relPath, navGroups, activeSlug, toc = [], e
 </html>`;
 }
 
+const README_HTML = {
+  "README.md": "oglavlenie.html",
+  "README-igrok.md": "oglavlenie-igroka.html",
+  "README-hranitel.md": "oglavlenie-hranitelya.html",
+};
+
 function slugFromMd(rel) {
+  if (README_HTML[rel]) return README_HTML[rel];
   return rel.replace(/\.md$/, ".html");
+}
+
+function isReadmeRel(rel) {
+  return rel in README_HTML;
 }
 
 function shortLabel(rel, title) {
   if (rel === "README.md") return "Оглавление";
+  if (rel === "README-igrok.md") return "Книга игрока";
+  if (rel === "README-hranitel.md") return "Книга хранителя";
   if (rel.startsWith("fantasy/")) {
     const n = rel.replace("fantasy/", "").replace(".md", "");
     return title && title.length < 50 ? title : n;
@@ -243,10 +275,11 @@ function main() {
     const title = extractTitle(md) || rel;
     pageMeta.push({
       rel,
-      outRel: rel === "README.md" ? "oglavlenie.html" : slugFromMd(rel),
+      outRel: slugFromMd(rel),
       title,
       short: shortLabel(rel, title),
-      isReadme: rel === "README.md",
+      isReadme: isReadmeRel(rel),
+      audience: chapterAudience(rel),
     });
   }
 
@@ -264,25 +297,59 @@ function main() {
   );
   const fant = pageMeta.filter((p) => p.rel.startsWith("fantasy/"));
   const adv = pageMeta.filter((p) => p.rel.startsWith("adventure/"));
+  const readmes = pageMeta.filter((p) => p.isReadme);
 
-  const HIDE_FROM_NAV = new Set(["kniga-polnaya.md", "kniga-homebrewery.md"]);
+  const playerCore = core.filter((p) => p.audience === "player");
+  const keeperCore = core.filter((p) => p.audience === "keeper");
+  const playerFant = fant.filter((p) => p.audience === "player");
+  const keeperFant = fant.filter((p) => p.audience === "keeper");
+
+  const HIDE_FROM_NAV = new Set([
+    "kniga-polnaya.md",
+    "kniga-homebrewery.md",
+    "kniga-igroka.md",
+    "kniga-hranitelya.md",
+  ]);
   const isNavVisible = (p) => !HIDE_FROM_NAV.has(p.rel);
 
+  const slovarPage = pageMeta.find((p) => p.rel === "slovar-terminov.md");
+
+  const playerNavItems = sortNavByChapterOrder(
+    [...playerCore, ...playerFant].filter(isNavVisible).map(toNavItem),
+    PLAYER_CHAPTER_ORDER
+  );
+  const keeperNavItems = sortNavByChapterOrder(
+    [...keeperCore, ...keeperFant, ...(slovarPage ? [slovarPage] : []), ...adv]
+      .filter(isNavVisible)
+      .map(toNavItem),
+    KEEPER_CHAPTER_ORDER
+  );
+
   const navGroups = [
-    { items: core.filter(isNavVisible).map(toNavItem) },
-    { title: "Фэнтези-модули", items: fant.filter(isNavVisible).map(toNavItem) },
-    { items: adv.filter(isNavVisible).map(toNavItem) },
+    {
+      title: "Оглавления",
+      items: readmes.map(toNavItem),
+    },
+    {
+      title: "Книга игрока",
+      items: playerNavItems,
+    },
+    {
+      title: "Книга хранителя",
+      items: keeperNavItems,
+    },
   ];
 
   for (const p of pageMeta) {
     const md = fs.readFileSync(path.join(RPG, p.rel), "utf8");
     const mdForPage = humanizeMdLinks(md, (rel) => rel, { titleByRel, fromRel: p.rel });
     const rawBody = fixMdLinks(marked.parse(mdForPage));
-    const { html: bodyHtml, toc } = extractHeadingsAndAddIds(rawBody);
+    const { html: bodyWithIds, toc } = extractHeadingsAndAddIds(rawBody);
+    const bodyHtml = linkGlossaryInHtml(bodyWithIds, glossaryHrefForPage(p.outRel));
     const outPath = path.join(OUT, p.outRel);
     fs.mkdirSync(path.dirname(outPath), { recursive: true });
     const html = wrapPage({
-      title: p.isReadme ? "Оглавление" : p.title,
+      title: p.isReadme ? p.short : p.title,
       bodyHtml,
       relPath: p.outRel,
       navGroups,
@@ -292,12 +359,19 @@ function main() {
     fs.writeFileSync(outPath, html);
   }
 
-  // Главная страница
+  const playerPages = sortNavByChapterOrder([...playerCore, ...playerFant], PLAYER_CHAPTER_ORDER);
+  const keeperPages = sortNavByChapterOrder(
+    [...keeperCore, ...keeperFant, ...(slovarPage ? [slovarPage] : []), ...adv],
+    KEEPER_CHAPTER_ORDER
+  );
 
   const card = (p) => {
     const desc = p.short.replace(/"/g, "&quot;");
     let meta = "Правила";
-    if (p.rel.startsWith("fantasy/")) meta = "Фэнтези";
+    if (p.isReadme) meta = "Оглавление";
+    else if (p.audience === "player") meta = "Игрок";
+    else if (p.audience === "keeper") meta = "Хранитель";
+    if (p.rel.startsWith("fantasy/")) meta = p.audience === "keeper" ? "Фэнтези · хранитель" : "Фэнтези · игрок";
     if (p.rel.startsWith("adventure/")) meta = "Приключение";
     const mod = PAGE_TO_MODULE[p.outRel];
     const dataMod = mod ? ` data-module="${mod}"` : "";
@@ -314,7 +388,7 @@ function main() {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Корни судьбы — модульная настольная ролевая игра. Один тип кубиков, тактика, магия как атака, фэнтези-модули.">
+  <meta name="description" content="Корни судьбы — модульная настольная ролевая игра. Только d6, книга игрока и книга хранителя, тактика, магия как атака.">
   <title>Корни судьбы — модульная настольная РПГ</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -327,6 +401,8 @@ function main() {
     <nav class="nav-inline">
       <a href="index.html">Главная</a>
       <a href="oglavlenie.html">Оглавление</a>
+      <a href="oglavlenie-igroka.html">Игроку</a>
+      <a href="oglavlenie-hranitelya.html">Хранителю</a>
       <a href="character-sheet.html">Лист персонажа</a>
       <a href="nastroyki.html">Настройки</a>
     </nav>
@@ -335,27 +411,30 @@ function main() {
     <img class="hero-emblem" src="images/emblem-tree-d6.png" width="240" height="264" alt="Дерево с корнями, растущее из шестигранного кубика — символ игры">
     <div class="hero-ornament"></div>
     <h1>Корни судьбы</h1>
-    <p class="tagline">Модульная настольная ролевая игра. Единый кубик за столом, тактика без лишнего счёта, магия как атака — и тихая роскошь минимализма.</p>
-    <a class="btn" href="oglavlenie.html">Читать правила</a>
+    <p class="tagline">Модульная настольная ролевая игра. Только d6, две книги — для игроков и для хранителя. Тактика без лишнего счёта, магия как атака.</p>
+    <div class="hero-actions">
+      <a class="btn" href="oglavlenie-igroka.html">Книга игрока</a>
+      <a class="btn btn-muted" href="oglavlenie-hranitelya.html">Книга хранителя</a>
+    </div>
   </section>
-  <section id="index-section-core">
-  <h2 class="section-title">Основные главы</h2>
+  <section id="index-section-readmes">
+  <h2 class="section-title">Оглавления</h2>
   <div class="card-grid">
-    ${core.map(card).join("")}
+    ${readmes.map(card).join("")}
   </div>
   </section>
-  <section id="index-section-fantasy">
-  <h2 class="section-title">Фэнтези-модули</h2>
+  <section id="index-section-player">
+  <h2 class="section-title">Книга игрока</h2>
   <div class="card-grid">
-    ${fant.map(card).join("")}
+    ${playerPages.map(card).join("")}
   </div>
   </section>
-  ${adv.length ? `<section id="index-section-adv">
-  <h2 class="section-title">Приключения</h2>
+  <section id="index-section-keeper">
+  <h2 class="section-title">Книга хранителя</h2>
   <div class="card-grid">
-    ${adv.map(card).join("")}
+    ${keeperPages.map(card).join("")}
   </div>
-  </section>` : ""}
+  </section>
   <footer class="site-footer">
     <p>Собрано из Markdown · <a href="https://gitlab.com/fso13/me-rpg">GitLab</a> · Pages</p>
   </footer>

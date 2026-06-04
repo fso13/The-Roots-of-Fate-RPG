@@ -3,7 +3,6 @@
 
 campaign:
   name: "Пример кампании"
-  dice_type: "d6"   # единственный тип кубиков: d6 | d8 | d10 | d12
 
 modules:
   core: true
