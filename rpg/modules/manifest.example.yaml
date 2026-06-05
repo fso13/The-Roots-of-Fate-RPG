@@ -30,3 +30,5 @@ modules:
 custom_modules:
   - path: "./my_modules/sea_faring"
     enabled: false
+  - path: "./my_modules/noir_investigation"
+    enabled: false   # для «Чёрного счёта» — включите true

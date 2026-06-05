@@ -1,4 +1,6 @@
 /* Лист персонажа — Корни судьбы */
+@import url("inventar-schema.css");
+
 .character-sheet-page {
   background: var(--bg-deep);
   color: var(--ink);
@@ -324,15 +326,6 @@
   text-align: center;
 }
 
-.sheet-inventory-fig img {
-  max-width: min(420px, 100%);
-  height: auto;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  border-radius: 3px;
-}
-
 .sheet-inventory-fig figcaption {
   font-size: 0.8rem;
   color: var(--ink-muted);
@@ -411,13 +404,6 @@
 .sheet-magic-row > .sheet-block,
 .sheet-gear-row > .sheet-block {
   min-width: 0;
-}
-
-.sheet-gear-row .sheet-inventory-fig img {
-  max-width: 100%;
-  max-height: 100%;
-  width: auto;
-  object-fit: contain;
 }
 
 @media (max-width: 820px) {

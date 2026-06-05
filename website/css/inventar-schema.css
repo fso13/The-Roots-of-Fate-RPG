@@ -1,0 +1,257 @@
+/* Схема инвентаря — HTML вместо inventar-schema.png */
+.inventar-schema-fig {
+  margin: 1.5rem auto;
+  text-align: center;
+}
+
+.inventar-schema {
+  --schema-bg: #0c0b0a;
+  --schema-cell: #2e2b28;
+  --schema-cell-line: #1a1816;
+  --schema-gold: #b8954a;
+  --schema-gold-dim: #7a6232;
+  --schema-silver: #9a9a9a;
+  --schema-ink: #f2ece2;
+  --schema-gap: 2px;
+  --schema-cell-size: 1.35rem;
+
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: min(440px, 100%);
+  padding: 0.65rem;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(80, 68, 48, 0.18), transparent 55%),
+    linear-gradient(180deg, #121110 0%, var(--schema-bg) 100%);
+  border: 1px solid #2a2622;
+  border-radius: 2px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+}
+
+.inventar-schema__gear {
+  display: grid;
+  grid-template-columns: max-content max-content max-content;
+  gap: 0.5rem;
+  align-items: start;
+  justify-content: center;
+}
+
+.inventar-schema__col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.inventar-schema__set-badge {
+  min-width: 2.4rem;
+  padding: 0.15rem 0.55rem;
+  font-family: var(--font-display, "Cormorant Garamond", Georgia, serif);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--schema-ink);
+  text-align: center;
+  border: 1px solid var(--schema-gold);
+  box-shadow:
+    inset 0 0 0 1px rgba(184, 149, 74, 0.25),
+    0 0 10px rgba(184, 149, 74, 0.15);
+}
+
+.inventar-schema__zone {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: max-content;
+  max-width: 100%;
+  padding: 0.3rem 0.35rem 0.35rem;
+  box-sizing: border-box;
+}
+
+.inventar-schema__zone--gold::before,
+.inventar-schema__zone--gold::after,
+.inventar-schema__zone--silver::before,
+.inventar-schema__zone--silver::after {
+  content: "";
+  position: absolute;
+  width: 0.45rem;
+  height: 0.45rem;
+  pointer-events: none;
+}
+
+.inventar-schema__zone--gold {
+  border: 1px solid var(--schema-gold);
+  background: rgba(0, 0, 0, 0.22);
+}
+
+.inventar-schema__zone--gold::before {
+  top: -1px;
+  left: -1px;
+  border-top: 2px solid var(--schema-gold);
+  border-left: 2px solid var(--schema-gold);
+}
+
+.inventar-schema__zone--gold::after {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 2px solid var(--schema-gold);
+  border-right: 2px solid var(--schema-gold);
+}
+
+.inventar-schema__zone--silver {
+  border: 1px solid var(--schema-silver);
+  background: rgba(0, 0, 0, 0.18);
+}
+
+.inventar-schema__zone--silver::before {
+  top: -1px;
+  left: -1px;
+  border-top: 2px solid var(--schema-silver);
+  border-left: 2px solid var(--schema-silver);
+}
+
+.inventar-schema__zone--silver::after {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 2px solid var(--schema-silver);
+  border-right: 2px solid var(--schema-silver);
+}
+
+.inventar-schema__zone-title {
+  display: block;
+  margin: 0 0 0.25rem;
+  font-family: var(--font-display, "Cormorant Garamond", Georgia, serif);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--schema-ink);
+  text-align: center;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.inventar-schema__belt-row {
+  display: flex;
+  gap: 0.35rem;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.inventar-schema__zone--compact .inventar-schema__zone-title {
+  font-size: 0.68rem;
+}
+
+.inventar-schema__zone--belt .inventar-schema__grid {
+  --schema-cell-size: 1.1rem;
+}
+
+.inventar-schema__grid {
+  display: grid;
+  grid-template-columns: repeat(var(--cols), var(--schema-cell-size));
+  grid-template-rows: repeat(var(--rows), var(--schema-cell-size));
+  gap: var(--schema-gap);
+  width: max-content;
+}
+
+.inventar-schema__cell {
+  display: block;
+  width: var(--schema-cell-size);
+  height: var(--schema-cell-size);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.05), transparent 45%),
+    var(--schema-cell);
+  border: 1px solid var(--schema-cell-line);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.35);
+}
+
+.inventar-schema__bag {
+  margin-top: 0.55rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.inventar-schema__zone--bag {
+  width: max-content;
+  max-width: 100%;
+  padding: 0.35rem 0.4rem;
+}
+
+.inventar-schema__zone--bag .inventar-schema__grid {
+  --schema-cell-size: 1.05rem;
+}
+
+.inventar-schema__bag-label {
+  display: block;
+  margin-top: 0.35rem;
+  font-family: var(--font-display, "Cormorant Garamond", Georgia, serif);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--schema-ink);
+  letter-spacing: 0.03em;
+}
+
+/* Лист персонажа — компактнее, та же компоновка */
+.sheet-inventory-fig .inventar-schema {
+  --schema-cell-size: 0.9rem;
+  --schema-gap: 1px;
+  max-width: 100%;
+  padding: 0.4rem;
+}
+
+.sheet-inventory-fig .inventar-schema__gear {
+  gap: 0.35rem;
+}
+
+.sheet-inventory-fig .inventar-schema__col {
+  gap: 0.3rem;
+}
+
+.sheet-inventory-fig .inventar-schema__zone {
+  padding: 0.2rem 0.22rem 0.24rem;
+}
+
+.sheet-inventory-fig .inventar-schema__zone-title {
+  font-size: 0.62rem;
+  margin-bottom: 0.15rem;
+}
+
+.sheet-inventory-fig .inventar-schema__zone--compact .inventar-schema__zone-title {
+  font-size: 0.55rem;
+}
+
+.sheet-inventory-fig .inventar-schema__set-badge {
+  font-size: 0.72rem;
+  min-width: 1.7rem;
+  padding: 0.08rem 0.35rem;
+}
+
+.sheet-inventory-fig .inventar-schema__belt-row {
+  gap: 0.25rem;
+}
+
+.sheet-inventory-fig .inventar-schema__zone--belt .inventar-schema__grid {
+  --schema-cell-size: 0.78rem;
+}
+
+.sheet-inventory-fig .inventar-schema__zone--bag .inventar-schema__grid {
+  --schema-cell-size: 0.86rem;
+}
+
+.sheet-inventory-fig .inventar-schema__bag-label {
+  font-size: 0.65rem;
+  margin-top: 0.2rem;
+}
+
+@media print {
+  .inventar-schema {
+    max-width: 100%;
+    break-inside: avoid;
+  }
+
+  .inventar-schema__zone--gold,
+  .inventar-schema__zone--silver,
+  .inventar-schema__cell {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}

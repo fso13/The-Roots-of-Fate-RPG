@@ -55,10 +55,11 @@
 ## PDF
 
 ```bash
-npm run pdf:igrok
-npm run pdf:hranitel
-npm run pdf
-npm run pdf:cairn
+npm run pdf:igrok          # koreni-sudby-kniga-igroka.pdf
+npm run pdf:hranitel       # koreni-sudby-kniga-hranitelya.pdf
+npm run pdf:polnoe         # koreni-sudby-polnoe-izdanie.pdf
+npm run pdf:cairn:igrok    # …-cairn.pdf (A5, стиль Cairn)
+npm run pdf:all            # все шесть PDF
 ```
 
 ## Быстрый старт

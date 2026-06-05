@@ -14,15 +14,19 @@ npx playwright install chromium   # один раз
 npm run pdf
 ```
 
-Итог: `public/koreni-sudby-pravila.pdf` (и `public/print-book.html` для предпросмотра). Без приключений: `node scripts/build-pdf.mjs --no-adventure`.
+| Команда | PDF | HTML-предпросмотр |
+|---------|-----|-------------------|
+| `npm run pdf:igrok` | `koreni-sudby-kniga-igroka.pdf` | `print-book-igrok.html` |
+| `npm run pdf:hranitel` | `koreni-sudby-kniga-hranitelya.pdf` | `print-book-hranitel.html` |
+| `npm run pdf:polnoe` | `koreni-sudby-polnoe-izdanie.pdf` | `print-book-polnoe.html` |
+| `npm run pdf:cairn:igrok` | `koreni-sudby-kniga-igroka-cairn.pdf` | `print-book-cairn-igrok.html` |
+| `npm run pdf:cairn:hranitel` | `koreni-sudby-kniga-hranitelya-cairn.pdf` | `print-book-cairn-hranitel.html` |
+| `npm run pdf:cairn:polnoe` | `koreni-sudby-polnoe-izdanie-cairn.pdf` | `print-book-cairn-polnoe.html` |
+| `npm run pdf:all` | все шесть файлов | — |
 
-**PDF в стиле Cairn** (A5, шрифт Lora, как в русской «Книге игрока» Cairn):
+Без приключений: `node scripts/build-pdf.mjs --audience player --no-adventure`.
 
-```bash
-npm run pdf:cairn
-```
-
-Итог: `public/koreni-sudby-pravila-cairn.pdf`, предпросмотр: `public/print-book-cairn.html`.
+**PDF в стиле Cairn** (A5, шрифт Lora, как в русской «Книге игрока» Cairn): `npm run pdf:cairn:polnoe` или `npm run pdf:cairn:igrok`.
 
 **The Homebrewery:** `npm run book:homebrewery` → [`rpg/kniga-homebrewery.md`](rpg/kniga-homebrewery.md). Скопируйте в [homebrewery.naturalcrit.com](https://homebrewery.naturalcrit.com/) (тема Blank, A5, в стиле Cairn).
 

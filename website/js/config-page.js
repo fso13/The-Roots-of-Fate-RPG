@@ -20,6 +20,7 @@
     "fantasy_inventory",
     "firearms",
     "vehicles",
+    "noir_investigation",
   ];
 
   function init() {
@@ -45,9 +46,13 @@
       const otherGroup = document.createElement("div");
       otherGroup.className = "config-group";
       otherGroup.innerHTML = '<div class="config-group-title">Прочее</div>';
+      const customGroup = document.createElement("div");
+      customGroup.className = "config-group";
+      customGroup.innerHTML = '<div class="config-group-title">Дополнительные модули</div>';
 
       const fantasyKeys = ["fantasy_spells", "fantasy_skills", "fantasy_gear", "fantasy_bestiary", "fantasy_inventory"];
       const otherKeys = ["firearms", "vehicles"];
+      const customKeys = ["noir_investigation"];
 
       MODULES_ORDER.forEach((key) => {
         const label = labels[key] || key;
@@ -60,6 +65,8 @@
         `;
         if (fantasyKeys.includes(key)) {
           fantasyGroup.appendChild(labelEl);
+        } else if (customKeys.includes(key)) {
+          customGroup.appendChild(labelEl);
         } else if (otherKeys.includes(key)) {
           otherGroup.appendChild(labelEl);
         } else {
@@ -69,6 +76,7 @@
 
       form.appendChild(coreGroup);
       form.appendChild(fantasyGroup);
+      if (customGroup.querySelector("label")) form.appendChild(customGroup);
       form.appendChild(otherGroup);
     }
 

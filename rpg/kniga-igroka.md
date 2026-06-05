@@ -938,7 +938,66 @@
 *Дополняет [Глава 10. Расширенное снаряжение](#глава-10-расширенное-снаряжение) и [Глава 5. Снаряжение](#глава-5-снаряжение). Даёт детальные ограничения: сетка сумки и слоты экипировки.*
 
 <figure class="inventar-schema-fig">
-  <img src="images/inventar-schema.png" alt="Схема инвентаря: слоты экипировки и сумка 10×4">
+<div class="inventar-schema" role="img" aria-label="Схема инвентаря: слоты экипировки и сумка 10×4">
+    <div class="inventar-schema__gear">
+      <div class="inventar-schema__col inventar-schema__col--side">
+        <div class="inventar-schema__set-badge" aria-hidden="true">I</div>
+        <div class="inventar-schema__zone inventar-schema__zone--gold">
+    <span class="inventar-schema__zone-title">Руки I</span>
+    <div class="inventar-schema__grid" style="--cols:2;--rows:4"><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span></div>
+  </div>
+        <div class="inventar-schema__zone inventar-schema__zone--gold">
+    <span class="inventar-schema__zone-title">Перчатки</span>
+    <div class="inventar-schema__grid" style="--cols:2;--rows:2"><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span></div>
+  </div>
+      </div>
+      <div class="inventar-schema__col inventar-schema__col--center">
+        <div class="inventar-schema__zone inventar-schema__zone--gold">
+    <span class="inventar-schema__zone-title">Голова</span>
+    <div class="inventar-schema__grid" style="--cols:2;--rows:2"><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span></div>
+  </div>
+        <div class="inventar-schema__zone inventar-schema__zone--gold inventar-schema__zone--inline">
+    <span class="inventar-schema__zone-title inventar-schema__zone-title--inline">Шея</span>
+    <div class="inventar-schema__grid" style="--cols:1;--rows:1"><span class="inventar-schema__cell"></span></div>
+  </div>
+        <div class="inventar-schema__zone inventar-schema__zone--gold">
+    <span class="inventar-schema__zone-title">Туловище</span>
+    <div class="inventar-schema__grid" style="--cols:2;--rows:3"><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span></div>
+  </div>
+        <div class="inventar-schema__belt-row">
+          <div class="inventar-schema__zone inventar-schema__zone--gold inventar-schema__zone--compact">
+    <span class="inventar-schema__zone-title">Кольца</span>
+    <div class="inventar-schema__grid" style="--cols:1;--rows:1"><span class="inventar-schema__cell"></span></div>
+  </div>
+          <div class="inventar-schema__zone inventar-schema__zone--gold inventar-schema__zone--belt">
+    <span class="inventar-schema__zone-title">Пояс</span>
+    <div class="inventar-schema__grid" style="--cols:2;--rows:1"><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span></div>
+  </div>
+          <div class="inventar-schema__zone inventar-schema__zone--gold inventar-schema__zone--compact">
+    <span class="inventar-schema__zone-title">Кольца</span>
+    <div class="inventar-schema__grid" style="--cols:1;--rows:1"><span class="inventar-schema__cell"></span></div>
+  </div>
+        </div>
+      </div>
+      <div class="inventar-schema__col inventar-schema__col--side">
+        <div class="inventar-schema__set-badge" aria-hidden="true">II</div>
+        <div class="inventar-schema__zone inventar-schema__zone--gold">
+    <span class="inventar-schema__zone-title">Руки II</span>
+    <div class="inventar-schema__grid" style="--cols:2;--rows:4"><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span></div>
+  </div>
+        <div class="inventar-schema__zone inventar-schema__zone--gold">
+    <span class="inventar-schema__zone-title">Сапоги</span>
+    <div class="inventar-schema__grid" style="--cols:2;--rows:2"><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span></div>
+  </div>
+      </div>
+    </div>
+    <div class="inventar-schema__bag">
+      <div class="inventar-schema__zone inventar-schema__zone--silver inventar-schema__zone--bag">
+        <div class="inventar-schema__grid" style="--cols:10;--rows:4"><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span></div>
+      </div>
+      <span class="inventar-schema__bag-label">Сумка 10×4</span>
+    </div>
+  </div>
 </figure>
 
 ## 1. Сумка: сетка 10×4

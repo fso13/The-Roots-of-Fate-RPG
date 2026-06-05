@@ -4,6 +4,8 @@
 
 Ниже существа **в духе** отрядов из серии *Heroes of Might and Magic* (V и др.) и **классического фэнтези** — это не официальные статы игры, а перевод в механику «Корней судьбы».
 
+*Иллюстрации — арты существ из **Heroes of Might and Magic V** (Ubisoft / Nival); статы ниже — перевод в «Корни судьбы», не официальные данные игры.*
+
 **Обозначения:** **Бонус** — слагаемое в **(итог атаки − ЧЦ) + бонус**. **ЧЦ** — если не указано, считайте сами из атрибутов и доспеха.
 
 ---
@@ -11,6 +13,8 @@
 ## Небесный легион *(стиль Убежища / Haven)*
 
 ### Ополченец
+
+<figure class="bestiary-portrait"><img src="images/bestiariy/opolchenets.png" alt="Ополченец" loading="lazy" width="200" height="280"></figure>
 
 - **Угроза:** низкая  
 - **Тело 2, Ловкость 2, Разум 1, Воля 1**  
@@ -20,6 +24,8 @@
 
 ### Лучник
 
+<figure class="bestiary-portrait"><img src="images/bestiariy/luchnik.png" alt="Лучник" loading="lazy" width="200" height="280"></figure>
+
 - **Угроза:** низкая  
 - **Тело 2, Ловкость 3, Разум 1, Воля 1**  
 - **Раны 5**  
@@ -27,6 +33,8 @@
 - **ЧЦ:** 8+3+0 = **11**
 
 ### Рыцарь на коне
+
+<figure class="bestiary-portrait"><img src="images/bestiariy/rytsar-na-kone.png" alt="Рыцарь на коне" loading="lazy" width="200" height="280"></figure>
 
 - **Угроза:** высокая  
 - **Тело 4, Ловкость 2, Разум 2, Воля 3**  
@@ -36,6 +44,8 @@
 
 ### Грифон
 
+<figure class="bestiary-portrait"><img src="images/bestiariy/grifon.png" alt="Грифон" loading="lazy" width="200" height="280"></figure>
+
 - **Угроза:** средняя  
 - **Тело 3, Ловкость 4, Разум 1, Воля 2**  
 - **Раны 9**  
@@ -43,6 +53,8 @@
 - **Особое:** **Даль** и **Рукопашная** без штрафа за смену зоны **раз за раунд**.
 
 ### Небесный страж *(ангел — верхний эшелон)*
+
+<figure class="bestiary-portrait"><img src="images/bestiariy/nebesnyy-strazh.png" alt="Небесный страж" loading="lazy" width="200" height="280"></figure>
 
 - **Угроза:** очень высокая  
 - **Тело 5, Ловкость 4, Разум 3, Воля 5**  
@@ -56,6 +68,8 @@
 
 ### Бес
 
+<figure class="bestiary-portrait"><img src="images/bestiariy/bes.png" alt="Бес" loading="lazy" width="200" height="280"></figure>
+
 - **Угроза:** низкая  
 - **Тело 1, Ловкость 3, Разум 1, Воля 2**  
 - **Раны 4**  
@@ -63,6 +77,8 @@
 - **Особое:** **1 ОД** — **Сдвиг** на два шага (стремительный).
 
 ### Адская гончая
+
+<figure class="bestiary-portrait"><img src="images/bestiariy/adskaya-gonchaya.png" alt="Адская гончая" loading="lazy" width="200" height="280"></figure>
 
 - **Угроза:** средняя  
 - **Тело 3, Ловкость 4, Разум 1, Воля 2**  
@@ -72,6 +88,8 @@
 
 ### Порождение бездны *(демон среднего калибра)*
 
+<figure class="bestiary-portrait"><img src="images/bestiariy/porozhdenie-bezdny.jpg" alt="Порождение бездны" loading="lazy" width="200" height="280"></figure>
+
 - **Угроза:** высокая  
 - **Тело 5, Ловкость 3, Разум 2, Воля 3**  
 - **Раны 14**  
@@ -79,6 +97,8 @@
 - **Особое:** уязвимость к **священной воде / свету** — **+1** урон от таких источников.
 
 ### Суккуб *(искусительница)*
+
+<figure class="bestiary-portrait"><img src="images/bestiariy/sukkub.jpg" alt="Суккуб" loading="lazy" width="200" height="280"></figure>
 
 - **Угроза:** средняя  
 - **Тело 2, Ловкость 3, Разум 3, Воля 4**  
@@ -92,6 +112,8 @@
 
 ### Скелет-воин
 
+<figure class="bestiary-portrait"><img src="images/bestiariy/skelet-voin.png" alt="Скелет-воин" loading="lazy" width="200" height="280"></figure>
+
 - **Угроза:** низкая  
 - **Тело 2, Ловкость 2, Разум 0, Воля 1**  
 - **Раны 5** · щит (+1 к ЧЦ)  
@@ -99,6 +121,8 @@
 - **Особое:** иммун к **яду**, **удушью**; **святой урон** **+1** к бонусу против них.
 
 ### Вампир
+
+<figure class="bestiary-portrait"><img src="images/bestiariy/vampir.jpg" alt="Вампир" loading="lazy" width="200" height="280"></figure>
 
 - **Угроза:** высокая  
 - **Тело 4, Ловкость 4, Разум 3, Воля 3**  
@@ -108,6 +132,8 @@
 
 ### Лич
 
+<figure class="bestiary-portrait"><img src="images/bestiariy/lich.jpg" alt="Лич" loading="lazy" width="200" height="280"></figure>
+
 - **Угроза:** очень высокая  
 - **Тело 2, Ловкость 2, Разум 5, Воля 5**  
 - **Раны 10**  
@@ -115,6 +141,8 @@
 - **Особое:** призыв **2 скелета** раз за сцену (миньоны с **3 ранами**).
 
 ### Костяной дракон
+
+<figure class="bestiary-portrait"><img src="images/bestiariy/kostyanoy-drakon.jpg" alt="Костяной дракон" loading="lazy" width="200" height="280"></figure>
 
 - **Угроза:** босс  
 - **Тело 6, Ловкость 2, Разум 1, Воля 4**  
@@ -128,6 +156,8 @@
 
 ### Тёмный следопыт
 
+<figure class="bestiary-portrait"><img src="images/bestiariy/tyomnyy-sledopyt.png" alt="Тёмный следопыт" loading="lazy" width="200" height="280"></figure>
+
 - **Угроза:** средняя  
 - **Тело 2, Ловкость 4, Разум 2, Воля 2**  
 - **Раны 7**  
@@ -135,6 +165,8 @@
 - **Особое:** **Скрытность +2** к итогу в тёмноте.
 
 ### Минотавр
+
+<figure class="bestiary-portrait"><img src="images/bestiariy/minotavr.png" alt="Минотавр" loading="lazy" width="200" height="280"></figure>
 
 - **Угроза:** высокая  
 - **Тело 5, Ловкость 2, Разум 1, Воля 2**  
@@ -144,6 +176,8 @@
 
 ### Гидра
 
+<figure class="bestiary-portrait"><img src="images/bestiariy/gidra.png" alt="Гидра" loading="lazy" width="200" height="280"></figure>
+
 - **Угроза:** босс-мини  
 - **Тело 6, Ловкость 2, Разум 0, Воля 2**  
 - **Раны 20**  
@@ -151,6 +185,8 @@
 - **Особое:** при отрубании головы — **регенерация**: **+3 раны** в конце раунда (пока не сожжён огнём).
 
 ### Чёрный дракон
+
+<figure class="bestiary-portrait"><img src="images/bestiariy/chernyy-drakon.png" alt="Чёрный дракон" loading="lazy" width="200" height="280"></figure>
 
 - **Угроза:** босс  
 - **Тело 6, Ловкость 3, Разум 4, Воля 5**  
@@ -164,6 +200,8 @@
 
 ### Лесной эльф
 
+<figure class="bestiary-portrait"><img src="images/bestiariy/lesnoy-elf.jpg" alt="Лесной эльф" loading="lazy" width="200" height="280"></figure>
+
 - **Угроза:** средняя  
 - **Тело 2, Ловкость 4, Разум 2, Воля 2**  
 - **Раны 7**  
@@ -172,6 +210,8 @@
 
 ### Единорог
 
+<figure class="bestiary-portrait"><img src="images/bestiariy/edinorog.jpg" alt="Единорог" loading="lazy" width="200" height="280"></figure>
+
 - **Угроза:** средняя  
 - **Тело 4, Ловкость 3, Разум 1, Воля 3**  
 - **Раны 10**  
@@ -179,6 +219,8 @@
 - **Особое:** **очарование зверей** — раз за сцену **Воля** цели-зверя **против 12**.
 
 ### Древень
+
+<figure class="bestiary-portrait"><img src="images/bestiariy/dreven.jpg" alt="Древень" loading="lazy" width="200" height="280"></figure>
 
 - **Угроза:** высокая  
 - **Тело 6, Ловкость 1, Разум 2, Воля 3**  
@@ -192,6 +234,8 @@
 
 ### Гремлин
 
+<figure class="bestiary-portrait"><img src="images/bestiariy/gremlin.jpg" alt="Гремлин" loading="lazy" width="200" height="280"></figure>
+
 - **Угроза:** низкая  
 - **Тело 1, Ловкость 3, Разум 2, Воля 1**  
 - **Раны 4**  
@@ -200,6 +244,8 @@
 
 ### Стальной голем
 
+<figure class="bestiary-portrait"><img src="images/bestiariy/stalnoy-golem.jpg" alt="Стальной голем" loading="lazy" width="200" height="280"></figure>
+
 - **Угроза:** высокая  
 - **Тело 6, Ловкость 1, Разум 0, Воля 0**  
 - **Раны 16** · ЧЦ **+2**  
@@ -207,6 +253,8 @@
 - **Особое:** иммун к **яду**, **страху**; **медленный** — **−1 ОД** в первом раунде.
 
 ### Архимаг *(NPC-босс)*
+
+<figure class="bestiary-portrait"><img src="images/bestiariy/arhimag.jpg" alt="Архимаг" loading="lazy" width="200" height="280"></figure>
 
 - **Угроза:** очень высокая  
 - **Тело 2, Ловкость 3, Разум 5, Воля 5**  
@@ -220,6 +268,8 @@
 
 ### Гном-страж
 
+<figure class="bestiary-portrait"><img src="images/bestiariy/gnom-strazh.png" alt="Гном-страж" loading="lazy" width="200" height="280"></figure>
+
 - **Угроза:** средняя  
 - **Тело 4, Ловкость 2, Разум 2, Воля 3**  
 - **Раны 10** · тяжёлый доспех (+3)  
@@ -227,6 +277,8 @@
 - **Особое:** **+1** к ЧЦ против **оружия** (опыт).
 
 ### Всадник на медведе
+
+<figure class="bestiary-portrait"><img src="images/bestiariy/vsadnik-na-medvede.png" alt="Всадник на медведе" loading="lazy" width="200" height="280"></figure>
 
 - **Угроза:** высокая  
 - **Тело 5, Ловкость 2, Разум 1, Воля 2**  
@@ -240,6 +292,8 @@
 
 ### Гоблин
 
+<figure class="bestiary-portrait"><img src="images/bestiariy/goblin.jpg" alt="Гоблин" loading="lazy" width="200" height="280"></figure>
+
 - **Угроза:** низкая  
 - **Тело 1, Ловкость 3, Разум 1, Воля 1**  
 - **Раны 4**  
@@ -247,6 +301,8 @@
 - **Особое:** **трусость** — при **половине ран** **сдвиг** к **Даль** без атаки.
 
 ### Орк-воин
+
+<figure class="bestiary-portrait"><img src="images/bestiariy/ork-voin.jpg" alt="Орк-воин" loading="lazy" width="200" height="280"></figure>
 
 - **Угроза:** средняя  
 - **Тело 4, Ловкость 2, Разум 1, Воля 2**  
@@ -256,6 +312,8 @@
 
 ### Циклоп
 
+<figure class="bestiary-portrait"><img src="images/bestiariy/tsiklop.jpg" alt="Циклоп" loading="lazy" width="200" height="280"></figure>
+
 - **Угроза:** высокая  
 - **Тело 6, Ловкость 1, Разум 1, Воля 2**  
 - **Раны 16**  
@@ -263,6 +321,8 @@
 - **Особое:** **слепота** фланга — **−2** к атаке по целям **Рядом** с союзником циклопа.
 
 ### Чудище *(бегемот)*
+
+<figure class="bestiary-portrait"><img src="images/bestiariy/chudishte.jpg" alt="Чудище" loading="lazy" width="200" height="280"></figure>
 
 - **Угроза:** босс-мини  
 - **Тело 6, Ловкость 2, Разум 0, Воля 2**  
@@ -276,6 +336,8 @@
 
 ### Тролль
 
+<figure class="bestiary-portrait"><img src="images/bestiariy/troll.jpg" alt="Тролль" loading="lazy" width="200" height="280"></figure>
+
 - **Угроза:** высокая  
 - **Тело 5, Ловкость 2, Разум 1, Воля 1**  
 - **Раны 15**  
@@ -283,6 +345,8 @@
 - **Особое:** **регенерация 1** рана в конце раунда, кроме **огня/кислоты**.
 
 ### Гигантский паук
+
+<figure class="bestiary-portrait"><img src="images/bestiariy/gigantskiy-pauk.jpg" alt="Гигантский паук" loading="lazy" width="200" height="280"></figure>
 
 - **Угроза:** средняя  
 - **Тело 3, Ловкость 3, Разум 0, Воля 1**  
@@ -292,6 +356,8 @@
 
 ### Красный дракон (молодой)
 
+<figure class="bestiary-portrait"><img src="images/bestiariy/krasnyy-drakon.jpg" alt="Красный дракон" loading="lazy" width="200" height="280"></figure>
+
 - **Угроза:** босс  
 - **Тело 5, Ловкость 3, Разум 3, Воля 4**  
 - **Раны 20**  
@@ -300,6 +366,8 @@
 
 ### Призрак
 
+<figure class="bestiary-portrait"><img src="images/bestiariy/prizrak.png" alt="Призрак" loading="lazy" width="200" height="280"></figure>
+
 - **Угроза:** средняя  
 - **Тело 0, Ловкость 3, Разум 2, Воля 3**  
 - **Раны** — нежить: **8** «токсичных»  
@@ -307,6 +375,8 @@
 - **Особое:** **половина** урона от обычного оружия; **магия/серебро** — полный.
 
 ### Доппельгангер
+
+<figure class="bestiary-portrait"><img src="images/bestiariy/doppelganger.jpg" alt="Доппельгангер" loading="lazy" width="200" height="280"></figure>
 
 - **Угроза:** зависит от копии  
 - **Тело 3, Ловкость 3, Разум 3, Воля 3**  

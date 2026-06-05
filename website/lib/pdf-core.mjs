@@ -2,12 +2,25 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath, pathToFileURL } from "url";
 import { marked } from "marked";
-import { chromium } from "playwright";
+import { expandInventarSchema } from "./inventar-schema.mjs";
 
 marked.use({ gfm: true });
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 export const ROOT = path.join(__dirname, "..", "..");
+
+const LOCAL_BROWSERS = path.join(ROOT, ".playwright-browsers");
+if (fs.existsSync(LOCAL_BROWSERS)) {
+  process.env.PLAYWRIGHT_BROWSERS_PATH = LOCAL_BROWSERS;
+}
+
+let chromiumModule;
+async function getChromium() {
+  if (!chromiumModule) {
+    chromiumModule = (await import("playwright")).chromium;
+  }
+  return chromiumModule;
+}
 export const RPG = path.join(ROOT, "rpg");
 export const PUBLIC = path.join(ROOT, "public");
 
@@ -84,7 +97,7 @@ export function buildChapterList(relFiles, { wrapHead = false, transformMd } = {
   return relFiles.map((rel) => {
     const mdRaw = fs.readFileSync(path.join(RPG, rel), "utf8");
     const mdBase = transformMd ? transformMd(rel, mdRaw) : mdRaw;
-    const md = relImageSrc(rel, mdBase);
+    const md = expandInventarSchema(relImageSrc(rel, mdBase));
     const title = extractTitle(md) || rel;
     const id = chapterId(rel);
     let body = fixHtmlAssetPaths(fixMdLinksForPdf(marked.parse(md)), rel);
@@ -104,7 +117,16 @@ export function buildToc(chapters, { tocClass = "print-toc" } = {}) {
   const readme = chapters.find((c) => isIntro(c));
 
   const section = (items) =>
-    items.map((c) => `<li><a href="#${c.id}">${escapeHtml(c.title)}</a></li>`).join("\n");
+    items
+      .map(
+        (c) => `<li class="toc-item">
+          <a class="toc-link" href="#${c.id}">
+            <span class="toc-title">${escapeHtml(c.title)}</span>
+            <span class="toc-fill" aria-hidden="true"></span>
+          </a>
+        </li>`
+      )
+      .join("\n");
 
   let html = `<nav class="${tocClass}"><h2>Оглавление</h2><ol>`;
   if (readme) html += section([readme]);
@@ -155,8 +177,26 @@ export function buildPrintHtml({
 </html>`;
 }
 
+async function launchPdfBrowser() {
+  const chromium = await getChromium();
+  const attempts = [
+    { channel: "chrome", headless: true },
+    { channel: "chromium", headless: true },
+    { headless: true },
+  ];
+  let lastError;
+  for (const options of attempts) {
+    try {
+      return await chromium.launch(options);
+    } catch (err) {
+      lastError = err;
+    }
+  }
+  throw lastError;
+}
+
 export async function renderPdf(htmlPath, pdfPath, pdfOptions) {
-  const browser = await chromium.launch();
+  const browser = await launchPdfBrowser();
   try {
     const page = await browser.newPage();
     await page.goto(pathToFileURL(htmlPath).href, { waitUntil: "networkidle" });
@@ -174,10 +214,12 @@ export function ensurePublicBuilt() {
 }
 
 export function copyPrintCss(cssName) {
-  const src = path.join(ROOT, "website", "css", cssName);
+  const cssDir = path.join(ROOT, "website", "css");
   const destDir = path.join(PUBLIC, "css");
   fs.mkdirSync(destDir, { recursive: true });
-  fs.copyFileSync(src, path.join(destDir, cssName));
+  for (const name of [cssName, "inventar-schema.css"]) {
+    fs.copyFileSync(path.join(cssDir, name), path.join(destDir, name));
+  }
 }
 
 export function parsePdfArgs(argv, defaults) {

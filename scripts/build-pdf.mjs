@@ -17,9 +17,8 @@ import {
   stripReadmeForBook,
   PDF_OUTPUT,
   PDF_TITLE,
+  pdfHtmlOutputName,
 } from "../website/lib/book-build.mjs";
-
-const OUT_HTML = path.join(PUBLIC, "print-book.html");
 
 const FONT_LINKS = `
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -43,11 +42,10 @@ const HELP = `Usage: node scripts/build-pdf.mjs [options]
 `;
 
 async function main() {
-  const audience = "all";
   const opts = parsePdfArgs(process.argv, {
     output: path.join(PUBLIC, PDF_OUTPUT.all),
     includeAdventure: true,
-    audience,
+    audience: "all",
     helpText: HELP,
   });
 
@@ -55,6 +53,7 @@ async function main() {
   if (process.argv.indexOf("--output") === -1) {
     opts.output = path.join(PUBLIC, PDF_OUTPUT[opts.audience] || PDF_OUTPUT.all);
   }
+  const outHtml = path.join(PUBLIC, pdfHtmlOutputName("book", opts.audience));
 
   ensurePublicBuilt();
   copyPrintCss("print-book.css");
@@ -78,10 +77,10 @@ async function main() {
     mainClass: "print-book-main",
   });
 
-  fs.writeFileSync(OUT_HTML, html, "utf8");
+  fs.writeFileSync(outHtml, html, "utf8");
   fs.mkdirSync(path.dirname(opts.output), { recursive: true });
 
-  await renderPdf(OUT_HTML, opts.output, {
+  await renderPdf(outHtml, opts.output, {
     format: "A4",
     margin: { top: "18mm", right: "16mm", bottom: "20mm", left: "16mm" },
     displayHeaderFooter: true,
@@ -95,7 +94,7 @@ async function main() {
 
   console.log("PDF:", opts.output);
   console.log("Audience:", opts.audience);
-  console.log("HTML:", OUT_HTML);
+  console.log("HTML:", outHtml);
   console.log("Chapters:", chapters.length);
 }
 

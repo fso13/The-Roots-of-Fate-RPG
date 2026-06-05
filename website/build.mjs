@@ -4,12 +4,21 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 import { marked } from "marked";
-import { buildTitleByRel, fixMdLinks as humanizeMdLinks, chapterAudience, PLAYER_CHAPTER_ORDER, KEEPER_CHAPTER_ORDER } from "./lib/book-build.mjs";
+import {
+  buildTitleByRel,
+  fixMdLinks as humanizeMdLinks,
+  chapterAudience,
+  PLAYER_CHAPTER_ORDER,
+  KEEPER_CHAPTER_ORDER,
+  CUSTOM_MODULES,
+} from "./lib/book-build.mjs";
 import { linkGlossaryInHtml, glossaryHrefForPage } from "./lib/glossary.mjs";
+import { expandInventarSchema } from "./lib/inventar-schema.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, "..");
 const RPG = path.join(ROOT, "rpg");
+const MY_MODULES = path.join(ROOT, "my_modules");
 const OUT = path.join(ROOT, "public");
 const CSS_SRC = path.join(__dirname, "css", "main.css");
 const JS_MANIFEST = path.join(__dirname, "js", "manifest.js");
@@ -31,6 +40,7 @@ const PAGE_TO_MODULE = {
   "fantasy/03-snaryazhenie.html": "fantasy_gear",
   "fantasy/04-bestiariy.html": "fantasy_bestiary",
   "fantasy/05-inventar.html": "fantasy_inventory",
+  "modules/noir-investigation.html": "noir_investigation",
 };
 
 marked.use({ gfm: true });
@@ -50,6 +60,14 @@ function walkMarkdown(dir, base = dir) {
 function extractTitle(md) {
   const m = md.match(/^#\s+(.+)$/m);
   return m ? m[1].trim().replace(/\*\*/g, "") : null;
+}
+
+function stripFrontmatter(md) {
+  if (md.startsWith("---\n")) {
+    const end = md.indexOf("\n---\n", 4);
+    if (end !== -1) return md.slice(end + 5);
+  }
+  return md;
 }
 
 function escapeHtml(s) {
@@ -243,10 +261,14 @@ function main() {
   fs.mkdirSync(path.join(OUT, "fantasy"), { recursive: true });
   fs.copyFileSync(CSS_SRC, path.join(OUT, "css", "main.css"));
   fs.copyFileSync(path.join(__dirname, "css", "character-sheet.css"), path.join(OUT, "css", "character-sheet.css"));
+  fs.copyFileSync(path.join(__dirname, "css", "inventar-schema.css"), path.join(OUT, "css", "inventar-schema.css"));
   fs.copyFileSync(JS_MANIFEST, path.join(OUT, "js", "manifest.js"));
   fs.copyFileSync(path.join(__dirname, "js", "config-page.js"), path.join(OUT, "js", "config-page.js"));
   fs.copyFileSync(path.join(__dirname, "js", "character-sheet.js"), path.join(OUT, "js", "character-sheet.js"));
-  fs.copyFileSync(path.join(__dirname, "character-sheet.html"), path.join(OUT, "character-sheet.html"));
+  const sheetSrc = expandInventarSchema(
+    fs.readFileSync(path.join(__dirname, "character-sheet.html"), "utf8")
+  );
+  fs.writeFileSync(path.join(OUT, "character-sheet.html"), sheetSrc, "utf8");
 
   const siteImages = path.join(__dirname, "images");
   if (fs.existsSync(siteImages)) {
@@ -280,7 +302,34 @@ function main() {
       short: shortLabel(rel, title),
       isReadme: isReadmeRel(rel),
       audience: chapterAudience(rel),
+      isCustomModule: false,
     });
+  }
+
+  const customModulePages = [];
+  for (const mod of CUSTOM_MODULES) {
+    const srcPath = path.join(MY_MODULES, mod.srcRel);
+    if (!fs.existsSync(srcPath)) {
+      console.warn("Custom module not found:", srcPath);
+      continue;
+    }
+    const raw = fs.readFileSync(srcPath, "utf8");
+    const md = stripFrontmatter(raw);
+    const title = extractTitle(md) || mod.id;
+    const entry = {
+      rel: mod.mdRel,
+      outRel: mod.outRel,
+      title,
+      short: title.length < 52 ? title : "Нуарное расследование",
+      isReadme: false,
+      audience: mod.audience,
+      isCustomModule: true,
+      moduleId: mod.id,
+      mdBody: md,
+    };
+    customModulePages.push(entry);
+    pageMeta.push(entry);
+    titleByRel.set(mod.mdRel, title);
   }
 
   const toNavItem = (p) => {
@@ -293,10 +342,15 @@ function main() {
   };
 
   const core = pageMeta.filter(
-    (p) => !p.isReadme && !p.rel.startsWith("fantasy/") && !p.rel.startsWith("adventure/")
+    (p) =>
+      !p.isReadme &&
+      !p.isCustomModule &&
+      !p.rel.startsWith("fantasy/") &&
+      !p.rel.startsWith("adventure/")
   );
   const fant = pageMeta.filter((p) => p.rel.startsWith("fantasy/"));
   const adv = pageMeta.filter((p) => p.rel.startsWith("adventure/"));
+  const customMods = pageMeta.filter((p) => p.isCustomModule);
   const readmes = pageMeta.filter((p) => p.isReadme);
 
   const playerCore = core.filter((p) => p.audience === "player");
@@ -338,11 +392,23 @@ function main() {
       title: "Книга хранителя",
       items: keeperNavItems,
     },
+    ...(customMods.length
+      ? [
+          {
+            title: "Доп. модули",
+            items: customMods.map(toNavItem),
+          },
+        ]
+      : []),
   ];
 
   for (const p of pageMeta) {
-    const md = fs.readFileSync(path.join(RPG, p.rel), "utf8");
-    const mdForPage = humanizeMdLinks(md, (rel) => rel, { titleByRel, fromRel: p.rel });
+    const md = p.isCustomModule
+      ? p.mdBody
+      : fs.readFileSync(path.join(RPG, p.rel), "utf8");
+    const mdForPage = expandInventarSchema(
+      humanizeMdLinks(md, (rel) => rel, { titleByRel, fromRel: p.rel })
+    );
     const rawBody = fixMdLinks(marked.parse(mdForPage));
     const { html: bodyWithIds, toc } = extractHeadingsAndAddIds(rawBody);
     const bodyHtml = linkGlossaryInHtml(bodyWithIds, glossaryHrefForPage(p.outRel));
@@ -369,6 +435,7 @@ function main() {
     const desc = p.short.replace(/"/g, "&quot;");
     let meta = "Правила";
     if (p.isReadme) meta = "Оглавление";
+    else if (p.isCustomModule) meta = "Доп. модуль";
     else if (p.audience === "player") meta = "Игрок";
     else if (p.audience === "keeper") meta = "Хранитель";
     if (p.rel.startsWith("fantasy/")) meta = p.audience === "keeper" ? "Фэнтези · хранитель" : "Фэнтези · игрок";
@@ -435,6 +502,16 @@ function main() {
     ${keeperPages.map(card).join("")}
   </div>
   </section>
+  ${
+    customMods.length
+      ? `<section id="index-section-custom">
+  <h2 class="section-title">Дополнительные модули</h2>
+  <div class="card-grid">
+    ${customMods.map(card).join("")}
+  </div>
+  </section>`
+      : ""
+  }
   <footer class="site-footer">
     <p>Собрано из Markdown · <a href="https://gitlab.com/fso13/me-rpg">GitLab</a> · Pages</p>
   </footer>

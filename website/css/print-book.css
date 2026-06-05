@@ -1,4 +1,6 @@
 /* Сборка PDF: светлая «книжная» вёрстка (не тёмная тема сайта) */
+@import url("inventar-schema.css");
+
 :root {
   --ink: #1a1814;
   --ink-muted: #4a4540;
@@ -87,6 +89,29 @@ body.print-book {
 
 .print-toc li {
   margin: 0.35rem 0;
+}
+
+.print-toc li a {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.print-toc .toc-title {
+  flex: 0 1 auto;
+}
+
+.print-toc .toc-fill {
+  flex: 1 1 auto;
+  border-bottom: 1px dotted var(--line);
+  transform: translateY(-0.1em);
+}
+
+.print-toc .toc-link::after {
+  content: target-counter(attr(href), page);
+  flex: 0 0 auto;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-muted);
 }
 
 .print-toc .toc-group {
@@ -196,14 +221,6 @@ body.print-book {
   border: none;
   border-top: 1px solid var(--line);
   margin: 1.5rem 0;
-}
-
-.inventar-schema-fig {
-  text-align: center;
-}
-
-.inventar-schema-fig img {
-  max-width: min(360px, 100%);
 }
 
 @media print {

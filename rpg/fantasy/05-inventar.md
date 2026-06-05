@@ -3,7 +3,7 @@
 *Дополняет [Глава 10. Расширенное снаряжение](./03-snaryazhenie.md) и [Глава 5. Снаряжение](../05-snaryazhenie.md). Даёт детальные ограничения: сетка сумки и слоты экипировки.*
 
 <figure class="inventar-schema-fig">
-  <img src="images/inventar-schema.png" alt="Схема инвентаря: слоты экипировки и сумка 10×4">
+<!-- inventar-schema -->
 </figure>
 
 ## 1. Сумка: сетка 10×4

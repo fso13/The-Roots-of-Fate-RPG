@@ -15,11 +15,10 @@ import {
   listBookSources,
   isReadmeFile,
   stripReadmeForBook,
-  PDF_OUTPUT,
+  PDF_OUTPUT_CAIRN,
   PDF_TITLE,
+  pdfHtmlOutputName,
 } from "../website/lib/book-build.mjs";
-
-const OUT_HTML = path.join(PUBLIC, "print-book-cairn.html");
 
 const FONT_LINKS = `
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -47,7 +46,7 @@ const HELP = `Usage: node scripts/build-pdf-cairn.mjs [options]
 
 async function main() {
   const opts = parsePdfArgs(process.argv, {
-    output: path.join(PUBLIC, PDF_OUTPUT.all.replace(".pdf", "-cairn.pdf")),
+    output: path.join(PUBLIC, PDF_OUTPUT_CAIRN.all),
     includeAdventure: true,
     audience: "all",
     helpText: HELP,
@@ -55,9 +54,9 @@ async function main() {
 
   if (!opts.audience) opts.audience = "all";
   if (process.argv.indexOf("--output") === -1) {
-    const base = PDF_OUTPUT[opts.audience] || PDF_OUTPUT.all;
-    opts.output = path.join(PUBLIC, base.replace(".pdf", "-cairn.pdf"));
+    opts.output = path.join(PUBLIC, PDF_OUTPUT_CAIRN[opts.audience] || PDF_OUTPUT_CAIRN.all);
   }
+  const outHtml = path.join(PUBLIC, pdfHtmlOutputName("cairn", opts.audience));
 
   ensurePublicBuilt();
   copyPrintCss("print-cairn.css");
@@ -83,10 +82,10 @@ async function main() {
     tocClass: "print-cairn-toc",
   });
 
-  fs.writeFileSync(OUT_HTML, html, "utf8");
+  fs.writeFileSync(outHtml, html, "utf8");
   fs.mkdirSync(path.dirname(opts.output), { recursive: true });
 
-  await renderPdf(OUT_HTML, opts.output, {
+  await renderPdf(outHtml, opts.output, {
     width: "148mm",
     height: "210mm",
     margin: { top: "20mm", right: "16mm", bottom: "24mm", left: "16mm" },
@@ -100,7 +99,7 @@ async function main() {
 
   console.log("PDF (Cairn style):", opts.output);
   console.log("Audience:", opts.audience);
-  console.log("HTML:", OUT_HTML);
+  console.log("HTML:", outHtml);
   console.log("Chapters:", chapters.length);
 }
 

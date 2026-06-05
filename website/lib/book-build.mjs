@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import { RPG, walkMarkdown, extractTitle } from "./pdf-core.mjs";
+import { expandInventarSchema } from "./inventar-schema.mjs";
 
 /** Разрешает относительный href (без .md) в путь rel от корня rpg/ */
 export function resolveMdRel(hrefBase, fromRel) {
@@ -67,7 +68,10 @@ export const CHAPTER_AUDIENCE = {
   "fantasy/04-bestiariy.md": "keeper",
   "fantasy/05-inventar.md": "player",
   "adventure/01-steklyannyy-zvon.md": "keeper",
+  "adventure/02-chernyy-schet.md": "keeper",
+  "adventure/maps/chernyy-schet/MAPS.md": "keeper",
   "slovar-terminov.md": "player",
+  "modules/noir-investigation.md": "keeper",
 };
 
 export const PLAYER_CHAPTER_ORDER = [
@@ -93,7 +97,19 @@ export const KEEPER_CHAPTER_ORDER = [
   "07-rany.md",
   "08-krity-i-promahi.md",
   "11-otryady.md",
+  "modules/noir-investigation.md",
   "slovar-terminov.md",
+];
+
+/** Кастомные модули: исходник в my_modules/, страница на сайте — modules/*.html */
+export const CUSTOM_MODULES = [
+  {
+    id: "noir_investigation",
+    srcRel: "noir_investigation/module.md",
+    outRel: "modules/noir-investigation.html",
+    mdRel: "modules/noir-investigation.md",
+    audience: "keeper",
+  },
 ];
 
 const README_BY_AUDIENCE = {
@@ -246,7 +262,9 @@ export function loadBookEntries(relFiles) {
       title: titleByRel.get(rel),
       anchor: chapterAnchor(rel),
       hbAnchor: slugifyHb(titleByRel.get(rel)),
-      body: fixMdLinks(md.trim(), (targetRel) => linkHash(targetRel), { titleByRel, fromRel: rel }),
+      body: expandInventarSchema(
+        fixMdLinks(md.trim(), (targetRel) => linkHash(targetRel), { titleByRel, fromRel: rel })
+      ),
     };
   });
 }
@@ -258,10 +276,38 @@ export const BOOK_OUTPUT = {
 };
 
 export const PDF_OUTPUT = {
-  all: "koreni-sudby-pravila.pdf",
+  all: "koreni-sudby-polnoe-izdanie.pdf",
   player: "koreni-sudby-kniga-igroka.pdf",
   keeper: "koreni-sudby-kniga-hranitelya.pdf",
 };
+
+export const PDF_OUTPUT_CAIRN = {
+  all: "koreni-sudby-polnoe-izdanie-cairn.pdf",
+  player: "koreni-sudby-kniga-igroka-cairn.pdf",
+  keeper: "koreni-sudby-kniga-hranitelya-cairn.pdf",
+};
+
+export const PDF_HTML_OUTPUT = {
+  all: "print-book-polnoe.html",
+  player: "print-book-igrok.html",
+  keeper: "print-book-hranitel.html",
+};
+
+export const PDF_HTML_OUTPUT_CAIRN = {
+  all: "print-book-cairn-polnoe.html",
+  player: "print-book-cairn-igrok.html",
+  keeper: "print-book-cairn-hranitel.html",
+};
+
+export function pdfOutputName(style, audience = "all") {
+  const map = style === "cairn" ? PDF_OUTPUT_CAIRN : PDF_OUTPUT;
+  return map[audience] || map.all;
+}
+
+export function pdfHtmlOutputName(style, audience = "all") {
+  const map = style === "cairn" ? PDF_HTML_OUTPUT_CAIRN : PDF_HTML_OUTPUT;
+  return map[audience] || map.all;
+}
 
 export const PDF_TITLE = {
   all: "Корни судьбы — полное издание",

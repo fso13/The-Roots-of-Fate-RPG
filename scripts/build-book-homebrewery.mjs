@@ -94,7 +94,8 @@ theme: Blank
 
 function styleBlock() {
   const css = fs.readFileSync(STYLE, "utf8");
-  return `\`\`\`css\n${css}\n\`\`\``;
+  const inventarCss = fs.readFileSync(path.join(ROOT, "website", "css", "inventar-schema.css"), "utf8");
+  return `\`\`\`css\n${css}\n${inventarCss}\n\`\`\``;
 }
 
 function isReadmeEntry(rel) {

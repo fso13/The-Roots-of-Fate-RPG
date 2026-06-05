@@ -1,4 +1,6 @@
 /* Стиль Cairn (A5, Lora + заголовки в духе Minion Pro) — по мотивам русской «Книги игрока» */
+@import url("inventar-schema.css");
+
 :root {
   --paper: #faf8f4;
   --ink: #1c1b19;
@@ -116,11 +118,26 @@ body.print-cairn {
 
 .print-cairn-toc li a {
   text-decoration: none;
-  border-bottom: 1px dotted transparent;
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
 }
 
-.print-cairn-toc li a:hover {
-  border-bottom-color: var(--ink-soft);
+.print-cairn-toc .toc-title {
+  flex: 0 1 auto;
+}
+
+.print-cairn-toc .toc-fill {
+  flex: 1 1 auto;
+  border-bottom: 1px dotted var(--ink-soft);
+  transform: translateY(-0.1em);
+}
+
+.print-cairn-toc .toc-link::after {
+  content: target-counter(attr(href), page);
+  flex: 0 0 auto;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-soft);
 }
 
 .print-cairn-toc .toc-group {
@@ -269,12 +286,9 @@ body.print-cairn {
   margin: 0.75rem auto;
 }
 
-.inventar-schema-fig {
-  text-align: center;
-}
-
-.inventar-schema-fig img {
-  max-width: min(300px, 100%);
+.print-cairn .inventar-schema {
+  --schema-cell-size: 1.05rem;
+  max-width: 100%;
 }
 
 @media print {

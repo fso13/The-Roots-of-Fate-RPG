@@ -1,4 +1,6 @@
 /* Корни судьбы — минималистичный фэнтези */
+@import url("inventar-schema.css");
+
 :root {
   --bg-deep: #0c0e12;
   --bg-panel: #141820;
@@ -543,24 +545,80 @@ a:hover {
   margin: 1rem 0;
 }
 
-/* Схема инвентаря — центрирование и ограничение размера */
-.inventar-schema-fig {
-  text-align: center;
-  margin: 1.5rem 0;
+.map-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0 2.5rem;
 }
 
-.inventar-schema-fig img {
-  max-width: min(420px, 100%);
+.map-card {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.map-card a {
   display: block;
-  margin-left: auto;
-  margin-right: auto;
+  line-height: 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
-@media print {
-  .inventar-schema-fig img {
-    max-width: 95%;
-    max-height: 280px;
-    object-fit: contain;
+.map-card a:hover {
+  border-color: var(--accent);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+.map-card img {
+  width: 100%;
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  display: block;
+}
+
+.map-card figcaption {
+  font-size: 0.95rem;
+  line-height: 1.4;
+  color: var(--ink-muted);
+  text-align: center;
+}
+
+.map-card figcaption strong {
+  color: var(--ink);
+}
+
+.bestiary-portrait {
+  float: right;
+  width: min(200px, 38%);
+  margin: 0.15rem 0 1rem 1.25rem;
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+
+.bestiary-portrait img {
+  width: 100%;
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.15);
+}
+
+.doc-main h3:has(+ .bestiary-portrait) {
+  clear: none;
+}
+
+@media (max-width: 640px) {
+  .bestiary-portrait {
+    float: none;
+    width: min(220px, 70%);
+    margin: 0.5rem auto 1rem;
   }
 }
 

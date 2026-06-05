@@ -23,6 +23,7 @@
     fantasy_gear: "fantasy/03-snaryazhenie.html",
     fantasy_bestiary: "fantasy/04-bestiariy.html",
     fantasy_inventory: "fantasy/05-inventar.html",
+    noir_investigation: "modules/noir-investigation.html",
   };
 
   const DEFAULT_MODULES = {
@@ -44,6 +45,7 @@
     fantasy_inventory: true,
     firearms: false,
     vehicles: false,
+    noir_investigation: true,
   };
 
   const MODULE_LABELS = {
@@ -64,6 +66,7 @@
     fantasy_inventory: "Инвентарь (гл. 11, игрок)",
     firearms: "Огнестрел",
     vehicles: "Транспорт",
+    noir_investigation: "Нуарное расследование",
   };
 
   function getConfig() {
@@ -127,6 +130,15 @@
         (c) => config[c.getAttribute("data-module")] !== false
       );
       fantasySection.style.display = visible ? "" : "none";
+    }
+
+    const customSection = document.getElementById("index-section-custom");
+    if (customSection) {
+      const grid = customSection.querySelector(".card-grid");
+      const visible = grid && Array.from(grid.querySelectorAll(".card[data-module]")).some(
+        (c) => config[c.getAttribute("data-module")] !== false
+      );
+      customSection.style.display = visible ? "" : "none";
     }
   }
 
