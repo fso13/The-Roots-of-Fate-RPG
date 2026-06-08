@@ -956,8 +956,8 @@
     <span class="inventar-schema__zone-title">Голова</span>
     <div class="inventar-schema__grid" style="--cols:2;--rows:2"><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span><span class="inventar-schema__cell"></span></div>
   </div>
-        <div class="inventar-schema__zone inventar-schema__zone--gold inventar-schema__zone--inline">
-    <span class="inventar-schema__zone-title inventar-schema__zone-title--inline">Шея</span>
+        <div class="inventar-schema__zone inventar-schema__zone--gold">
+    <span class="inventar-schema__zone-title">Шея</span>
     <div class="inventar-schema__grid" style="--cols:1;--rows:1"><span class="inventar-schema__cell"></span></div>
   </div>
         <div class="inventar-schema__zone inventar-schema__zone--gold">

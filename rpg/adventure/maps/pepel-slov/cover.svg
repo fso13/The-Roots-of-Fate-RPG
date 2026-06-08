@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1240" height="1754" viewBox="0 0 1240 1754">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2a2d34"/>
+      <stop offset="55%" stop-color="#4a4e57"/>
+      <stop offset="100%" stop-color="#1a1c22"/>
+    </linearGradient>
+    <radialGradient id="fire" cx="50%" cy="75%" r="45%">
+      <stop offset="0%" stop-color="#ff9f1c" stop-opacity="0.9"/>
+      <stop offset="50%" stop-color="#e85d04" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#e85d04" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1240" height="1754" fill="url(#sky)"/>
+  <rect width="1240" height="1754" fill="url(#fire)"/>
+  <rect x="80" y="1214" width="110" height="420" fill="#3d4149" opacity="0.95"/>
+    <rect x="88" y="1226" width="94" height="52" fill="#6ec5ff" opacity="0.25"/><rect x="235" y="1124" width="110" height="510" fill="#3d4149" opacity="0.95"/>
+    <rect x="243" y="1136" width="94" height="52" fill="#6ec5ff" opacity="0.25"/><rect x="390" y="1034" width="110" height="600" fill="#3d4149" opacity="0.95"/>
+    <rect x="398" y="1046" width="94" height="52" fill="#6ec5ff" opacity="0.25"/><rect x="545" y="1214" width="110" height="420" fill="#3d4149" opacity="0.95"/>
+    <rect x="553" y="1226" width="94" height="52" fill="#6ec5ff" opacity="0.25"/><rect x="700" y="1124" width="110" height="510" fill="#3d4149" opacity="0.95"/>
+    <rect x="708" y="1136" width="94" height="52" fill="#6ec5ff" opacity="0.25"/><rect x="855" y="1034" width="110" height="600" fill="#3d4149" opacity="0.95"/>
+    <rect x="863" y="1046" width="94" height="52" fill="#6ec5ff" opacity="0.25"/><rect x="1010" y="1214" width="110" height="420" fill="#3d4149" opacity="0.95"/>
+    <rect x="1018" y="1226" width="94" height="52" fill="#6ec5ff" opacity="0.25"/>
+  <ellipse cx="644.8000000000001" cy="1087.48" rx="90" ry="120" fill="#1a1c22" opacity="0.85"/>
+  <rect x="595.1999999999999" y="912.08" width="70" height="90" rx="4" fill="#e85d04" opacity="0.35"/>
+  <text x="620" y="180" text-anchor="middle" font-family="Georgia, serif" font-size="72" fill="#f8f9fa" letter-spacing="2">Пепел слов</text>
+  <text x="620" y="240" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" fill="#adb5bd">Корни судьбы · приключение</text>
+  <text x="620" y="1674" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" fill="#6c757d">Солнечный Квартал · память против огня</text>
+</svg>

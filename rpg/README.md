@@ -52,15 +52,15 @@
 | `npm run book:md` | `rpg/kniga-polnaya.md` — полное издание |
 | `npm run book:homebrewery` | `rpg/kniga-homebrewery.md` |
 
-## PDF
+## Скачать
 
-```bash
-npm run pdf:igrok          # koreni-sudby-kniga-igroka.pdf
-npm run pdf:hranitel       # koreni-sudby-kniga-hranitelya.pdf
-npm run pdf:polnoe         # koreni-sudby-polnoe-izdanie.pdf
-npm run pdf:cairn:igrok    # …-cairn.pdf (A5, стиль Cairn)
-npm run pdf:all            # все шесть PDF
-```
+| Книга | PDF (A4) | PDF (Cairn) | Markdown |
+|-------|----------|-------------|----------|
+| Игрок | [pdf](koreni-sudby-kniga-igroka.pdf) | [pdf](koreni-sudby-kniga-igroka-cairn.pdf) | [md](kniga-igroka.md) |
+| Хранитель | [pdf](koreni-sudby-kniga-hranitelya.pdf) | [pdf](koreni-sudby-kniga-hranitelya-cairn.pdf) | [md](kniga-hranitelya.md) |
+| Полное издание | [pdf](koreni-sudby-polnoe-izdanie.pdf) | [pdf](koreni-sudby-polnoe-izdanie-cairn.pdf) | [md](kniga-polnaya.md) |
+
+Сборка: `npm run book:igrok` · `book:hranitel` · `book:md` · PDF: `npm run pdf:all`
 
 ## Быстрый старт
 

@@ -40,7 +40,9 @@ async function main() {
     await run(cmd, args);
     console.log("");
   }
-  console.log("Готово: public/*.pdf");
+  console.log("Обновление сайта (ссылки на скачивание)…");
+  await run("node", ["website/build.mjs"]);
+  console.log("Готово: public/*.pdf + index.html");
 }
 
 main().catch((err) => {

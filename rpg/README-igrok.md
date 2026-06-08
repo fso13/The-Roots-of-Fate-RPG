@@ -27,13 +27,15 @@
 |------|------------|
 | [`kniga-igroka.md`](kniga-igroka.md) | Сборка книги игрока (`npm run book:igrok`) |
 
-## PDF
+## Скачать
 
-```bash
-npm run pdf:igrok
-```
+| Формат | Файл |
+|--------|------|
+| PDF, A4 | [koreni-sudby-kniga-igroka.pdf](koreni-sudby-kniga-igroka.pdf) |
+| PDF, Cairn (A5) | [koreni-sudby-kniga-igroka-cairn.pdf](koreni-sudby-kniga-igroka-cairn.pdf) |
+| Markdown | [kniga-igroka.md](kniga-igroka.md) |
 
-→ `public/koreni-sudby-kniga-igroka.pdf`
+Сборка: `npm run book:igrok` · PDF: `npm run pdf:igrok`
 
 ## Быстрый старт
 

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1240" height="1754" viewBox="0 0 1240 1754">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0.3" y2="1">
+      <stop offset="0%" stop-color="#0c0a10"/>
+      <stop offset="100%" stop-color="#141218"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="62%" cy="38%" r="35%">
+      <stop offset="0%" stop-color="#9d4edd" stop-opacity="0.75"/>
+      <stop offset="100%" stop-color="#9d4edd" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1240" height="1754" fill="url(#bg)"/>
+  <rect width="1240" height="1754" fill="url(#glow)"/>
+  <polygon points="620,315.71999999999997 768.8,1262.8799999999999 471.2,1262.8799999999999" fill="#1f1b24" stroke="#4a4658" stroke-width="3"/>
+  <rect x="582.8" y="736.68" width="60" height="70" fill="#9d4edd" opacity="0.55"/>
+  <ellipse cx="620" cy="1368.1200000000001" rx="280" ry="40" fill="#2d4a3e" opacity="0.5"/>
+  <path d="M 434 1438.28 Q 620 1333.04 806 1438.28" fill="none" stroke="#b8c0d4" stroke-width="4" opacity="0.85"/>
+  <text x="620" y="170" text-anchor="middle" font-family="Georgia, serif" font-size="58" fill="#e8e0f0" letter-spacing="1">Зов из Чёрного шпиля</text>
+  <text x="620" y="230" text-anchor="middle" font-family="Arial, sans-serif" font-size="26" fill="#9d8ec2">Корни судьбы · приключение</text>
+  <text x="620" y="1674" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" fill="#6c6578">Вестмар · сказка без хэппи-энда</text>
+</svg>

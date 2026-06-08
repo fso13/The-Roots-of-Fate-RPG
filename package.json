@@ -7,6 +7,7 @@
     "build:chernyy-maps": "node scripts/install-chernyy-schet-maps.mjs",
     "build:pepel-slov-maps": "node scripts/generate-pepel-slov-maps.mjs",
     "build:chernyy-shpil-maps": "node scripts/generate-chernyy-shpil-maps.mjs",
+    "build:adventure-covers": "node scripts/generate-adventure-covers.mjs",
     "images:homm5-bestiary": "node scripts/fetch-homm5-bestiariy-images.mjs",
     "build": "node scripts/convert-adventure-maps.mjs && node website/build.mjs",
     "build:pdf": "npm run build && node scripts/build-pdf.mjs",
@@ -26,7 +27,8 @@
     "book:hranitel": "node scripts/build-book-md.mjs --audience keeper",
     "book:homebrewery": "node scripts/build-book-homebrewery.mjs --audience all",
     "book:homebrewery:igrok": "node scripts/build-book-homebrewery.mjs --audience player",
-    "book:homebrewery:hranitel": "node scripts/build-book-homebrewery.mjs --audience keeper"
+    "book:homebrewery:hranitel": "node scripts/build-book-homebrewery.mjs --audience keeper",
+    "books": "npm run book:igrok && npm run book:hranitel && npm run book:md && npm run pdf:all"
   },
   "dependencies": {
     "marked": "^15.0.4"

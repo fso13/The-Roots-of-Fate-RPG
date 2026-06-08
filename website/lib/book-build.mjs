@@ -336,3 +336,125 @@ export const PDF_TITLE = {
   player: "Корни судьбы — Книга игрока",
   keeper: "Корни судьбы — Книга хранителя",
 };
+
+/** Файлы для скачивания с сайта (public/). */
+export const BOOK_DOWNLOAD_GROUPS = [
+  {
+    id: "player",
+    title: "Книга игрока",
+    items: [
+      { file: PDF_OUTPUT.player, label: "PDF, A4" },
+      { file: PDF_OUTPUT_CAIRN.player, label: "PDF, Cairn (A5)" },
+      { file: BOOK_OUTPUT.player, label: "Markdown", fromRpg: true },
+    ],
+  },
+  {
+    id: "keeper",
+    title: "Книга хранителя",
+    items: [
+      { file: PDF_OUTPUT.keeper, label: "PDF, A4" },
+      { file: PDF_OUTPUT_CAIRN.keeper, label: "PDF, Cairn (A5)" },
+      { file: BOOK_OUTPUT.keeper, label: "Markdown", fromRpg: true },
+    ],
+  },
+  {
+    id: "all",
+    title: "Полное издание",
+    items: [
+      { file: PDF_OUTPUT.all, label: "PDF, A4" },
+      { file: PDF_OUTPUT_CAIRN.all, label: "PDF, Cairn (A5)" },
+      { file: BOOK_OUTPUT.all, label: "Markdown", fromRpg: true },
+    ],
+  },
+];
+
+const PRESERVE_IN_PUBLIC = /^(koreni-sudby-.*\.pdf|print-book.*\.html)$/;
+
+/** Сохранить PDF и print-HTML перед очисткой public/. */
+export function preserveBookAssets(publicDir) {
+  const preserved = new Map();
+  if (!fs.existsSync(publicDir)) return preserved;
+  for (const name of fs.readdirSync(publicDir)) {
+    if (!PRESERVE_IN_PUBLIC.test(name)) continue;
+    preserved.set(name, fs.readFileSync(path.join(publicDir, name)));
+  }
+  return preserved;
+}
+
+export function restoreBookAssets(publicDir, preserved) {
+  if (!preserved?.size) return;
+  fs.mkdirSync(publicDir, { recursive: true });
+  for (const [name, data] of preserved) {
+    fs.writeFileSync(path.join(publicDir, name), data);
+  }
+}
+
+export function copyBooksForDownload(publicDir, rpgDir = RPG) {
+  fs.mkdirSync(publicDir, { recursive: true });
+  for (const name of Object.values(BOOK_OUTPUT)) {
+    const src = path.join(rpgDir, name);
+    if (fs.existsSync(src)) {
+      fs.copyFileSync(src, path.join(publicDir, name));
+    }
+  }
+}
+
+/** Копии MD + восстановленные PDF перед финальной вёрсткой index. */
+export function syncBookDownloads(publicDir, rpgDir = RPG, preserved = null) {
+  copyBooksForDownload(publicDir, rpgDir);
+  if (preserved) restoreBookAssets(publicDir, preserved);
+}
+
+function formatFileSize(bytes) {
+  if (bytes < 1024) return `${bytes} B`;
+  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(0)} KB`;
+  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+}
+
+/** HTML-блок «Скачать книги»; prefix — относительный путь к корню public (напр. «../»). */
+export function renderBookDownloadsHtml(
+  publicDir,
+  { prefix = "", id = "downloads", onlyGroupIds = null } = {}
+) {
+  const groupsSource = onlyGroupIds
+    ? BOOK_DOWNLOAD_GROUPS.filter((g) => onlyGroupIds.includes(g.id))
+    : BOOK_DOWNLOAD_GROUPS;
+  const esc = (s) =>
+    String(s)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+
+  const groups = groupsSource.map((group) => {
+    const links = group.items
+      .map((item) => {
+        const diskPath = path.join(publicDir, item.file);
+        const href = `${prefix}${item.file}`;
+        const size = fs.existsSync(diskPath)
+          ? formatFileSize(fs.statSync(diskPath).size)
+          : "соберите: npm run pdf:all";
+        return `<li><a class="download-link" href="${esc(href)}" download>${esc(item.label)}</a> <span class="download-meta">${esc(size)}</span></li>`;
+      })
+      .join("\n        ");
+    if (!links) return "";
+    return `
+    <div class="download-group">
+      <h3>${esc(group.title)}</h3>
+      <ul class="download-list">
+        ${links}
+      </ul>
+    </div>`;
+  }).filter(Boolean);
+
+  if (!groups.length) return "";
+
+  return `
+  <section class="downloads" id="${esc(id)}">
+    <h2 class="section-title">Скачать книги</h2>
+    <p class="downloads-note">PDF для печати и офлайн-игры. Markdown — полная сборка из исходников (<code>npm run book:*</code>).</p>
+    <div class="download-grid">
+      ${groups.join("")}
+    </div>
+  </section>`;
+}

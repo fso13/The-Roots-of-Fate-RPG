@@ -340,6 +340,70 @@ a:hover {
   color: var(--accent);
 }
 
+/* ——— Скачивание книг ——— */
+.downloads {
+  max-width: var(--max-read);
+  margin: 0 auto 3rem;
+  padding: 0 1.25rem;
+}
+
+.downloads-note {
+  color: var(--ink-muted);
+  font-size: 0.95rem;
+  margin: -0.5rem 0 1.25rem;
+}
+
+.download-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+}
+
+.download-group {
+  background: var(--bg-panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1rem 1.15rem;
+}
+
+.download-group h3 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 0 0 0.65rem;
+  color: var(--accent);
+}
+
+.download-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.download-list li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.35rem 0;
+  border-top: 1px solid var(--line);
+}
+
+.download-list li:first-child {
+  border-top: none;
+}
+
+.download-link {
+  font-weight: 600;
+  border-bottom: none;
+}
+
+.download-meta {
+  font-size: 0.8rem;
+  color: var(--ink-muted);
+  white-space: nowrap;
+}
+
 /* ——— Страница настроек ——— */
 .config-form {
   margin: 1.5rem 0;

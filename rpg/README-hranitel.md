@@ -40,13 +40,15 @@
 |------|------------|
 | [`kniga-hranitelya.md`](kniga-hranitelya.md) | Сборка книги хранителя (`npm run book:hranitel`) |
 
-## PDF
+## Скачать
 
-```bash
-npm run pdf:hranitel
-```
+| Формат | Файл |
+|--------|------|
+| PDF, A4 | [koreni-sudby-kniga-hranitelya.pdf](koreni-sudby-kniga-hranitelya.pdf) |
+| PDF, Cairn (A5) | [koreni-sudby-kniga-hranitelya-cairn.pdf](koreni-sudby-kniga-hranitelya-cairn.pdf) |
+| Markdown | [kniga-hranitelya.md](kniga-hranitelya.md) |
 
-→ `public/koreni-sudby-kniga-hranitelya.pdf`
+Сборка: `npm run book:hranitel` · PDF: `npm run pdf:hranitel`
 
 ## Быстрый старт
 

@@ -11,6 +11,9 @@ import {
   PLAYER_CHAPTER_ORDER,
   KEEPER_CHAPTER_ORDER,
   CUSTOM_MODULES,
+  preserveBookAssets,
+  renderBookDownloadsHtml,
+  syncBookDownloads,
 } from "./lib/book-build.mjs";
 import { linkGlossaryInHtml, glossaryHrefForPage } from "./lib/glossary.mjs";
 import { expandInventarSchema } from "./lib/inventar-schema.mjs";
@@ -256,6 +259,7 @@ function shortLabel(rel, title) {
 }
 
 function main() {
+  const preservedBooks = preserveBookAssets(OUT);
   fs.rmSync(OUT, { recursive: true, force: true });
   fs.mkdirSync(OUT, { recursive: true });
   fs.mkdirSync(path.join(OUT, "css"), { recursive: true });
@@ -404,6 +408,8 @@ function main() {
       : []),
   ];
 
+  syncBookDownloads(OUT, RPG, preservedBooks);
+
   for (const p of pageMeta) {
     const md = p.isCustomModule
       ? p.mdBody
@@ -413,7 +419,23 @@ function main() {
     );
     const rawBody = fixMdLinks(marked.parse(mdForPage));
     const { html: bodyWithIds, toc } = extractHeadingsAndAddIds(rawBody);
-    const bodyHtml = linkGlossaryInHtml(bodyWithIds, glossaryHrefForPage(p.outRel));
+    let bodyHtml = linkGlossaryInHtml(bodyWithIds, glossaryHrefForPage(p.outRel));
+    const dlPrefix = p.outRel.includes("/") ? "../" : "";
+    if (p.rel === "README-igrok.md") {
+      bodyHtml += renderBookDownloadsHtml(OUT, {
+        prefix: dlPrefix,
+        id: "downloads",
+        onlyGroupIds: ["player"],
+      });
+    } else if (p.rel === "README-hranitel.md") {
+      bodyHtml += renderBookDownloadsHtml(OUT, {
+        prefix: dlPrefix,
+        id: "downloads",
+        onlyGroupIds: ["keeper"],
+      });
+    } else if (p.rel === "README.md") {
+      bodyHtml += renderBookDownloadsHtml(OUT, { prefix: dlPrefix, id: "downloads" });
+    }
     const outPath = path.join(OUT, p.outRel);
     fs.mkdirSync(path.dirname(outPath), { recursive: true });
     const html = wrapPage({
@@ -484,8 +506,10 @@ function main() {
     <div class="hero-actions">
       <a class="btn" href="oglavlenie-igroka.html">Книга игрока</a>
       <a class="btn btn-muted" href="oglavlenie-hranitelya.html">Книга хранителя</a>
+      <a class="btn btn-muted" href="#downloads">Скачать PDF</a>
     </div>
   </section>
+  ${renderBookDownloadsHtml(OUT)}
   <section id="index-section-readmes">
   <h2 class="section-title">Оглавления</h2>
   <div class="card-grid">
