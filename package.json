@@ -5,6 +5,8 @@
   "scripts": {
     "build:maps": "node scripts/convert-adventure-maps.mjs",
     "build:chernyy-maps": "node scripts/install-chernyy-schet-maps.mjs",
+    "build:pepel-slov-maps": "node scripts/generate-pepel-slov-maps.mjs",
+    "build:chernyy-shpil-maps": "node scripts/generate-chernyy-shpil-maps.mjs",
     "images:homm5-bestiary": "node scripts/fetch-homm5-bestiariy-images.mjs",
     "build": "node scripts/convert-adventure-maps.mjs && node website/build.mjs",
     "build:pdf": "npm run build && node scripts/build-pdf.mjs",

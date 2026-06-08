@@ -21,6 +21,8 @@
     "firearms",
     "vehicles",
     "noir_investigation",
+    "fahrenheit_books",
+    "hero_trap",
   ];
 
   function init() {
@@ -52,7 +54,7 @@
 
       const fantasyKeys = ["fantasy_spells", "fantasy_skills", "fantasy_gear", "fantasy_bestiary", "fantasy_inventory"];
       const otherKeys = ["firearms", "vehicles"];
-      const customKeys = ["noir_investigation"];
+      const customKeys = ["noir_investigation", "fahrenheit_books", "hero_trap"];
 
       MODULES_ORDER.forEach((key) => {
         const label = labels[key] || key;

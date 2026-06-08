@@ -41,6 +41,8 @@ const PAGE_TO_MODULE = {
   "fantasy/04-bestiariy.html": "fantasy_bestiary",
   "fantasy/05-inventar.html": "fantasy_inventory",
   "modules/noir-investigation.html": "noir_investigation",
+  "modules/fahrenheit-books.html": "fahrenheit_books",
+  "modules/hero-trap.html": "hero_trap",
 };
 
 marked.use({ gfm: true });

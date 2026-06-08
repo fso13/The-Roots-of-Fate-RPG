@@ -69,9 +69,15 @@ export const CHAPTER_AUDIENCE = {
   "fantasy/05-inventar.md": "player",
   "adventure/01-steklyannyy-zvon.md": "keeper",
   "adventure/02-chernyy-schet.md": "keeper",
+  "adventure/03-pepel-slov.md": "keeper",
+  "adventure/04-zov-chernogo-shpilya.md": "keeper",
   "adventure/maps/chernyy-schet/MAPS.md": "keeper",
+  "adventure/maps/pepel-slov/MAPS.md": "keeper",
+  "adventure/maps/chernyy-shpil/MAPS.md": "keeper",
   "slovar-terminov.md": "player",
   "modules/noir-investigation.md": "keeper",
+  "modules/fahrenheit-books.md": "keeper",
+  "modules/hero-trap.md": "keeper",
 };
 
 export const PLAYER_CHAPTER_ORDER = [
@@ -98,6 +104,8 @@ export const KEEPER_CHAPTER_ORDER = [
   "08-krity-i-promahi.md",
   "11-otryady.md",
   "modules/noir-investigation.md",
+  "modules/fahrenheit-books.md",
+  "modules/hero-trap.md",
   "slovar-terminov.md",
 ];
 
@@ -108,6 +116,20 @@ export const CUSTOM_MODULES = [
     srcRel: "noir_investigation/module.md",
     outRel: "modules/noir-investigation.html",
     mdRel: "modules/noir-investigation.md",
+    audience: "keeper",
+  },
+  {
+    id: "fahrenheit_books",
+    srcRel: "fahrenheit_books/module.md",
+    outRel: "modules/fahrenheit-books.html",
+    mdRel: "modules/fahrenheit-books.md",
+    audience: "keeper",
+  },
+  {
+    id: "hero_trap",
+    srcRel: "hero_trap/module.md",
+    outRel: "modules/hero-trap.html",
+    mdRel: "modules/hero-trap.md",
     audience: "keeper",
   },
 ];

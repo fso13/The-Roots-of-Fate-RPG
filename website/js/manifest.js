@@ -24,6 +24,8 @@
     fantasy_bestiary: "fantasy/04-bestiariy.html",
     fantasy_inventory: "fantasy/05-inventar.html",
     noir_investigation: "modules/noir-investigation.html",
+    fahrenheit_books: "modules/fahrenheit-books.html",
+    hero_trap: "modules/hero-trap.html",
   };
 
   const DEFAULT_MODULES = {
@@ -46,6 +48,8 @@
     firearms: false,
     vehicles: false,
     noir_investigation: true,
+    fahrenheit_books: false,
+    hero_trap: false,
   };
 
   const MODULE_LABELS = {
@@ -67,6 +71,8 @@
     firearms: "Огнестрел",
     vehicles: "Транспорт",
     noir_investigation: "Нуарное расследование",
+    fahrenheit_books: "Пепел и память (451°)",
+    hero_trap: "Эхо сказки (ловушка героя)",
   };
 
   function getConfig() {

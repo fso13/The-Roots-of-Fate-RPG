@@ -32,3 +32,7 @@ custom_modules:
     enabled: false
   - path: "./my_modules/noir_investigation"
     enabled: false   # для «Чёрного счёта» — включите true
+  - path: "./my_modules/fahrenheit_books"
+    enabled: false   # для «Пепел слов» — включите true
+  - path: "./my_modules/hero_trap"
+    enabled: false   # для «Зов из Чёрного шпиля» — включите true
