@@ -78,6 +78,10 @@ export const CHAPTER_AUDIENCE = {
   "modules/noir-investigation.md": "keeper",
   "modules/fahrenheit-books.md": "keeper",
   "modules/hero-trap.md": "keeper",
+  "modules/gothic-oruzhie.md": "player",
+  "modules/gothic-bronya.md": "player",
+  "modules/gothic-magiya.md": "player",
+  "modules/gothic-talanty.md": "player",
 };
 
 export const PLAYER_CHAPTER_ORDER = [
@@ -92,6 +96,10 @@ export const PLAYER_CHAPTER_ORDER = [
   "fantasy/02-talanty-i-navyki.md",
   "fantasy/03-snaryazhenie.md",
   "fantasy/05-inventar.md",
+  "modules/gothic-oruzhie.md",
+  "modules/gothic-bronya.md",
+  "modules/gothic-magiya.md",
+  "modules/gothic-talanty.md",
   "slovar-terminov.md",
 ];
 
@@ -131,6 +139,34 @@ export const CUSTOM_MODULES = [
     outRel: "modules/hero-trap.html",
     mdRel: "modules/hero-trap.md",
     audience: "keeper",
+  },
+  {
+    id: "gothic_weapons",
+    srcRel: "gothic/oruzhie/module.md",
+    outRel: "modules/gothic-oruzhie.html",
+    mdRel: "modules/gothic-oruzhie.md",
+    audience: "player",
+  },
+  {
+    id: "gothic_armor",
+    srcRel: "gothic/bronya/module.md",
+    outRel: "modules/gothic-bronya.html",
+    mdRel: "modules/gothic-bronya.md",
+    audience: "player",
+  },
+  {
+    id: "gothic_magic",
+    srcRel: "gothic/magiya/module.md",
+    outRel: "modules/gothic-magiya.html",
+    mdRel: "modules/gothic-magiya.md",
+    audience: "player",
+  },
+  {
+    id: "gothic_talents",
+    srcRel: "gothic/talanty/module.md",
+    outRel: "modules/gothic-talanty.html",
+    mdRel: "modules/gothic-talanty.md",
+    audience: "player",
   },
 ];
 

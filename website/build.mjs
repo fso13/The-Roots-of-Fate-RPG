@@ -46,6 +46,10 @@ const PAGE_TO_MODULE = {
   "modules/noir-investigation.html": "noir_investigation",
   "modules/fahrenheit-books.html": "fahrenheit_books",
   "modules/hero-trap.html": "hero_trap",
+  "modules/gothic-oruzhie.html": "gothic_weapons",
+  "modules/gothic-bronya.html": "gothic_armor",
+  "modules/gothic-magiya.html": "gothic_magic",
+  "modules/gothic-talanty.html": "gothic_talents",
 };
 
 marked.use({ gfm: true });
@@ -357,6 +361,8 @@ function main() {
   const fant = pageMeta.filter((p) => p.rel.startsWith("fantasy/"));
   const adv = pageMeta.filter((p) => p.rel.startsWith("adventure/"));
   const customMods = pageMeta.filter((p) => p.isCustomModule);
+  const playerCustomMods = customMods.filter((p) => p.audience === "player");
+  const keeperCustomMods = customMods.filter((p) => p.audience !== "player");
   const readmes = pageMeta.filter((p) => p.isReadme);
 
   const playerCore = core.filter((p) => p.audience === "player");
@@ -375,7 +381,7 @@ function main() {
   const slovarPage = pageMeta.find((p) => p.rel === "slovar-terminov.md");
 
   const playerNavItems = sortNavByChapterOrder(
-    [...playerCore, ...playerFant].filter(isNavVisible).map(toNavItem),
+    [...playerCore, ...playerFant, ...playerCustomMods].filter(isNavVisible).map(toNavItem),
     PLAYER_CHAPTER_ORDER
   );
   const keeperNavItems = sortNavByChapterOrder(
@@ -398,11 +404,11 @@ function main() {
       title: "Книга хранителя",
       items: keeperNavItems,
     },
-    ...(customMods.length
+    ...(keeperCustomMods.length
       ? [
           {
             title: "Доп. модули",
-            items: customMods.map(toNavItem),
+            items: keeperCustomMods.map(toNavItem),
           },
         ]
       : []),
@@ -449,7 +455,10 @@ function main() {
     fs.writeFileSync(outPath, html);
   }
 
-  const playerPages = sortNavByChapterOrder([...playerCore, ...playerFant], PLAYER_CHAPTER_ORDER);
+  const playerPages = sortNavByChapterOrder(
+    [...playerCore, ...playerFant, ...playerCustomMods],
+    PLAYER_CHAPTER_ORDER
+  );
   const keeperPages = sortNavByChapterOrder(
     [...keeperCore, ...keeperFant, ...(slovarPage ? [slovarPage] : []), ...adv],
     KEEPER_CHAPTER_ORDER
@@ -529,11 +538,11 @@ function main() {
   </div>
   </section>
   ${
-    customMods.length
+    keeperCustomMods.length
       ? `<section id="index-section-custom">
   <h2 class="section-title">Дополнительные модули</h2>
   <div class="card-grid">
-    ${customMods.map(card).join("")}
+    ${keeperCustomMods.map(card).join("")}
   </div>
   </section>`
       : ""

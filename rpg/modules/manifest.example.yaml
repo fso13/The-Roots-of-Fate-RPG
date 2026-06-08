@@ -36,3 +36,11 @@ custom_modules:
     enabled: false   # для «Пепел слов» — включите true
   - path: "./my_modules/hero_trap"
     enabled: false   # для «Зов из Чёрного шпиля» — включите true
+  - path: "./my_modules/gothic/oruzhie"
+    enabled: false   # Готика — оружие
+  - path: "./my_modules/gothic/bronya"
+    enabled: false   # Готика — броня
+  - path: "./my_modules/gothic/magiya"
+    enabled: false   # Готика — магия
+  - path: "./my_modules/gothic/talanty"
+    enabled: false   # Готика — таланты

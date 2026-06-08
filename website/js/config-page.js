@@ -23,6 +23,10 @@
     "noir_investigation",
     "fahrenheit_books",
     "hero_trap",
+    "gothic_weapons",
+    "gothic_armor",
+    "gothic_magic",
+    "gothic_talents",
   ];
 
   function init() {
@@ -54,7 +58,15 @@
 
       const fantasyKeys = ["fantasy_spells", "fantasy_skills", "fantasy_gear", "fantasy_bestiary", "fantasy_inventory"];
       const otherKeys = ["firearms", "vehicles"];
-      const customKeys = ["noir_investigation", "fahrenheit_books", "hero_trap"];
+      const customKeys = [
+        "noir_investigation",
+        "fahrenheit_books",
+        "hero_trap",
+        "gothic_weapons",
+        "gothic_armor",
+        "gothic_magic",
+        "gothic_talents",
+      ];
 
       MODULES_ORDER.forEach((key) => {
         const label = labels[key] || key;

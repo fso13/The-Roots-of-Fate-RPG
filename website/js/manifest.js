@@ -26,6 +26,10 @@
     noir_investigation: "modules/noir-investigation.html",
     fahrenheit_books: "modules/fahrenheit-books.html",
     hero_trap: "modules/hero-trap.html",
+    gothic_weapons: "modules/gothic-oruzhie.html",
+    gothic_armor: "modules/gothic-bronya.html",
+    gothic_magic: "modules/gothic-magiya.html",
+    gothic_talents: "modules/gothic-talanty.html",
   };
 
   const DEFAULT_MODULES = {
@@ -50,6 +54,10 @@
     noir_investigation: true,
     fahrenheit_books: false,
     hero_trap: false,
+    gothic_weapons: false,
+    gothic_armor: false,
+    gothic_magic: false,
+    gothic_talents: false,
   };
 
   const MODULE_LABELS = {
@@ -73,6 +81,10 @@
     noir_investigation: "Нуарное расследование",
     fahrenheit_books: "Пепел и память (451°)",
     hero_trap: "Эхо сказки (ловушка героя)",
+    gothic_weapons: "Готика — оружие",
+    gothic_armor: "Готика — броня",
+    gothic_magic: "Готика — магия",
+    gothic_talents: "Готика — таланты",
   };
 
   function getConfig() {
