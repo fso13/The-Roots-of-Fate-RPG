@@ -44,3 +44,7 @@ custom_modules:
     enabled: false   # Готика — магия
   - path: "./my_modules/gothic/talanty"
     enabled: false   # Готика — таланты
+  - path: "./my_modules/firearms"
+    enabled: false   # Огнестрел
+  - path: "./my_modules/vehicles"
+    enabled: false   # Транспорт

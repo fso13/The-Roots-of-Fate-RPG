@@ -347,10 +347,19 @@ a:hover {
   padding: 0 1.25rem;
 }
 
-.downloads-note {
+.downloads-note,
+.section-note {
   color: var(--ink-muted);
   font-size: 0.95rem;
   margin: -0.5rem 0 1.25rem;
+}
+
+.index-adventure {
+  margin-bottom: 2rem;
+}
+
+.card-grid-adventure {
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
 }
 
 .download-grid {

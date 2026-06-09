@@ -11,6 +11,7 @@ import {
   PLAYER_CHAPTER_ORDER,
   KEEPER_CHAPTER_ORDER,
   CUSTOM_MODULES,
+  ADVENTURES,
   preserveBookAssets,
   renderBookDownloadsHtml,
   syncBookDownloads,
@@ -50,6 +51,8 @@ const PAGE_TO_MODULE = {
   "modules/gothic-bronya.html": "gothic_armor",
   "modules/gothic-magiya.html": "gothic_magic",
   "modules/gothic-talanty.html": "gothic_talents",
+  "modules/ognestrel.html": "firearms",
+  "modules/transport.html": "vehicles",
 };
 
 marked.use({ gfm: true });
@@ -359,11 +362,12 @@ function main() {
       !p.rel.startsWith("adventure/")
   );
   const fant = pageMeta.filter((p) => p.rel.startsWith("fantasy/"));
-  const adv = pageMeta.filter((p) => p.rel.startsWith("adventure/"));
-  const customMods = pageMeta.filter((p) => p.isCustomModule);
-  const playerCustomMods = customMods.filter((p) => p.audience === "player");
-  const keeperCustomMods = customMods.filter((p) => p.audience !== "player");
+  const customModOrder = CUSTOM_MODULES.map((m) => m.mdRel);
+  const customMods = pageMeta
+    .filter((p) => p.isCustomModule)
+    .sort((a, b) => customModOrder.indexOf(a.rel) - customModOrder.indexOf(b.rel));
   const readmes = pageMeta.filter((p) => p.isReadme);
+  const pageByRel = new Map(pageMeta.map((p) => [p.rel, p]));
 
   const playerCore = core.filter((p) => p.audience === "player");
   const keeperCore = core.filter((p) => p.audience === "keeper");
@@ -380,16 +384,20 @@ function main() {
 
   const slovarPage = pageMeta.find((p) => p.rel === "slovar-terminov.md");
 
+  const advMainRels = new Set(ADVENTURES.map((a) => a.adventureRel));
+  const advMain = pageMeta.filter((p) => advMainRels.has(p.rel));
+
   const playerNavItems = sortNavByChapterOrder(
-    [...playerCore, ...playerFant, ...playerCustomMods].filter(isNavVisible).map(toNavItem),
+    [...playerCore, ...playerFant].filter(isNavVisible).map(toNavItem),
     PLAYER_CHAPTER_ORDER
   );
   const keeperNavItems = sortNavByChapterOrder(
-    [...keeperCore, ...keeperFant, ...(slovarPage ? [slovarPage] : []), ...adv]
+    [...keeperCore, ...keeperFant, ...(slovarPage ? [slovarPage] : [])]
       .filter(isNavVisible)
       .map(toNavItem),
     KEEPER_CHAPTER_ORDER
   );
+  const adventureNavItems = advMain.filter(isNavVisible).map(toNavItem);
 
   const navGroups = [
     {
@@ -404,11 +412,19 @@ function main() {
       title: "Книга хранителя",
       items: keeperNavItems,
     },
-    ...(keeperCustomMods.length
+    ...(adventureNavItems.length
+      ? [
+          {
+            title: "Приключения",
+            items: adventureNavItems,
+          },
+        ]
+      : []),
+    ...(customMods.length
       ? [
           {
             title: "Доп. модули",
-            items: keeperCustomMods.map(toNavItem),
+            items: customMods.filter(isNavVisible).map(toNavItem),
           },
         ]
       : []),
@@ -455,24 +471,24 @@ function main() {
     fs.writeFileSync(outPath, html);
   }
 
-  const playerPages = sortNavByChapterOrder(
-    [...playerCore, ...playerFant, ...playerCustomMods],
-    PLAYER_CHAPTER_ORDER
-  );
+  const playerPages = sortNavByChapterOrder([...playerCore, ...playerFant], PLAYER_CHAPTER_ORDER);
   const keeperPages = sortNavByChapterOrder(
-    [...keeperCore, ...keeperFant, ...(slovarPage ? [slovarPage] : []), ...adv],
+    [...keeperCore, ...keeperFant, ...(slovarPage ? [slovarPage] : [])],
     KEEPER_CHAPTER_ORDER
   );
 
-  const card = (p) => {
+  const card = (p, metaOverride) => {
     const desc = p.short.replace(/"/g, "&quot;");
-    let meta = "Правила";
-    if (p.isReadme) meta = "Оглавление";
-    else if (p.isCustomModule) meta = "Доп. модуль";
-    else if (p.audience === "player") meta = "Игрок";
-    else if (p.audience === "keeper") meta = "Хранитель";
-    if (p.rel.startsWith("fantasy/")) meta = p.audience === "keeper" ? "Фэнтези · хранитель" : "Фэнтези · игрок";
-    if (p.rel.startsWith("adventure/")) meta = "Приключение";
+    let meta = metaOverride || "Правила";
+    if (!metaOverride) {
+      if (p.isReadme) meta = "Оглавление";
+      else if (p.isCustomModule) meta = "Доп. модуль";
+      else if (p.audience === "player") meta = "Игрок";
+      else if (p.audience === "keeper") meta = "Хранитель";
+      if (p.rel.startsWith("fantasy/")) meta = p.audience === "keeper" ? "Фэнтези · хранитель" : "Фэнтези · игрок";
+      if (p.rel.startsWith("adventure/") && p.rel.endsWith(".md") && !p.rel.includes("/maps/")) meta = "Приключение";
+      if (p.rel.includes("/maps/") && p.rel.endsWith("MAPS.md")) meta = "Карты";
+    }
     const mod = PAGE_TO_MODULE[p.outRel];
     const dataMod = mod ? ` data-module="${mod}"` : "";
     return `
@@ -482,6 +498,27 @@ function main() {
       <p>${escapeHtml(desc)}</p>
     </a>`;
   };
+
+  const adventureSections = ADVENTURES.map((advConfig) => {
+    const adventure = pageByRel.get(advConfig.adventureRel);
+    if (!adventure) return "";
+    const module = advConfig.moduleRel ? pageByRel.get(advConfig.moduleRel) : null;
+    const maps = advConfig.mapsRel ? pageByRel.get(advConfig.mapsRel) : null;
+    const cards = [
+      card(adventure, "Приключение"),
+      module ? card(module, "Модуль") : "",
+      maps ? card(maps, "Карты") : "",
+    ]
+      .filter(Boolean)
+      .join("");
+    return `
+  <section id="index-adventure-${advConfig.id}" class="index-adventure">
+  <h2 class="section-title">${escapeHtml(adventure.title)}</h2>
+  <div class="card-grid card-grid-adventure">
+    ${cards}
+  </div>
+  </section>`;
+  }).join("");
 
   const indexHtml = `<!DOCTYPE html>
 <html lang="ru">
@@ -522,27 +559,28 @@ function main() {
   <section id="index-section-readmes">
   <h2 class="section-title">Оглавления</h2>
   <div class="card-grid">
-    ${readmes.map(card).join("")}
+    ${readmes.map((p) => card(p)).join("")}
   </div>
   </section>
   <section id="index-section-player">
   <h2 class="section-title">Книга игрока</h2>
   <div class="card-grid">
-    ${playerPages.map(card).join("")}
+    ${playerPages.map((p) => card(p)).join("")}
   </div>
   </section>
   <section id="index-section-keeper">
   <h2 class="section-title">Книга хранителя</h2>
   <div class="card-grid">
-    ${keeperPages.map(card).join("")}
+    ${keeperPages.map((p) => card(p)).join("")}
   </div>
   </section>
+  ${adventureSections}
   ${
-    keeperCustomMods.length
+    customMods.length
       ? `<section id="index-section-custom">
   <h2 class="section-title">Дополнительные модули</h2>
   <div class="card-grid">
-    ${keeperCustomMods.map(card).join("")}
+    ${customMods.map((p) => card(p)).join("")}
   </div>
   </section>`
       : ""

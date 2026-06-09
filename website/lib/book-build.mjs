@@ -71,9 +71,12 @@ export const CHAPTER_AUDIENCE = {
   "adventure/02-chernyy-schet.md": "keeper",
   "adventure/03-pepel-slov.md": "keeper",
   "adventure/04-zov-chernogo-shpilya.md": "keeper",
+  "adventure/05-apokrif-iudy.md": "keeper",
   "adventure/maps/chernyy-schet/MAPS.md": "keeper",
   "adventure/maps/pepel-slov/MAPS.md": "keeper",
   "adventure/maps/chernyy-shpil/MAPS.md": "keeper",
+  "adventure/maps/apokrif-iudy/MAPS.md": "keeper",
+  "adventure/maps/steklyannyy-zvon/MAPS.md": "keeper",
   "slovar-terminov.md": "player",
   "modules/noir-investigation.md": "keeper",
   "modules/fahrenheit-books.md": "keeper",
@@ -82,6 +85,8 @@ export const CHAPTER_AUDIENCE = {
   "modules/gothic-bronya.md": "player",
   "modules/gothic-magiya.md": "player",
   "modules/gothic-talanty.md": "player",
+  "modules/ognestrel.md": "player",
+  "modules/transport.md": "keeper",
 };
 
 export const PLAYER_CHAPTER_ORDER = [
@@ -96,10 +101,6 @@ export const PLAYER_CHAPTER_ORDER = [
   "fantasy/02-talanty-i-navyki.md",
   "fantasy/03-snaryazhenie.md",
   "fantasy/05-inventar.md",
-  "modules/gothic-oruzhie.md",
-  "modules/gothic-bronya.md",
-  "modules/gothic-magiya.md",
-  "modules/gothic-talanty.md",
   "slovar-terminov.md",
 ];
 
@@ -111,9 +112,6 @@ export const KEEPER_CHAPTER_ORDER = [
   "07-rany.md",
   "08-krity-i-promahi.md",
   "11-otryady.md",
-  "modules/noir-investigation.md",
-  "modules/fahrenheit-books.md",
-  "modules/hero-trap.md",
   "slovar-terminov.md",
 ];
 
@@ -167,6 +165,59 @@ export const CUSTOM_MODULES = [
     outRel: "modules/gothic-talanty.html",
     mdRel: "modules/gothic-talanty.md",
     audience: "player",
+  },
+  {
+    id: "firearms",
+    srcRel: "firearms/module.md",
+    outRel: "modules/ognestrel.html",
+    mdRel: "modules/ognestrel.md",
+    audience: "player",
+  },
+  {
+    id: "vehicles",
+    srcRel: "vehicles/module.md",
+    outRel: "modules/transport.html",
+    mdRel: "modules/transport.md",
+    audience: "keeper",
+  },
+];
+
+/** Приключения на сайте: приключение + модуль + карты. */
+export const ADVENTURES = [
+  {
+    id: "steklyannyy-zvon",
+    title: "Стеклянный звон",
+    adventureRel: "adventure/01-steklyannyy-zvon.md",
+    moduleRel: null,
+    mapsRel: "adventure/maps/steklyannyy-zvon/MAPS.md",
+  },
+  {
+    id: "chernyy-schet",
+    title: "Чёрный счёт",
+    adventureRel: "adventure/02-chernyy-schet.md",
+    moduleRel: "modules/noir-investigation.md",
+    mapsRel: "adventure/maps/chernyy-schet/MAPS.md",
+  },
+  {
+    id: "pepel-slov",
+    title: "Пепел слов",
+    adventureRel: "adventure/03-pepel-slov.md",
+    moduleRel: "modules/fahrenheit-books.md",
+    mapsRel: "adventure/maps/pepel-slov/MAPS.md",
+  },
+  {
+    id: "chernyy-shpil",
+    title: "Зов из Чёрного шпиля",
+    adventureRel: "adventure/04-zov-chernogo-shpilya.md",
+    moduleRel: "modules/hero-trap.md",
+    mapsRel: "adventure/maps/chernyy-shpil/MAPS.md",
+  },
+  {
+    id: "apokrif-iudy",
+    title: "Поцелуй Иуды",
+    adventureRel: "adventure/05-apokrif-iudy.md",
+    moduleRel: "modules/noir-investigation.md",
+    mapsRel: "adventure/maps/apokrif-iudy/MAPS.md",
   },
 ];
 

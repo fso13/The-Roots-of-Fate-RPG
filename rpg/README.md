@@ -7,7 +7,7 @@
 | Книга | Для кого | Ссылка |
 |-------|----------|--------|
 | **Книга игрока** | Создание персонажа, бой, магия, снаряжение, таланты | [README-igrok.md](README-igrok.md) |
-| **Книга хранителя** | Модули, бестиарий, опциональные правила, приключения | [README-hranitel.md](README-hranitel.md) |
+| **Книга хранителя** | Модули, бестиарий, опциональные правила | [README-hranitel.md](README-hranitel.md) |
 
 ## Книга игрока (главы 1–11)
 
@@ -37,11 +37,23 @@
 | 5 | [Глава 5. Критические попадания и промахи](08-krity-i-promahi.md) | *Опционально* |
 | 6 | [Глава 6. Бой с отрядами](11-otryady.md) | *Опционально* |
 
-### Приключения
+### Дополнительные модули
 
 | Файл | Содержание |
 |------|------------|
-| [«Стеклянный звон»](adventure/01-steklyannyy-zvon.md) | Стартовое приключение на **2 сессии** |
+| [Готика — оружие](modules/gothic-oruzhie.html) · [броня](modules/gothic-bronya.html) · [магия](modules/gothic-magiya.html) · [таланты](modules/gothic-talanty.html) | Готический сеттинг |
+| [«Нуарное расследование»](modules/noir-investigation.html) · [«Пепел и память»](modules/fahrenheit-books.html) · [«Эхо сказки»](modules/hero-trap.html) | Приключенческие модули |
+| [Огнестрел](modules/ognestrel.html) · [Транспорт](modules/transport.html) | Погони и огнестрельное оружие |
+
+## Приключения
+
+| Приключение | Модуль | Карты |
+|-------------|--------|-------|
+| [«Стеклянный звон»](adventure/01-steklyannyy-zvon.md) | — | [карты](adventure/maps/steklyannyy-zvon/MAPS.md) |
+| [«Чёрный счёт»](adventure/02-chernyy-schet.md) | [нуар](modules/noir-investigation.html) | [карты](adventure/maps/chernyy-schet/MAPS.md) |
+| [«Пепел слов»](adventure/03-pepel-slov.md) | [451°](modules/fahrenheit-books.html) | [карты](adventure/maps/pepel-slov/MAPS.md) |
+| [«Зов из Чёрного шпиля»](adventure/04-zov-chernogo-shpilya.md) | [эхо сказки](modules/hero-trap.html) | [карты](adventure/maps/chernyy-shpil/MAPS.md) |
+| [«Поцелуй Иуды»](adventure/05-apokrif-iudy.md) | [нуар](modules/noir-investigation.html) | [карты](adventure/maps/apokrif-iudy/MAPS.md) |
 
 ## Сборка книг
 

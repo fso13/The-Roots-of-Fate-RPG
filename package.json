@@ -7,6 +7,7 @@
     "build:chernyy-maps": "node scripts/install-chernyy-schet-maps.mjs",
     "build:pepel-slov-maps": "node scripts/generate-pepel-slov-maps.mjs",
     "build:chernyy-shpil-maps": "node scripts/generate-chernyy-shpil-maps.mjs",
+    "build:apokrif-iudy-maps": "node scripts/generate-apokrif-iudy-maps.mjs",
     "build:adventure-covers": "node scripts/generate-adventure-covers.mjs",
     "images:homm5-bestiary": "node scripts/fetch-homm5-bestiariy-images.mjs",
     "build": "node scripts/convert-adventure-maps.mjs && node website/build.mjs",

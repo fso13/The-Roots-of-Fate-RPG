@@ -18,8 +18,6 @@
     "fantasy_gear",
     "fantasy_bestiary",
     "fantasy_inventory",
-    "firearms",
-    "vehicles",
     "noir_investigation",
     "fahrenheit_books",
     "hero_trap",
@@ -27,6 +25,8 @@
     "gothic_armor",
     "gothic_magic",
     "gothic_talents",
+    "firearms",
+    "vehicles",
   ];
 
   function init() {
@@ -49,15 +49,11 @@
       const fantasyGroup = document.createElement("div");
       fantasyGroup.className = "config-group";
       fantasyGroup.innerHTML = '<div class="config-group-title">Фэнтези-модули</div>';
-      const otherGroup = document.createElement("div");
-      otherGroup.className = "config-group";
-      otherGroup.innerHTML = '<div class="config-group-title">Прочее</div>';
       const customGroup = document.createElement("div");
       customGroup.className = "config-group";
       customGroup.innerHTML = '<div class="config-group-title">Дополнительные модули</div>';
 
       const fantasyKeys = ["fantasy_spells", "fantasy_skills", "fantasy_gear", "fantasy_bestiary", "fantasy_inventory"];
-      const otherKeys = ["firearms", "vehicles"];
       const customKeys = [
         "noir_investigation",
         "fahrenheit_books",
@@ -66,6 +62,8 @@
         "gothic_armor",
         "gothic_magic",
         "gothic_talents",
+        "firearms",
+        "vehicles",
       ];
 
       MODULES_ORDER.forEach((key) => {
@@ -81,8 +79,6 @@
           fantasyGroup.appendChild(labelEl);
         } else if (customKeys.includes(key)) {
           customGroup.appendChild(labelEl);
-        } else if (otherKeys.includes(key)) {
-          otherGroup.appendChild(labelEl);
         } else {
           coreGroup.appendChild(labelEl);
         }
@@ -91,7 +87,6 @@
       form.appendChild(coreGroup);
       form.appendChild(fantasyGroup);
       if (customGroup.querySelector("label")) form.appendChild(customGroup);
-      form.appendChild(otherGroup);
     }
 
     function collectConfig() {

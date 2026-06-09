@@ -30,6 +30,8 @@
     gothic_armor: "modules/gothic-bronya.html",
     gothic_magic: "modules/gothic-magiya.html",
     gothic_talents: "modules/gothic-talanty.html",
+    firearms: "modules/ognestrel.html",
+    vehicles: "modules/transport.html",
   };
 
   const DEFAULT_MODULES = {
