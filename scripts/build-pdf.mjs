@@ -44,7 +44,7 @@ const HELP = `Usage: node scripts/build-pdf.mjs [options]
 async function main() {
   const opts = parsePdfArgs(process.argv, {
     output: path.join(PUBLIC, PDF_OUTPUT.all),
-    includeAdventure: true,
+    includeAdventure: false,
     audience: "all",
     helpText: HELP,
   });

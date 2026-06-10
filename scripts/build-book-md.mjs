@@ -12,7 +12,7 @@ import {
 } from "../website/lib/book-build.mjs";
 
 function parseArgs(argv) {
-  const opts = { includeAdventure: true, audience: "all", output: null };
+  const opts = { includeAdventure: false, audience: "all", output: null };
   for (let i = 2; i < argv.length; i++) {
     if (argv[i] === "--no-adventure") opts.includeAdventure = false;
     else if (argv[i] === "--audience" && argv[i + 1]) opts.audience = argv[++i];

@@ -22,6 +22,7 @@ async function getChromium() {
   return chromiumModule;
 }
 export const RPG = path.join(ROOT, "rpg");
+export const MY_MODULES = path.join(ROOT, "my_modules");
 export const PUBLIC = path.join(ROOT, "public");
 
 export function walkMarkdown(dir, base = dir) {
@@ -60,12 +61,31 @@ export function escapeHtml(s) {
     .replace(/"/g, "&quot;");
 }
 
-function assetPublicPath(relPath, src) {
+export function stripFrontmatter(md) {
+  if (md.startsWith("---\n")) {
+    const end = md.indexOf("\n---\n", 4);
+    if (end !== -1) return md.slice(end + 5);
+  }
+  return md;
+}
+
+function resolveAssetAbs(relPath, src) {
   if (/^https?:\/\//i.test(src) || src.startsWith("data:")) return null;
-  const dir = path.dirname(relPath);
   const normalized = src.replace(/^\.\//, "");
-  const abs = path.join(RPG, dir === "." ? "" : dir, normalized);
-  if (!fs.existsSync(abs)) return null;
+  const dir = path.dirname(relPath);
+  const candidates = [path.normalize(path.join(RPG, dir === "." ? "" : dir, normalized))];
+  if (normalized.includes("..")) {
+    candidates.push(path.normalize(path.join(RPG, normalized.replace(/^(\.\.\/)+/, ""))));
+  }
+  for (const abs of candidates) {
+    if (fs.existsSync(abs)) return abs;
+  }
+  return null;
+}
+
+function assetPublicPath(relPath, src) {
+  const abs = resolveAssetAbs(relPath, src);
+  if (!abs) return null;
   return path.relative(PUBLIC, abs).replace(/\\/g, "/");
 }
 
@@ -106,6 +126,66 @@ export function buildChapterList(relFiles, { wrapHead = false, transformMd } = {
   });
 }
 
+export function buildCustomModuleChapter(mod, { wrapHead = false } = {}) {
+  const srcPath = path.join(MY_MODULES, mod.srcRel);
+  const mdRaw = stripFrontmatter(fs.readFileSync(srcPath, "utf8"));
+  const rel = mod.mdRel;
+  const md = expandInventarSchema(relImageSrc(rel, mdRaw));
+  const title = extractTitle(md) || mod.title || mod.id;
+  const id = chapterId(rel);
+  let body = fixHtmlAssetPaths(fixMdLinksForPdf(marked.parse(md)), rel);
+  if (wrapHead) body = wrapChapterHead(body);
+  return { rel, title, id, body };
+}
+
+export function buildSimpleToc(chapters, { tocClass = "print-toc" } = {}) {
+  const items = chapters
+    .map(
+      (c) => `<li class="toc-item">
+          <a class="toc-link" href="#${c.id}">
+            <span class="toc-title">${escapeHtml(c.title)}</span>
+            <span class="toc-fill" aria-hidden="true"></span>
+          </a>
+        </li>`
+    )
+    .join("\n");
+  return `<nav class="${tocClass}"><h2>Оглавление</h2><ol>${items}</ol></nav>`;
+}
+
+export function buildPrintHtml({
+  chapters,
+  title,
+  bodyClass,
+  cssHref,
+  fontLinks = "",
+  coverHtml,
+  mainClass = "print-book-main",
+  tocClass,
+  simpleToc = false,
+}) {
+  const toc = simpleToc
+    ? buildSimpleToc(chapters, { tocClass: tocClass || "print-toc" })
+    : buildToc(chapters, { tocClass: tocClass || "print-toc" });
+  const body = chapters.map((c) => `<section class="chapter" id="${c.id}">${c.body}</section>`).join("\n");
+
+  return `<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>${escapeHtml(title)}</title>
+  ${fontLinks}
+  <link rel="stylesheet" href="${cssHref}">
+</head>
+<body class="${bodyClass}">
+  ${coverHtml}
+  <main class="${mainClass}">
+    ${toc}
+    ${body}
+  </main>
+</body>
+</html>`;
+}
+
 export function buildToc(chapters, { tocClass = "print-toc" } = {}) {
   const isIntro = (c) =>
     c.rel === "README.md" || c.rel === "README-igrok.md" || c.rel === "README-hranitel.md";
@@ -114,6 +194,7 @@ export function buildToc(chapters, { tocClass = "print-toc" } = {}) {
   );
   const fantasy = chapters.filter((c) => c.rel.startsWith("fantasy/"));
   const adventure = chapters.filter((c) => c.rel.startsWith("adventure/"));
+  const modules = chapters.filter((c) => c.rel.startsWith("modules/"));
   const readme = chapters.find((c) => isIntro(c));
 
   const section = (items) =>
@@ -138,43 +219,16 @@ export function buildToc(chapters, { tocClass = "print-toc" } = {}) {
     html += '<li class="toc-group">Фэнтези-модули</li>';
     html += section(fantasy);
   }
+  if (modules.length) {
+    html += '<li class="toc-group">Дополнительные модули</li>';
+    html += section(modules);
+  }
   if (adventure.length) {
     html += '<li class="toc-group">Приключения</li>';
     html += section(adventure);
   }
   html += "</ol></nav>";
   return html;
-}
-
-export function buildPrintHtml({
-  chapters,
-  title,
-  bodyClass,
-  cssHref,
-  fontLinks = "",
-  coverHtml,
-  mainClass = "print-book-main",
-  tocClass,
-}) {
-  const toc = buildToc(chapters, { tocClass: tocClass || "print-toc" });
-  const body = chapters.map((c) => `<section class="chapter" id="${c.id}">${c.body}</section>`).join("\n");
-
-  return `<!DOCTYPE html>
-<html lang="ru">
-<head>
-  <meta charset="utf-8">
-  <title>${escapeHtml(title)}</title>
-  ${fontLinks}
-  <link rel="stylesheet" href="${cssHref}">
-</head>
-<body class="${bodyClass}">
-  ${coverHtml}
-  <main class="${mainClass}">
-    ${toc}
-    ${body}
-  </main>
-</body>
-</html>`;
 }
 
 async function launchPdfBrowser() {

@@ -14,6 +14,8 @@ const JOBS = [
   ["node", ["scripts/build-pdf-cairn.mjs", "--audience", "player"]],
   ["node", ["scripts/build-pdf-cairn.mjs", "--audience", "keeper"]],
   ["node", ["scripts/build-pdf-cairn.mjs", "--audience", "all"]],
+  ["node", ["scripts/build-pdf-pack.mjs", "--all-modules"]],
+  ["node", ["scripts/build-pdf-pack.mjs", "--all-adventures"]],
 ];
 
 function run(cmd, args) {
@@ -35,7 +37,7 @@ function run(cmd, args) {
 }
 
 async function main() {
-  console.log("Сборка 6 PDF (A4 + Cairn × игрок / хранитель / полное)…\n");
+  console.log("Сборка PDF: книги + модули + приключения…\n");
   for (const [cmd, args] of JOBS) {
     await run(cmd, args);
     console.log("");

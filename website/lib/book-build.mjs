@@ -65,7 +65,6 @@ export const CHAPTER_AUDIENCE = {
   "fantasy/01-zaklinaniya.md": "player",
   "fantasy/02-talanty-i-navyki.md": "player",
   "fantasy/03-snaryazhenie.md": "player",
-  "fantasy/04-bestiariy.md": "keeper",
   "fantasy/05-inventar.md": "player",
   "adventure/01-steklyannyy-zvon.md": "keeper",
   "adventure/02-chernyy-schet.md": "keeper",
@@ -85,6 +84,16 @@ export const CHAPTER_AUDIENCE = {
   "modules/gothic-bronya.md": "player",
   "modules/gothic-magiya.md": "player",
   "modules/gothic-talanty.md": "player",
+  "modules/skyrim-oruzhie.md": "player",
+  "modules/skyrim-bronya.md": "player",
+  "modules/skyrim-magiya.md": "player",
+  "modules/skyrim-talanty.md": "player",
+  "modules/skyrim-bogi.md": "player",
+  "modules/skyrim-kulty.md": "player",
+  "modules/skyrim-izgotovlenie.md": "player",
+  "modules/skyrim-alkhimiya.md": "player",
+  "modules/skyrim-frakcii.md": "player",
+  "modules/skyrim-karta.md": "player",
   "modules/ognestrel.md": "player",
   "modules/transport.md": "keeper",
 };
@@ -104,19 +113,44 @@ export const PLAYER_CHAPTER_ORDER = [
   "slovar-terminov.md",
 ];
 
-/** Порядок глав книги хранителя (фэнтези-бестиарий сразу после базового). */
+/** Порядок глав книги хранителя (только базовые главы, без доп. модулей). */
 export const KEEPER_CHAPTER_ORDER = [
   "01-moduli.md",
   "06-bestiariy.md",
-  "fantasy/04-bestiariy.md",
   "07-rany.md",
   "08-krity-i-promahi.md",
   "11-otryady.md",
   "slovar-terminov.md",
 ];
 
+/** Идентификатор набора модулей Gothic. */
+export const GOTHIC_PACK = "gothic";
+
+/** Идентификатор набора модулей Skyrim. */
+export const SKYRIM_PACK = "skyrim";
+
+export function isGothicModule(mod) {
+  return mod?.pack === GOTHIC_PACK;
+}
+
+export function isSkyrimModule(mod) {
+  return mod?.pack === SKYRIM_PACK;
+}
+
+export function isPackModule(mod) {
+  return isGothicModule(mod) || isSkyrimModule(mod);
+}
+
 /** Кастомные модули: исходник в my_modules/, страница на сайте — modules/*.html */
 export const CUSTOM_MODULES = [
+  {
+    id: "fantasy_bestiary",
+    title: "Фэнтези-бестиарий",
+    srcRel: "fantasy_bestiary/module.md",
+    outRel: "modules/fantasy-bestiariy.html",
+    mdRel: "modules/fantasy-bestiariy.md",
+    audience: "keeper",
+  },
   {
     id: "noir_investigation",
     srcRel: "noir_investigation/module.md",
@@ -140,6 +174,8 @@ export const CUSTOM_MODULES = [
   },
   {
     id: "gothic_weapons",
+    title: "Готика — оружие",
+    pack: GOTHIC_PACK,
     srcRel: "gothic/oruzhie/module.md",
     outRel: "modules/gothic-oruzhie.html",
     mdRel: "modules/gothic-oruzhie.md",
@@ -147,6 +183,8 @@ export const CUSTOM_MODULES = [
   },
   {
     id: "gothic_armor",
+    title: "Готика — броня",
+    pack: GOTHIC_PACK,
     srcRel: "gothic/bronya/module.md",
     outRel: "modules/gothic-bronya.html",
     mdRel: "modules/gothic-bronya.md",
@@ -154,6 +192,8 @@ export const CUSTOM_MODULES = [
   },
   {
     id: "gothic_magic",
+    title: "Готика — магия",
+    pack: GOTHIC_PACK,
     srcRel: "gothic/magiya/module.md",
     outRel: "modules/gothic-magiya.html",
     mdRel: "modules/gothic-magiya.md",
@@ -161,9 +201,101 @@ export const CUSTOM_MODULES = [
   },
   {
     id: "gothic_talents",
+    title: "Готика — таланты",
+    pack: GOTHIC_PACK,
     srcRel: "gothic/talanty/module.md",
     outRel: "modules/gothic-talanty.html",
     mdRel: "modules/gothic-talanty.md",
+    audience: "player",
+  },
+  {
+    id: "skyrim_weapons",
+    title: "Скайрим — оружие",
+    pack: SKYRIM_PACK,
+    srcRel: "skyrim/oruzhie/module.md",
+    outRel: "modules/skyrim-oruzhie.html",
+    mdRel: "modules/skyrim-oruzhie.md",
+    audience: "player",
+  },
+  {
+    id: "skyrim_armor",
+    title: "Скайрим — броня",
+    pack: SKYRIM_PACK,
+    srcRel: "skyrim/bronya/module.md",
+    outRel: "modules/skyrim-bronya.html",
+    mdRel: "modules/skyrim-bronya.md",
+    audience: "player",
+  },
+  {
+    id: "skyrim_magic",
+    title: "Скайрим — магия",
+    pack: SKYRIM_PACK,
+    srcRel: "skyrim/magiya/module.md",
+    outRel: "modules/skyrim-magiya.html",
+    mdRel: "modules/skyrim-magiya.md",
+    audience: "player",
+  },
+  {
+    id: "skyrim_talents",
+    title: "Скайрим — таланты",
+    pack: SKYRIM_PACK,
+    srcRel: "skyrim/talanty/module.md",
+    outRel: "modules/skyrim-talanty.html",
+    mdRel: "modules/skyrim-talanty.md",
+    audience: "player",
+  },
+  {
+    id: "skyrim_gods",
+    title: "Скайрим — боги",
+    pack: SKYRIM_PACK,
+    srcRel: "skyrim/bogi/module.md",
+    outRel: "modules/skyrim-bogi.html",
+    mdRel: "modules/skyrim-bogi.md",
+    audience: "player",
+  },
+  {
+    id: "skyrim_cults",
+    title: "Скайрим — культы",
+    pack: SKYRIM_PACK,
+    srcRel: "skyrim/kulty/module.md",
+    outRel: "modules/skyrim-kulty.html",
+    mdRel: "modules/skyrim-kulty.md",
+    audience: "player",
+  },
+  {
+    id: "skyrim_crafting",
+    title: "Скайрим — изготовление",
+    pack: SKYRIM_PACK,
+    srcRel: "skyrim/izgotovlenie/module.md",
+    outRel: "modules/skyrim-izgotovlenie.html",
+    mdRel: "modules/skyrim-izgotovlenie.md",
+    audience: "player",
+  },
+  {
+    id: "skyrim_alchemy",
+    title: "Скайрим — алхимия",
+    pack: SKYRIM_PACK,
+    srcRel: "skyrim/alkhimiya/module.md",
+    outRel: "modules/skyrim-alkhimiya.html",
+    mdRel: "modules/skyrim-alkhimiya.md",
+    audience: "player",
+  },
+  {
+    id: "skyrim_factions",
+    title: "Скайрим — фракции и гильдии",
+    pack: SKYRIM_PACK,
+    srcRel: "skyrim/frakcii/module.md",
+    outRel: "modules/skyrim-frakcii.html",
+    mdRel: "modules/skyrim-frakcii.md",
+    audience: "player",
+  },
+  {
+    id: "skyrim_map",
+    title: "Скайрим — карта",
+    pack: SKYRIM_PACK,
+    srcRel: "skyrim/karta/module.md",
+    outRel: "modules/skyrim-karta.html",
+    mdRel: "modules/skyrim-karta.md",
     audience: "player",
   },
   {
@@ -257,9 +389,12 @@ export function stripReadmeForBook(md) {
     .replace(/## Оглавление[\s\S]*?(?=\n## )/, "")
     .replace(/## Книга игрока[\s\S]*?(?=\n## )/, "")
     .replace(/## Книга хранителя[\s\S]*?(?=\n## )/, "")
+    .replace(/### Дополнительные модули[\s\S]*?(?=\n## )/, "")
+    .replace(/## Приключения[\s\S]*?(?=\n## )/, "")
     .replace(/## Одним файлом[\s\S]*?(?=\n## )/, "")
     .replace(/## Сборка книг[\s\S]*?(?=\n## )/, "")
-    .replace(/## PDF[\s\S]*?(?=\n## )/, "");
+    .replace(/## PDF[\s\S]*?(?=\n## )/, "")
+    .replace(/## Скачать[\s\S]*?(?=\n## )/, "");
 }
 
 export function fixMdLinks(md, linkForRel, opts = {}) {
@@ -315,8 +450,7 @@ export function orderBookFiles(relFiles, { audience = "all" } = {}) {
       content.filter((r) => CHAPTER_AUDIENCE[r] === "keeper"),
       KEEPER_CHAPTER_ORDER
     );
-    const adventure = content.filter((r) => r.startsWith("adventure/"));
-    ordered = [...player, ...keeper, ...adventure];
+    ordered = [...player, ...keeper];
   } else {
     const core = content.filter(
       (r) => !r.startsWith("fantasy/") && !r.startsWith("adventure/")
@@ -336,18 +470,35 @@ function sortByOrder(files, order) {
   return [...sorted, ...rest];
 }
 
-export function listBookSources({ includeAdventure = true, audience = "all" } = {}) {
+export function listBookSources({
+  includeAdventure = null,
+  audience = "all",
+  includeCustomModules = false,
+} = {}) {
   const readmeRel = README_BY_AUDIENCE[audience] || README_BY_AUDIENCE.all;
+  const withAdventure =
+    includeAdventure ?? (audience === "all" ? false : audience === "player" ? false : false);
 
   let relFiles = orderBookFiles(walkMarkdown(RPG)).filter((r) => {
     if (BOOK_SOURCES_SKIP.has(r)) return false;
     if (isReadmeFile(r)) return false;
-    if (audience === "all") return true;
+    if (r.startsWith("modules/")) return false;
+    if (audience === "all") {
+      if (r.startsWith("adventure/")) return false;
+      return CHAPTER_AUDIENCE[r] === "player" || CHAPTER_AUDIENCE[r] === "keeper";
+    }
     if (r === "slovar-terminov.md") return true;
     return CHAPTER_AUDIENCE[r] === audience;
   });
 
-  if (!includeAdventure) relFiles = relFiles.filter((r) => !r.startsWith("adventure/"));
+  if (!withAdventure) relFiles = relFiles.filter((r) => !r.startsWith("adventure/"));
+
+  if (includeCustomModules) {
+    for (const mod of CUSTOM_MODULES) {
+      if (audience !== "all" && mod.audience !== audience) continue;
+      relFiles.push(mod.mdRel);
+    }
+  }
 
   if (fs.existsSync(path.join(RPG, readmeRel))) {
     relFiles = orderBookFiles([readmeRel, ...relFiles], { audience });
@@ -424,38 +575,60 @@ export const PDF_TITLE = {
   keeper: "Корни судьбы — Книга хранителя",
 };
 
+export function modulePdfFile(mod) {
+  return `koreni-sudby-modul-${mod.id.replace(/_/g, "-")}.pdf`;
+}
+
+export function adventurePdfFile(adv) {
+  return `koreni-sudby-priklyuchenie-${adv.id}.pdf`;
+}
+
+export function modulePdfHtmlFile(mod) {
+  return `print-modul-${mod.id.replace(/_/g, "-")}.html`;
+}
+
+export function adventurePdfHtmlFile(adv) {
+  return `print-priklyuchenie-${adv.id}.html`;
+}
+
+export function findCustomModule(idOrMdRel) {
+  return CUSTOM_MODULES.find((m) => m.id === idOrMdRel || m.mdRel === idOrMdRel);
+}
+
+export function findAdventureByRel(adventureRel) {
+  return ADVENTURES.find((a) => a.adventureRel === adventureRel);
+}
+
+/** Источники глав для PDF одного приключения. */
+export function listAdventurePdfSources(adventureId) {
+  const adv = ADVENTURES.find((a) => a.id === adventureId);
+  if (!adv) throw new Error(`Unknown adventure: ${adventureId}`);
+  const module = adv.moduleRel ? findCustomModule(adv.moduleRel) : null;
+  const rels = [adv.adventureRel];
+  if (adv.mapsRel) rels.push(adv.mapsRel);
+  return { adv, rels, module };
+}
+
 /** Файлы для скачивания с сайта (public/). */
 export const BOOK_DOWNLOAD_GROUPS = [
   {
     id: "player",
     title: "Книга игрока",
-    items: [
-      { file: PDF_OUTPUT.player, label: "PDF, A4" },
-      { file: PDF_OUTPUT_CAIRN.player, label: "PDF, Cairn (A5)" },
-      { file: BOOK_OUTPUT.player, label: "Markdown", fromRpg: true },
-    ],
+    items: [{ file: PDF_OUTPUT.player, label: "PDF, A4" }],
   },
   {
     id: "keeper",
     title: "Книга хранителя",
-    items: [
-      { file: PDF_OUTPUT.keeper, label: "PDF, A4" },
-      { file: PDF_OUTPUT_CAIRN.keeper, label: "PDF, Cairn (A5)" },
-      { file: BOOK_OUTPUT.keeper, label: "Markdown", fromRpg: true },
-    ],
+    items: [{ file: PDF_OUTPUT.keeper, label: "PDF, A4" }],
   },
   {
     id: "all",
     title: "Полное издание",
-    items: [
-      { file: PDF_OUTPUT.all, label: "PDF, A4" },
-      { file: PDF_OUTPUT_CAIRN.all, label: "PDF, Cairn (A5)" },
-      { file: BOOK_OUTPUT.all, label: "Markdown", fromRpg: true },
-    ],
+    items: [{ file: PDF_OUTPUT.all, label: "PDF, A4" }],
   },
 ];
 
-const PRESERVE_IN_PUBLIC = /^(koreni-sudby-.*\.pdf|print-book.*\.html)$/;
+const PRESERVE_IN_PUBLIC = /^(koreni-sudby-.*\.pdf|print-(book|modul|priklyuchenie).*\.html)$/;
 
 /** Сохранить PDF и print-HTML перед очисткой public/. */
 export function preserveBookAssets(publicDir) {
@@ -496,6 +669,45 @@ function formatFileSize(bytes) {
   if (bytes < 1024) return `${bytes} B`;
   if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(0)} KB`;
   return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+}
+
+function escapeDownloadHtml(s) {
+  return String(s)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+/**
+ * Компактный блок скачивания PDF на странице модуля или приключения.
+ * items: [{ file, label }]
+ */
+export function renderPagePdfDownloadHtml(
+  publicDir,
+  { prefix = "", id = "pdf-download", title = "Скачать PDF", items = [], missingHint = "npm run pdf:pack" } = {}
+) {
+  if (!items.length) return "";
+
+  const links = items
+    .map((item) => {
+      const diskPath = path.join(publicDir, item.file);
+      const href = `${prefix}${item.file}`;
+      const size = fs.existsSync(diskPath)
+        ? formatFileSize(fs.statSync(diskPath).size)
+        : `соберите: ${missingHint}`;
+      return `<li><a class="download-link" href="${escapeDownloadHtml(href)}" download>${escapeDownloadHtml(item.label)}</a> <span class="download-meta">${escapeDownloadHtml(size)}</span></li>`;
+    })
+    .join("\n      ");
+
+  return `
+<section class="downloads downloads-page" id="${escapeDownloadHtml(id)}">
+  <h2 class="section-title">${escapeDownloadHtml(title)}</h2>
+  <p class="downloads-note">PDF для печати и офлайн-игры.</p>
+  <ul class="download-list download-list-page">
+    ${links}
+  </ul>
+</section>`;
 }
 
 /** HTML-блок «Скачать книги»; prefix — относительный путь к корню public (напр. «../»). */
@@ -539,7 +751,7 @@ export function renderBookDownloadsHtml(
   return `
   <section class="downloads" id="${esc(id)}">
     <h2 class="section-title">Скачать книги</h2>
-    <p class="downloads-note">PDF для печати и офлайн-игры. Markdown — полная сборка из исходников (<code>npm run book:*</code>).</p>
+    <p class="downloads-note">PDF для печати и офлайн-игры.</p>
     <div class="download-grid">
       ${groups.join("")}
     </div>

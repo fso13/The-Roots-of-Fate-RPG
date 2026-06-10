@@ -1,4 +1,11 @@
-# Глава 3. Фэнтези-бестиарий
+---
+id: fantasy_bestiary
+requires: [core, tactical_combat, bestiary]
+replaces: []
+dice_notes: "Все статы — только d6. ЧЦ защиты: 8 + Ловкость + доспех."
+---
+
+# Модуль: «Фэнтези-бестиарий»
 
 *Требует [Глава 2. Бестиарий](../06-bestiariy.md) и модуль боя. ЧЦ защиты: **8 + Ловкость + доспех**.*
 
@@ -14,7 +21,7 @@
 
 ### Ополченец
 
-<figure class="bestiary-portrait"><img src="images/bestiariy/opolchenets.png" alt="Ополченец" loading="lazy" width="200" height="280"></figure>
+<figure class="bestiary-portrait"><img src="../fantasy/images/bestiariy/opolchenets.png" alt="Ополченец" loading="lazy" width="200" height="280"></figure>
 
 - **Угроза:** низкая  
 - **Тело 2, Ловкость 2, Разум 1, Воля 1**  
@@ -24,7 +31,7 @@
 
 ### Лучник
 
-<figure class="bestiary-portrait"><img src="images/bestiariy/luchnik.png" alt="Лучник" loading="lazy" width="200" height="280"></figure>
+<figure class="bestiary-portrait"><img src="../fantasy/images/bestiariy/luchnik.png" alt="Лучник" loading="lazy" width="200" height="280"></figure>
 
 - **Угроза:** низкая  
 - **Тело 2, Ловкость 3, Разум 1, Воля 1**  
@@ -34,7 +41,7 @@
 
 ### Рыцарь на коне
 
-<figure class="bestiary-portrait"><img src="images/bestiariy/rytsar-na-kone.png" alt="Рыцарь на коне" loading="lazy" width="200" height="280"></figure>
+<figure class="bestiary-portrait"><img src="../fantasy/images/bestiariy/rytsar-na-kone.png" alt="Рыцарь на коне" loading="lazy" width="200" height="280"></figure>
 
 - **Угроза:** высокая  
 - **Тело 4, Ловкость 2, Разум 2, Воля 3**  
@@ -44,7 +51,7 @@
 
 ### Грифон
 
-<figure class="bestiary-portrait"><img src="images/bestiariy/grifon.png" alt="Грифон" loading="lazy" width="200" height="280"></figure>
+<figure class="bestiary-portrait"><img src="../fantasy/images/bestiariy/grifon.png" alt="Грифон" loading="lazy" width="200" height="280"></figure>
 
 - **Угроза:** средняя  
 - **Тело 3, Ловкость 4, Разум 1, Воля 2**  
@@ -54,7 +61,7 @@
 
 ### Небесный страж *(ангел — верхний эшелон)*
 
-<figure class="bestiary-portrait"><img src="images/bestiariy/nebesnyy-strazh.png" alt="Небесный страж" loading="lazy" width="200" height="280"></figure>
+<figure class="bestiary-portrait"><img src="../fantasy/images/bestiariy/nebesnyy-strazh.png" alt="Небесный страж" loading="lazy" width="200" height="280"></figure>
 
 - **Угроза:** очень высокая  
 - **Тело 5, Ловкость 4, Разум 3, Воля 5**  
@@ -68,7 +75,7 @@
 
 ### Бес
 
-<figure class="bestiary-portrait"><img src="images/bestiariy/bes.png" alt="Бес" loading="lazy" width="200" height="280"></figure>
+<figure class="bestiary-portrait"><img src="../fantasy/images/bestiariy/bes.png" alt="Бес" loading="lazy" width="200" height="280"></figure>
 
 - **Угроза:** низкая  
 - **Тело 1, Ловкость 3, Разум 1, Воля 2**  
@@ -78,7 +85,7 @@
 
 ### Адская гончая
 
-<figure class="bestiary-portrait"><img src="images/bestiariy/adskaya-gonchaya.png" alt="Адская гончая" loading="lazy" width="200" height="280"></figure>
+<figure class="bestiary-portrait"><img src="../fantasy/images/bestiariy/adskaya-gonchaya.png" alt="Адская гончая" loading="lazy" width="200" height="280"></figure>
 
 - **Угроза:** средняя  
 - **Тело 3, Ловкость 4, Разум 1, Воля 2**  
@@ -88,7 +95,7 @@
 
 ### Порождение бездны *(демон среднего калибра)*
 
-<figure class="bestiary-portrait"><img src="images/bestiariy/porozhdenie-bezdny.jpg" alt="Порождение бездны" loading="lazy" width="200" height="280"></figure>
+<figure class="bestiary-portrait"><img src="../fantasy/images/bestiariy/porozhdenie-bezdny.jpg" alt="Порождение бездны" loading="lazy" width="200" height="280"></figure>
 
 - **Угроза:** высокая  
 - **Тело 5, Ловкость 3, Разум 2, Воля 3**  
@@ -98,7 +105,7 @@
 
 ### Суккуб *(искусительница)*
 
-<figure class="bestiary-portrait"><img src="images/bestiariy/sukkub.jpg" alt="Суккуб" loading="lazy" width="200" height="280"></figure>
+<figure class="bestiary-portrait"><img src="../fantasy/images/bestiariy/sukkub.jpg" alt="Суккуб" loading="lazy" width="200" height="280"></figure>
 
 - **Угроза:** средняя  
 - **Тело 2, Ловкость 3, Разум 3, Воля 4**  
@@ -112,7 +119,7 @@
 
 ### Скелет-воин
 
-<figure class="bestiary-portrait"><img src="images/bestiariy/skelet-voin.png" alt="Скелет-воин" loading="lazy" width="200" height="280"></figure>
+<figure class="bestiary-portrait"><img src="../fantasy/images/bestiariy/skelet-voin.png" alt="Скелет-воин" loading="lazy" width="200" height="280"></figure>
 
 - **Угроза:** низкая  
 - **Тело 2, Ловкость 2, Разум 0, Воля 1**  
@@ -122,7 +129,7 @@
 
 ### Вампир
 
-<figure class="bestiary-portrait"><img src="images/bestiariy/vampir.jpg" alt="Вампир" loading="lazy" width="200" height="280"></figure>
+<figure class="bestiary-portrait"><img src="../fantasy/images/bestiariy/vampir.jpg" alt="Вампир" loading="lazy" width="200" height="280"></figure>
 
 - **Угроза:** высокая  
 - **Тело 4, Ловкость 4, Разум 3, Воля 3**  
@@ -132,7 +139,7 @@
 
 ### Лич
 
-<figure class="bestiary-portrait"><img src="images/bestiariy/lich.jpg" alt="Лич" loading="lazy" width="200" height="280"></figure>
+<figure class="bestiary-portrait"><img src="../fantasy/images/bestiariy/lich.jpg" alt="Лич" loading="lazy" width="200" height="280"></figure>
 
 - **Угроза:** очень высокая  
 - **Тело 2, Ловкость 2, Разум 5, Воля 5**  
@@ -142,7 +149,7 @@
 
 ### Костяной дракон
 
-<figure class="bestiary-portrait"><img src="images/bestiariy/kostyanoy-drakon.jpg" alt="Костяной дракон" loading="lazy" width="200" height="280"></figure>
+<figure class="bestiary-portrait"><img src="../fantasy/images/bestiariy/kostyanoy-drakon.jpg" alt="Костяной дракон" loading="lazy" width="200" height="280"></figure>
 
 - **Угроза:** босс  
 - **Тело 6, Ловкость 2, Разум 1, Воля 4**  
@@ -156,7 +163,7 @@
 
 ### Тёмный следопыт
 
-<figure class="bestiary-portrait"><img src="images/bestiariy/tyomnyy-sledopyt.png" alt="Тёмный следопыт" loading="lazy" width="200" height="280"></figure>
+<figure class="bestiary-portrait"><img src="../fantasy/images/bestiariy/tyomnyy-sledopyt.png" alt="Тёмный следопыт" loading="lazy" width="200" height="280"></figure>
 
 - **Угроза:** средняя  
 - **Тело 2, Ловкость 4, Разум 2, Воля 2**  
@@ -166,7 +173,7 @@
 
 ### Минотавр
 
-<figure class="bestiary-portrait"><img src="images/bestiariy/minotavr.png" alt="Минотавр" loading="lazy" width="200" height="280"></figure>
+<figure class="bestiary-portrait"><img src="../fantasy/images/bestiariy/minotavr.png" alt="Минотавр" loading="lazy" width="200" height="280"></figure>
 
 - **Угроза:** высокая  
 - **Тело 5, Ловкость 2, Разум 1, Воля 2**  
@@ -176,7 +183,7 @@
 
 ### Гидра
 
-<figure class="bestiary-portrait"><img src="images/bestiariy/gidra.png" alt="Гидра" loading="lazy" width="200" height="280"></figure>
+<figure class="bestiary-portrait"><img src="../fantasy/images/bestiariy/gidra.png" alt="Гидра" loading="lazy" width="200" height="280"></figure>
 
 - **Угроза:** босс-мини  
 - **Тело 6, Ловкость 2, Разум 0, Воля 2**  
@@ -186,7 +193,7 @@
 
 ### Чёрный дракон
 
-<figure class="bestiary-portrait"><img src="images/bestiariy/chernyy-drakon.png" alt="Чёрный дракон" loading="lazy" width="200" height="280"></figure>
+<figure class="bestiary-portrait"><img src="../fantasy/images/bestiariy/chernyy-drakon.png" alt="Чёрный дракон" loading="lazy" width="200" height="280"></figure>
 
 - **Угроза:** босс  
 - **Тело 6, Ловкость 3, Разум 4, Воля 5**  
@@ -200,7 +207,7 @@
 
 ### Лесной эльф
 
-<figure class="bestiary-portrait"><img src="images/bestiariy/lesnoy-elf.jpg" alt="Лесной эльф" loading="lazy" width="200" height="280"></figure>
+<figure class="bestiary-portrait"><img src="../fantasy/images/bestiariy/lesnoy-elf.jpg" alt="Лесной эльф" loading="lazy" width="200" height="280"></figure>
 
 - **Угроза:** средняя  
 - **Тело 2, Ловкость 4, Разум 2, Воля 2**  
@@ -210,7 +217,7 @@
 
 ### Единорог
 
-<figure class="bestiary-portrait"><img src="images/bestiariy/edinorog.jpg" alt="Единорог" loading="lazy" width="200" height="280"></figure>
+<figure class="bestiary-portrait"><img src="../fantasy/images/bestiariy/edinorog.jpg" alt="Единорог" loading="lazy" width="200" height="280"></figure>
 
 - **Угроза:** средняя  
 - **Тело 4, Ловкость 3, Разум 1, Воля 3**  
@@ -220,7 +227,7 @@
 
 ### Древень
 
-<figure class="bestiary-portrait"><img src="images/bestiariy/dreven.jpg" alt="Древень" loading="lazy" width="200" height="280"></figure>
+<figure class="bestiary-portrait"><img src="../fantasy/images/bestiariy/dreven.jpg" alt="Древень" loading="lazy" width="200" height="280"></figure>
 
 - **Угроза:** высокая  
 - **Тело 6, Ловкость 1, Разум 2, Воля 3**  
@@ -234,7 +241,7 @@
 
 ### Гремлин
 
-<figure class="bestiary-portrait"><img src="images/bestiariy/gremlin.jpg" alt="Гремлин" loading="lazy" width="200" height="280"></figure>
+<figure class="bestiary-portrait"><img src="../fantasy/images/bestiariy/gremlin.jpg" alt="Гремлин" loading="lazy" width="200" height="280"></figure>
 
 - **Угроза:** низкая  
 - **Тело 1, Ловкость 3, Разум 2, Воля 1**  
@@ -244,7 +251,7 @@
 
 ### Стальной голем
 
-<figure class="bestiary-portrait"><img src="images/bestiariy/stalnoy-golem.jpg" alt="Стальной голем" loading="lazy" width="200" height="280"></figure>
+<figure class="bestiary-portrait"><img src="../fantasy/images/bestiariy/stalnoy-golem.jpg" alt="Стальной голем" loading="lazy" width="200" height="280"></figure>
 
 - **Угроза:** высокая  
 - **Тело 6, Ловкость 1, Разум 0, Воля 0**  
@@ -254,7 +261,7 @@
 
 ### Архимаг *(NPC-босс)*
 
-<figure class="bestiary-portrait"><img src="images/bestiariy/arhimag.jpg" alt="Архимаг" loading="lazy" width="200" height="280"></figure>
+<figure class="bestiary-portrait"><img src="../fantasy/images/bestiariy/arhimag.jpg" alt="Архимаг" loading="lazy" width="200" height="280"></figure>
 
 - **Угроза:** очень высокая  
 - **Тело 2, Ловкость 3, Разум 5, Воля 5**  
@@ -268,7 +275,7 @@
 
 ### Гном-страж
 
-<figure class="bestiary-portrait"><img src="images/bestiariy/gnom-strazh.png" alt="Гном-страж" loading="lazy" width="200" height="280"></figure>
+<figure class="bestiary-portrait"><img src="../fantasy/images/bestiariy/gnom-strazh.png" alt="Гном-страж" loading="lazy" width="200" height="280"></figure>
 
 - **Угроза:** средняя  
 - **Тело 4, Ловкость 2, Разум 2, Воля 3**  
@@ -278,7 +285,7 @@
 
 ### Всадник на медведе
 
-<figure class="bestiary-portrait"><img src="images/bestiariy/vsadnik-na-medvede.png" alt="Всадник на медведе" loading="lazy" width="200" height="280"></figure>
+<figure class="bestiary-portrait"><img src="../fantasy/images/bestiariy/vsadnik-na-medvede.png" alt="Всадник на медведе" loading="lazy" width="200" height="280"></figure>
 
 - **Угроза:** высокая  
 - **Тело 5, Ловкость 2, Разум 1, Воля 2**  
@@ -292,7 +299,7 @@
 
 ### Гоблин
 
-<figure class="bestiary-portrait"><img src="images/bestiariy/goblin.jpg" alt="Гоблин" loading="lazy" width="200" height="280"></figure>
+<figure class="bestiary-portrait"><img src="../fantasy/images/bestiariy/goblin.jpg" alt="Гоблин" loading="lazy" width="200" height="280"></figure>
 
 - **Угроза:** низкая  
 - **Тело 1, Ловкость 3, Разум 1, Воля 1**  
@@ -302,7 +309,7 @@
 
 ### Орк-воин
 
-<figure class="bestiary-portrait"><img src="images/bestiariy/ork-voin.jpg" alt="Орк-воин" loading="lazy" width="200" height="280"></figure>
+<figure class="bestiary-portrait"><img src="../fantasy/images/bestiariy/ork-voin.jpg" alt="Орк-воин" loading="lazy" width="200" height="280"></figure>
 
 - **Угроза:** средняя  
 - **Тело 4, Ловкость 2, Разум 1, Воля 2**  
@@ -312,7 +319,7 @@
 
 ### Циклоп
 
-<figure class="bestiary-portrait"><img src="images/bestiariy/tsiklop.jpg" alt="Циклоп" loading="lazy" width="200" height="280"></figure>
+<figure class="bestiary-portrait"><img src="../fantasy/images/bestiariy/tsiklop.jpg" alt="Циклоп" loading="lazy" width="200" height="280"></figure>
 
 - **Угроза:** высокая  
 - **Тело 6, Ловкость 1, Разум 1, Воля 2**  
@@ -322,7 +329,7 @@
 
 ### Чудище *(бегемот)*
 
-<figure class="bestiary-portrait"><img src="images/bestiariy/chudishte.jpg" alt="Чудище" loading="lazy" width="200" height="280"></figure>
+<figure class="bestiary-portrait"><img src="../fantasy/images/bestiariy/chudishte.jpg" alt="Чудище" loading="lazy" width="200" height="280"></figure>
 
 - **Угроза:** босс-мини  
 - **Тело 6, Ловкость 2, Разум 0, Воля 2**  
@@ -336,7 +343,7 @@
 
 ### Тролль
 
-<figure class="bestiary-portrait"><img src="images/bestiariy/troll.jpg" alt="Тролль" loading="lazy" width="200" height="280"></figure>
+<figure class="bestiary-portrait"><img src="../fantasy/images/bestiariy/troll.jpg" alt="Тролль" loading="lazy" width="200" height="280"></figure>
 
 - **Угроза:** высокая  
 - **Тело 5, Ловкость 2, Разум 1, Воля 1**  
@@ -346,7 +353,7 @@
 
 ### Гигантский паук
 
-<figure class="bestiary-portrait"><img src="images/bestiariy/gigantskiy-pauk.jpg" alt="Гигантский паук" loading="lazy" width="200" height="280"></figure>
+<figure class="bestiary-portrait"><img src="../fantasy/images/bestiariy/gigantskiy-pauk.jpg" alt="Гигантский паук" loading="lazy" width="200" height="280"></figure>
 
 - **Угроза:** средняя  
 - **Тело 3, Ловкость 3, Разум 0, Воля 1**  
@@ -356,7 +363,7 @@
 
 ### Красный дракон (молодой)
 
-<figure class="bestiary-portrait"><img src="images/bestiariy/krasnyy-drakon.jpg" alt="Красный дракон" loading="lazy" width="200" height="280"></figure>
+<figure class="bestiary-portrait"><img src="../fantasy/images/bestiariy/krasnyy-drakon.jpg" alt="Красный дракон" loading="lazy" width="200" height="280"></figure>
 
 - **Угроза:** босс  
 - **Тело 5, Ловкость 3, Разум 3, Воля 4**  
@@ -366,7 +373,7 @@
 
 ### Призрак
 
-<figure class="bestiary-portrait"><img src="images/bestiariy/prizrak.png" alt="Призрак" loading="lazy" width="200" height="280"></figure>
+<figure class="bestiary-portrait"><img src="../fantasy/images/bestiariy/prizrak.png" alt="Призрак" loading="lazy" width="200" height="280"></figure>
 
 - **Угроза:** средняя  
 - **Тело 0, Ловкость 3, Разум 2, Воля 3**  
@@ -376,7 +383,7 @@
 
 ### Доппельгангер
 
-<figure class="bestiary-portrait"><img src="images/bestiariy/doppelganger.jpg" alt="Доппельгангер" loading="lazy" width="200" height="280"></figure>
+<figure class="bestiary-portrait"><img src="../fantasy/images/bestiariy/doppelganger.jpg" alt="Доппельгангер" loading="lazy" width="200" height="280"></figure>
 
 - **Угроза:** зависит от копии  
 - **Тело 3, Ловкость 3, Разум 3, Воля 3**  

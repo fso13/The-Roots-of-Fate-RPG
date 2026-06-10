@@ -12,8 +12,13 @@ import {
   KEEPER_CHAPTER_ORDER,
   CUSTOM_MODULES,
   ADVENTURES,
+  GOTHIC_PACK,
+  SKYRIM_PACK,
   preserveBookAssets,
   renderBookDownloadsHtml,
+  renderPagePdfDownloadHtml,
+  modulePdfFile,
+  adventurePdfFile,
   syncBookDownloads,
 } from "./lib/book-build.mjs";
 import { linkGlossaryInHtml, glossaryHrefForPage } from "./lib/glossary.mjs";
@@ -42,7 +47,7 @@ const PAGE_TO_MODULE = {
   "fantasy/01-zaklinaniya.html": "fantasy_spells",
   "fantasy/02-talanty-i-navyki.html": "fantasy_skills",
   "fantasy/03-snaryazhenie.html": "fantasy_gear",
-  "fantasy/04-bestiariy.html": "fantasy_bestiary",
+  "modules/fantasy-bestiariy.html": "fantasy_bestiary",
   "fantasy/05-inventar.html": "fantasy_inventory",
   "modules/noir-investigation.html": "noir_investigation",
   "modules/fahrenheit-books.html": "fahrenheit_books",
@@ -51,6 +56,16 @@ const PAGE_TO_MODULE = {
   "modules/gothic-bronya.html": "gothic_armor",
   "modules/gothic-magiya.html": "gothic_magic",
   "modules/gothic-talanty.html": "gothic_talents",
+  "modules/skyrim-oruzhie.html": "skyrim_weapons",
+  "modules/skyrim-bronya.html": "skyrim_armor",
+  "modules/skyrim-magiya.html": "skyrim_magic",
+  "modules/skyrim-talanty.html": "skyrim_talents",
+  "modules/skyrim-bogi.html": "skyrim_gods",
+  "modules/skyrim-kulty.html": "skyrim_cults",
+  "modules/skyrim-izgotovlenie.html": "skyrim_crafting",
+  "modules/skyrim-alkhimiya.html": "skyrim_alchemy",
+  "modules/skyrim-frakcii.html": "skyrim_factions",
+  "modules/skyrim-karta.html": "skyrim_map",
   "modules/ognestrel.html": "firearms",
   "modules/transport.html": "vehicles",
 };
@@ -301,6 +316,12 @@ function main() {
     fs.cpSync(fantasyImages, path.join(OUT, "fantasy", "images"), { recursive: true });
   }
 
+  const skyrimMaps = path.join(MY_MODULES, "skyrim", "maps");
+  if (fs.existsSync(skyrimMaps)) {
+    fs.mkdirSync(path.join(OUT, "modules", "skyrim", "maps"), { recursive: true });
+    fs.cpSync(skyrimMaps, path.join(OUT, "modules", "skyrim", "maps"), { recursive: true });
+  }
+
   const relFiles = walkMarkdown(RPG);
   const titleByRel = buildTitleByRel(relFiles);
   const pageMeta = [];
@@ -338,6 +359,7 @@ function main() {
       audience: mod.audience,
       isCustomModule: true,
       moduleId: mod.id,
+      pack: mod.pack || null,
       mdBody: md,
     };
     customModulePages.push(entry);
@@ -366,13 +388,17 @@ function main() {
   const customMods = pageMeta
     .filter((p) => p.isCustomModule)
     .sort((a, b) => customModOrder.indexOf(a.rel) - customModOrder.indexOf(b.rel));
+  const gothicMods = customMods.filter((p) => p.pack === GOTHIC_PACK);
+  const skyrimMods = customMods.filter((p) => p.pack === SKYRIM_PACK);
+  const extraMods = customMods.filter(
+    (p) => p.pack !== GOTHIC_PACK && p.pack !== SKYRIM_PACK
+  );
   const readmes = pageMeta.filter((p) => p.isReadme);
   const pageByRel = new Map(pageMeta.map((p) => [p.rel, p]));
 
   const playerCore = core.filter((p) => p.audience === "player");
   const keeperCore = core.filter((p) => p.audience === "keeper");
   const playerFant = fant.filter((p) => p.audience === "player");
-  const keeperFant = fant.filter((p) => p.audience === "keeper");
 
   const HIDE_FROM_NAV = new Set([
     "kniga-polnaya.md",
@@ -392,7 +418,7 @@ function main() {
     PLAYER_CHAPTER_ORDER
   );
   const keeperNavItems = sortNavByChapterOrder(
-    [...keeperCore, ...keeperFant, ...(slovarPage ? [slovarPage] : [])]
+    [...keeperCore, ...(slovarPage ? [slovarPage] : [])]
       .filter(isNavVisible)
       .map(toNavItem),
     KEEPER_CHAPTER_ORDER
@@ -420,11 +446,27 @@ function main() {
           },
         ]
       : []),
-    ...(customMods.length
+    ...(gothicMods.length
+      ? [
+          {
+            title: "Модули Gothic",
+            items: gothicMods.filter(isNavVisible).map(toNavItem),
+          },
+        ]
+      : []),
+    ...(skyrimMods.length
+      ? [
+          {
+            title: "Модули Skyrim",
+            items: skyrimMods.filter(isNavVisible).map(toNavItem),
+          },
+        ]
+      : []),
+    ...(extraMods.length
       ? [
           {
             title: "Доп. модули",
-            items: customMods.filter(isNavVisible).map(toNavItem),
+            items: extraMods.filter(isNavVisible).map(toNavItem),
           },
         ]
       : []),
@@ -443,6 +485,29 @@ function main() {
     const { html: bodyWithIds, toc } = extractHeadingsAndAddIds(rawBody);
     let bodyHtml = linkGlossaryInHtml(bodyWithIds, glossaryHrefForPage(p.outRel));
     const dlPrefix = p.outRel.includes("/") ? "../" : "";
+
+    if (p.isCustomModule) {
+      const mod = CUSTOM_MODULES.find((m) => m.id === p.moduleId);
+      if (mod) {
+        bodyHtml =
+          renderPagePdfDownloadHtml(OUT, {
+            prefix: dlPrefix,
+            items: [{ file: modulePdfFile(mod), label: mod.title || "PDF модуля" }],
+            missingHint: "npm run pdf:modules",
+          }) + bodyHtml;
+      }
+    } else {
+      const adv = ADVENTURES.find((a) => a.adventureRel === p.rel);
+      if (adv) {
+        bodyHtml =
+          renderPagePdfDownloadHtml(OUT, {
+            prefix: dlPrefix,
+            items: [{ file: adventurePdfFile(adv), label: `PDF: ${adv.title}` }],
+            missingHint: "npm run pdf:adventures",
+          }) + bodyHtml;
+      }
+    }
+
     if (p.rel === "README-igrok.md") {
       bodyHtml += renderBookDownloadsHtml(OUT, {
         prefix: dlPrefix,
@@ -473,7 +538,7 @@ function main() {
 
   const playerPages = sortNavByChapterOrder([...playerCore, ...playerFant], PLAYER_CHAPTER_ORDER);
   const keeperPages = sortNavByChapterOrder(
-    [...keeperCore, ...keeperFant, ...(slovarPage ? [slovarPage] : [])],
+    [...keeperCore, ...(slovarPage ? [slovarPage] : [])],
     KEEPER_CHAPTER_ORDER
   );
 
@@ -482,10 +547,12 @@ function main() {
     let meta = metaOverride || "Правила";
     if (!metaOverride) {
       if (p.isReadme) meta = "Оглавление";
-      else if (p.isCustomModule) meta = "Доп. модуль";
+      else if (p.isCustomModule)
+        meta =
+          p.pack === GOTHIC_PACK ? "Gothic" : p.pack === SKYRIM_PACK ? "Skyrim" : "Доп. модуль";
       else if (p.audience === "player") meta = "Игрок";
       else if (p.audience === "keeper") meta = "Хранитель";
-      if (p.rel.startsWith("fantasy/")) meta = p.audience === "keeper" ? "Фэнтези · хранитель" : "Фэнтези · игрок";
+      if (p.rel.startsWith("fantasy/")) meta = "Фэнтези · игрок";
       if (p.rel.startsWith("adventure/") && p.rel.endsWith(".md") && !p.rel.includes("/maps/")) meta = "Приключение";
       if (p.rel.includes("/maps/") && p.rel.endsWith("MAPS.md")) meta = "Карты";
     }
@@ -576,11 +643,31 @@ function main() {
   </section>
   ${adventureSections}
   ${
-    customMods.length
+    gothicMods.length
+      ? `<section id="index-section-gothic">
+  <h2 class="section-title">Модули Gothic</h2>
+  <div class="card-grid">
+    ${gothicMods.map((p) => card(p)).join("")}
+  </div>
+  </section>`
+      : ""
+  }
+  ${
+    skyrimMods.length
+      ? `<section id="index-section-skyrim">
+  <h2 class="section-title">Модули Skyrim</h2>
+  <div class="card-grid">
+    ${skyrimMods.map((p) => card(p)).join("")}
+  </div>
+  </section>`
+      : ""
+  }
+  ${
+    extraMods.length
       ? `<section id="index-section-custom">
   <h2 class="section-title">Дополнительные модули</h2>
   <div class="card-grid">
-    ${customMods.map((p) => card(p)).join("")}
+    ${extraMods.map((p) => card(p)).join("")}
   </div>
   </section>`
       : ""

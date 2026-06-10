@@ -26,22 +26,36 @@
 | 11 | [Глава 11. Инвентарь](fantasy/05-inventar.md) | Сетка сумки и слоты |
 | — | [Словарь терминов](slovar-terminov.md) | Сокращения: ЧЦ, ОД, ОО, d6 и др. |
 
-## Книга хранителя (главы 1–6)
+## Книга хранителя (главы 1–5)
 
 | № | Файл | Содержание |
 |---|------|------------|
 | 1 | [Глава 1. Модульность](01-moduli.md) | Подключение модулей |
 | 2 | [Глава 2. Бестиарий](06-bestiariy.md) | Бестиарий |
-| 3 | [Глава 3. Фэнтези-бестиарий](fantasy/04-bestiariy.md) | Фэнтези-существа |
-| 4 | [Глава 4. Получение и учёт ран](07-rany.md) | *Опционально* |
-| 5 | [Глава 5. Критические попадания и промахи](08-krity-i-promahi.md) | *Опционально* |
-| 6 | [Глава 6. Бой с отрядами](11-otryady.md) | *Опционально* |
+| 3 | [Глава 3. Получение и учёт ран](07-rany.md) | *Опционально* |
+| 4 | [Глава 4. Критические попадания и промахи](08-krity-i-promahi.md) | *Опционально* |
+| 5 | [Глава 5. Бой с отрядами](11-otryady.md) | *Опционально* |
+
+### Модули Gothic
+
+| Файл | Содержание |
+|------|------------|
+| [Готика — оружие](modules/gothic-oruzhie.html) · [броня](modules/gothic-bronya.html) · [магия](modules/gothic-magiya.html) · [таланты](modules/gothic-talanty.html) | Готический сеттинг |
+
+### Модули Skyrim
+
+| Файл | Содержание |
+|------|------------|
+| [Скайрим — оружие](modules/skyrim-oruzhie.html) · [броня](modules/skyrim-bronya.html) · [магия](modules/skyrim-magiya.html) · [таланты](modules/skyrim-talanty.html) | Снаряжение, магия и навыки |
+| [Скайрим — боги](modules/skyrim-bogi.html) · [культы](modules/skyrim-kulty.html) · [изготовление](modules/skyrim-izgotovlenie.html) · [алхимия](modules/skyrim-alkhimiya.html) | Религия, ремёсла, даэдра |
+| [Скайрим — фракции и гильдии](modules/skyrim-frakcii.html) | Соратники, воры, Братство, война, DLC |
+| [Скайрим — карта](modules/skyrim-karta.html) | Провинция и Солстхейм, расстояния, встречи |
 
 ### Дополнительные модули
 
 | Файл | Содержание |
 |------|------------|
-| [Готика — оружие](modules/gothic-oruzhie.html) · [броня](modules/gothic-bronya.html) · [магия](modules/gothic-magiya.html) · [таланты](modules/gothic-talanty.html) | Готический сеттинг |
+| [Фэнтези-бестиарий](modules/fantasy-bestiariy.html) | Существа в духе HoMM и классического фэнтези |
 | [«Нуарное расследование»](modules/noir-investigation.html) · [«Пепел и память»](modules/fahrenheit-books.html) · [«Эхо сказки»](modules/hero-trap.html) | Приключенческие модули |
 | [Огнестрел](modules/ognestrel.html) · [Транспорт](modules/transport.html) | Погони и огнестрельное оружие |
 

@@ -47,7 +47,7 @@ const HELP = `Usage: node scripts/build-pdf-cairn.mjs [options]
 async function main() {
   const opts = parsePdfArgs(process.argv, {
     output: path.join(PUBLIC, PDF_OUTPUT_CAIRN.all),
-    includeAdventure: true,
+    includeAdventure: false,
     audience: "all",
     helpText: HELP,
   });

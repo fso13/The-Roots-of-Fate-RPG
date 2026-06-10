@@ -21,7 +21,7 @@
     fantasy_spells: "fantasy/01-zaklinaniya.html",
     fantasy_skills: "fantasy/02-talanty-i-navyki.html",
     fantasy_gear: "fantasy/03-snaryazhenie.html",
-    fantasy_bestiary: "fantasy/04-bestiariy.html",
+    fantasy_bestiary: "modules/fantasy-bestiariy.html",
     fantasy_inventory: "fantasy/05-inventar.html",
     noir_investigation: "modules/noir-investigation.html",
     fahrenheit_books: "modules/fahrenheit-books.html",
@@ -30,6 +30,16 @@
     gothic_armor: "modules/gothic-bronya.html",
     gothic_magic: "modules/gothic-magiya.html",
     gothic_talents: "modules/gothic-talanty.html",
+    skyrim_weapons: "modules/skyrim-oruzhie.html",
+    skyrim_armor: "modules/skyrim-bronya.html",
+    skyrim_magic: "modules/skyrim-magiya.html",
+    skyrim_talents: "modules/skyrim-talanty.html",
+    skyrim_gods: "modules/skyrim-bogi.html",
+    skyrim_cults: "modules/skyrim-kulty.html",
+    skyrim_crafting: "modules/skyrim-izgotovlenie.html",
+    skyrim_alchemy: "modules/skyrim-alkhimiya.html",
+    skyrim_factions: "modules/skyrim-frakcii.html",
+    skyrim_map: "modules/skyrim-karta.html",
     firearms: "modules/ognestrel.html",
     vehicles: "modules/transport.html",
   };
@@ -60,6 +70,16 @@
     gothic_armor: false,
     gothic_magic: false,
     gothic_talents: false,
+    skyrim_weapons: false,
+    skyrim_armor: false,
+    skyrim_magic: false,
+    skyrim_talents: false,
+    skyrim_gods: false,
+    skyrim_cults: false,
+    skyrim_crafting: false,
+    skyrim_alchemy: false,
+    skyrim_factions: false,
+    skyrim_map: false,
   };
 
   const MODULE_LABELS = {
@@ -76,7 +96,7 @@
     fantasy_spells: "Заклинания (гл. 8, игрок)",
     fantasy_skills: "Таланты и навыки (гл. 9, игрок)",
     fantasy_gear: "Расш. снаряжение (гл. 10, игрок)",
-    fantasy_bestiary: "Фэнтези-бестиарий (гл. 3, хранитель)",
+    fantasy_bestiary: "Фэнтези-бестиарий",
     fantasy_inventory: "Инвентарь (гл. 11, игрок)",
     firearms: "Огнестрел",
     vehicles: "Транспорт",
@@ -87,6 +107,16 @@
     gothic_armor: "Готика — броня",
     gothic_magic: "Готика — магия",
     gothic_talents: "Готика — таланты",
+    skyrim_weapons: "Скайрим — оружие",
+    skyrim_armor: "Скайрим — броня",
+    skyrim_magic: "Скайрим — магия",
+    skyrim_talents: "Скайрим — таланты",
+    skyrim_gods: "Скайрим — боги",
+    skyrim_cults: "Скайрим — культы",
+    skyrim_crafting: "Скайрим — изготовление",
+    skyrim_alchemy: "Скайрим — алхимия",
+    skyrim_factions: "Скайрим — фракции и гильдии",
+    skyrim_map: "Скайрим — карта",
   };
 
   function getConfig() {
@@ -150,6 +180,24 @@
         (c) => config[c.getAttribute("data-module")] !== false
       );
       fantasySection.style.display = visible ? "" : "none";
+    }
+
+    const gothicSection = document.getElementById("index-section-gothic");
+    if (gothicSection) {
+      const grid = gothicSection.querySelector(".card-grid");
+      const visible = grid && Array.from(grid.querySelectorAll(".card[data-module]")).some(
+        (c) => config[c.getAttribute("data-module")] !== false
+      );
+      gothicSection.style.display = visible ? "" : "none";
+    }
+
+    const skyrimSection = document.getElementById("index-section-skyrim");
+    if (skyrimSection) {
+      const grid = skyrimSection.querySelector(".card-grid");
+      const visible = grid && Array.from(grid.querySelectorAll(".card[data-module]")).some(
+        (c) => config[c.getAttribute("data-module")] !== false
+      );
+      skyrimSection.style.display = visible ? "" : "none";
     }
 
     const customSection = document.getElementById("index-section-custom");

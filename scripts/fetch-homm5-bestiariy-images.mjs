@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Скачивает портреты существ HoMM5 с Might and Magic Wiki (Fandom)
-// и вставляет их в rpg/fantasy/04-bestiariy.md
+// и вставляет их в my_modules/fantasy_bestiary/module.md
 
 import fs from "fs";
 import path from "path";
@@ -9,7 +9,7 @@ import { fileURLToPath } from "url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, "..");
 const OUT_DIR = path.join(ROOT, "rpg", "fantasy", "images", "bestiariy");
-const BESTIARY_MD = path.join(ROOT, "rpg", "fantasy", "04-bestiariy.md");
+const BESTIARY_MD = path.join(ROOT, "my_modules", "fantasy_bestiary", "module.md");
 const API = "https://mightandmagic.fandom.com/api.php";
 
 /** slug файла → страница вики HoMM5 */

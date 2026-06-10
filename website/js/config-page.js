@@ -25,6 +25,16 @@
     "gothic_armor",
     "gothic_magic",
     "gothic_talents",
+    "skyrim_weapons",
+    "skyrim_armor",
+    "skyrim_magic",
+    "skyrim_talents",
+    "skyrim_gods",
+    "skyrim_cults",
+    "skyrim_crafting",
+    "skyrim_alchemy",
+    "skyrim_factions",
+    "skyrim_map",
     "firearms",
     "vehicles",
   ];
@@ -49,19 +59,34 @@
       const fantasyGroup = document.createElement("div");
       fantasyGroup.className = "config-group";
       fantasyGroup.innerHTML = '<div class="config-group-title">Фэнтези-модули</div>';
+      const gothicGroup = document.createElement("div");
+      gothicGroup.className = "config-group";
+      gothicGroup.innerHTML = '<div class="config-group-title">Модули Gothic</div>';
+      const skyrimGroup = document.createElement("div");
+      skyrimGroup.className = "config-group";
+      skyrimGroup.innerHTML = '<div class="config-group-title">Модули Skyrim</div>';
       const customGroup = document.createElement("div");
       customGroup.className = "config-group";
       customGroup.innerHTML = '<div class="config-group-title">Дополнительные модули</div>';
 
       const fantasyKeys = ["fantasy_spells", "fantasy_skills", "fantasy_gear", "fantasy_bestiary", "fantasy_inventory"];
+      const gothicKeys = ["gothic_weapons", "gothic_armor", "gothic_magic", "gothic_talents"];
+      const skyrimKeys = [
+        "skyrim_weapons",
+        "skyrim_armor",
+        "skyrim_magic",
+        "skyrim_talents",
+        "skyrim_gods",
+        "skyrim_cults",
+        "skyrim_crafting",
+        "skyrim_alchemy",
+        "skyrim_factions",
+        "skyrim_map",
+      ];
       const customKeys = [
         "noir_investigation",
         "fahrenheit_books",
         "hero_trap",
-        "gothic_weapons",
-        "gothic_armor",
-        "gothic_magic",
-        "gothic_talents",
         "firearms",
         "vehicles",
       ];
@@ -77,6 +102,10 @@
         `;
         if (fantasyKeys.includes(key)) {
           fantasyGroup.appendChild(labelEl);
+        } else if (gothicKeys.includes(key)) {
+          gothicGroup.appendChild(labelEl);
+        } else if (skyrimKeys.includes(key)) {
+          skyrimGroup.appendChild(labelEl);
         } else if (customKeys.includes(key)) {
           customGroup.appendChild(labelEl);
         } else {
@@ -86,6 +115,8 @@
 
       form.appendChild(coreGroup);
       form.appendChild(fantasyGroup);
+      if (gothicGroup.querySelector("label")) form.appendChild(gothicGroup);
+      if (skyrimGroup.querySelector("label")) form.appendChild(skyrimGroup);
       if (customGroup.querySelector("label")) form.appendChild(customGroup);
     }
 
