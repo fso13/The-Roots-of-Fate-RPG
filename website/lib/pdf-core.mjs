@@ -77,6 +77,10 @@ function resolveAssetAbs(relPath, src) {
   if (normalized.includes("..")) {
     candidates.push(path.normalize(path.join(RPG, normalized.replace(/^(\.\.\/)+/, ""))));
   }
+  if (relPath.startsWith("modules/")) {
+    candidates.push(path.normalize(path.join(MY_MODULES, normalized)));
+    candidates.push(path.normalize(path.join(PUBLIC, "modules", normalized)));
+  }
   for (const abs of candidates) {
     if (fs.existsSync(abs)) return abs;
   }
@@ -274,6 +278,70 @@ export function copyPrintCss(cssName) {
   for (const name of [cssName, "inventar-schema.css"]) {
     fs.copyFileSync(path.join(cssDir, name), path.join(destDir, name));
   }
+}
+
+const PRINT_FONT_LINKS = `
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">`;
+
+function printCoverHtml(title, tagline) {
+  return `
+  <div class="print-cover">
+    <h1>${escapeHtml(title)}</h1>
+    <p class="tagline">${escapeHtml(tagline)}</p>
+  </div>`;
+}
+
+export function modulePrintHtmlFilename(mod) {
+  return `print-modul-${mod.id.replace(/_/g, "-")}.html`;
+}
+
+export function adventurePrintHtmlFilename(adv) {
+  return `print-priklyuchenie-${adv.id}.html`;
+}
+
+export function buildModulePrintHtml(mod) {
+  const chapters = [buildCustomModuleChapter(mod)];
+  const title = `Корни судьбы — ${mod.title || mod.id}`;
+  return buildPrintHtml({
+    chapters,
+    title,
+    bodyClass: "print-book",
+    cssHref: "css/print-book.css",
+    fontLinks: PRINT_FONT_LINKS,
+    coverHtml: printCoverHtml(title, "Дополнительный модуль · только d6"),
+    mainClass: "print-book-main",
+    simpleToc: true,
+  });
+}
+
+export function writeModulePrintHtml(mod, publicDir = PUBLIC) {
+  const srcPath = path.join(MY_MODULES, mod.srcRel);
+  if (!fs.existsSync(srcPath)) return null;
+  const outHtml = path.join(publicDir, modulePrintHtmlFilename(mod));
+  fs.writeFileSync(outHtml, buildModulePrintHtml(mod), "utf8");
+  return outHtml;
+}
+
+export function buildAdventurePrintHtml(adv, { chapters }) {
+  const title = `Корни судьбы — ${adv.title}`;
+  return buildPrintHtml({
+    chapters,
+    title,
+    bodyClass: "print-book",
+    cssHref: "css/print-book.css",
+    fontLinks: PRINT_FONT_LINKS,
+    coverHtml: printCoverHtml(title, "Приключение · модульная настольная РПГ · только d6"),
+    mainClass: "print-book-main",
+    simpleToc: true,
+  });
+}
+
+export function writeAdventurePrintHtml(adv, chapters, publicDir = PUBLIC) {
+  const outHtml = path.join(publicDir, adventurePrintHtmlFilename(adv));
+  fs.writeFileSync(outHtml, buildAdventurePrintHtml(adv, { chapters }), "utf8");
+  return outHtml;
 }
 
 export function parsePdfArgs(argv, defaults) {

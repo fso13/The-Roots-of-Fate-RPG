@@ -701,6 +701,16 @@ a:hover {
   text-align: center;
 }
 
+.download-unavailable {
+  color: var(--ink-muted);
+  font-size: 0.95rem;
+}
+
+.download-unavailable em {
+  font-style: normal;
+  color: var(--accent);
+}
+
 .map-card figcaption strong {
   color: var(--ink);
 }

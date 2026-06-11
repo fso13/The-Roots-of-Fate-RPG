@@ -628,6 +628,75 @@ export const BOOK_DOWNLOAD_GROUPS = [
   },
 ];
 
+function moduleDownloadItem(mod) {
+  return {
+    file: modulePdfFile(mod),
+    label: mod.title || mod.id,
+    htmlFile: modulePdfHtmlFile(mod),
+    htmlLabel: `${mod.title || mod.id} (HTML)`,
+  };
+}
+
+/** Группы скачивания для главной: книги + модули + приключения. */
+export function getBookDownloadGroups() {
+  const groups = [...BOOK_DOWNLOAD_GROUPS];
+
+  const gothic = CUSTOM_MODULES.filter((m) => m.pack === GOTHIC_PACK).map(moduleDownloadItem);
+  if (gothic.length) {
+    groups.push({ id: "gothic", title: "Модули Gothic", items: gothic });
+  }
+
+  const skyrim = CUSTOM_MODULES.filter((m) => m.pack === SKYRIM_PACK).map(moduleDownloadItem);
+  if (skyrim.length) {
+    groups.push({ id: "skyrim", title: "Модули Skyrim", items: skyrim });
+  }
+
+  const extra = CUSTOM_MODULES.filter((m) => !m.pack).map(moduleDownloadItem);
+  if (extra.length) {
+    groups.push({ id: "modules", title: "Дополнительные модули", items: extra });
+  }
+
+  const adventures = ADVENTURES.map((adv) => ({
+    file: adventurePdfFile(adv),
+    label: adv.title,
+    htmlFile: adventurePdfHtmlFile(adv),
+    htmlLabel: `${adv.title} (HTML)`,
+  }));
+  if (adventures.length) {
+    groups.push({ id: "adventures", title: "Приключения", items: adventures });
+  }
+
+  return groups;
+}
+
+function renderDownloadItemLi(publicDir, prefix, item, missingHint) {
+  const esc = escapeDownloadHtml;
+  const pdfPath = path.join(publicDir, item.file);
+  const pdfExists = fs.existsSync(pdfPath);
+  const pdfHref = `${prefix}${item.file}`;
+  const pdfMeta = pdfExists
+    ? formatFileSize(fs.statSync(pdfPath).size)
+    : `ещё не собран (${missingHint})`;
+
+  const parts = [
+    `<li><a class="download-link" href="${esc(pdfHref)}" download>${esc(item.label)}</a> <span class="download-meta">${esc(pdfMeta)}</span></li>`,
+  ];
+
+  if (item.htmlFile) {
+    const htmlPath = path.join(publicDir, item.htmlFile);
+    if (fs.existsSync(htmlPath)) {
+      const htmlHref = `${prefix}${item.htmlFile}`;
+      const htmlSize = formatFileSize(fs.statSync(htmlPath).size);
+      const htmlLabel = item.htmlLabel || "HTML для печати";
+      parts.push(
+        `<li><a class="download-link download-link-secondary" href="${esc(htmlHref)}">${esc(htmlLabel)}</a> <span class="download-meta">${esc(htmlSize)} · Печать → PDF</span></li>`
+      );
+    }
+  }
+
+  return parts.join("\n      ");
+}
+
 const PRESERVE_IN_PUBLIC = /^(koreni-sudby-.*\.pdf|print-(book|modul|priklyuchenie).*\.html)$/;
 
 /** Сохранить PDF и print-HTML перед очисткой public/. */
@@ -680,30 +749,23 @@ function escapeDownloadHtml(s) {
 }
 
 /**
- * Компактный блок скачивания PDF на странице модуля или приключения.
- * items: [{ file, label }]
+ * Компактный блок скачивания на странице модуля или приключения.
+ * items: [{ file, label, htmlFile?, htmlLabel? }]
  */
 export function renderPagePdfDownloadHtml(
   publicDir,
-  { prefix = "", id = "pdf-download", title = "Скачать PDF", items = [], missingHint = "npm run pdf:pack" } = {}
+  { prefix = "", id = "pdf-download", title = "Скачать", items = [], missingHint = "npm run pdf:pack" } = {}
 ) {
   if (!items.length) return "";
 
   const links = items
-    .map((item) => {
-      const diskPath = path.join(publicDir, item.file);
-      const href = `${prefix}${item.file}`;
-      const size = fs.existsSync(diskPath)
-        ? formatFileSize(fs.statSync(diskPath).size)
-        : `соберите: ${missingHint}`;
-      return `<li><a class="download-link" href="${escapeDownloadHtml(href)}" download>${escapeDownloadHtml(item.label)}</a> <span class="download-meta">${escapeDownloadHtml(size)}</span></li>`;
-    })
+    .map((item) => renderDownloadItemLi(publicDir, prefix, item, missingHint))
     .join("\n      ");
 
   return `
 <section class="downloads downloads-page" id="${escapeDownloadHtml(id)}">
   <h2 class="section-title">${escapeDownloadHtml(title)}</h2>
-  <p class="downloads-note">PDF для печати и офлайн-игры.</p>
+  <p class="downloads-note">PDF для печати и офлайн-игры. Ссылка на PDF ведёт на готовый файл; HTML — запасной вариант (Печать → PDF в браузере).</p>
   <ul class="download-list download-list-page">
     ${links}
   </ul>
@@ -713,28 +775,16 @@ export function renderPagePdfDownloadHtml(
 /** HTML-блок «Скачать книги»; prefix — относительный путь к корню public (напр. «../»). */
 export function renderBookDownloadsHtml(
   publicDir,
-  { prefix = "", id = "downloads", onlyGroupIds = null } = {}
+  { prefix = "", id = "downloads", onlyGroupIds = null, missingHint = "npm run pdf:pack" } = {}
 ) {
   const groupsSource = onlyGroupIds
-    ? BOOK_DOWNLOAD_GROUPS.filter((g) => onlyGroupIds.includes(g.id))
-    : BOOK_DOWNLOAD_GROUPS;
-  const esc = (s) =>
-    String(s)
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;");
+    ? getBookDownloadGroups().filter((g) => onlyGroupIds.includes(g.id))
+    : getBookDownloadGroups();
+  const esc = escapeDownloadHtml;
 
   const groups = groupsSource.map((group) => {
     const links = group.items
-      .map((item) => {
-        const diskPath = path.join(publicDir, item.file);
-        const href = `${prefix}${item.file}`;
-        const size = fs.existsSync(diskPath)
-          ? formatFileSize(fs.statSync(diskPath).size)
-          : "соберите: npm run pdf:all";
-        return `<li><a class="download-link" href="${esc(href)}" download>${esc(item.label)}</a> <span class="download-meta">${esc(size)}</span></li>`;
-      })
+      .map((item) => renderDownloadItemLi(publicDir, prefix, item, missingHint))
       .join("\n        ");
     if (!links) return "";
     return `
@@ -750,8 +800,8 @@ export function renderBookDownloadsHtml(
 
   return `
   <section class="downloads" id="${esc(id)}">
-    <h2 class="section-title">Скачать книги</h2>
-    <p class="downloads-note">PDF для печати и офлайн-игры.</p>
+    <h2 class="section-title">Скачать PDF</h2>
+    <p class="downloads-note">Книги правил, дополнительные модули и приключения.</p>
     <div class="download-grid">
       ${groups.join("")}
     </div>

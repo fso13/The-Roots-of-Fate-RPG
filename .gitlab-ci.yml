@@ -1,4 +1,4 @@
-# GitLab Pages: статический сайт из rpg/*.md
+# GitLab Pages: статический сайт из rpg/*.md + PDF модулей и приключений
 image: node:20
 
 pages:
@@ -6,6 +6,11 @@ pages:
   script:
     - npm ci
     - npm run build
+    - npx playwright install --with-deps chromium
+    - node scripts/build-pdf-pack.mjs --all-modules
+    - node scripts/build-pdf-pack.mjs --all-adventures
+    # Повторная сборка: страницы получают ссылки на уже созданные PDF
+    - node website/build.mjs
   artifacts:
     paths:
       - public

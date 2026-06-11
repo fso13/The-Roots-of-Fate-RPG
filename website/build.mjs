@@ -18,9 +18,19 @@ import {
   renderBookDownloadsHtml,
   renderPagePdfDownloadHtml,
   modulePdfFile,
+  modulePdfHtmlFile,
   adventurePdfFile,
+  adventurePdfHtmlFile,
+  listAdventurePdfSources,
   syncBookDownloads,
 } from "./lib/book-build.mjs";
+import {
+  buildChapterList,
+  buildCustomModuleChapter,
+  copyPrintCss,
+  writeModulePrintHtml,
+  writeAdventurePrintHtml,
+} from "./lib/pdf-core.mjs";
 import { linkGlossaryInHtml, glossaryHrefForPage } from "./lib/glossary.mjs";
 import { expandInventarSchema } from "./lib/inventar-schema.mjs";
 
@@ -474,6 +484,19 @@ function main() {
 
   syncBookDownloads(OUT, RPG, preservedBooks);
 
+  copyPrintCss("print-book.css");
+  for (const mod of CUSTOM_MODULES) {
+    writeModulePrintHtml(mod, OUT);
+  }
+  for (const adv of ADVENTURES) {
+    const { adv: advMeta, rels, module } = listAdventurePdfSources(adv.id);
+    const chapters = [...buildChapterList([advMeta.adventureRel])];
+    if (module) chapters.push(buildCustomModuleChapter(module));
+    const mapRels = rels.filter((r) => r !== advMeta.adventureRel);
+    if (mapRels.length) chapters.push(...buildChapterList(mapRels));
+    writeAdventurePrintHtml(advMeta, chapters, OUT);
+  }
+
   for (const p of pageMeta) {
     const md = p.isCustomModule
       ? p.mdBody
@@ -492,7 +515,14 @@ function main() {
         bodyHtml =
           renderPagePdfDownloadHtml(OUT, {
             prefix: dlPrefix,
-            items: [{ file: modulePdfFile(mod), label: mod.title || "PDF модуля" }],
+            items: [
+              {
+                file: modulePdfFile(mod),
+                label: `${mod.title || mod.id} (PDF)`,
+                htmlFile: modulePdfHtmlFile(mod),
+                htmlLabel: `${mod.title || mod.id} (HTML для печати)`,
+              },
+            ],
             missingHint: "npm run pdf:modules",
           }) + bodyHtml;
       }
@@ -502,7 +532,14 @@ function main() {
         bodyHtml =
           renderPagePdfDownloadHtml(OUT, {
             prefix: dlPrefix,
-            items: [{ file: adventurePdfFile(adv), label: `PDF: ${adv.title}` }],
+            items: [
+              {
+                file: adventurePdfFile(adv),
+                label: `${adv.title} (PDF)`,
+                htmlFile: adventurePdfHtmlFile(adv),
+                htmlLabel: `${adv.title} (HTML для печати)`,
+              },
+            ],
             missingHint: "npm run pdf:adventures",
           }) + bodyHtml;
       }

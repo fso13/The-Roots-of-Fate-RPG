@@ -4,12 +4,16 @@ import fs from "fs";
 import path from "path";
 import {
   PUBLIC,
+  MY_MODULES,
   buildChapterList,
   buildCustomModuleChapter,
-  buildPrintHtml,
+  buildModulePrintHtml,
+  buildAdventurePrintHtml,
   renderPdf,
   ensurePublicBuilt,
   copyPrintCss,
+  adventurePrintHtmlFilename,
+  modulePrintHtmlFilename,
 } from "../website/lib/pdf-core.mjs";
 import {
   CUSTOM_MODULES,
@@ -17,15 +21,8 @@ import {
   findCustomModule,
   listAdventurePdfSources,
   adventurePdfFile,
-  adventurePdfHtmlFile,
   modulePdfFile,
-  modulePdfHtmlFile,
 } from "../website/lib/book-build.mjs";
-
-const FONT_LINKS = `
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">`;
 
 const PDF_OPTS = {
   format: "A4",
@@ -38,14 +35,6 @@ const PDF_OPTS = {
         <span style="float:right"><span class="pageNumber"></span> / <span class="totalPages"></span></span>
       </div>`,
 };
-
-function coverHtml(title, tagline) {
-  return `
-  <div class="print-cover">
-    <h1>${title}</h1>
-    <p class="tagline">${tagline}</p>
-  </div>`;
-}
 
 function parseArgs(argv) {
   const opts = { adventure: null, module: null, allAdventures: false, allModules: false };
@@ -77,20 +66,10 @@ async function buildAdventurePdf(adventureId) {
   const mapRels = rels.filter((r) => r !== adv.adventureRel);
   if (mapRels.length) chapters.push(...buildChapterList(mapRels));
 
-  const title = `Корни судьбы — ${adv.title}`;
   const outPdf = path.join(PUBLIC, adventurePdfFile(adv));
-  const outHtml = path.join(PUBLIC, adventurePdfHtmlFile(adv));
+  const outHtml = path.join(PUBLIC, adventurePrintHtmlFilename(adv));
 
-  const html = buildPrintHtml({
-    chapters,
-    title,
-    bodyClass: "print-book",
-    cssHref: "css/print-book.css",
-    fontLinks: FONT_LINKS,
-    coverHtml: coverHtml(title, "Приключение · модульная настольная РПГ · только d6"),
-    mainClass: "print-book-main",
-    simpleToc: true,
-  });
+  const html = buildAdventurePrintHtml(adv, { chapters });
 
   fs.writeFileSync(outHtml, html, "utf8");
   fs.mkdirSync(path.dirname(outPdf), { recursive: true });
@@ -104,21 +83,10 @@ async function buildModulePdf(moduleId) {
   const mod = findCustomModule(moduleId);
   if (!mod) throw new Error(`Unknown module: ${moduleId}`);
 
-  const chapters = [buildCustomModuleChapter(mod)];
-  const title = `Корни судьбы — ${mod.title || mod.id}`;
   const outPdf = path.join(PUBLIC, modulePdfFile(mod));
-  const outHtml = path.join(PUBLIC, modulePdfHtmlFile(mod));
+  const outHtml = path.join(PUBLIC, modulePrintHtmlFilename(mod));
 
-  const html = buildPrintHtml({
-    chapters,
-    title,
-    bodyClass: "print-book",
-    cssHref: "css/print-book.css",
-    fontLinks: FONT_LINKS,
-    coverHtml: coverHtml(title, "Дополнительный модуль · только d6"),
-    mainClass: "print-book-main",
-    simpleToc: true,
-  });
+  const html = buildModulePrintHtml(mod);
 
   fs.writeFileSync(outHtml, html, "utf8");
   fs.mkdirSync(path.dirname(outPdf), { recursive: true });
@@ -137,7 +105,14 @@ async function main() {
     return;
   }
   if (opts.allModules) {
-    for (const mod of CUSTOM_MODULES) await buildModulePdf(mod.id);
+    for (const mod of CUSTOM_MODULES) {
+      const srcPath = path.join(MY_MODULES, mod.srcRel);
+      if (!fs.existsSync(srcPath)) {
+        console.warn("Skip module (no source):", mod.id);
+        continue;
+      }
+      await buildModulePdf(mod.id);
+    }
     return;
   }
   if (opts.adventure) {
