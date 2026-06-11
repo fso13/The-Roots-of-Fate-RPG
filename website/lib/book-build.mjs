@@ -628,33 +628,9 @@ export const BOOK_DOWNLOAD_GROUPS = [
   },
 ];
 
-function moduleDownloadItem(mod) {
-  return {
-    file: modulePdfFile(mod),
-    label: mod.title || mod.id,
-    htmlFile: modulePdfHtmlFile(mod),
-    htmlLabel: `${mod.title || mod.id} (HTML)`,
-  };
-}
-
-/** Группы скачивания для главной: книги + модули + приключения. */
+/** Группы скачивания для главной и оглавлений: книги + приключения (модули — на своих страницах). */
 export function getBookDownloadGroups() {
   const groups = [...BOOK_DOWNLOAD_GROUPS];
-
-  const gothic = CUSTOM_MODULES.filter((m) => m.pack === GOTHIC_PACK).map(moduleDownloadItem);
-  if (gothic.length) {
-    groups.push({ id: "gothic", title: "Модули Gothic", items: gothic });
-  }
-
-  const skyrim = CUSTOM_MODULES.filter((m) => m.pack === SKYRIM_PACK).map(moduleDownloadItem);
-  if (skyrim.length) {
-    groups.push({ id: "skyrim", title: "Модули Skyrim", items: skyrim });
-  }
-
-  const extra = CUSTOM_MODULES.filter((m) => !m.pack).map(moduleDownloadItem);
-  if (extra.length) {
-    groups.push({ id: "modules", title: "Дополнительные модули", items: extra });
-  }
 
   const adventures = ADVENTURES.map((adv) => ({
     file: adventurePdfFile(adv),
@@ -679,7 +655,7 @@ function renderDownloadItemLi(publicDir, prefix, item, missingHint) {
     : `ещё не собран (${missingHint})`;
 
   const parts = [
-    `<li><a class="download-link" href="${esc(pdfHref)}" download>${esc(item.label)}</a> <span class="download-meta">${esc(pdfMeta)}</span></li>`,
+    `<li><a class="download-link" href="${esc(pdfHref)}" download type="application/pdf">${esc(item.label)}</a> <span class="download-meta">${esc(pdfMeta)}</span></li>`,
   ];
 
   if (item.htmlFile) {
@@ -801,7 +777,7 @@ export function renderBookDownloadsHtml(
   return `
   <section class="downloads" id="${esc(id)}">
     <h2 class="section-title">Скачать PDF</h2>
-    <p class="downloads-note">Книги правил, дополнительные модули и приключения.</p>
+    <p class="downloads-note">Книги правил и приключения. PDF модулей — на странице каждого модуля.</p>
     <div class="download-grid">
       ${groups.join("")}
     </div>

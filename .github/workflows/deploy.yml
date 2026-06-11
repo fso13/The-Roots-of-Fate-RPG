@@ -1,4 +1,4 @@
-# GitHub Pages: статический сайт из rpg/*.md
+# GitHub Pages: статический сайт + PDF модулей и приключений
 name: pages
 
 on:
@@ -30,6 +30,11 @@ jobs:
 
       - run: npm ci
       - run: npm run build
+      - run: npx playwright install --with-deps chromium
+      - run: node scripts/build-pdf-pack.mjs --all-modules
+      - run: node scripts/build-pdf-pack.mjs --all-adventures
+      # Повторная сборка: страницы получают размеры и ссылки на уже созданные PDF
+      - run: node website/build.mjs
 
       - uses: actions/upload-pages-artifact@v3
         with:
