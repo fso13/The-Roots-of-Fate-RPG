@@ -628,21 +628,9 @@ export const BOOK_DOWNLOAD_GROUPS = [
   },
 ];
 
-/** Группы скачивания для главной и оглавлений: книги + приключения (модули — на своих страницах). */
+/** Группы скачивания для главной и оглавлений: только книги правил. */
 export function getBookDownloadGroups() {
-  const groups = [...BOOK_DOWNLOAD_GROUPS];
-
-  const adventures = ADVENTURES.map((adv) => ({
-    file: adventurePdfFile(adv),
-    label: adv.title,
-    htmlFile: adventurePdfHtmlFile(adv),
-    htmlLabel: `${adv.title} (HTML)`,
-  }));
-  if (adventures.length) {
-    groups.push({ id: "adventures", title: "Приключения", items: adventures });
-  }
-
-  return groups;
+  return [...BOOK_DOWNLOAD_GROUPS];
 }
 
 function renderDownloadItemLi(publicDir, prefix, item, missingHint) {
@@ -777,7 +765,7 @@ export function renderBookDownloadsHtml(
   return `
   <section class="downloads" id="${esc(id)}">
     <h2 class="section-title">Скачать PDF</h2>
-    <p class="downloads-note">Книги правил и приключения. PDF модулей — на странице каждого модуля.</p>
+    <p class="downloads-note">Книги правил. PDF модулей и приключений — на странице каждого раздела.</p>
     <div class="download-grid">
       ${groups.join("")}
     </div>
