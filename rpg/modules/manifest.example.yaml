@@ -36,6 +36,32 @@ custom_modules:
     enabled: false   # для «Пепел слов» — включите true
   - path: "./my_modules/hero_trap"
     enabled: false   # для «Зов из Чёрного шпиля» — включите true
+  - path: "./my_modules/homm3/lore"
+    enabled: false   # Heroes III — лор Антагарича
+  - path: "./my_modules/homm3/magiya"
+    enabled: false   # Heroes III — магия
+  - path: "./my_modules/homm3/bestiariy"
+    enabled: false   # Heroes III — бестиарий
+  - path: "./my_modules/homm3/talanty"
+    enabled: false   # Heroes III — таланты и навыки
+  - path: "./my_modules/homm3/predmety"
+    enabled: false   # Heroes III — товары, реликвии и артефакты
+  - path: "./my_modules/homm3/adventure"
+    enabled: false   # Heroes III — мини-приключение на одну сессию
+  - path: "./my_modules/elden_ring/lore"
+    enabled: false   # Elden Ring — лор Междуземья
+  - path: "./my_modules/elden_ring/navyki"
+    enabled: false   # Elden Ring — навыки
+  - path: "./my_modules/elden_ring/talanty"
+    enabled: false   # Elden Ring — таланты
+  - path: "./my_modules/elden_ring/magiya"
+    enabled: false   # Elden Ring — магия
+  - path: "./my_modules/elden_ring/predmety"
+    enabled: false   # Elden Ring — товары и предметы
+  - path: "./my_modules/elden_ring/bestiariy"
+    enabled: false   # Elden Ring — бестиарий
+  - path: "./my_modules/elden_ring/adventure"
+    enabled: false   # Elden Ring — мини-приключение на одну сессию
   - path: "./my_modules/gothic/oruzhie"
     enabled: false   # Готика — оружие
   - path: "./my_modules/gothic/bronya"
@@ -44,6 +70,8 @@ custom_modules:
     enabled: false   # Готика — магия
   - path: "./my_modules/gothic/talanty"
     enabled: false   # Готика — таланты
+  - path: "./my_modules/gothic/adventure"
+    enabled: false   # Готика — мини-приключение на одну сессию
   - path: "./my_modules/skyrim/oruzhie"
     enabled: false   # Скайрим — оружие
   - path: "./my_modules/skyrim/bronya"
@@ -64,6 +92,8 @@ custom_modules:
     enabled: false   # Скайрим — фракции и гильдии
   - path: "./my_modules/skyrim/karta"
     enabled: false   # Скайрим — карта
+  - path: "./my_modules/skyrim/adventure"
+    enabled: false   # Скайрим — мини-приключение на одну сессию
   - path: "./my_modules/firearms"
     enabled: false   # Огнестрел
   - path: "./my_modules/vehicles"

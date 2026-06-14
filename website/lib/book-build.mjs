@@ -80,10 +80,18 @@ export const CHAPTER_AUDIENCE = {
   "modules/noir-investigation.md": "keeper",
   "modules/fahrenheit-books.md": "keeper",
   "modules/hero-trap.md": "keeper",
+  "modules/elden-ring-lore.md": "keeper",
+  "modules/elden-ring-navyki.md": "player",
+  "modules/elden-ring-talanty.md": "player",
+  "modules/elden-ring-magiya.md": "player",
+  "modules/elden-ring-predmety.md": "player",
+  "modules/elden-ring-bestiariy.md": "keeper",
+  "modules/elden-ring-adventure.md": "keeper",
   "modules/gothic-oruzhie.md": "player",
   "modules/gothic-bronya.md": "player",
   "modules/gothic-magiya.md": "player",
   "modules/gothic-talanty.md": "player",
+  "modules/gothic-adventure.md": "keeper",
   "modules/skyrim-oruzhie.md": "player",
   "modules/skyrim-bronya.md": "player",
   "modules/skyrim-magiya.md": "player",
@@ -94,6 +102,7 @@ export const CHAPTER_AUDIENCE = {
   "modules/skyrim-alkhimiya.md": "player",
   "modules/skyrim-frakcii.md": "player",
   "modules/skyrim-karta.md": "player",
+  "modules/skyrim-adventure.md": "keeper",
   "modules/ognestrel.md": "player",
   "modules/transport.md": "keeper",
 };
@@ -129,6 +138,12 @@ export const GOTHIC_PACK = "gothic";
 /** Идентификатор набора модулей Skyrim. */
 export const SKYRIM_PACK = "skyrim";
 
+/** Идентификатор набора модулей Heroes III. */
+export const HOMM3_PACK = "homm3";
+
+/** Идентификатор набора модулей Elden Ring. */
+export const ELDEN_RING_PACK = "elden_ring";
+
 export function isGothicModule(mod) {
   return mod?.pack === GOTHIC_PACK;
 }
@@ -137,8 +152,16 @@ export function isSkyrimModule(mod) {
   return mod?.pack === SKYRIM_PACK;
 }
 
+export function isHomm3Module(mod) {
+  return mod?.pack === HOMM3_PACK;
+}
+
+export function isEldenRingModule(mod) {
+  return mod?.pack === ELDEN_RING_PACK;
+}
+
 export function isPackModule(mod) {
-  return isGothicModule(mod) || isSkyrimModule(mod);
+  return isGothicModule(mod) || isSkyrimModule(mod) || isHomm3Module(mod) || isEldenRingModule(mod);
 }
 
 /** Кастомные модули: исходник в my_modules/, страница на сайте — modules/*.html */
@@ -170,6 +193,123 @@ export const CUSTOM_MODULES = [
     srcRel: "hero_trap/module.md",
     outRel: "modules/hero-trap.html",
     mdRel: "modules/hero-trap.md",
+    audience: "keeper",
+  },
+  {
+    id: "homm3_lore",
+    title: "Heroes III — лор Антагарича",
+    pack: HOMM3_PACK,
+    srcRel: "homm3/lore/module.md",
+    outRel: "modules/homm3-lore.html",
+    mdRel: "modules/homm3-lore.md",
+    audience: "keeper",
+  },
+  {
+    id: "homm3_magic",
+    title: "Heroes III — магия",
+    pack: HOMM3_PACK,
+    srcRel: "homm3/magiya/module.md",
+    outRel: "modules/homm3-magiya.html",
+    mdRel: "modules/homm3-magiya.md",
+    audience: "player",
+  },
+  {
+    id: "homm3_bestiary",
+    title: "Heroes III — бестиарий",
+    pack: HOMM3_PACK,
+    srcRel: "homm3/bestiariy/module.md",
+    outRel: "modules/homm3-bestiariy.html",
+    mdRel: "modules/homm3-bestiariy.md",
+    audience: "keeper",
+  },
+  {
+    id: "homm3_talents",
+    title: "Heroes III — таланты и навыки",
+    pack: HOMM3_PACK,
+    srcRel: "homm3/talanty/module.md",
+    outRel: "modules/homm3-talanty.html",
+    mdRel: "modules/homm3-talanty.md",
+    audience: "player",
+  },
+  {
+    id: "homm3_items",
+    title: "Heroes III — товары и артефакты",
+    pack: HOMM3_PACK,
+    srcRel: "homm3/predmety/module.md",
+    outRel: "modules/homm3-predmety.html",
+    mdRel: "modules/homm3-predmety.md",
+    audience: "player",
+  },
+  {
+    id: "homm3_adventure",
+    title: "Heroes III — Обелиск у Тихой рощи",
+    pack: HOMM3_PACK,
+    srcRel: "homm3/adventure/module.md",
+    outRel: "modules/homm3-adventure.html",
+    mdRel: "modules/homm3-adventure.md",
+    audience: "keeper",
+  },
+  {
+    id: "elden_ring_lore",
+    title: "Elden Ring — Междуземье",
+    pack: ELDEN_RING_PACK,
+    srcRel: "elden_ring/lore/module.md",
+    outRel: "modules/elden-ring-lore.html",
+    mdRel: "modules/elden-ring-lore.md",
+    audience: "keeper",
+  },
+  {
+    id: "elden_ring_skills",
+    title: "Elden Ring — навыки",
+    pack: ELDEN_RING_PACK,
+    srcRel: "elden_ring/navyki/module.md",
+    outRel: "modules/elden-ring-navyki.html",
+    mdRel: "modules/elden-ring-navyki.md",
+    audience: "player",
+  },
+  {
+    id: "elden_ring_talents",
+    title: "Elden Ring — таланты",
+    pack: ELDEN_RING_PACK,
+    srcRel: "elden_ring/talanty/module.md",
+    outRel: "modules/elden-ring-talanty.html",
+    mdRel: "modules/elden-ring-talanty.md",
+    audience: "player",
+  },
+  {
+    id: "elden_ring_magic",
+    title: "Elden Ring — магия",
+    pack: ELDEN_RING_PACK,
+    srcRel: "elden_ring/magiya/module.md",
+    outRel: "modules/elden-ring-magiya.html",
+    mdRel: "modules/elden-ring-magiya.md",
+    audience: "player",
+  },
+  {
+    id: "elden_ring_items",
+    title: "Elden Ring — товары и предметы",
+    pack: ELDEN_RING_PACK,
+    srcRel: "elden_ring/predmety/module.md",
+    outRel: "modules/elden-ring-predmety.html",
+    mdRel: "modules/elden-ring-predmety.md",
+    audience: "player",
+  },
+  {
+    id: "elden_ring_bestiary",
+    title: "Elden Ring — бестиарий",
+    pack: ELDEN_RING_PACK,
+    srcRel: "elden_ring/bestiariy/module.md",
+    outRel: "modules/elden-ring-bestiariy.html",
+    mdRel: "modules/elden-ring-bestiariy.md",
+    audience: "keeper",
+  },
+  {
+    id: "elden_ring_adventure",
+    title: "Elden Ring — Плачущий корень",
+    pack: ELDEN_RING_PACK,
+    srcRel: "elden_ring/adventure/module.md",
+    outRel: "modules/elden-ring-adventure.html",
+    mdRel: "modules/elden-ring-adventure.md",
     audience: "keeper",
   },
   {
@@ -207,6 +347,15 @@ export const CUSTOM_MODULES = [
     outRel: "modules/gothic-talanty.html",
     mdRel: "modules/gothic-talanty.md",
     audience: "player",
+  },
+  {
+    id: "gothic_adventure",
+    title: "Готика — Колокол на обрыве",
+    pack: GOTHIC_PACK,
+    srcRel: "gothic/adventure/module.md",
+    outRel: "modules/gothic-adventure.html",
+    mdRel: "modules/gothic-adventure.md",
+    audience: "keeper",
   },
   {
     id: "skyrim_weapons",
@@ -297,6 +446,15 @@ export const CUSTOM_MODULES = [
     outRel: "modules/skyrim-karta.html",
     mdRel: "modules/skyrim-karta.md",
     audience: "player",
+  },
+  {
+    id: "skyrim_adventure",
+    title: "Скайрим — Пепельный курган",
+    pack: SKYRIM_PACK,
+    srcRel: "skyrim/adventure/module.md",
+    outRel: "modules/skyrim-adventure.html",
+    mdRel: "modules/skyrim-adventure.md",
+    audience: "keeper",
   },
   {
     id: "firearms",

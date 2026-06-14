@@ -41,6 +41,7 @@
 | Файл | Содержание |
 |------|------------|
 | [Готика — оружие](modules/gothic-oruzhie.html) · [броня](modules/gothic-bronya.html) · [магия](modules/gothic-magiya.html) · [таланты](modules/gothic-talanty.html) | Готический сеттинг |
+| [Готика — Колокол на обрыве](modules/gothic-adventure.html) | Мини-приключение на одну сессию |
 
 ### Модули Skyrim
 
@@ -50,6 +51,15 @@
 | [Скайрим — боги](modules/skyrim-bogi.html) · [культы](modules/skyrim-kulty.html) · [изготовление](modules/skyrim-izgotovlenie.html) · [алхимия](modules/skyrim-alkhimiya.html) | Религия, ремёсла, даэдра |
 | [Скайрим — фракции и гильдии](modules/skyrim-frakcii.html) | Соратники, воры, Братство, война, DLC |
 | [Скайрим — карта](modules/skyrim-karta.html) | Провинция и Солстхейм, расстояния, встречи |
+| [Скайрим — Пепельный курган](modules/skyrim-adventure.html) | Мини-приключение на одну сессию |
+
+### Модули Elden Ring
+
+| Файл | Содержание |
+|------|------------|
+| [Elden Ring — навыки](modules/elden-ring-navyki.html) · [таланты](modules/elden-ring-talanty.html) · [магия](modules/elden-ring-magiya.html) · [товары и предметы](modules/elden-ring-predmety.html) | Правила для игроков |
+| [Elden Ring — лор Междуземья](modules/elden-ring-lore.html) · [бестиарий](modules/elden-ring-bestiariy.html) | Лор и противники для хранителя |
+| [Elden Ring — Плачущий корень](modules/elden-ring-adventure.html) | Мини-приключение на одну сессию |
 
 ### Дополнительные модули
 

@@ -24,6 +24,7 @@
 | [Готика — броня](modules/gothic-bronya.html) | Броня в готическом сеттинге |
 | [Готика — магия](modules/gothic-magiya.html) | Магия в готическом сеттинге |
 | [Готика — таланты](modules/gothic-talanty.html) | Таланты в готическом сеттинге |
+| [Готика — Колокол на обрыве](modules/gothic-adventure.html) | Мини-приключение на одну сессию |
 
 ### Модули Skyrim
 
@@ -39,6 +40,19 @@
 | [Скайрим — алхимия](modules/skyrim-alkhimiya.html) | Зелья и яды |
 | [Скайрим — фракции и гильдии](modules/skyrim-frakcii.html) | Гильдии, гражданская война, Dawnguard, Dragonborn |
 | [Скайрим — карта](modules/skyrim-karta.html) | Карта провинции и Солстхейма |
+| [Скайрим — Пепельный курган](modules/skyrim-adventure.html) | Мини-приключение на одну сессию |
+
+### Модули Elden Ring
+
+| Файл | Содержание |
+|------|------------|
+| [Elden Ring — лор Междуземья](modules/elden-ring-lore.html) | Лор, фракции, Милость, проклятья |
+| [Elden Ring — навыки](modules/elden-ring-navyki.html) | Навыки Потускневших |
+| [Elden Ring — таланты](modules/elden-ring-talanty.html) | Таланты, пеплы войны, клятвы |
+| [Elden Ring — магия](modules/elden-ring-magiya.html) | Чародейства, молитвы, Гниль, Безумие |
+| [Elden Ring — товары и предметы](modules/elden-ring-predmety.html) | Оружие, броня, расходники, руны |
+| [Elden Ring — бестиарий](modules/elden-ring-bestiariy.html) | Существа и боссы Междуземья |
+| [Elden Ring — Плачущий корень](modules/elden-ring-adventure.html) | Мини-приключение на одну сессию |
 
 ### Дополнительные модули
 

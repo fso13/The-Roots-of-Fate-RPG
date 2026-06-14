@@ -14,6 +14,8 @@ import {
   ADVENTURES,
   GOTHIC_PACK,
   SKYRIM_PACK,
+  HOMM3_PACK,
+  ELDEN_RING_PACK,
   preserveBookAssets,
   renderBookDownloadsHtml,
   renderPagePdfDownloadHtml,
@@ -66,6 +68,7 @@ const PAGE_TO_MODULE = {
   "modules/gothic-bronya.html": "gothic_armor",
   "modules/gothic-magiya.html": "gothic_magic",
   "modules/gothic-talanty.html": "gothic_talents",
+  "modules/gothic-adventure.html": "gothic_adventure",
   "modules/skyrim-oruzhie.html": "skyrim_weapons",
   "modules/skyrim-bronya.html": "skyrim_armor",
   "modules/skyrim-magiya.html": "skyrim_magic",
@@ -76,6 +79,20 @@ const PAGE_TO_MODULE = {
   "modules/skyrim-alkhimiya.html": "skyrim_alchemy",
   "modules/skyrim-frakcii.html": "skyrim_factions",
   "modules/skyrim-karta.html": "skyrim_map",
+  "modules/skyrim-adventure.html": "skyrim_adventure",
+  "modules/elden-ring-lore.html": "elden_ring_lore",
+  "modules/elden-ring-navyki.html": "elden_ring_skills",
+  "modules/elden-ring-talanty.html": "elden_ring_talents",
+  "modules/elden-ring-magiya.html": "elden_ring_magic",
+  "modules/elden-ring-predmety.html": "elden_ring_items",
+  "modules/elden-ring-bestiariy.html": "elden_ring_bestiary",
+  "modules/elden-ring-adventure.html": "elden_ring_adventure",
+  "modules/homm3-lore.html": "homm3_lore",
+  "modules/homm3-magiya.html": "homm3_magic",
+  "modules/homm3-bestiariy.html": "homm3_bestiary",
+  "modules/homm3-talanty.html": "homm3_talents",
+  "modules/homm3-predmety.html": "homm3_items",
+  "modules/homm3-adventure.html": "homm3_adventure",
   "modules/ognestrel.html": "firearms",
   "modules/transport.html": "vehicles",
 };
@@ -400,8 +417,14 @@ function main() {
     .sort((a, b) => customModOrder.indexOf(a.rel) - customModOrder.indexOf(b.rel));
   const gothicMods = customMods.filter((p) => p.pack === GOTHIC_PACK);
   const skyrimMods = customMods.filter((p) => p.pack === SKYRIM_PACK);
+  const homm3Mods = customMods.filter((p) => p.pack === HOMM3_PACK);
+  const eldenRingMods = customMods.filter((p) => p.pack === ELDEN_RING_PACK);
   const extraMods = customMods.filter(
-    (p) => p.pack !== GOTHIC_PACK && p.pack !== SKYRIM_PACK
+    (p) =>
+      p.pack !== GOTHIC_PACK &&
+      p.pack !== SKYRIM_PACK &&
+      p.pack !== HOMM3_PACK &&
+      p.pack !== ELDEN_RING_PACK
   );
   const readmes = pageMeta.filter((p) => p.isReadme);
   const pageByRel = new Map(pageMeta.map((p) => [p.rel, p]));
@@ -469,6 +492,22 @@ function main() {
           {
             title: "Модули Skyrim",
             items: skyrimMods.filter(isNavVisible).map(toNavItem),
+          },
+        ]
+      : []),
+    ...(homm3Mods.length
+      ? [
+          {
+            title: "Модули Heroes III",
+            items: homm3Mods.filter(isNavVisible).map(toNavItem),
+          },
+        ]
+      : []),
+    ...(eldenRingMods.length
+      ? [
+          {
+            title: "Модули Elden Ring",
+            items: eldenRingMods.filter(isNavVisible).map(toNavItem),
           },
         ]
       : []),
@@ -586,7 +625,15 @@ function main() {
       if (p.isReadme) meta = "Оглавление";
       else if (p.isCustomModule)
         meta =
-          p.pack === GOTHIC_PACK ? "Gothic" : p.pack === SKYRIM_PACK ? "Skyrim" : "Доп. модуль";
+          p.pack === GOTHIC_PACK
+            ? "Gothic"
+            : p.pack === SKYRIM_PACK
+              ? "Skyrim"
+              : p.pack === HOMM3_PACK
+                ? "Heroes III"
+                : p.pack === ELDEN_RING_PACK
+                  ? "Elden Ring"
+                  : "Доп. модуль";
       else if (p.audience === "player") meta = "Игрок";
       else if (p.audience === "keeper") meta = "Хранитель";
       if (p.rel.startsWith("fantasy/")) meta = "Фэнтези · игрок";
@@ -695,6 +742,26 @@ function main() {
   <h2 class="section-title">Модули Skyrim</h2>
   <div class="card-grid">
     ${skyrimMods.map((p) => card(p)).join("")}
+  </div>
+  </section>`
+      : ""
+  }
+  ${
+    homm3Mods.length
+      ? `<section id="index-section-homm3">
+  <h2 class="section-title">Модули Heroes III</h2>
+  <div class="card-grid">
+    ${homm3Mods.map((p) => card(p)).join("")}
+  </div>
+  </section>`
+      : ""
+  }
+  ${
+    eldenRingMods.length
+      ? `<section id="index-section-elden-ring">
+  <h2 class="section-title">Модули Elden Ring</h2>
+  <div class="card-grid">
+    ${eldenRingMods.map((p) => card(p)).join("")}
   </div>
   </section>`
       : ""

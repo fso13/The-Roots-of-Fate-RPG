@@ -25,6 +25,7 @@
     "gothic_armor",
     "gothic_magic",
     "gothic_talents",
+    "gothic_adventure",
     "skyrim_weapons",
     "skyrim_armor",
     "skyrim_magic",
@@ -35,6 +36,20 @@
     "skyrim_alchemy",
     "skyrim_factions",
     "skyrim_map",
+    "skyrim_adventure",
+    "elden_ring_lore",
+    "elden_ring_skills",
+    "elden_ring_talents",
+    "elden_ring_magic",
+    "elden_ring_items",
+    "elden_ring_bestiary",
+    "elden_ring_adventure",
+    "homm3_lore",
+    "homm3_magic",
+    "homm3_bestiary",
+    "homm3_talents",
+    "homm3_items",
+    "homm3_adventure",
     "firearms",
     "vehicles",
   ];
@@ -65,12 +80,18 @@
       const skyrimGroup = document.createElement("div");
       skyrimGroup.className = "config-group";
       skyrimGroup.innerHTML = '<div class="config-group-title">Модули Skyrim</div>';
+      const eldenRingGroup = document.createElement("div");
+      eldenRingGroup.className = "config-group";
+      eldenRingGroup.innerHTML = '<div class="config-group-title">Модули Elden Ring</div>';
+      const homm3Group = document.createElement("div");
+      homm3Group.className = "config-group";
+      homm3Group.innerHTML = '<div class="config-group-title">Модули Heroes III</div>';
       const customGroup = document.createElement("div");
       customGroup.className = "config-group";
       customGroup.innerHTML = '<div class="config-group-title">Дополнительные модули</div>';
 
       const fantasyKeys = ["fantasy_spells", "fantasy_skills", "fantasy_gear", "fantasy_bestiary", "fantasy_inventory"];
-      const gothicKeys = ["gothic_weapons", "gothic_armor", "gothic_magic", "gothic_talents"];
+      const gothicKeys = ["gothic_weapons", "gothic_armor", "gothic_magic", "gothic_talents", "gothic_adventure"];
       const skyrimKeys = [
         "skyrim_weapons",
         "skyrim_armor",
@@ -82,6 +103,24 @@
         "skyrim_alchemy",
         "skyrim_factions",
         "skyrim_map",
+        "skyrim_adventure",
+      ];
+      const eldenRingKeys = [
+        "elden_ring_lore",
+        "elden_ring_skills",
+        "elden_ring_talents",
+        "elden_ring_magic",
+        "elden_ring_items",
+        "elden_ring_bestiary",
+        "elden_ring_adventure",
+      ];
+      const homm3Keys = [
+        "homm3_lore",
+        "homm3_magic",
+        "homm3_bestiary",
+        "homm3_talents",
+        "homm3_items",
+        "homm3_adventure",
       ];
       const customKeys = [
         "noir_investigation",
@@ -106,6 +145,10 @@
           gothicGroup.appendChild(labelEl);
         } else if (skyrimKeys.includes(key)) {
           skyrimGroup.appendChild(labelEl);
+        } else if (eldenRingKeys.includes(key)) {
+          eldenRingGroup.appendChild(labelEl);
+        } else if (homm3Keys.includes(key)) {
+          homm3Group.appendChild(labelEl);
         } else if (customKeys.includes(key)) {
           customGroup.appendChild(labelEl);
         } else {
@@ -117,6 +160,8 @@
       form.appendChild(fantasyGroup);
       if (gothicGroup.querySelector("label")) form.appendChild(gothicGroup);
       if (skyrimGroup.querySelector("label")) form.appendChild(skyrimGroup);
+      if (eldenRingGroup.querySelector("label")) form.appendChild(eldenRingGroup);
+      if (homm3Group.querySelector("label")) form.appendChild(homm3Group);
       if (customGroup.querySelector("label")) form.appendChild(customGroup);
     }
 

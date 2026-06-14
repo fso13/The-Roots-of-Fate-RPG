@@ -30,6 +30,7 @@
     gothic_armor: "modules/gothic-bronya.html",
     gothic_magic: "modules/gothic-magiya.html",
     gothic_talents: "modules/gothic-talanty.html",
+    gothic_adventure: "modules/gothic-adventure.html",
     skyrim_weapons: "modules/skyrim-oruzhie.html",
     skyrim_armor: "modules/skyrim-bronya.html",
     skyrim_magic: "modules/skyrim-magiya.html",
@@ -40,6 +41,20 @@
     skyrim_alchemy: "modules/skyrim-alkhimiya.html",
     skyrim_factions: "modules/skyrim-frakcii.html",
     skyrim_map: "modules/skyrim-karta.html",
+    skyrim_adventure: "modules/skyrim-adventure.html",
+    elden_ring_lore: "modules/elden-ring-lore.html",
+    elden_ring_skills: "modules/elden-ring-navyki.html",
+    elden_ring_talents: "modules/elden-ring-talanty.html",
+    elden_ring_magic: "modules/elden-ring-magiya.html",
+    elden_ring_items: "modules/elden-ring-predmety.html",
+    elden_ring_bestiary: "modules/elden-ring-bestiariy.html",
+    elden_ring_adventure: "modules/elden-ring-adventure.html",
+    homm3_lore: "modules/homm3-lore.html",
+    homm3_magic: "modules/homm3-magiya.html",
+    homm3_bestiary: "modules/homm3-bestiariy.html",
+    homm3_talents: "modules/homm3-talanty.html",
+    homm3_items: "modules/homm3-predmety.html",
+    homm3_adventure: "modules/homm3-adventure.html",
     firearms: "modules/ognestrel.html",
     vehicles: "modules/transport.html",
   };
@@ -70,6 +85,7 @@
     gothic_armor: false,
     gothic_magic: false,
     gothic_talents: false,
+    gothic_adventure: false,
     skyrim_weapons: false,
     skyrim_armor: false,
     skyrim_magic: false,
@@ -80,6 +96,20 @@
     skyrim_alchemy: false,
     skyrim_factions: false,
     skyrim_map: false,
+    skyrim_adventure: false,
+    elden_ring_lore: false,
+    elden_ring_skills: false,
+    elden_ring_talents: false,
+    elden_ring_magic: false,
+    elden_ring_items: false,
+    elden_ring_bestiary: false,
+    elden_ring_adventure: false,
+    homm3_lore: false,
+    homm3_magic: false,
+    homm3_bestiary: false,
+    homm3_talents: false,
+    homm3_items: false,
+    homm3_adventure: false,
   };
 
   const MODULE_LABELS = {
@@ -107,6 +137,7 @@
     gothic_armor: "Готика — броня",
     gothic_magic: "Готика — магия",
     gothic_talents: "Готика — таланты",
+    gothic_adventure: "Готика — Колокол на обрыве",
     skyrim_weapons: "Скайрим — оружие",
     skyrim_armor: "Скайрим — броня",
     skyrim_magic: "Скайрим — магия",
@@ -117,6 +148,20 @@
     skyrim_alchemy: "Скайрим — алхимия",
     skyrim_factions: "Скайрим — фракции и гильдии",
     skyrim_map: "Скайрим — карта",
+    skyrim_adventure: "Скайрим — Пепельный курган",
+    elden_ring_lore: "Elden Ring — лор Междуземья",
+    elden_ring_skills: "Elden Ring — навыки",
+    elden_ring_talents: "Elden Ring — таланты",
+    elden_ring_magic: "Elden Ring — магия",
+    elden_ring_items: "Elden Ring — товары и предметы",
+    elden_ring_bestiary: "Elden Ring — бестиарий",
+    elden_ring_adventure: "Elden Ring — Плачущий корень",
+    homm3_lore: "Heroes III — лор Антагарича",
+    homm3_magic: "Heroes III — магия",
+    homm3_bestiary: "Heroes III — бестиарий",
+    homm3_talents: "Heroes III — таланты и навыки",
+    homm3_items: "Heroes III — товары и артефакты",
+    homm3_adventure: "Heroes III — Обелиск у Тихой рощи",
   };
 
   function getConfig() {
@@ -198,6 +243,24 @@
         (c) => config[c.getAttribute("data-module")] !== false
       );
       skyrimSection.style.display = visible ? "" : "none";
+    }
+
+    const eldenRingSection = document.getElementById("index-section-elden-ring");
+    if (eldenRingSection) {
+      const grid = eldenRingSection.querySelector(".card-grid");
+      const visible = grid && Array.from(grid.querySelectorAll(".card[data-module]")).some(
+        (c) => config[c.getAttribute("data-module")] !== false
+      );
+      eldenRingSection.style.display = visible ? "" : "none";
+    }
+
+    const homm3Section = document.getElementById("index-section-homm3");
+    if (homm3Section) {
+      const grid = homm3Section.querySelector(".card-grid");
+      const visible = grid && Array.from(grid.querySelectorAll(".card[data-module]")).some(
+        (c) => config[c.getAttribute("data-module")] !== false
+      );
+      homm3Section.style.display = visible ? "" : "none";
     }
 
     const customSection = document.getElementById("index-section-custom");
