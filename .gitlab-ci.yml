@@ -1,4 +1,4 @@
-# GitLab Pages: статический сайт из rpg/*.md + PDF модулей и приключений
+# GitLab Pages: статический сайт из rpg/*.md + PDF книг, модулей и приключений
 image: node:20
 
 pages:
@@ -7,6 +7,14 @@ pages:
     - npm ci
     - npm run build
     - npx playwright install --with-deps chromium
+    # Книги правил (A4 + Cairn) и ширма — иначе ссылки на сайте отдают 404
+    - node scripts/build-pdf.mjs --audience player
+    - node scripts/build-pdf.mjs --audience keeper
+    - node scripts/build-pdf.mjs --audience all
+    - node scripts/build-pdf-cairn.mjs --audience player
+    - node scripts/build-pdf-cairn.mjs --audience keeper
+    - node scripts/build-pdf-cairn.mjs --audience all
+    - node scripts/build-pdf-screen.mjs
     - node scripts/build-pdf-pack.mjs --all-modules
     - node scripts/build-pdf-pack.mjs --all-adventures
     # Повторная сборка: страницы получают ссылки на уже созданные PDF

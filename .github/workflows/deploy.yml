@@ -1,4 +1,4 @@
-# GitHub Pages: статический сайт + PDF модулей и приключений
+# GitHub Pages: статический сайт + PDF книг, модулей и приключений
 name: pages
 
 on:
@@ -31,6 +31,14 @@ jobs:
       - run: npm ci
       - run: npm run build
       - run: npx playwright install --with-deps chromium
+      # Книги правил (A4 + Cairn) и ширма — иначе ссылки на сайте отдают 404
+      - run: node scripts/build-pdf.mjs --audience player
+      - run: node scripts/build-pdf.mjs --audience keeper
+      - run: node scripts/build-pdf.mjs --audience all
+      - run: node scripts/build-pdf-cairn.mjs --audience player
+      - run: node scripts/build-pdf-cairn.mjs --audience keeper
+      - run: node scripts/build-pdf-cairn.mjs --audience all
+      - run: node scripts/build-pdf-screen.mjs
       - run: node scripts/build-pdf-pack.mjs --all-modules
       - run: node scripts/build-pdf-pack.mjs --all-adventures
       # Повторная сборка: страницы получают размеры и ссылки на уже созданные PDF
