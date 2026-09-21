@@ -819,7 +819,7 @@ function renderDownloadItemLi(publicDir, prefix, item, missingHint) {
   return parts.join("\n      ");
 }
 
-const PRESERVE_IN_PUBLIC = /^(koreni-sudby-.*\.pdf|print-(book|modul|priklyuchenie).*\.html)$/;
+const PRESERVE_IN_PUBLIC = /^(koreni-sudby-.*\.pdf|print-(book|modul|priklyuchenie|shirima).*\.html)$/;
 
 /** Сохранить PDF и print-HTML перед очисткой public/. */
 export function preserveBookAssets(publicDir) {

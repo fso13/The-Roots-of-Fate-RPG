@@ -94,9 +94,10 @@
 |-------|----------|-------------|----------|
 | Игрок | [pdf](koreni-sudby-kniga-igroka.pdf) | [pdf](koreni-sudby-kniga-igroka-cairn.pdf) | [md](kniga-igroka.md) |
 | Хранитель | [pdf](koreni-sudby-kniga-hranitelya.pdf) | [pdf](koreni-sudby-kniga-hranitelya-cairn.pdf) | [md](kniga-hranitelya.md) |
+| Ширма хранителя | [pdf, 4×A4 portrait](koreni-sudby-shirima-hranitelya.pdf) | — | — |
 | Полное издание | [pdf](koreni-sudby-polnoe-izdanie.pdf) | [pdf](koreni-sudby-polnoe-izdanie-cairn.pdf) | [md](kniga-polnaya.md) |
 
-Сборка: `npm run book:igrok` · `book:hranitel` · `book:md` · PDF: `npm run pdf:all`
+Сборка: `npm run book:igrok` · `book:hranitel` · `book:md` · PDF: `npm run pdf:all` · ширма: `npm run pdf:shirima`
 
 ## Быстрый старт
 

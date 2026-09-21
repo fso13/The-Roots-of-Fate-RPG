@@ -1,0 +1,235 @@
+/* Ширма хранителя: 4 листа A4 portrait */
+:root {
+  --ink: #1a1814;
+  --muted: #4a4540;
+  --line: #c8c2b6;
+  --head: #5c4818;
+  --light-bg: #f7f4ee;
+  --dark-bg: #ebe6dc;
+  --font: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --display: "Cormorant Garamond", Georgia, serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 9pt;
+}
+
+body.screen {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font);
+  line-height: 1.3;
+  background: #fff;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+@page {
+  size: A4 portrait;
+  margin: 8mm 9mm 9mm 9mm;
+}
+
+.panel {
+  page-break-after: always;
+  break-after: page;
+  min-height: 278mm;
+  height: 278mm;
+  display: flex;
+  flex-direction: column;
+  gap: 3.5mm;
+  overflow: hidden;
+}
+
+.panel:last-child {
+  page-break-after: auto;
+  break-after: auto;
+}
+
+.panel-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 3mm;
+  border-bottom: 1.75pt solid var(--head);
+  padding-bottom: 1.5mm;
+  flex-shrink: 0;
+}
+
+.panel-head h1 {
+  font-family: var(--display);
+  font-size: 15pt;
+  font-weight: 600;
+  margin: 0;
+  color: var(--head);
+  letter-spacing: 0.02em;
+  line-height: 1.15;
+}
+
+.panel-head .meta {
+  font-size: 8pt;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3.5mm;
+  flex: 1;
+  min-height: 0;
+  align-items: stretch;
+}
+
+.block {
+  border: 0.7pt solid var(--line);
+  border-radius: 1.8mm;
+  padding: 2.5mm 3mm;
+  background: #fff;
+}
+
+.block h2 {
+  font-family: var(--display);
+  font-size: 11pt;
+  font-weight: 600;
+  margin: 0 0 1.8mm;
+  color: var(--head);
+  border-bottom: 0.6pt solid var(--line);
+  padding-bottom: 1mm;
+  line-height: 1.2;
+}
+
+.block h3 {
+  font-size: 9pt;
+  font-weight: 600;
+  margin: 2.2mm 0 1.2mm;
+  color: var(--ink);
+}
+
+.block p,
+.block ul,
+.block ol {
+  margin: 0 0 1.4mm;
+  font-size: 8.5pt;
+}
+
+.block ul,
+.block ol {
+  padding-left: 4mm;
+}
+
+.block li {
+  margin-bottom: 0.7mm;
+}
+
+.formula {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 8.2pt;
+  background: var(--light-bg);
+  border: 0.55pt solid var(--line);
+  border-radius: 1.2mm;
+  padding: 1.6mm 2.2mm;
+  margin: 1.2mm 0;
+  line-height: 1.35;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 8pt;
+}
+
+th,
+td {
+  border: 0.5pt solid var(--line);
+  padding: 1.1mm 1.6mm;
+  vertical-align: top;
+  text-align: left;
+}
+
+th {
+  background: var(--dark-bg);
+  font-weight: 600;
+  color: var(--ink);
+  font-size: 7.8pt;
+}
+
+tr:nth-child(even) td {
+  background: #faf8f4;
+}
+
+.num {
+  width: 7mm;
+  text-align: center;
+  font-weight: 600;
+}
+
+.tag {
+  display: inline-block;
+  font-size: 7pt;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.4mm 1.4mm;
+  border-radius: 0.8mm;
+  background: var(--dark-bg);
+  color: var(--head);
+  vertical-align: middle;
+}
+
+.tag-light {
+  background: #f0ebe0;
+}
+
+.tag-dark {
+  background: #3a3530;
+  color: #f5f0e6;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 3mm;
+  min-height: 0;
+}
+
+.stack > .block {
+  flex: 0 0 auto;
+}
+
+.note {
+  font-size: 7.6pt;
+  color: var(--muted);
+  margin: 1mm 0 0;
+  line-height: 1.3;
+}
+
+.kv {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.8mm 2.5mm;
+  font-size: 8.2pt;
+}
+
+.kv dt {
+  font-weight: 600;
+  color: var(--head);
+}
+
+.kv dd {
+  margin: 0;
+}
+
+table.tight {
+  font-size: 7.6pt;
+}
+
+table.tight th,
+table.tight td {
+  padding: 0.9mm 1.3mm;
+}

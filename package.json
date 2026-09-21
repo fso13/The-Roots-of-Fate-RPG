@@ -19,6 +19,7 @@
     "pdf:cairn": "npm run build:pdf:cairn --",
     "pdf:igrok": "npm run build && node scripts/build-pdf.mjs --audience player",
     "pdf:hranitel": "npm run build && node scripts/build-pdf.mjs --audience keeper",
+    "pdf:shirima": "PLAYWRIGHT_BROWSERS_PATH= node scripts/build-pdf-screen.mjs",
     "pdf:polnoe": "npm run build && node scripts/build-pdf.mjs --audience all",
     "pdf:cairn:igrok": "npm run build && node scripts/build-pdf-cairn.mjs --audience player",
     "pdf:cairn:hranitel": "npm run build && node scripts/build-pdf-cairn.mjs --audience keeper",

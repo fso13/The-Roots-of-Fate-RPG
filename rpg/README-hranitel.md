@@ -119,12 +119,13 @@
 | Формат | Файл |
 |--------|------|
 | PDF, A4 — книга хранителя | [koreni-sudby-kniga-hranitelya.pdf](koreni-sudby-kniga-hranitelya.pdf) |
+| PDF, A4 portrait × 4 — ширма хранителя | [koreni-sudby-shirima-hranitelya.pdf](koreni-sudby-shirima-hranitelya.pdf) |
 | PDF, Cairn (A5) | [koreni-sudby-kniga-hranitelya-cairn.pdf](koreni-sudby-kniga-hranitelya-cairn.pdf) |
 | Markdown | [kniga-hranitelya.md](kniga-hranitelya.md) |
 
 Доп. модули и приключения — PDF на странице каждого модуля или приключения; сборка: `npm run pdf:modules` · `npm run pdf:adventures`.
 
-Сборка: `npm run book:hranitel` · PDF: `npm run pdf:hranitel`
+Сборка: `npm run book:hranitel` · PDF: `npm run pdf:hranitel` · Ширма (4 листа A4): `npm run pdf:shirima`
 
 ## Быстрый старт
 
