@@ -391,6 +391,8 @@ async function main() {
     landscape: false,
     margin: { top: "8mm", right: "9mm", bottom: "9mm", left: "9mm" },
     displayHeaderFooter: false,
+    stampLeafPages: false,
+    fillTocPages: false,
     preferCSSPageSize: true,
   });
 

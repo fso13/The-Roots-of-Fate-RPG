@@ -6,27 +6,24 @@
 
 Статическая версия правил: каталог [`website/`](website/) (стили, [`website/build.mjs`](website/build.mjs)). Сборка: `npm install` и `npm run build` — сначала **PNG карт** из SVG (`scripts/convert-adventure-maps.mjs`), затем HTML; результат в `public/`.
 
-**PDF правил** из тех же Markdown-файлов (`rpg/**/*.md`):
+**PDF правил** в стиле Cairn 2E Warden's Guide (A5, Lora + Source Sans):
 
 ```bash
 npm install
 npx playwright install chromium   # один раз
-npm run pdf
+npm run pdf:igrok                 # книга игрока
+npm run pdf:hranitel              # книга хранителя
 ```
 
-| Команда | PDF | HTML-предпросмотр |
-|---------|-----|-------------------|
-| `npm run pdf:igrok` | `koreni-sudby-kniga-igroka.pdf` | `print-book-igrok.html` |
-| `npm run pdf:hranitel` | `koreni-sudby-kniga-hranitelya.pdf` | `print-book-hranitel.html` |
-| `npm run pdf:polnoe` | `koreni-sudby-polnoe-izdanie.pdf` | `print-book-polnoe.html` |
-| `npm run pdf:cairn:igrok` | `koreni-sudby-kniga-igroka-cairn.pdf` | `print-book-cairn-igrok.html` |
-| `npm run pdf:cairn:hranitel` | `koreni-sudby-kniga-hranitelya-cairn.pdf` | `print-book-cairn-hranitel.html` |
-| `npm run pdf:cairn:polnoe` | `koreni-sudby-polnoe-izdanie-cairn.pdf` | `print-book-cairn-polnoe.html` |
-| `npm run pdf:all` | все шесть файлов | — |
+| Команда | PDF |
+|---------|-----|
+| `npm run pdf:igrok` | `koreni-sudby-kniga-igroka.pdf` (+ `-cairn.pdf`) |
+| `npm run pdf:hranitel` | `koreni-sudby-kniga-hranitelya.pdf` (+ `-cairn.pdf`) |
+| `npm run pdf:polnoe` | `koreni-sudby-polnoe-izdanie.pdf` |
+| `npm run pdf:shirima` | ширма, 4×A4 |
+| `npm run pdf:all` | все книги + модули + приключения |
 
-Без приключений: `node scripts/build-pdf.mjs --audience player --no-adventure`.
-
-**PDF в стиле Cairn** (A5, шрифт Lora, как в русской «Книге игрока» Cairn): `npm run pdf:cairn:polnoe` или `npm run pdf:cairn:igrok`.
+Старая A4-вёрстка: `node scripts/build-pdf-a4.mjs --audience player`.
 
 **The Homebrewery:** `npm run book:homebrewery` → [`rpg/kniga-homebrewery.md`](rpg/kniga-homebrewery.md). Скопируйте в [homebrewery.naturalcrit.com](https://homebrewery.naturalcrit.com/) (тема Blank, A5, в стиле Cairn).
 

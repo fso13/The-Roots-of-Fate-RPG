@@ -45,6 +45,7 @@ export const BOOK_SOURCES_SKIP = new Set([
   "kniga-homebrewery.md",
   "kniga-igroka.md",
   "kniga-hranitelya.md",
+  "blagodarnosti.md",
   ...README_FILES,
 ]);
 
@@ -103,6 +104,7 @@ export const CHAPTER_AUDIENCE = {
   "modules/skyrim-frakcii.md": "player",
   "modules/skyrim-karta.md": "player",
   "modules/skyrim-adventure.md": "keeper",
+  "modules/skyrim-adventure-lunar.md": "keeper",
   "modules/ognestrel.md": "player",
   "modules/transport.md": "keeper",
 };
@@ -457,6 +459,15 @@ export const CUSTOM_MODULES = [
     audience: "keeper",
   },
   {
+    id: "skyrim_adventure_lunar",
+    title: "Скайрим — Серебряная ложь",
+    pack: SKYRIM_PACK,
+    srcRel: "skyrim/adventure-lunar/module.md",
+    outRel: "modules/skyrim-adventure-lunar.html",
+    mdRel: "modules/skyrim-adventure-lunar.md",
+    audience: "keeper",
+  },
+  {
     id: "firearms",
     srcRel: "firearms/module.md",
     outRel: "modules/ognestrel.html",
@@ -480,6 +491,9 @@ export const ADVENTURES = [
     adventureRel: "adventure/01-steklyannyy-zvon.md",
     moduleRel: null,
     mapsRel: "adventure/maps/steklyannyy-zvon/MAPS.md",
+    style: "glass",
+    genre: "Фэнтези · тайна каналов",
+    tagline: "Стекло, вода и то, что звенит под мостом",
   },
   {
     id: "chernyy-schet",
@@ -487,6 +501,9 @@ export const ADVENTURES = [
     adventureRel: "adventure/02-chernyy-schet.md",
     moduleRel: "modules/noir-investigation.md",
     mapsRel: "adventure/maps/chernyy-schet/MAPS.md",
+    style: "noir",
+    genre: "Нуар · расследование",
+    tagline: "Долги, Жара и улики, которые жгут пальцы",
   },
   {
     id: "pepel-slov",
@@ -494,6 +511,9 @@ export const ADVENTURES = [
     adventureRel: "adventure/03-pepel-slov.md",
     moduleRel: "modules/fahrenheit-books.md",
     mapsRel: "adventure/maps/pepel-slov/MAPS.md",
+    style: "ash",
+    genre: "Дистопия · запретные книги",
+    tagline: "Пламя помнит каждое сожжённое слово",
   },
   {
     id: "chernyy-shpil",
@@ -501,6 +521,9 @@ export const ADVENTURES = [
     adventureRel: "adventure/04-zov-chernogo-shpilya.md",
     moduleRel: "modules/hero-trap.md",
     mapsRel: "adventure/maps/chernyy-shpil/MAPS.md",
+    style: "spire",
+    genre: "Тёмная сказка · ловушка героя",
+    tagline: "Сказка зовёт. Трещины считают шаги",
   },
   {
     id: "apokrif-iudy",
@@ -508,6 +531,19 @@ export const ADVENTURES = [
     adventureRel: "adventure/05-apokrif-iudy.md",
     moduleRel: "modules/noir-investigation.md",
     mapsRel: "adventure/maps/apokrif-iudy/MAPS.md",
+    style: "apocrypha",
+    genre: "Символо-триллер · Рим",
+    tagline: "Канон, апокриф и цена одного абзаца",
+  },
+  {
+    id: "serebryanaya-lozh",
+    title: "Серебряная ложь",
+    adventureRel: null,
+    moduleRel: "modules/skyrim-adventure-lunar.md",
+    mapsRel: null,
+    style: "lunar",
+    genre: "Скайрим · ложный след",
+    tagline: "Луна считает ночи. Верёвка ждёт не того",
   },
 ];
 
@@ -728,9 +764,9 @@ export function pdfHtmlOutputName(style, audience = "all") {
 }
 
 export const PDF_TITLE = {
-  all: "Корни судьбы — полное издание",
-  player: "Корни судьбы — Книга игрока",
-  keeper: "Корни судьбы — Книга хранителя",
+  all: "The Edge! — полное издание",
+  player: "The Edge! — Книга игрока",
+  keeper: "The Edge! — Книга хранителя",
 };
 
 export function modulePdfFile(mod) {
@@ -762,9 +798,16 @@ export function listAdventurePdfSources(adventureId) {
   const adv = ADVENTURES.find((a) => a.id === adventureId);
   if (!adv) throw new Error(`Unknown adventure: ${adventureId}`);
   const module = adv.moduleRel ? findCustomModule(adv.moduleRel) : null;
-  const rels = [adv.adventureRel];
+  const rels = [];
+  if (adv.adventureRel) rels.push(adv.adventureRel);
   if (adv.mapsRel) rels.push(adv.mapsRel);
   return { adv, rels, module };
+}
+
+/** Главы PDF приключения (ядро rpg/ и/или модуль). */
+export function buildAdventureChapterSources(adventureId) {
+  const { adv, rels, module } = listAdventurePdfSources(adventureId);
+  return { adv, rels, module, isModuleOnly: !adv.adventureRel && !!module };
 }
 
 /** Файлы для скачивания с сайта (public/). */
@@ -772,17 +815,17 @@ export const BOOK_DOWNLOAD_GROUPS = [
   {
     id: "player",
     title: "Книга игрока",
-    items: [{ file: PDF_OUTPUT.player, label: "PDF, A4" }],
+    items: [{ file: PDF_OUTPUT.player, label: "PDF, A5 · стиль Cairn" }],
   },
   {
     id: "keeper",
     title: "Книга хранителя",
-    items: [{ file: PDF_OUTPUT.keeper, label: "PDF, A4" }],
+    items: [{ file: PDF_OUTPUT.keeper, label: "PDF, A5 · стиль Cairn" }],
   },
   {
     id: "all",
     title: "Полное издание",
-    items: [{ file: PDF_OUTPUT.all, label: "PDF, A4" }],
+    items: [{ file: PDF_OUTPUT.all, label: "PDF, A5 · стиль Cairn" }],
   },
 ];
 

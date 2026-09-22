@@ -107,11 +107,22 @@ body.print-book {
   transform: translateY(-0.1em);
 }
 
-.print-toc .toc-link::after {
-  content: target-counter(attr(href), page);
+.print-toc .toc-page {
   flex: 0 0 auto;
   font-variant-numeric: tabular-nums;
   color: var(--ink-muted);
+  min-width: 1.6em;
+  text-align: right;
+}
+
+.print-toc .toc-link::after {
+  content: none;
+}
+
+.print-blank-page {
+  min-height: 100vh;
+  page-break-after: always;
+  background: #ffffff;
 }
 
 .print-toc .toc-group {

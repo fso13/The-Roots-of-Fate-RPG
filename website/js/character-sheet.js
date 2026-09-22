@@ -5,16 +5,19 @@
   const STORAGE_KEY = "koreni-sudby-character";
 
   function init() {
+    mountAllTracks();
     updateAttrSum();
     updateResourceMaxes();
     loadFromStorage();
 
-    document.querySelectorAll('[data-attr]').forEach((input) => {
+    document.querySelectorAll("[data-attr]").forEach((input) => {
       input.addEventListener("input", updateAttrSum);
     });
 
     document.querySelectorAll('[name="body"], [name="agility"], [name="mind"], [name="will"]').forEach((input) => {
-      input.addEventListener("input", updateResourceMaxes);
+      input.addEventListener("input", () => {
+        updateResourceMaxes();
+      });
     });
 
     document.getElementById("btn-print")?.addEventListener("click", () => window.print());
@@ -50,7 +53,7 @@
   }
 
   function roll2d6() {
-    return (Math.floor(Math.random() * 6) + 1) + (Math.floor(Math.random() * 6) + 1);
+    return Math.floor(Math.random() * 6) + 1 + (Math.floor(Math.random() * 6) + 1);
   }
 
   function attrFrom2d6(sum) {
@@ -70,21 +73,69 @@
     updateResourceMaxes();
   }
 
+  function countChecked(track) {
+    return track.querySelectorAll('input[type="checkbox"]:checked').length;
+  }
+
+  function fillTrack(track, max, checked) {
+    const field = track.dataset.field || track.dataset.resource || "tick";
+    const n = Math.max(0, max | 0);
+    const on = Math.max(0, Math.min(n, checked | 0));
+    track.dataset.max = String(n);
+    track.innerHTML = "";
+    for (let i = 1; i <= n; i++) {
+      const label = document.createElement("label");
+      label.className = "tick";
+      const input = document.createElement("input");
+      input.type = "checkbox";
+      input.name = `${field}_${i}`;
+      input.value = "1";
+      if (i <= on) input.checked = true;
+      const span = document.createElement("span");
+      span.setAttribute("aria-hidden", "true");
+      label.appendChild(input);
+      label.appendChild(span);
+      track.appendChild(label);
+    }
+  }
+
+  function mountAllTracks() {
+    document.querySelectorAll(".tick-track[data-field]").forEach((track) => {
+      const max = parseInt(track.dataset.max || "4", 10) || 4;
+      fillTrack(track, max, 0);
+    });
+    document.querySelectorAll(".tick-track[data-resource]").forEach((track) => {
+      const max = parseInt(track.dataset.max || "9", 10) || 9;
+      fillTrack(track, max, 0);
+    });
+  }
+
   function updateResourceMaxes() {
     const body = getAttr("body");
     const will = getAttr("will");
-    const stressMax = document.querySelector('[name="stress_max"]');
-    const woundsMax = document.querySelector('[name="wounds_max"]');
-    const sparksMax = document.querySelector('[name="sparks_max"]');
-    if (stressMax) stressMax.value = 6 + body;
-    if (woundsMax) woundsMax.value = 6 + body;
-    if (sparksMax) sparksMax.value = 3 + will;
+    const limits = {
+      stress: 6 + body,
+      wounds: 6 + body,
+      sparks: 3 + will,
+    };
+    Object.entries(limits).forEach(([key, max]) => {
+      const track = document.querySelector(`.tick-track[data-resource="${key}"]`);
+      const label = document.querySelector(`[data-max-label="${key}"]`);
+      if (label) label.textContent = String(max);
+      if (track) {
+        const kept = countChecked(track);
+        fillTrack(track, max, kept);
+      }
+    });
   }
 
   function serialize() {
     const data = {};
     document.querySelectorAll("input, textarea").forEach((el) => {
-      if (el.name && el.type !== "submit" && el.type !== "button") {
+      if (!el.name || el.type === "submit" || el.type === "button") return;
+      if (el.type === "checkbox") {
+        data[el.name] = el.checked ? "1" : "0";
+      } else {
         data[el.name] = el.value;
       }
     });
@@ -95,11 +146,48 @@
     try {
       const data = JSON.parse(json);
       Object.entries(data).forEach(([name, value]) => {
+        if (name.endsWith("_max") && ["stress_max", "wounds_max", "sparks_max"].includes(name)) return;
         const el = document.querySelector(`[name="${name}"]`);
-        if (el && value != null) el.value = value;
+        if (!el || value == null) return;
+        if (el.type === "checkbox") el.checked = value === "1" || value === true || value === 1;
+        else el.value = value;
       });
+
+      // Legacy number skills → ticks
+      document.querySelectorAll(".tick-track[data-field]").forEach((track) => {
+        const field = track.dataset.field;
+        const legacy = data[field];
+        if (legacy != null && !Number.isNaN(Number(legacy))) {
+          fillTrack(track, parseInt(track.dataset.max || "4", 10) || 4, Number(legacy));
+        } else {
+          const max = parseInt(track.dataset.max || "4", 10) || 4;
+          let checked = 0;
+          for (let i = 1; i <= max; i++) {
+            if (data[`${field}_${i}`] === "1") checked = i;
+          }
+          fillTrack(track, max, checked);
+        }
+      });
+
       updateAttrSum();
       updateResourceMaxes();
+
+      // Restore resource fills after max rebuild
+      ["stress", "wounds", "sparks"].forEach((key) => {
+        const track = document.querySelector(`.tick-track[data-resource="${key}"]`);
+        if (!track) return;
+        const max = parseInt(track.dataset.max || "0", 10) || 0;
+        let checked = 0;
+        const legacyCur = data[`${key}_current`];
+        if (legacyCur != null && !Number.isNaN(Number(legacyCur))) {
+          checked = Number(legacyCur);
+        } else {
+          for (let i = 1; i <= max; i++) {
+            if (data[`${key}_${i}`] === "1") checked = i;
+          }
+        }
+        fillTrack(track, max, checked);
+      });
     } catch (_) {}
   }
 

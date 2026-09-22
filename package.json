@@ -28,6 +28,7 @@
     "pdf:modules": "npm run build && node scripts/build-pdf-pack.mjs --all-modules",
     "pdf:adventures": "npm run build && node scripts/build-pdf-pack.mjs --all-adventures",
     "pdf:pack": "npm run build && node scripts/build-pdf-pack.mjs --all-modules && node scripts/build-pdf-pack.mjs --all-adventures",
+    "pdf:new": "npm run build && npm run book:igrok && npm run book:hranitel && node scripts/build-new-pdf.mjs",
     "deploy:pages": "npm run build && npx playwright install chromium && node scripts/build-pdf.mjs --audience player && node scripts/build-pdf.mjs --audience keeper && node scripts/build-pdf.mjs --audience all && node scripts/build-pdf-cairn.mjs --audience player && node scripts/build-pdf-cairn.mjs --audience keeper && node scripts/build-pdf-cairn.mjs --audience all && node scripts/build-pdf-screen.mjs && node scripts/build-pdf-pack.mjs --all-modules && node scripts/build-pdf-pack.mjs --all-adventures && node website/build.mjs",
     "book:md": "node scripts/build-book-md.mjs --audience all",
     "book:igrok": "node scripts/build-book-md.mjs --audience player",
@@ -38,7 +39,10 @@
     "books": "npm run book:igrok && npm run book:hranitel && npm run book:md && npm run pdf:all"
   },
   "dependencies": {
-    "marked": "^15.0.4"
+    "@pdf-lib/fontkit": "^1.1.1",
+    "marked": "^15.0.4",
+    "pdf-lib": "^1.17.1",
+    "pdfjs-dist": "^6.3.289"
   },
   "devDependencies": {
     "playwright": "^1.52.0",

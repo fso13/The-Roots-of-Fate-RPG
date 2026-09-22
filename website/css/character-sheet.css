@@ -236,7 +236,7 @@
   margin: 0;
 }
 
-/* Ресурсы — вертикальный список */
+/* Ресурсы — квадратики */
 .resource-grid {
   display: flex;
   flex-direction: column;
@@ -247,6 +247,7 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  flex-wrap: wrap;
 }
 
 .resource-item label {
@@ -254,19 +255,58 @@
   min-width: 4rem;
 }
 
-.resource-track input {
-  width: 2.5rem;
-  text-align: center;
-  padding: 0.3rem;
-}
-
-.resource-track input.readonly {
-  background: var(--bg-elevated);
+.resource-hint {
+  font-size: 0.75rem;
   color: var(--ink-muted);
 }
 
-.resource-track span {
-  color: var(--ink-muted);
+/* Квадратики рангов / ресурсов */
+.tick-track {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex-wrap: wrap;
+}
+
+.tick {
+  position: relative;
+  display: inline-flex;
+  width: 0.95rem;
+  height: 0.95rem;
+  margin: 0;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.tick input {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.tick span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  border: 1.5px solid var(--ink, #e8e4dc);
+  border-radius: 2px;
+  background: transparent;
+}
+
+.tick input:checked + span {
+  background: var(--accent, #c4a35a);
+  border-color: var(--accent, #c4a35a);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.25);
+}
+
+.tick input:focus-visible + span {
+  outline: 2px solid var(--accent, #c4a35a);
+  outline-offset: 1px;
 }
 
 /* Навыки */
@@ -294,16 +334,10 @@
   gap: 0.5rem;
 }
 
-.skill-row span {
+.skill-row span:first-child {
   font-size: 0.85rem;
   flex: 1;
   min-width: 0;
-}
-
-.skill-row input {
-  width: 2.25rem;
-  text-align: center;
-  padding: 0.2rem;
 }
 
 .sheet-block textarea {
@@ -631,9 +665,7 @@
 
   .sheet-row input,
   .sheet-block textarea,
-  .attr-item input,
-  .skill-row input,
-  .resource-track input {
+  .attr-item input {
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
     padding: 2px 4px;
@@ -670,8 +702,25 @@
     color: var(--ink-muted) !important;
   }
 
-  .resource-track span {
+  .resource-hint {
+    font-size: 6.5px;
     color: var(--ink-muted);
+  }
+
+  .tick {
+    width: 8px;
+    height: 8px;
+  }
+
+  .tick span {
+    border-width: 1px;
+    border-color: var(--ink) !important;
+    background: transparent !important;
+  }
+
+  .tick input:checked + span {
+    background: var(--accent) !important;
+    border-color: var(--accent) !important;
   }
 
   .attr-grid {
@@ -699,11 +748,6 @@
     min-width: 2.5rem;
   }
 
-  .resource-track input {
-    width: 16px;
-    padding: 1px;
-  }
-
   .skills-grid {
     grid-template-columns: repeat(5, 1fr);
     gap: 3px;
@@ -718,13 +762,8 @@
     gap: 1px;
   }
 
-  .skill-row span {
+  .skill-row span:first-child {
     font-size: 7.5px;
-  }
-
-  .skill-row input {
-    width: 14px;
-    padding: 0;
   }
 
   .sheet-inventory-fig figcaption {

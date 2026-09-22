@@ -246,11 +246,14 @@
   .inventar-schema {
     max-width: 100%;
     break-inside: avoid;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
 
   .inventar-schema__zone--gold,
   .inventar-schema__zone--silver,
-  .inventar-schema__cell {
+  .inventar-schema__cell,
+  .inventar-schema__set-badge {
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }

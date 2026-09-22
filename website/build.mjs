@@ -80,6 +80,7 @@ const PAGE_TO_MODULE = {
   "modules/skyrim-frakcii.html": "skyrim_factions",
   "modules/skyrim-karta.html": "skyrim_map",
   "modules/skyrim-adventure.html": "skyrim_adventure",
+  "modules/skyrim-adventure-lunar.html": "skyrim_adventure_lunar",
   "modules/elden-ring-lore.html": "elden_ring_lore",
   "modules/elden-ring-navyki.html": "elden_ring_skills",
   "modules/elden-ring-talanty.html": "elden_ring_talents",
@@ -331,10 +332,22 @@ function main() {
     fs.cpSync(siteImages, path.join(OUT, "images"), { recursive: true });
   }
 
+  const siteFonts = path.join(__dirname, "fonts");
+  if (fs.existsSync(siteFonts)) {
+    fs.mkdirSync(path.join(OUT, "fonts"), { recursive: true });
+    fs.cpSync(siteFonts, path.join(OUT, "fonts"), { recursive: true });
+  }
+
   const advMaps = path.join(RPG, "adventure", "maps");
   if (fs.existsSync(advMaps)) {
     fs.mkdirSync(path.join(OUT, "adventure", "maps"), { recursive: true });
     fs.cpSync(advMaps, path.join(OUT, "adventure", "maps"), { recursive: true });
+  }
+
+  const advArt = path.join(RPG, "adventure", "art");
+  if (fs.existsSync(advArt)) {
+    fs.mkdirSync(path.join(OUT, "adventure", "art"), { recursive: true });
+    fs.cpSync(advArt, path.join(OUT, "adventure", "art"), { recursive: true });
   }
 
   const fantasyImages = path.join(RPG, "fantasy", "images");
@@ -347,6 +360,13 @@ function main() {
   if (fs.existsSync(skyrimMaps)) {
     fs.mkdirSync(path.join(OUT, "modules", "skyrim", "maps"), { recursive: true });
     fs.cpSync(skyrimMaps, path.join(OUT, "modules", "skyrim", "maps"), { recursive: true });
+  }
+
+  const skyrimLunarArt = path.join(MY_MODULES, "skyrim", "adventure-lunar", "images");
+  if (fs.existsSync(skyrimLunarArt)) {
+    const dest = path.join(OUT, "modules", "skyrim", "adventure-lunar", "images");
+    fs.mkdirSync(dest, { recursive: true });
+    fs.cpSync(skyrimLunarArt, dest, { recursive: true });
   }
 
   const relFiles = walkMarkdown(RPG);
@@ -443,7 +463,9 @@ function main() {
 
   const slovarPage = pageMeta.find((p) => p.rel === "slovar-terminov.md");
 
-  const advMainRels = new Set(ADVENTURES.map((a) => a.adventureRel));
+  const advMainRels = new Set(
+    ADVENTURES.map((a) => a.adventureRel || a.moduleRel).filter(Boolean)
+  );
   const advMain = pageMeta.filter((p) => advMainRels.has(p.rel));
 
   const playerNavItems = sortNavByChapterOrder(
@@ -529,10 +551,12 @@ function main() {
   }
   for (const adv of ADVENTURES) {
     const { adv: advMeta, rels, module } = listAdventurePdfSources(adv.id);
-    const chapters = [...buildChapterList([advMeta.adventureRel])];
+    const chapters = [];
+    if (advMeta.adventureRel) chapters.push(...buildChapterList([advMeta.adventureRel]));
     if (module) chapters.push(buildCustomModuleChapter(module));
     const mapRels = rels.filter((r) => r !== advMeta.adventureRel);
     if (mapRels.length) chapters.push(...buildChapterList(mapRels));
+    if (!chapters.length) continue;
     writeAdventurePrintHtml(advMeta, chapters, OUT);
   }
 
@@ -550,7 +574,24 @@ function main() {
 
     if (p.isCustomModule) {
       const mod = CUSTOM_MODULES.find((m) => m.id === p.moduleId);
-      if (mod) {
+      const advAsModule = ADVENTURES.find(
+        (a) => a.moduleRel === p.rel && !a.adventureRel
+      );
+      if (advAsModule) {
+        bodyHtml =
+          renderPagePdfDownloadHtml(OUT, {
+            prefix: dlPrefix,
+            items: [
+              {
+                file: adventurePdfFile(advAsModule),
+                label: `${advAsModule.title} (PDF, A5${advAsModule.genre ? ` · ${advAsModule.genre}` : ""})`,
+                htmlFile: adventurePdfHtmlFile(advAsModule),
+                htmlLabel: `${advAsModule.title} (HTML для печати)`,
+              },
+            ],
+            missingHint: "npm run pdf:adventures",
+          }) + bodyHtml;
+      } else if (mod) {
         bodyHtml =
           renderPagePdfDownloadHtml(OUT, {
             prefix: dlPrefix,
@@ -574,7 +615,7 @@ function main() {
             items: [
               {
                 file: adventurePdfFile(adv),
-                label: `${adv.title} (PDF)`,
+                label: `${adv.title} (PDF, A5${adv.genre ? ` · ${adv.genre}` : ""})`,
                 htmlFile: adventurePdfHtmlFile(adv),
                 htmlLabel: `${adv.title} (HTML для печати)`,
               },
@@ -651,9 +692,16 @@ function main() {
   };
 
   const adventureSections = ADVENTURES.map((advConfig) => {
-    const adventure = pageByRel.get(advConfig.adventureRel);
+    const adventure = advConfig.adventureRel
+      ? pageByRel.get(advConfig.adventureRel)
+      : advConfig.moduleRel
+        ? pageByRel.get(advConfig.moduleRel)
+        : null;
     if (!adventure) return "";
-    const module = advConfig.moduleRel ? pageByRel.get(advConfig.moduleRel) : null;
+    const module =
+      advConfig.moduleRel && advConfig.adventureRel
+        ? pageByRel.get(advConfig.moduleRel)
+        : null;
     const maps = advConfig.mapsRel ? pageByRel.get(advConfig.mapsRel) : null;
     const cards = [
       card(adventure, "Приключение"),
@@ -664,7 +712,7 @@ function main() {
       .join("");
     return `
   <section id="index-adventure-${advConfig.id}" class="index-adventure">
-  <h2 class="section-title">${escapeHtml(adventure.title)}</h2>
+  <h2 class="section-title">${escapeHtml(advConfig.title || adventure.title)}</h2>
   <div class="card-grid card-grid-adventure">
     ${cards}
   </div>

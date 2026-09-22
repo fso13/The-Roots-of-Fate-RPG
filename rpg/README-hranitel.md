@@ -2,7 +2,7 @@
 
 Правила для ведущего: модульность, бестиарий, опциональные системы. Игрокам достаточно [Книги игрока](README-igrok.md). Приключения и дополнительные модули — отдельные PDF ниже.
 
-Система использует **только d6**.
+За столом нужны **только d6**.
 
 ## Оглавление
 
@@ -14,7 +14,6 @@
 | 4 | [Глава 4. Критические попадания и промахи](08-krity-i-promahi.md) | *Опционально:* криты и промахи 6+6 / 1+1 |
 | 5 | [Глава 5. Бой с отрядами](11-otryady.md) | *Опционально:* группы монстров, массовые атаки |
 | — | [Словарь терминов](slovar-terminov.md) | Сокращения: ЧЦ, ОД, ОО, d6 и др. |
-| — | [modules/manifest.example.yaml](modules/manifest.example.yaml) | Пример манифеста |
 
 ### Модули Gothic
 
@@ -41,6 +40,7 @@
 | [Скайрим — фракции и гильдии](modules/skyrim-frakcii.html) | Гильдии, гражданская война, Dawnguard, Dragonborn |
 | [Скайрим — карта](modules/skyrim-karta.html) | Карта провинции и Солстхейма |
 | [Скайрим — Пепельный курган](modules/skyrim-adventure.html) | Мини-приключение на одну сессию |
+| [Скайрим — Серебряная ложь](modules/skyrim-adventure-lunar.html) | Пропавшие девушки, оборотень, культ даэдра |
 
 ### Модули Elden Ring
 
@@ -67,7 +67,7 @@
 
 ## Приключения
 
-Каждое приключение — самостоятельный раздел: текст сценария, связанный модуль (если есть) и карты. PDF собираются отдельно (`npm run pdf:adventures`).
+Каждое приключение — отдельный PDF: сценарий, связанный модуль (если есть) и карты. Сборка: `npm run pdf:adventures` или `npm run pdf:new`.
 
 ### «Стеклянный звон»
 
@@ -118,18 +118,18 @@
 
 | Формат | Файл |
 |--------|------|
-| PDF, A4 — книга хранителя | [koreni-sudby-kniga-hranitelya.pdf](koreni-sudby-kniga-hranitelya.pdf) |
+| PDF, A5 · стиль Cairn — книга хранителя | [koreni-sudby-kniga-hranitelya.pdf](koreni-sudby-kniga-hranitelya.pdf) |
 | PDF, A4 portrait × 4 — ширма хранителя | [koreni-sudby-shirima-hranitelya.pdf](koreni-sudby-shirima-hranitelya.pdf) |
-| PDF, Cairn (A5) | [koreni-sudby-kniga-hranitelya-cairn.pdf](koreni-sudby-kniga-hranitelya-cairn.pdf) |
+| PDF, A5 (дубль) | [koreni-sudby-kniga-hranitelya-cairn.pdf](koreni-sudby-kniga-hranitelya-cairn.pdf) |
 | Markdown | [kniga-hranitelya.md](kniga-hranitelya.md) |
 
-Доп. модули и приключения — PDF на странице каждого модуля или приключения; сборка: `npm run pdf:modules` · `npm run pdf:adventures`.
+Свежие PDF (игрок, хранитель, полное издание, приключения) — в папке [`new_pdf/`](../new_pdf/). Сборка: `npm run pdf:new`.
 
 Сборка: `npm run book:hranitel` · PDF: `npm run pdf:hranitel` · Ширма (4 листа A4): `npm run pdf:shirima`
 
 ## Быстрый старт
 
-1. Скопируйте `modules/manifest.example.yaml` в `manifest.yaml` и отметьте модули (**rany**, **crits**, **fantasy_bestiary** — по желанию).
+1. Договоритесь со столом, какие **модули** в кампании (см. [главу 1](01-moduli.md)): бой, магия, раны, криты, нуар — по вкусу.
 2. Раздайте игрокам [Книгу игрока](README-igrok.md) или ссылку на сайт.
 3. Стартовое приключение — [«Стеклянный звон»](adventure/01-steklyannyy-zvon.md).
 

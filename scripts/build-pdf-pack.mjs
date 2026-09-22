@@ -14,6 +14,8 @@ import {
   copyPrintCss,
   adventurePrintHtmlFilename,
   modulePrintHtmlFilename,
+  ADVENTURE_PDF_OPTS_BASE,
+  adventurePdfHeaderFooter,
 } from "../website/lib/pdf-core.mjs";
 import {
   CUSTOM_MODULES,
@@ -24,10 +26,12 @@ import {
   modulePdfFile,
 } from "../website/lib/book-build.mjs";
 
-const PDF_OPTS = {
+const MODULE_PDF_OPTS = {
   format: "A4",
   margin: { top: "18mm", right: "16mm", bottom: "20mm", left: "16mm" },
   displayHeaderFooter: true,
+  stampLeafPages: false,
+  fillTocPages: false,
   headerTemplate: "<span></span>",
   footerTemplate: `
       <div style="width:100%;font-size:8px;color:#666;text-align:center;padding:0 16mm;">
@@ -61,22 +65,27 @@ function parseArgs(argv) {
 async function buildAdventurePdf(adventureId) {
   const { adv, rels, module } = listAdventurePdfSources(adventureId);
   const chapters = [];
-  chapters.push(...buildChapterList([adv.adventureRel]));
+  if (adv.adventureRel) chapters.push(...buildChapterList([adv.adventureRel]));
   if (module) chapters.push(buildCustomModuleChapter(module));
   const mapRels = rels.filter((r) => r !== adv.adventureRel);
   if (mapRels.length) chapters.push(...buildChapterList(mapRels));
+  if (!chapters.length) throw new Error(`No chapters for adventure: ${adventureId}`);
 
   const outPdf = path.join(PUBLIC, adventurePdfFile(adv));
   const outHtml = path.join(PUBLIC, adventurePrintHtmlFilename(adv));
 
+  copyPrintCss("print-adventure.css");
   const html = buildAdventurePrintHtml(adv, { chapters });
 
   fs.writeFileSync(outHtml, html, "utf8");
   fs.mkdirSync(path.dirname(outPdf), { recursive: true });
-  await renderPdf(outHtml, outPdf, PDF_OPTS);
+  await renderPdf(outHtml, outPdf, {
+    ...ADVENTURE_PDF_OPTS_BASE,
+    ...adventurePdfHeaderFooter(adv),
+  });
   console.log("PDF:", outPdf);
   console.log("HTML:", outHtml);
-  console.log("Chapters:", chapters.length);
+  console.log("Style:", adv.style || "default", "· Chapters:", chapters.length);
 }
 
 async function buildModulePdf(moduleId) {
@@ -86,11 +95,12 @@ async function buildModulePdf(moduleId) {
   const outPdf = path.join(PUBLIC, modulePdfFile(mod));
   const outHtml = path.join(PUBLIC, modulePrintHtmlFilename(mod));
 
+  copyPrintCss("print-book.css");
   const html = buildModulePrintHtml(mod);
 
   fs.writeFileSync(outHtml, html, "utf8");
   fs.mkdirSync(path.dirname(outPdf), { recursive: true });
-  await renderPdf(outHtml, outPdf, PDF_OPTS);
+  await renderPdf(outHtml, outPdf, MODULE_PDF_OPTS);
   console.log("PDF:", outPdf);
   console.log("HTML:", outHtml);
 }
@@ -98,13 +108,14 @@ async function buildModulePdf(moduleId) {
 async function main() {
   const opts = parseArgs(process.argv);
   ensurePublicBuilt();
-  copyPrintCss("print-book.css");
 
   if (opts.allAdventures) {
+    copyPrintCss("print-adventure.css");
     for (const adv of ADVENTURES) await buildAdventurePdf(adv.id);
     return;
   }
   if (opts.allModules) {
+    copyPrintCss("print-book.css");
     for (const mod of CUSTOM_MODULES) {
       const srcPath = path.join(MY_MODULES, mod.srcRel);
       if (!fs.existsSync(srcPath)) {

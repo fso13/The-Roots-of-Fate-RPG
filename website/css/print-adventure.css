@@ -1,0 +1,590 @@
+/* A5 приключения: те же цвета и шрифты, что книга игрока (Cairn). Белый фон — под печать. */
+@import url("inventar-schema.css");
+
+@font-face {
+  font-family: "Exocet";
+  src: url("../fonts/exocet-medium.woff2") format("woff2"),
+    url("../fonts/exocet-medium.ttf") format("truetype"),
+    url("../fonts/diablo.woff2") format("woff2"),
+    url("../fonts/diablo.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --paper: #ffffff;
+  --ink: #1a1917;
+  --ink-soft: #4a4742;
+  --rule: #1a1917;
+  --gold: #8a6f2e;
+  --accent: #8a6f2e;
+  --parchment: #b8a690;
+  --table-head: #3a3530;
+  --table-zebra: #f0eeea;
+  --cover-bg: #ffffff;
+  --cover-ink: #1a1917;
+  --font-display: "Exocet", "MedievalSharp", "UnifrakturMaguntia", Georgia, serif;
+  --font-body: "Lora", "IM Fell English", Georgia, serif;
+  --font-ui: "Source Sans 3", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 12pt;
+}
+
+body.print-adventure {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-body);
+  line-height: 1.48;
+  background: #ffffff;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+/* Темы жанра: только класс для метаданных; цвет/шрифт как у книги игрока */
+body.print-adventure[class*="theme-"] {
+  --paper: #ffffff;
+  --cover-bg: #ffffff;
+  --cover-ink: #1a1917;
+  --accent: var(--gold);
+  --font-display: "Exocet", "MedievalSharp", Georgia, serif;
+  --font-body: "Lora", "IM Fell English", Georgia, serif;
+  --font-ui: "Source Sans 3", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.print-adventure a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 1.5px;
+  text-decoration-thickness: 0.5pt;
+}
+
+/* —— Обложка —— */
+.print-adventure-cover {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 14mm 12mm;
+  page-break-after: always;
+  position: relative;
+  background: #ffffff;
+  color: var(--cover-ink);
+}
+
+.print-adventure-cover::before {
+  content: "";
+  position: absolute;
+  inset: 8mm;
+  border: 1px solid rgba(92, 72, 24, 0.55);
+  pointer-events: none;
+}
+
+.print-adventure-cover::after {
+  content: "";
+  position: absolute;
+  inset: 10mm;
+  border: 0.5px solid rgba(26, 25, 23, 0.2);
+  pointer-events: none;
+}
+
+.print-adventure-cover-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 26rem;
+}
+
+.print-adventure-cover .cover-genre {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: 0 0 1rem;
+}
+
+.print-adventure-cover h1 {
+  font-family: var(--font-display);
+  font-size: 1.85rem;
+  font-weight: normal;
+  margin: 0 0 0.75rem;
+  letter-spacing: 0.1em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.print-adventure-cover .cover-book {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin: 0 0 1rem;
+  color: var(--cover-ink);
+}
+
+.print-adventure-ornament {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 10rem;
+  margin: 0 auto 1rem;
+}
+
+.print-adventure-ornament .dot {
+  width: 5px;
+  height: 5px;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: transparent;
+}
+
+.print-adventure-ornament .line {
+  flex: 1;
+  border-top: 1px solid rgba(138, 111, 46, 0.7);
+}
+
+.print-adventure-cover .tagline {
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  font-style: normal;
+  color: var(--ink-soft);
+  margin: 0;
+  line-height: 1.45;
+  letter-spacing: 0.04em;
+}
+
+/* —— Поток —— */
+.print-adventure-main {
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  background: #ffffff;
+}
+
+/* —— Оглавление INDICE —— */
+.print-adventure-toc {
+  page-break-after: always;
+  padding: 2mm 0 2mm;
+  position: relative;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.print-adventure-toc h2 {
+  align-self: flex-end;
+  display: block;
+  margin: 0 0 3mm;
+  padding: 0;
+  border: none;
+  color: var(--ink) !important;
+  line-height: 1;
+}
+
+.print-adventure-toc .toc-h2-text {
+  position: relative;
+  display: inline-block;
+  font-family: var(--font-ui);
+  font-size: 1.55rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+  line-height: 1;
+  padding: 0 0 2.8mm;
+}
+
+.print-adventure-toc .toc-h2-text::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1.8pt;
+  background: var(--ink);
+}
+
+.print-adventure-toc .toc-item:first-child {
+  border-top: none;
+}
+
+.print-adventure-toc .toc-rule {
+  display: none;
+}
+
+.print-adventure-toc .toc-vline {
+  display: none;
+}
+
+.print-adventure-toc ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  max-width: 100%;
+}
+
+.print-adventure-toc .toc-item {
+  display: grid;
+  grid-template-columns: 9mm 1fr;
+  column-gap: 2.5mm;
+  align-items: start;
+  margin: 0;
+  padding: 1.4mm 0 1.6mm;
+  border-bottom: 0.45pt solid rgba(26, 25, 23, 0.28);
+  line-height: 1.15;
+}
+
+.print-adventure-toc .toc-page {
+  font-family: var(--font-ui);
+  font-variant-numeric: tabular-nums;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #8a8680;
+  text-align: right;
+  padding-top: 0.1em;
+  min-width: 0;
+}
+
+.print-adventure-toc .toc-text {
+  min-width: 0;
+}
+
+.print-adventure-toc .toc-link {
+  text-decoration: none;
+  display: block;
+}
+
+.print-adventure-toc .toc-title {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink);
+  line-height: 1.2;
+}
+
+.print-adventure-toc .toc-sub {
+  display: block;
+  margin-top: 0.6mm;
+  font-family: var(--font-ui);
+  font-size: 0.5rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #9a958c;
+  line-height: 1.2;
+}
+
+.print-adventure-toc .toc-fill {
+  display: none;
+}
+
+.print-adventure-toc .toc-link::after {
+  content: none;
+}
+
+.print-blank-page {
+  min-height: 100vh;
+  page-break-after: always;
+  background: #ffffff;
+}
+
+.chapter {
+  page-break-before: always;
+}
+
+/* —— Открытие главы —— */
+.chapter-open {
+  margin: 0 0 8mm;
+  padding: 2mm 0 0;
+  page-break-after: avoid;
+}
+
+.chapter-open-num {
+  font-family: var(--font-ui);
+  font-size: 4.6rem;
+  font-weight: 800;
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+  margin: 0 0 3mm;
+}
+
+.chapter-open-rule {
+  display: block;
+  width: 100%;
+  height: 0.85pt;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: var(--ink);
+}
+
+.chapter-open-title {
+  font-family: var(--font-display) !important;
+  font-size: 1.55rem !important;
+  font-weight: normal !important;
+  margin: 4.5mm 0 4.5mm !important;
+  line-height: 1.15 !important;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase !important;
+  color: var(--ink) !important;
+  border: none !important;
+}
+
+.chapter-open-title:has(+ .chapter-open-subtitle) {
+  margin-bottom: 1.5mm !important;
+}
+
+.chapter-open-subtitle {
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  font-weight: normal;
+  margin: 0 0 4.5mm;
+  line-height: 1.15;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.chapter-open-lead-label {
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  font-weight: 500;
+  margin: 4.5mm 0 1.5mm;
+  color: var(--ink);
+}
+
+.chapter-open-lead {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 400;
+  line-height: 1.45;
+  margin: 0 0 5mm;
+  max-width: 92%;
+  color: var(--ink-soft);
+}
+
+.chapter-art {
+  margin: 5mm 0 4mm;
+  padding: 0;
+  background: #030201;
+  border: 1px solid var(--rule);
+  overflow: hidden;
+}
+
+.chapter-art img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 48mm;
+  object-fit: cover;
+  object-position: center;
+  border: none;
+  margin: 0;
+}
+
+.chapter-head h1,
+.print-adventure h1 {
+  font-family: var(--font-display);
+  font-size: 1.55rem;
+  font-weight: normal;
+  margin: 0 0 0.75rem;
+  line-height: 1.2;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ink);
+  border: none;
+}
+
+.print-adventure h2 {
+  font-family: var(--font-display);
+  font-size: 1.12rem;
+  font-weight: normal;
+  margin: 1.45rem 0 0.5rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.print-adventure h3 {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: normal;
+  margin: 1.15rem 0 0.4rem;
+  letter-spacing: 0.03em;
+}
+
+.print-adventure h4 {
+  font-family: var(--font-ui);
+  font-size: 0.92rem;
+  font-weight: 700;
+  margin: 0.85rem 0 0.3rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.print-adventure p,
+.print-adventure li {
+  margin: 0.35rem 0;
+  text-align: left;
+  hyphens: auto;
+}
+
+.print-adventure ul,
+.print-adventure ol {
+  margin: 0.35rem 0;
+  padding-left: 1.1rem;
+}
+
+.print-adventure blockquote {
+  margin: 0.75rem 0;
+  padding: 0.45rem 0.65rem 0.5rem 0.85rem;
+  border-left: 3px solid var(--gold);
+  border-top: 0.5px solid rgba(138, 111, 46, 0.35);
+  border-bottom: 0.5px solid rgba(138, 111, 46, 0.35);
+  border-right: none;
+  background: rgba(184, 166, 144, 0.12);
+  color: var(--ink);
+  font-style: normal;
+  font-size: 0.94em;
+  line-height: 1.42;
+  page-break-inside: avoid;
+}
+
+.print-adventure blockquote strong:first-child {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  color: var(--gold);
+}
+
+.print-adventure table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.65rem 0 0.85rem;
+  font-size: 0.95em;
+  break-inside: auto;
+  page-break-inside: auto;
+}
+
+.print-adventure thead {
+  display: table-header-group;
+}
+
+.print-adventure tr {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.print-adventure thead th {
+  background: var(--table-head);
+  color: #fff;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 0.9em;
+  letter-spacing: 0.03em;
+  padding: 0.4rem 0.5rem;
+  text-align: left;
+}
+
+.print-adventure tbody td {
+  padding: 0.35rem 0.5rem;
+  vertical-align: top;
+  border: none;
+  background: #ffffff;
+}
+
+.print-adventure tbody tr:nth-child(even) td {
+  background: var(--table-zebra);
+}
+
+.print-adventure pre {
+  font-family: var(--font-body);
+  font-size: 0.95em;
+  background: transparent;
+  border-left: 3.5px solid #9a9690;
+  padding: 0.35rem 0 0.35rem 0.75rem;
+  margin: 0.6rem 0;
+  white-space: pre-wrap;
+  color: var(--ink);
+}
+
+.print-adventure img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0.65rem auto;
+  background: #ffffff;
+}
+
+.print-adventure figure {
+  margin: 0.85rem 0 1rem;
+  page-break-inside: avoid;
+  background: #ffffff;
+}
+
+.print-adventure figcaption {
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  text-align: center;
+  margin-top: 0.35rem;
+  letter-spacing: 0.02em;
+}
+
+.print-adventure hr {
+  border: none;
+  margin: 1rem 0;
+  height: 0;
+}
+
+.print-adventure hr::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: rgba(26, 25, 23, 0.25);
+}
+
+@media print {
+  body.print-adventure,
+  .print-adventure-cover,
+  .print-adventure-main {
+    background: #ffffff !important;
+  }
+
+  .print-adventure h2,
+  .print-adventure h3,
+  .chapter-head {
+    break-after: avoid;
+  }
+
+  .print-adventure pre,
+  .print-adventure blockquote {
+    break-inside: avoid;
+  }
+
+  .print-adventure table {
+    break-inside: auto;
+    page-break-inside: auto;
+  }
+
+  .print-adventure tr {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}

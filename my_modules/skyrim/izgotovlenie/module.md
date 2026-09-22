@@ -132,19 +132,3 @@ dice_notes: "Все новые броски — только d6. Ковка и �
 ## Пример из партии: «Белый берег»
 
 **Эорлунд** улучшает **стальной** топор Ульфрика до **II**: **3** стали, **2d6 + Кузнечное 3 = 12** против ЧЦ **11** → топор **+1** бонус (итого **+3** с материалом и типом).
-
----
-
-## Манифест
-
-```yaml
-modules:
-  skyrim_crafting: true
-  skyrim_weapons: true
-  skyrim_armor: true
-  skyrim_talents: true
-
-custom_modules:
-  - path: "./my_modules/skyrim/izgotovlenie"
-    enabled: true
-```

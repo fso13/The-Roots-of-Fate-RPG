@@ -90,20 +90,20 @@
 
 ## Скачать
 
-| Книга | PDF (A4) | PDF (Cairn) | Markdown |
-|-------|----------|-------------|----------|
-| Игрок | [pdf](koreni-sudby-kniga-igroka.pdf) | [pdf](koreni-sudby-kniga-igroka-cairn.pdf) | [md](kniga-igroka.md) |
-| Хранитель | [pdf](koreni-sudby-kniga-hranitelya.pdf) | [pdf](koreni-sudby-kniga-hranitelya-cairn.pdf) | [md](kniga-hranitelya.md) |
-| Ширма хранителя | [pdf, 4×A4 portrait](koreni-sudby-shirima-hranitelya.pdf) | — | — |
-| Полное издание | [pdf](koreni-sudby-polnoe-izdanie.pdf) | [pdf](koreni-sudby-polnoe-izdanie-cairn.pdf) | [md](kniga-polnaya.md) |
+| Книга | PDF (A5 · Cairn) | Markdown |
+|-------|------------------|----------|
+| Игрок | [pdf](koreni-sudby-kniga-igroka.pdf) | [md](kniga-igroka.md) |
+| Хранитель | [pdf](koreni-sudby-kniga-hranitelya.pdf) | [md](kniga-hranitelya.md) |
+| Ширма хранителя | [pdf, 4×A4 portrait](koreni-sudby-shirima-hranitelya.pdf) | — |
+| Полное издание | [pdf](koreni-sudby-polnoe-izdanie.pdf) | [md](kniga-polnaya.md) |
 
-Сборка: `npm run book:igrok` · `book:hranitel` · `book:md` · PDF: `npm run pdf:all` · ширма: `npm run pdf:shirima`
+Сборка: `npm run book:igrok` · `book:hranitel` · `book:md` · PDF: `npm run pdf:igrok` / `pdf:hranitel` · ширма: `npm run pdf:shirima`
 
 ## Быстрый старт
 
 1. Возьмите **d6**.
 2. Игроки — [Книга игрока](README-igrok.md); хранитель — [Книга хранителя](README-hranitel.md).
-3. Скопируйте `modules/manifest.example.yaml` в `manifest.yaml`.
+3. Договоритесь, какие **модули** в кампании (см. [главу о модульности](01-moduli.md)).
 4. **Лист персонажа** — на сайте.
 
 Партия-пример: **«Стеклянные волки»**, Торнвельд.

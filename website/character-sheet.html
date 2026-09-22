@@ -76,81 +76,73 @@
 
     <section class="sheet-block sheet-resources">
       <h2>Ресурсы</h2>
+      <p class="sheet-hint">Закрашивайте квадратики. Макс. стресс/ран = 6+Тело, искр = 3+Воля.</p>
       <div class="resource-grid">
         <div class="resource-item">
           <label>Стресс</label>
-          <span class="resource-track">
-            <input type="number" name="stress_current" min="0" value="0">
-            <span>/</span>
-            <input type="number" name="stress_max" min="0" value="9" readonly class="readonly">
-          </span>
+          <span class="tick-track" data-resource="stress" data-max="9"></span>
+          <span class="resource-hint">макс <span data-max-label="stress">9</span></span>
         </div>
         <div class="resource-item">
           <label>Раны</label>
-          <span class="resource-track">
-            <input type="number" name="wounds_current" min="0" value="0">
-            <span>/</span>
-            <input type="number" name="wounds_max" min="0" value="9" readonly class="readonly">
-          </span>
+          <span class="tick-track" data-resource="wounds" data-max="9"></span>
+          <span class="resource-hint">макс <span data-max-label="wounds">9</span></span>
         </div>
         <div class="resource-item resource-optional" data-module="magic">
           <label>Искры</label>
-          <span class="resource-track">
-            <input type="number" name="sparks_current" min="0" value="0">
-            <span>/</span>
-            <input type="number" name="sparks_max" min="0" value="6" readonly class="readonly">
-          </span>
+          <span class="tick-track" data-resource="sparks" data-max="6"></span>
+          <span class="resource-hint">макс <span data-max-label="sparks">6</span></span>
         </div>
       </div>
     </section>
 
     <section class="sheet-block sheet-skills">
       <h2>Навыки</h2>
-      <p class="sheet-hint">Ранг 0–4. Старт: 1× ранг 2, 2× ранг 1</p>
+      <p class="sheet-hint">Ранг 0–4 — закрасьте квадратики. Старт: 1× ранг 2, 2× ранг 1</p>
       <div class="skills-grid">
         <div class="skill-category">
           <h3>Боевые</h3>
           <div class="skill-list">
-            <div class="skill-row"><span>Рукопашное оружие</span><input type="number" name="skill_melee" min="0" max="4" value="0"></div>
-            <div class="skill-row"><span>Двуручное оружие</span><input type="number" name="skill_2h" min="0" max="4" value="0"></div>
-            <div class="skill-row"><span>Оружие и щит</span><input type="number" name="skill_shield" min="0" max="4" value="0"></div>
-            <div class="skill-row"><span>Стрельба</span><input type="number" name="skill_ranged" min="0" max="4" value="0"></div>
-            <div class="skill-row"><span>Безоружный бой</span><input type="number" name="skill_unarmed" min="0" max="4" value="0"></div>
+            <div class="skill-row"><span>Рукопашное оружие</span><span class="tick-track" data-field="skill_melee" data-max="4"></span></div>
+            <div class="skill-row"><span>Двуручное оружие</span><span class="tick-track" data-field="skill_2h" data-max="4"></span></div>
+            <div class="skill-row"><span>Оружие и щит</span><span class="tick-track" data-field="skill_shield" data-max="4"></span></div>
+            <div class="skill-row"><span>Стрельба</span><span class="tick-track" data-field="skill_ranged" data-max="4"></span></div>
+            <div class="skill-row"><span>Безоружный бой</span><span class="tick-track" data-field="skill_unarmed" data-max="4"></span></div>
           </div>
         </div>
         <div class="skill-category">
           <h3>Социальные</h3>
           <div class="skill-list">
-            <div class="skill-row"><span>Дипломатия</span><input type="number" name="skill_diplomacy" min="0" max="4" value="0"></div>
-            <div class="skill-row"><span>Запугивание</span><input type="number" name="skill_intimidate" min="0" max="4" value="0"></div>
-            <div class="skill-row"><span>Обман</span><input type="number" name="skill_deceive" min="0" max="4" value="0"></div>
-            <div class="skill-row"><span>Проницательность</span><input type="number" name="skill_insight" min="0" max="4" value="0"></div>
+            <div class="skill-row"><span>Дипломатия</span><span class="tick-track" data-field="skill_diplomacy" data-max="4"></span></div>
+            <div class="skill-row"><span>Запугивание</span><span class="tick-track" data-field="skill_intimidate" data-max="4"></span></div>
+            <div class="skill-row"><span>Обман</span><span class="tick-track" data-field="skill_deceive" data-max="4"></span></div>
+            <div class="skill-row"><span>Проницательность</span><span class="tick-track" data-field="skill_insight" data-max="4"></span></div>
           </div>
         </div>
         <div class="skill-category">
           <h3>Знания и ремесло</h3>
           <div class="skill-list">
-            <div class="skill-row"><span>История</span><input type="number" name="skill_history" min="0" max="4" value="0"></div>
-            <div class="skill-row"><span>Природа</span><input type="number" name="skill_nature" min="0" max="4" value="0"></div>
-            <div class="skill-row"><span>Анализ</span><input type="number" name="skill_analysis" min="0" max="4" value="0"></div>
-            <div class="skill-row"><span>Медицина</span><input type="number" name="skill_medicine" min="0" max="4" value="0"></div>
+            <div class="skill-row"><span>История</span><span class="tick-track" data-field="skill_history" data-max="4"></span></div>
+            <div class="skill-row"><span>Природа</span><span class="tick-track" data-field="skill_nature" data-max="4"></span></div>
+            <div class="skill-row"><span>Анализ</span><span class="tick-track" data-field="skill_analysis" data-max="4"></span></div>
+            <div class="skill-row"><span>Медицина</span><span class="tick-track" data-field="skill_medicine" data-max="4"></span></div>
           </div>
         </div>
         <div class="skill-category">
           <h3>Путешествие</h3>
           <div class="skill-list">
-            <div class="skill-row"><span>Атлетика</span><input type="number" name="skill_athletics" min="0" max="4" value="0"></div>
-            <div class="skill-row"><span>Скрытность</span><input type="number" name="skill_stealth" min="0" max="4" value="0"></div>
-            <div class="skill-row"><span>Внимание</span><input type="number" name="skill_perception" min="0" max="4" value="0"></div>
-            <div class="skill-row"><span>Выживание</span><input type="number" name="skill_survival" min="0" max="4" value="0"></div>
-            <div class="skill-row"><span>Взлом</span><input type="number" name="skill_lockpick" min="0" max="4" value="0"></div>
+            <div class="skill-row"><span>Атлетика</span><span class="tick-track" data-field="skill_athletics" data-max="4"></span></div>
+            <div class="skill-row"><span>Скрытность</span><span class="tick-track" data-field="skill_stealth" data-max="4"></span></div>
+            <div class="skill-row"><span>Внимание</span><span class="tick-track" data-field="skill_perception" data-max="4"></span></div>
+            <div class="skill-row"><span>Выживание</span><span class="tick-track" data-field="skill_survival" data-max="4"></span></div>
+            <div class="skill-row"><span>Взлом</span><span class="tick-track" data-field="skill_lockpick" data-max="4"></span></div>
           </div>
         </div>
         <div class="skill-category" data-module="magic">
           <h3>Магия</h3>
           <div class="skill-list">
-            <div class="skill-row"><span>Магия (ближняя)</span><input type="number" name="skill_magic_melee" min="0" max="4" value="0"></div>
-            <div class="skill-row"><span>Магия (дальняя)</span><input type="number" name="skill_magic_ranged" min="0" max="4" value="0"></div>
+            <div class="skill-row"><span>Магия (ближняя)</span><span class="tick-track" data-field="skill_magic_melee" data-max="4"></span></div>
+            <div class="skill-row"><span>Магия (дальняя)</span><span class="tick-track" data-field="skill_magic_ranged" data-max="4"></span></div>
           </div>
         </div>
       </div>
