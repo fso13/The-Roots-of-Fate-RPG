@@ -18,8 +18,10 @@ import {
   buildChapterList,
   buildCustomModuleChapter,
   buildPrintHtml,
+  buildBleedSheetHtml,
   buildAdventurePrintHtml,
   renderPdf,
+  applyBleedCovers,
   ensurePublicBuilt,
   copyPrintCss,
   adventurePrintHtmlFilename,
@@ -137,6 +139,24 @@ function coverHtml(subtitle, tagline = "Только d6 · игрок · хра�
   </div>`;
 }
 
+function backCoverHtml(subtitle) {
+  return `
+  <div class="print-cairn-back">
+    <img class="cover-art" src="images/the-edge-back-cover.png" alt="">
+    <div class="cover-art-shade" aria-hidden="true"></div>
+    <div class="print-cairn-back-inner">
+      <div class="cover-top">
+        <h1>The Edge!</h1>
+        <p class="back-blurb">Два кубика. Светлый и тёмный. Один ход — и сцена уже не та, что была.</p>
+      </div>
+      <div class="cover-bottom">
+        <p class="tagline">${subtitle} · только d6</p>
+        <p class="back-meta">Тайная гильдия · fso13</p>
+      </div>
+    </div>
+  </div>`;
+}
+
 const CAIRN_PDF_OPTS = { ...PRINT_A5_PDF_OPTS_BASE };
 
 function transformCoreMd(rel, md) {
@@ -187,6 +207,8 @@ async function buildFullEdition() {
 
   const outPdf = path.join(OUT_DIR, "polnoe-izdanie.pdf");
   const outHtml = path.join(PUBLIC, "print-book-cairn-new-polnoe.html");
+  const front = coverHtml("Полное издание");
+  const back = backCoverHtml("Полное издание");
 
   const html = buildPrintHtml({
     chapters,
@@ -194,16 +216,43 @@ async function buildFullEdition() {
     bodyClass: "print-cairn",
     cssHref: "css/print-cairn.css",
     fontLinks: FONT_LINKS,
-    coverHtml: coverHtml("Полное издание"),
+    coverHtml: front,
     mainClass: "print-cairn-main",
     tocClass: "print-cairn-toc",
     tocGroups,
   });
 
   fs.writeFileSync(outHtml, html, "utf8");
+  const frontBleedHtml = path.join(PUBLIC, "print-bleed-front-polnoe-new.html");
+  const backBleedHtml = path.join(PUBLIC, "print-bleed-back-polnoe-new.html");
+  fs.writeFileSync(
+    frontBleedHtml,
+    buildBleedSheetHtml({
+      title: "The Edge! — полное издание — обложка",
+      cssHref: "css/print-cairn.css",
+      fontLinks: FONT_LINKS,
+      sheetHtml: front,
+    }),
+    "utf8"
+  );
+  fs.writeFileSync(
+    backBleedHtml,
+    buildBleedSheetHtml({
+      title: "The Edge! — полное издание — задник",
+      cssHref: "css/print-cairn.css",
+      fontLinks: FONT_LINKS,
+      sheetHtml: back,
+    }),
+    "utf8"
+  );
+
   await renderPdf(outHtml, outPdf, {
     ...CAIRN_PDF_OPTS,
     ...printChromeTemplates("The Edge! · Полное издание"),
+  });
+  await applyBleedCovers(outPdf, {
+    frontHtmlPath: frontBleedHtml,
+    backHtmlPath: backBleedHtml,
   });
 
   console.log("PDF:", outPdf, `(${chapters.length} chapters)`);
@@ -293,6 +342,50 @@ function listOutputs() {
   }
 }
 
+
+async function buildCharacterSheetPdf() {
+  copyPrintCss("print-cairn.css");
+  const sheetCssSrc = path.join(ROOT, "website", "css", "character-sheet.css");
+  const sheetCssDest = path.join(PUBLIC, "css", "character-sheet.css");
+  if (fs.existsSync(sheetCssSrc)) fs.copyFileSync(sheetCssSrc, sheetCssDest);
+
+  const body = buildCharacterSheetChapterHtml();
+  const html = `<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>The Edge! — Лист персонажа</title>
+  ${FONT_LINKS}
+  <link rel="stylesheet" href="css/print-cairn.css">
+  <style>
+    @page { size: 148mm 210mm; margin: 0; }
+    body.print-cairn { margin: 0; }
+    .print-cairn-main { padding: 6mm 7mm; }
+    .chapter { page-break-before: avoid; }
+  </style>
+</head>
+<body class="print-cairn">
+  <main class="print-cairn-main">
+    <section class="chapter" id="chapter-list-personazha">${body}</section>
+  </main>
+</body>
+</html>`;
+
+  const outHtml = path.join(PUBLIC, "print-list-personazha.html");
+  const outPdf = path.join(OUT_DIR, "list-personazha.pdf");
+  fs.writeFileSync(outHtml, html, "utf8");
+  await renderPdf(outHtml, outPdf, {
+    ...PRINT_A5_PDF_OPTS_BASE,
+    displayHeaderFooter: false,
+    stampLeafPages: false,
+    fillTocPages: false,
+    skipCoverPageNumber: false,
+    skipPages: 0,
+    margin: { top: "6mm", right: "7mm", bottom: "6mm", left: "7mm" },
+  });
+  console.log("Sheet PDF:", outPdf);
+}
+
 async function main() {
   fs.mkdirSync(OUT_DIR, { recursive: true });
   fs.mkdirSync(ADV_DIR, { recursive: true });
@@ -303,6 +396,29 @@ async function main() {
   if (adventuresOnly) {
     console.log("→ Приключения…");
     await buildAdventurePdfs();
+    listOutputs();
+    return;
+  }
+  if (process.argv.includes("--sheet")) {
+    console.log("→ Лист персонажа…");
+    await buildCharacterSheetPdf();
+    listOutputs();
+    return;
+  }
+  if (process.argv.includes("--hranitel")) {
+    console.log("→ Книга хранителя…");
+    await buildCairnPdf({
+      audience: "keeper",
+      includeAdventure: false,
+      alsoMain: false,
+      output: path.join(OUT_DIR, "kniga-hranitelya.pdf"),
+    });
+    listOutputs();
+    return;
+  }
+  if (process.argv.includes("--polnoe")) {
+    console.log("→ Полное издание…");
+    await buildFullEdition();
     listOutputs();
     return;
   }

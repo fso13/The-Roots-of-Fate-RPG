@@ -177,9 +177,9 @@
       api.saveConfig(collectConfig());
       api.applyNavFilter && api.applyNavFilter();
       if (window.parent !== window) {
-        window.parent.postMessage({ type: "koreni-sudby-config-changed" }, "*");
+        window.parent.postMessage({ type: "the-edge-config-changed" }, "*");
       }
-      window.dispatchEvent(new CustomEvent("koreni-sudby-config-changed"));
+      window.dispatchEvent(new CustomEvent("the-edge-config-changed"));
     }
 
     saveBtn.addEventListener("click", () => {

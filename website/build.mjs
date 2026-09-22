@@ -25,6 +25,7 @@ import {
   adventurePdfHtmlFile,
   listAdventurePdfSources,
   syncBookDownloads,
+  syncNewPdfToPublic,
 } from "./lib/book-build.mjs";
 import {
   buildChapterList,
@@ -244,16 +245,16 @@ function wrapPage({ title, bodyHtml, relPath, navGroups, activeSlug, toc = [], e
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Корни судьбы — модульная настольная РПГ. ${escapeHtml(title)}">
-  <title>${escapeHtml(title)} — Корни судьбы</title>
+  <meta name="description" content="The Edge! — модульная настольная РПГ. ${escapeHtml(title)}">
+  <title>${escapeHtml(title)} — The Edge!</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="${prefix}css/main.css">
 </head>
 <body>
   <header class="site-header">
-    <a class="brand" href="${prefix}index.html">Корни судьбы</a>
+    <a class="brand" href="${prefix}index.html">The Edge!</a>
     <nav class="nav-inline">
       <a href="${prefix}index.html">Главная</a>
       <a href="${prefix}oglavlenie.html">Оглавление</a>
@@ -275,7 +276,7 @@ function wrapPage({ title, bodyHtml, relPath, navGroups, activeSlug, toc = [], e
     </article>${tocSidebar}
   </div>
   <footer class="site-footer">
-    <p>Модульная настольная РПГ «Корни судьбы» · <a href="https://gitlab.com/fso13/me-rpg">Исходники на GitLab</a></p>
+    <p>Модульная настольная РПГ «The Edge!» · <a href="https://gitlab.com/fso13/me-rpg">Исходники на GitLab</a></p>
   </footer>
   <script src="${prefix}js/manifest.js"></script>${extraScripts}
 </body>
@@ -337,6 +338,9 @@ function main() {
     fs.mkdirSync(path.join(OUT, "fonts"), { recursive: true });
     fs.cpSync(siteFonts, path.join(OUT, "fonts"), { recursive: true });
   }
+
+  // PDF для скачивания — из new_pdf/
+  syncNewPdfToPublic(OUT, ROOT);
 
   const advMaps = path.join(RPG, "adventure", "maps");
   if (fs.existsSync(advMaps)) {
@@ -544,6 +548,7 @@ function main() {
   ];
 
   syncBookDownloads(OUT, RPG, preservedBooks);
+  syncNewPdfToPublic(OUT, ROOT);
 
   copyPrintCss("print-book.css");
   for (const mod of CUSTOM_MODULES) {
@@ -584,12 +589,12 @@ function main() {
             items: [
               {
                 file: adventurePdfFile(advAsModule),
-                label: `${advAsModule.title} (PDF, A5${advAsModule.genre ? ` · ${advAsModule.genre}` : ""})`,
+                label: `${advAsModule.title} (PDF · new_pdf${advAsModule.genre ? ` · ${advAsModule.genre}` : ""})`,
                 htmlFile: adventurePdfHtmlFile(advAsModule),
                 htmlLabel: `${advAsModule.title} (HTML для печати)`,
               },
             ],
-            missingHint: "npm run pdf:adventures",
+            missingHint: "npm run pdf:new",
           }) + bodyHtml;
       } else if (mod) {
         bodyHtml =
@@ -598,12 +603,12 @@ function main() {
             items: [
               {
                 file: modulePdfFile(mod),
-                label: `${mod.title || mod.id} (PDF)`,
+                label: `${mod.title || mod.id} (PDF · пак)`,
                 htmlFile: modulePdfHtmlFile(mod),
                 htmlLabel: `${mod.title || mod.id} (HTML для печати)`,
               },
             ],
-            missingHint: "npm run pdf:modules",
+            missingHint: "npm run pdf:new",
           }) + bodyHtml;
       }
     } else {
@@ -615,12 +620,12 @@ function main() {
             items: [
               {
                 file: adventurePdfFile(adv),
-                label: `${adv.title} (PDF, A5${adv.genre ? ` · ${adv.genre}` : ""})`,
+                label: `${adv.title} (PDF)`,
                 htmlFile: adventurePdfHtmlFile(adv),
                 htmlLabel: `${adv.title} (HTML для печати)`,
               },
             ],
-            missingHint: "npm run pdf:adventures",
+            missingHint: "npm run pdf:new",
           }) + bodyHtml;
       }
     }
@@ -724,16 +729,16 @@ function main() {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Корни судьбы — модульная настольная ролевая игра. Только d6, книга игрока и книга хранителя, тактика, магия как атака.">
-  <title>Корни судьбы — модульная настольная РПГ</title>
+  <meta name="description" content="The Edge! — модульная настольная ролевая игра. Только d6, книга игрока и книга хранителя, тактика, магия как атака.">
+  <title>The Edge! — модульная настольная РПГ</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
   <header class="site-header">
-    <a class="brand" href="index.html">Корни судьбы</a>
+    <a class="brand" href="index.html">The Edge!</a>
     <nav class="nav-inline">
       <a href="index.html">Главная</a>
       <a href="oglavlenie.html">Оглавление</a>
@@ -743,15 +748,20 @@ function main() {
       <a href="nastroyki.html">Настройки</a>
     </nav>
   </header>
-  <section class="hero">
-    <img class="hero-emblem" src="images/emblem-tree-d6.png" width="240" height="264" alt="Дерево с корнями, растущее из шестигранного кубика — символ игры">
-    <div class="hero-ornament"></div>
-    <h1>Корни судьбы</h1>
-    <p class="tagline">Модульная настольная ролевая игра. Только d6, две книги — для игроков и для хранителя. Тактика без лишнего счёта, магия как атака.</p>
-    <div class="hero-actions">
-      <a class="btn" href="oglavlenie-igroka.html">Книга игрока</a>
-      <a class="btn btn-muted" href="oglavlenie-hranitelya.html">Книга хранителя</a>
-      <a class="btn btn-muted" href="#downloads">Скачать PDF</a>
+  <section class="hero hero-edge">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-shade" aria-hidden="true"></div>
+    <div class="hero-content">
+      <p class="hero-kicker">Модульная настольная РПГ</p>
+      <h1>The Edge!</h1>
+      <p class="tagline">Только d6 · тактика · магия как атака. Ядро простое — модули собираешь под стол.</p>
+      <div class="hero-actions">
+        <a class="btn" href="oglavlenie-igroka.html">Книга игрока</a>
+        <a class="btn btn-muted" href="oglavlenie-hranitelya.html">Книга хранителя</a>
+        <a class="btn btn-muted" href="#downloads">Скачать PDF</a>
+        <a class="btn btn-muted" href="character-sheet.html">Лист персонажа</a>
+      </div>
+      <p class="hero-credits">Авторы: Тайная гильдия · fso13</p>
     </div>
   </section>
   ${renderBookDownloadsHtml(OUT)}

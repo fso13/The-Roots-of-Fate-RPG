@@ -1,8 +1,8 @@
 /**
- * Лист персонажа «Корни судьбы» — интерактивность, сохранение, печать.
+ * Лист персонажа «The Edge!» — интерактивность, сохранение, печать.
  */
 (function () {
-  const STORAGE_KEY = "koreni-sudby-character";
+  const STORAGE_KEY = "the-edge-character";
 
   function init() {
     mountAllTracks();

@@ -769,12 +769,42 @@ export const PDF_TITLE = {
   keeper: "The Edge! — Книга хранителя",
 };
 
+/** PDF из папки new_pdf/ (копируется в public/new_pdf при сборке сайта). */
+export const NEW_PDF_ROOT = "new_pdf";
+
+export const NEW_PDF_BOOKS = {
+  player: "new_pdf/kniga-igroka.pdf",
+  keeper: "new_pdf/kniga-hranitelya.pdf",
+  all: "new_pdf/polnoe-izdanie.pdf",
+  sheet: "new_pdf/list-personazha.pdf",
+};
+
+const FULL_EDITION_MODULE_IDS = new Set(["firearms", "vehicles", "noir_investigation"]);
+
+/** Пак модулей → файл в new_pdf/modules/. */
+export function moduleNewPdfFile(mod) {
+  if (!mod) return null;
+  if (mod.pack === GOTHIC_PACK) return "new_pdf/modules/gothic.pdf";
+  if (mod.pack === SKYRIM_PACK) return "new_pdf/modules/skyrim.pdf";
+  if (mod.pack === ELDEN_RING_PACK) return "new_pdf/modules/elden-ring.pdf";
+  if (mod.pack === HOMM3_PACK) return "new_pdf/modules/homm3.pdf";
+  if (mod.id === "fantasy_bestiary") return "new_pdf/modules/fantasy-bestiariy.pdf";
+  if (FULL_EDITION_MODULE_IDS.has(mod.id)) return "new_pdf/polnoe-izdanie.pdf";
+  return "new_pdf/modules/prochee.pdf";
+}
+
+export function adventureNewPdfFile(adv) {
+  if (!adv?.id) return null;
+  return `new_pdf/adventures/${adv.id}.pdf`;
+}
+
+/** @deprecated алиас → new_pdf pack */
 export function modulePdfFile(mod) {
-  return `koreni-sudby-modul-${mod.id.replace(/_/g, "-")}.pdf`;
+  return moduleNewPdfFile(mod) || `koreni-sudby-modul-${mod.id.replace(/_/g, "-")}.pdf`;
 }
 
 export function adventurePdfFile(adv) {
-  return `koreni-sudby-priklyuchenie-${adv.id}.pdf`;
+  return adventureNewPdfFile(adv) || `koreni-sudby-priklyuchenie-${adv.id}.pdf`;
 }
 
 export function modulePdfHtmlFile(mod) {
@@ -783,6 +813,19 @@ export function modulePdfHtmlFile(mod) {
 
 export function adventurePdfHtmlFile(adv) {
   return `print-priklyuchenie-${adv.id}.html`;
+}
+
+/** Скопировать ROOT/new_pdf → public/new_pdf. */
+export function syncNewPdfToPublic(publicDir, rootDir) {
+  const src = path.join(rootDir, "new_pdf");
+  const dest = path.join(publicDir, "new_pdf");
+  if (!fs.existsSync(src)) {
+    console.warn("Нет папки new_pdf — сначала: npm run pdf:new");
+    return false;
+  }
+  fs.mkdirSync(dest, { recursive: true });
+  fs.cpSync(src, dest, { recursive: true });
+  return true;
 }
 
 export function findCustomModule(idOrMdRel) {
@@ -815,17 +858,22 @@ export const BOOK_DOWNLOAD_GROUPS = [
   {
     id: "player",
     title: "Книга игрока",
-    items: [{ file: PDF_OUTPUT.player, label: "PDF, A5 · стиль Cairn" }],
+    items: [{ file: NEW_PDF_BOOKS.player, label: "PDF, A5 · The Edge!" }],
   },
   {
     id: "keeper",
     title: "Книга хранителя",
-    items: [{ file: PDF_OUTPUT.keeper, label: "PDF, A5 · стиль Cairn" }],
+    items: [{ file: NEW_PDF_BOOKS.keeper, label: "PDF, A5 · The Edge!" }],
   },
   {
     id: "all",
     title: "Полное издание",
-    items: [{ file: PDF_OUTPUT.all, label: "PDF, A5 · стиль Cairn" }],
+    items: [{ file: NEW_PDF_BOOKS.all, label: "PDF, A5 · The Edge!" }],
+  },
+  {
+    id: "sheet",
+    title: "Лист персонажа",
+    items: [{ file: NEW_PDF_BOOKS.sheet, label: "PDF, A5 · бланк" }],
   },
 ];
 
@@ -919,7 +967,7 @@ function escapeDownloadHtml(s) {
  */
 export function renderPagePdfDownloadHtml(
   publicDir,
-  { prefix = "", id = "pdf-download", title = "Скачать", items = [], missingHint = "npm run pdf:pack" } = {}
+  { prefix = "", id = "pdf-download", title = "Скачать", items = [], missingHint = "npm run pdf:new" } = {}
 ) {
   if (!items.length) return "";
 
@@ -940,7 +988,7 @@ export function renderPagePdfDownloadHtml(
 /** HTML-блок «Скачать книги»; prefix — относительный путь к корню public (напр. «../»). */
 export function renderBookDownloadsHtml(
   publicDir,
-  { prefix = "", id = "downloads", onlyGroupIds = null, missingHint = "npm run pdf:pack" } = {}
+  { prefix = "", id = "downloads", onlyGroupIds = null, missingHint = "npm run pdf:new" } = {}
 ) {
   const groupsSource = onlyGroupIds
     ? getBookDownloadGroups().filter((g) => onlyGroupIds.includes(g.id))
@@ -966,7 +1014,7 @@ export function renderBookDownloadsHtml(
   return `
   <section class="downloads" id="${esc(id)}">
     <h2 class="section-title">Скачать PDF</h2>
-    <p class="downloads-note">Книги правил. PDF модулей и приключений — на странице каждого раздела.</p>
+    <p class="downloads-note">Книги и бланк из папки new_pdf. Модули и приключения — на странице раздела.</p>
     <div class="download-grid">
       ${groups.join("")}
     </div>

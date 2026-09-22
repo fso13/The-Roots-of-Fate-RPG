@@ -551,6 +551,7 @@ export function buildPrintHtml({
   cssHref,
   fontLinks = "",
   coverHtml,
+  backCoverHtml = "",
   mainClass = "print-book-main",
   tocClass,
   simpleToc = false,
@@ -600,8 +601,103 @@ export function buildPrintHtml({
     ${toc}
     ${body}
   </main>
+  ${backCoverHtml || ""}
 </body>
 </html>`;
+}
+
+/** Одностраничный HTML обложки / задника для печати без полей. */
+export function buildBleedSheetHtml({
+  title,
+  bodyClass = "print-cairn print-bleed-sheet",
+  cssHref,
+  fontLinks = "",
+  sheetHtml,
+}) {
+  return `<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>${escapeHtml(title)}</title>
+  ${fontLinks}
+  <link rel="stylesheet" href="${cssHref}">
+  <style>
+    @page { size: 148mm 210mm; margin: 0; }
+    html, body { margin: 0; padding: 0; }
+  </style>
+</head>
+<body class="${bodyClass}">
+  ${sheetHtml}
+</body>
+</html>`;
+}
+
+const BLEED_PDF_OPTS = {
+  width: "148mm",
+  height: "210mm",
+  margin: { top: "0mm", right: "0mm", bottom: "0mm", left: "0mm" },
+  displayHeaderFooter: false,
+  printBackground: true,
+  preferCSSPageSize: true,
+};
+
+/**
+ * Рендерит лист без полей и подменяет/добавляет страницы в готовом PDF.
+ * frontHtmlPath → страница 0; backHtmlPath → в конец (после удаления старого задника, если был).
+ */
+export async function applyBleedCovers(pdfPath, { frontHtmlPath, backHtmlPath, hadBackCover = false } = {}) {
+  if (!frontHtmlPath && !backHtmlPath) return;
+
+  const browser = await launchPdfBrowser();
+  const tmpDir = path.join(path.dirname(pdfPath), ".bleed-tmp");
+  fs.mkdirSync(tmpDir, { recursive: true });
+  const frontPdf = path.join(tmpDir, "front-bleed.pdf");
+  const backPdf = path.join(tmpDir, "back-bleed.pdf");
+
+  try {
+    const page = await browser.newPage();
+    if (frontHtmlPath) {
+      await page.goto(pathToFileURL(frontHtmlPath).href, { waitUntil: "networkidle" });
+      await page.pdf({ path: frontPdf, ...BLEED_PDF_OPTS });
+    }
+    if (backHtmlPath) {
+      await page.goto(pathToFileURL(backHtmlPath).href, { waitUntil: "networkidle" });
+      await page.pdf({ path: backPdf, ...BLEED_PDF_OPTS });
+    }
+  } finally {
+    await browser.close();
+  }
+
+  const book = await PDFDocument.load(fs.readFileSync(pdfPath));
+  const out = await PDFDocument.create();
+
+  if (frontHtmlPath && fs.existsSync(frontPdf)) {
+    const front = await PDFDocument.load(fs.readFileSync(frontPdf));
+    const [p] = await out.copyPages(front, [0]);
+    out.addPage(p);
+  } else if (book.getPageCount() > 0) {
+    const [p] = await out.copyPages(book, [0]);
+    out.addPage(p);
+  }
+
+  const bookCount = book.getPageCount();
+  const endExclusive = hadBackCover && bookCount > 1 ? bookCount - 1 : bookCount;
+  if (endExclusive > 1) {
+    const middle = await out.copyPages(
+      book,
+      Array.from({ length: endExclusive - 1 }, (_, i) => i + 1)
+    );
+    for (const p of middle) out.addPage(p);
+  }
+
+  if (backHtmlPath && fs.existsSync(backPdf)) {
+    const back = await PDFDocument.load(fs.readFileSync(backPdf));
+    const [p] = await out.copyPages(back, [0]);
+    out.addPage(p);
+  }
+
+  fs.writeFileSync(pdfPath, await out.save());
+  fs.rmSync(tmpDir, { recursive: true, force: true });
 }
 
 export function buildToc(chapters, { tocClass = "print-toc" } = {}) {

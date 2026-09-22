@@ -1,11 +1,11 @@
 /**
- * Конфигурация модулей для сайта «Корни судьбы».
+ * Конфигурация модулей для сайта «The Edge!».
  * Соответствует modules/manifest.example.yaml.
  * Состояние сохраняется в localStorage и фильтрует навигацию.
  */
 
 (function () {
-  const STORAGE_KEY = "koreni-sudby-manifest";
+  const STORAGE_KEY = "the-edge-manifest";
 
   const MODULE_TO_PAGE = {
     tactical_combat: "02-boy.html",

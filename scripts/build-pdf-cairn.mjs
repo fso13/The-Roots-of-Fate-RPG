@@ -7,7 +7,9 @@ import {
   PUBLIC,
   buildChapterList,
   buildPrintHtml,
+  buildBleedSheetHtml,
   renderPdf,
+  applyBleedCovers,
   ensurePublicBuilt,
   copyPrintCss,
   parsePdfArgs,
@@ -64,6 +66,25 @@ function coverHtml(audience) {
   </div>`;
 }
 
+function backCoverHtml(audience) {
+  const book = BOOK_LABEL[audience] || BOOK_LABEL.all;
+  return `
+  <div class="print-cairn-back">
+    <img class="cover-art" src="images/the-edge-back-cover.png" alt="">
+    <div class="cover-art-shade" aria-hidden="true"></div>
+    <div class="print-cairn-back-inner">
+      <div class="cover-top">
+        <h1>The Edge!</h1>
+        <p class="back-blurb">Два кубика. Светлый и тёмный. Один ход — и сцена уже не та, что была.</p>
+      </div>
+      <div class="cover-bottom">
+        <p class="tagline">${escapeHtml(book)} · только d6</p>
+        <p class="back-meta">Тайная гильдия · fso13</p>
+      </div>
+    </div>
+  </div>`;
+}
+
 const HELP = `Usage: node scripts/build-pdf-cairn.mjs [options]
 
   --audience <all|player|keeper>  Какую книгу собрать (default: all)
@@ -109,18 +130,45 @@ export async function buildCairnPdf(optsIn = {}) {
     });
   }
 
+  const front = coverHtml(opts.audience);
+  const back = backCoverHtml(opts.audience);
   const html = buildPrintHtml({
     chapters,
     title: PDF_TITLE[opts.audience] || PDF_TITLE.all,
     bodyClass: "print-cairn",
     cssHref: "css/print-cairn.css",
     fontLinks: FONT_LINKS,
-    coverHtml: coverHtml(opts.audience),
+    coverHtml: front,
     mainClass: "print-cairn-main",
     tocClass: "print-cairn-toc",
   });
 
   fs.writeFileSync(outHtml, html, "utf8");
+
+  const aud = opts.audience === "keeper" ? "hranitel" : opts.audience === "player" ? "igrok" : "polnoe";
+  const frontBleedHtml = path.join(PUBLIC, `print-bleed-front-${aud}.html`);
+  const backBleedHtml = path.join(PUBLIC, `print-bleed-back-${aud}.html`);
+  fs.writeFileSync(
+    frontBleedHtml,
+    buildBleedSheetHtml({
+      title: `${PDF_TITLE[opts.audience] || PDF_TITLE.all} — обложка`,
+      cssHref: "css/print-cairn.css",
+      fontLinks: FONT_LINKS,
+      sheetHtml: front,
+    }),
+    "utf8"
+  );
+  fs.writeFileSync(
+    backBleedHtml,
+    buildBleedSheetHtml({
+      title: `${PDF_TITLE[opts.audience] || PDF_TITLE.all} — задник`,
+      cssHref: "css/print-cairn.css",
+      fontLinks: FONT_LINKS,
+      sheetHtml: back,
+    }),
+    "utf8"
+  );
+
   fs.mkdirSync(path.dirname(opts.output), { recursive: true });
 
   const pdfOpts = {
@@ -129,6 +177,10 @@ export async function buildCairnPdf(optsIn = {}) {
   };
 
   await renderPdf(outHtml, opts.output, pdfOpts);
+  await applyBleedCovers(opts.output, {
+    frontHtmlPath: frontBleedHtml,
+    backHtmlPath: backBleedHtml,
+  });
 
   const mainOut = path.join(PUBLIC, PDF_OUTPUT[opts.audience] || PDF_OUTPUT.all);
   if (opts.alsoMain && mainOut !== opts.output) {
