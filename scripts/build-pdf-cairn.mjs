@@ -16,6 +16,9 @@ import {
   escapeHtml,
   PRINT_A5_PDF_OPTS_BASE,
   printChromeTemplates,
+  padPdfToBooklet,
+  imposeBookletPdf,
+  bookletOutputPath,
 } from "../website/lib/pdf-core.mjs";
 import {
   listBookSources,
@@ -181,6 +184,13 @@ export async function buildCairnPdf(optsIn = {}) {
     frontHtmlPath: frontBleedHtml,
     backHtmlPath: backBleedHtml,
   });
+  const padded = await padPdfToBooklet(opts.output, { multiple: 4, reserveTrailing: 1 });
+  if (padded) console.log(`Booklet pad: +${padded} notes page(s) → multiple of 4`);
+  const broshyura = bookletOutputPath(opts.output);
+  const imposed = await imposeBookletPdf(opts.output, broshyura);
+  console.log(
+    `Broshyura: ${broshyura} (${imposed.pagesIn}→${imposed.pagesOut} стр. A4, ${imposed.sheets} листов)`
+  );
 
   const mainOut = path.join(PUBLIC, PDF_OUTPUT[opts.audience] || PDF_OUTPUT.all);
   if (opts.alsoMain && mainOut !== opts.output) {

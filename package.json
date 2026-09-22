@@ -29,6 +29,7 @@
     "pdf:adventures": "npm run build && node scripts/build-pdf-pack.mjs --all-adventures",
     "pdf:pack": "npm run build && node scripts/build-pdf-pack.mjs --all-modules && node scripts/build-pdf-pack.mjs --all-adventures",
     "pdf:new": "npm run build && npm run book:igrok && npm run book:hranitel && node scripts/build-new-pdf.mjs",
+    "pdf:broshyura": "node scripts/impose-booklet.mjs --all",
     "deploy:pages": "npm run build && npx playwright install chromium && node scripts/build-pdf.mjs --audience player && node scripts/build-pdf.mjs --audience keeper && node scripts/build-pdf.mjs --audience all && node scripts/build-pdf-cairn.mjs --audience player && node scripts/build-pdf-cairn.mjs --audience keeper && node scripts/build-pdf-cairn.mjs --audience all && node scripts/build-pdf-screen.mjs && node scripts/build-pdf-pack.mjs --all-modules && node scripts/build-pdf-pack.mjs --all-adventures && node website/build.mjs",
     "book:md": "node scripts/build-book-md.mjs --audience all",
     "book:igrok": "node scripts/build-book-md.mjs --audience player",

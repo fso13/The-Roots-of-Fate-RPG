@@ -22,6 +22,9 @@ import {
   buildAdventurePrintHtml,
   renderPdf,
   applyBleedCovers,
+  padPdfToBooklet,
+  imposeBookletPdf,
+  bookletOutputPath,
   ensurePublicBuilt,
   copyPrintCss,
   adventurePrintHtmlFilename,
@@ -254,6 +257,13 @@ async function buildFullEdition() {
     frontHtmlPath: frontBleedHtml,
     backHtmlPath: backBleedHtml,
   });
+  const padded = await padPdfToBooklet(outPdf, { multiple: 4, reserveTrailing: 1 });
+  if (padded) console.log(`Booklet pad: +${padded} notes page(s) → multiple of 4`);
+  const broshyura = bookletOutputPath(outPdf);
+  const imposed = await imposeBookletPdf(outPdf, broshyura);
+  console.log(
+    `Broshyura: ${broshyura} (${imposed.pagesIn}→${imposed.pagesOut} стр. A4, ${imposed.sheets} листов)`
+  );
 
   console.log("PDF:", outPdf, `(${chapters.length} chapters)`);
 }

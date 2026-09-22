@@ -700,6 +700,150 @@ export async function applyBleedCovers(pdfPath, { frontHtmlPath, backHtmlPath, h
   fs.rmSync(tmpDir, { recursive: true, force: true });
 }
 
+/**
+ * Доливает страницы до кратности `multiple` (для печати брошюрой).
+ * Вставляет листы «Заметки» перед задней обложкой (`reserveTrailing` последних страниц).
+ * @returns {number} сколько страниц добавлено
+ */
+export async function padPdfToBooklet(
+  pdfPath,
+  { multiple = 4, reserveTrailing = 1, label = "Заметки" } = {}
+) {
+  const doc = await PDFDocument.load(fs.readFileSync(pdfPath));
+  doc.registerFontkit(fontkit);
+  const count = doc.getPageCount();
+  const rem = count % multiple;
+  if (rem === 0) return 0;
+  const need = multiple - rem;
+
+  const fontPath = resolveStampFontPath();
+  let font;
+  if (fontPath) {
+    font = await doc.embedFont(fs.readFileSync(fontPath), { subset: true });
+  } else {
+    font = await doc.embedFont(StandardFonts.Helvetica);
+  }
+
+  const ref = doc.getPage(0);
+  const { width, height } = ref.getSize();
+  const insertAt = Math.max(0, count - Math.max(0, reserveTrailing));
+  const marginX = 12 * MM;
+  const marginTop = 15 * MM;
+  const marginBottom = 18 * MM;
+
+  for (let i = 0; i < need; i++) {
+    const page = doc.insertPage(insertAt + i, [width, height]);
+    page.drawRectangle({
+      x: 0,
+      y: 0,
+      width,
+      height,
+      color: rgb(1, 1, 1),
+    });
+
+    const title = label.toUpperCase();
+    const titleSize = 11;
+    const titleW = font.widthOfTextAtSize(title, titleSize);
+    page.drawText(title, {
+      x: (width - titleW) / 2,
+      y: height - marginTop - titleSize,
+      size: titleSize,
+      font,
+      color: PRINT_GOLD,
+    });
+    page.drawLine({
+      start: { x: marginX, y: height - marginTop - titleSize - 2.5 * MM },
+      end: { x: width - marginX, y: height - marginTop - titleSize - 2.5 * MM },
+      thickness: 0.6,
+      color: PRINT_INK,
+    });
+
+    const lineGap = 8 * MM;
+    let y = height - marginTop - titleSize - 8 * MM;
+    const bottom = marginBottom;
+    while (y > bottom) {
+      page.drawLine({
+        start: { x: marginX, y },
+        end: { x: width - marginX, y },
+        thickness: 0.35,
+        color: rgb(0.82, 0.8, 0.76),
+      });
+      y -= lineGap;
+    }
+  }
+
+  fs.writeFileSync(pdfPath, await doc.save());
+  return need;
+}
+
+/** A4 landscape (две A5 бок о бок). */
+const A4_LANDSCAPE_W = 297 * MM;
+const A4_LANDSCAPE_H = 210 * MM;
+
+/**
+ * Импозиция для печати брошюры на A4:
+ * каждый лист PDF = A4 landscape, слева и справа по одной странице A5-книги
+ * в порядке седловой сшивки (saddle stitch).
+ *
+ * Печать: A4, двусторонняя, переворот по короткому краю.
+ * Режим «брошюра» в драйвере не включать — уже спущено.
+ *
+ * @returns {{ sheets: number, pagesOut: number, pagesIn: number }}
+ */
+export async function imposeBookletPdf(srcPath, outPath) {
+  const src = await PDFDocument.load(fs.readFileSync(srcPath));
+  const n = src.getPageCount();
+  if (n < 4 || n % 4 !== 0) {
+    throw new Error(
+      `imposeBookletPdf: нужно кратно 4 страницам (сейчас ${n}). Сначала padPdfToBooklet.`
+    );
+  }
+
+  const out = await PDFDocument.create();
+  const embedded = await out.embedPages(src.getPages());
+  const sheets = n / 4;
+  const halfW = A4_LANDSCAPE_W / 2;
+
+  function addSpread(leftIdx, rightIdx) {
+    const page = out.addPage([A4_LANDSCAPE_W, A4_LANDSCAPE_H]);
+    const drawHalf = (emb, x0) => {
+      if (!emb) return;
+      const scale = Math.min(halfW / emb.width, A4_LANDSCAPE_H / emb.height);
+      const w = emb.width * scale;
+      const h = emb.height * scale;
+      page.drawPage(emb, {
+        x: x0 + (halfW - w) / 2,
+        y: (A4_LANDSCAPE_H - h) / 2,
+        width: w,
+        height: h,
+      });
+    };
+    drawHalf(embedded[leftIdx], 0);
+    drawHalf(embedded[rightIdx], halfW);
+  }
+
+  for (let s = 0; s < sheets; s++) {
+    // 1-based page numbers in classic booklet order
+    const leftFront = n - 2 * s;
+    const rightFront = 2 * s + 1;
+    const leftBack = 2 * s + 2;
+    const rightBack = n - 2 * s - 1;
+    addSpread(leftFront - 1, rightFront - 1);
+    addSpread(leftBack - 1, rightBack - 1);
+  }
+
+  fs.mkdirSync(path.dirname(outPath), { recursive: true });
+  fs.writeFileSync(outPath, await out.save());
+  return { sheets, pagesOut: sheets * 2, pagesIn: n };
+}
+
+/** Рядом с book.pdf → book-broshyura.pdf */
+export function bookletOutputPath(srcPath) {
+  const dir = path.dirname(srcPath);
+  const base = path.basename(srcPath, path.extname(srcPath));
+  return path.join(dir, `${base}-broshyura.pdf`);
+}
+
 export function buildToc(chapters, { tocClass = "print-toc" } = {}) {
   const isIntro = (c) =>
     c.rel === "README.md" || c.rel === "README-igrok.md" || c.rel === "README-hranitel.md";
