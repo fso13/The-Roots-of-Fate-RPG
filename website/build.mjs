@@ -261,6 +261,7 @@ function wrapPage({ title, bodyHtml, relPath, navGroups, activeSlug, toc = [], e
       <a href="${prefix}oglavlenie-igroka.html">Игроку</a>
       <a href="${prefix}oglavlenie-hranitelya.html">Хранителю</a>
       <a href="${prefix}character-sheet.html">Лист персонажа</a>
+      <a href="${prefix}pravila-komiks.html">Комикс</a>
       <a href="${prefix}nastroyki.html">Настройки</a>
     </nav>
   </header>
@@ -319,6 +320,7 @@ function main() {
   fs.copyFileSync(CSS_SRC, path.join(OUT, "css", "main.css"));
   fs.copyFileSync(path.join(__dirname, "css", "character-sheet.css"), path.join(OUT, "css", "character-sheet.css"));
   fs.copyFileSync(path.join(__dirname, "css", "inventar-schema.css"), path.join(OUT, "css", "inventar-schema.css"));
+  fs.copyFileSync(path.join(__dirname, "css", "comics-rules.css"), path.join(OUT, "css", "comics-rules.css"));
   fs.copyFileSync(JS_MANIFEST, path.join(OUT, "js", "manifest.js"));
   fs.copyFileSync(path.join(__dirname, "js", "config-page.js"), path.join(OUT, "js", "config-page.js"));
   fs.copyFileSync(path.join(__dirname, "js", "character-sheet.js"), path.join(OUT, "js", "character-sheet.js"));
@@ -326,6 +328,10 @@ function main() {
     fs.readFileSync(path.join(__dirname, "character-sheet.html"), "utf8")
   );
   fs.writeFileSync(path.join(OUT, "character-sheet.html"), sheetSrc, "utf8");
+  fs.copyFileSync(
+    path.join(__dirname, "pravila-komiks.html"),
+    path.join(OUT, "pravila-komiks.html")
+  );
 
   const siteImages = path.join(__dirname, "images");
   if (fs.existsSync(siteImages)) {
@@ -745,6 +751,7 @@ function main() {
       <a href="oglavlenie-igroka.html">Игроку</a>
       <a href="oglavlenie-hranitelya.html">Хранителю</a>
       <a href="character-sheet.html">Лист персонажа</a>
+      <a href="pravila-komiks.html">Комикс</a>
       <a href="nastroyki.html">Настройки</a>
     </nav>
   </header>
@@ -758,6 +765,7 @@ function main() {
       <div class="hero-actions">
         <a class="btn" href="oglavlenie-igroka.html">Книга игрока</a>
         <a class="btn btn-muted" href="oglavlenie-hranitelya.html">Книга хранителя</a>
+        <a class="btn btn-muted" href="pravila-komiks.html">Правила в комиксах</a>
         <a class="btn btn-muted" href="#downloads">Скачать PDF</a>
         <a class="btn btn-muted" href="character-sheet.html">Лист персонажа</a>
       </div>
@@ -862,7 +870,7 @@ function main() {
   });
   fs.writeFileSync(path.join(OUT, "nastroyki.html"), configHtml);
 
-  console.log("Built", pageMeta.length, "pages + index.html + nastroyki.html →", OUT);
+  console.log("Built", pageMeta.length, "pages + index.html + nastroyki.html + pravila-komiks.html →", OUT);
 }
 
 main();

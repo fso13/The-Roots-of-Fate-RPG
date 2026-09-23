@@ -10,12 +10,14 @@ import {
   buildModulePrintHtml,
   buildAdventurePrintHtml,
   renderPdf,
+  applyAdventureBleedCovers,
   ensurePublicBuilt,
   copyPrintCss,
   adventurePrintHtmlFilename,
   modulePrintHtmlFilename,
   ADVENTURE_PDF_OPTS_BASE,
   adventurePdfHeaderFooter,
+  adventurePdfRenderOptions,
 } from "../website/lib/pdf-core.mjs";
 import {
   CUSTOM_MODULES,
@@ -82,7 +84,9 @@ async function buildAdventurePdf(adventureId) {
   await renderPdf(outHtml, outPdf, {
     ...ADVENTURE_PDF_OPTS_BASE,
     ...adventurePdfHeaderFooter(adv),
+    ...adventurePdfRenderOptions(adv),
   });
+  await applyAdventureBleedCovers(adv, outPdf);
   console.log("PDF:", outPdf);
   console.log("HTML:", outHtml);
   console.log("Style:", adv.style || "default", "· Chapters:", chapters.length);

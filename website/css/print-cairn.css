@@ -14,15 +14,16 @@
 
 :root {
   --paper: #ffffff;
-  --ink: #1a1917;
-  --ink-soft: #4a4742;
-  --rule: #1a1917;
-  --gold: #8a6f2e;
-  --parchment: #b8a690;
-  --table-head: #3a3530;
-  --table-zebra: #f0eeea;
-  --cover-bg: #f7f4ee;
-  --cover-ink: #1a1917;
+  --ink: #000000;
+  --ink-soft: #444444;
+  --rule: #000000;
+  --gold: #111111;
+  --parchment: #777777;
+  --table-head: #111111;
+  --table-zebra: #d8d8d8;
+  --inset-bg: #e4e4e4;
+  --cover-bg: #f5f5f5;
+  --cover-ink: #000000;
   --cover-panel: #030201;
   --font-display: "Exocet", "MedievalSharp", "UnifrakturMaguntia", Georgia, serif;
   --font-body: "Lora", "IM Fell English", Georgia, serif;
@@ -432,7 +433,7 @@ body.print-bleed-sheet .print-cairn-back-inner {
   align-items: start;
   margin: 0;
   padding: 1.4mm 0 1.6mm;
-  border-bottom: 0.45pt solid rgba(26, 25, 23, 0.28);
+  border-bottom: 0.45pt solid rgba(17, 17, 17, 0.28);
   line-height: 1.15;
 }
 
@@ -441,7 +442,7 @@ body.print-bleed-sheet .print-cairn-back-inner {
   font-variant-numeric: tabular-nums;
   font-size: 0.95rem;
   font-weight: 600;
-  color: #8a8680;
+  color: #888888;
   text-align: right;
   padding-top: 0.1em;
   min-width: 0;
@@ -475,7 +476,7 @@ body.print-bleed-sheet .print-cairn-back-inner {
   font-weight: 400;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #9a958c;
+  color: #888888;
   line-height: 1.2;
 }
 
@@ -674,12 +675,15 @@ body.print-bleed-sheet .print-cairn-back-inner {
 
 .print-cairn table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 1.2px 0;
   margin: 0.65rem 0 0.85rem;
   font-size: 0.95em;
   border: none;
   break-inside: auto;
   page-break-inside: auto;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
 }
 
 .print-cairn thead {
@@ -696,6 +700,7 @@ body.print-bleed-sheet .print-cairn-back-inner {
   margin: 0;
   font-size: 0;
   border-collapse: collapse;
+  border-spacing: 0;
 }
 
 .print-cairn thead th {
@@ -732,7 +737,7 @@ body.print-bleed-sheet .print-cairn-back-inner {
   font-size: 0 !important;
 }
 
-.print-cairn tbody tr:nth-child(even) td {
+.print-cairn tbody tr:nth-child(odd) td {
   background: var(--table-zebra);
 }
 
@@ -741,7 +746,7 @@ body.print-bleed-sheet .print-cairn-back-inner {
   background: #fff !important;
 }
 
-.print-cairn tbody tr:nth-child(odd) td {
+.print-cairn tbody tr:nth-child(even) td {
   background: var(--paper);
 }
 
@@ -749,7 +754,7 @@ body.print-bleed-sheet .print-cairn-back-inner {
   font-family: var(--font-body);
   font-size: 0.95em;
   background: transparent;
-  border-left: 3.5px solid #9a9690;
+  border-left: 3.5px solid #999999;
   padding: 0.35rem 0 0.35rem 0.75rem;
   margin: 0.6rem 0;
   white-space: pre-wrap;
@@ -767,20 +772,20 @@ body.print-bleed-sheet .print-cairn-back-inner {
   font-family: var(--font-body);
 }
 
-/* Врезки: Важно / За столом / Опция — как callout в EZY/Cairn */
+/* Врезки: Важно / За столом / Опция — серый блок как у зебры таблиц */
 .print-cairn blockquote {
   margin: 0.75rem 0;
-  padding: 0.45rem 0.65rem 0.5rem 0.85rem;
-  border-left: 3px solid var(--gold);
-  border-top: 0.5px solid rgba(138, 111, 46, 0.35);
-  border-bottom: 0.5px solid rgba(138, 111, 46, 0.35);
-  border-right: none;
-  background: rgba(184, 166, 144, 0.12);
+  padding: 0.55rem 0.75rem 0.6rem 0.85rem;
+  border: none;
+  border-left: 3px solid var(--ink);
+  background: var(--inset-bg);
   color: var(--ink);
   font-style: normal;
   font-size: 0.94em;
   line-height: 1.42;
   page-break-inside: avoid;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
 }
 
 .print-cairn blockquote > p {
@@ -950,7 +955,7 @@ body.print-bleed-sheet .print-cairn-back-inner {
 .sheet-in-book .fill-area {
   border: 0.5pt solid var(--line, var(--rule));
   min-height: 10mm;
-  background: #faf8f4;
+  background: #f5f5f5;
 }
 
 .sheet-in-book .fill-area-notes {
@@ -1125,13 +1130,13 @@ body.print-bleed-sheet .print-cairn-back-inner {
 
 /* Светлая схема инвентаря — в тон остальному листу */
 .sheet-in-book .inventar-schema {
-  --schema-bg: #faf8f4;
+  --schema-bg: #f5f5f5;
   --schema-cell: #ffffff;
-  --schema-cell-line: #c8c2b8;
-  --schema-gold: #8a6f2e;
-  --schema-gold-dim: #b8a690;
-  --schema-silver: #8a8680;
-  --schema-ink: #1a1917;
+  --schema-cell-line: #bbbbbb;
+  --schema-gold: #2a2a2a;
+  --schema-gold-dim: #888888;
+  --schema-silver: #777777;
+  --schema-ink: #111111;
   --schema-cell-size: 0.78rem;
   --schema-gap: 1px;
   max-width: 100%;
@@ -1145,7 +1150,7 @@ body.print-bleed-sheet .print-cairn-back-inner {
 }
 
 .sheet-in-book .inventar-schema__zone--gold {
-  background: rgba(138, 111, 46, 0.06);
+  background: rgba(0, 0, 0, 0.05);
 }
 
 .sheet-in-book .inventar-schema__zone--silver {

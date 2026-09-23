@@ -71,9 +71,9 @@ export const PRINT_A5_PDF_OPTS_BASE = {
   displayHeaderFooter: true,
 };
 
-const PRINT_GOLD_HEX = "#8a6f2e";
-const PRINT_GOLD = rgb(138 / 255, 111 / 255, 46 / 255);
-const PRINT_INK = rgb(26 / 255, 25 / 255, 23 / 255);
+const PRINT_GOLD_HEX = "#111111";
+const PRINT_GOLD = rgb(17 / 255, 17 / 255, 17 / 255);
+const PRINT_INK = rgb(0, 0, 0);
 const MM = 72 / 25.4;
 
 /** Верхний колонтитул пустой — главу штампуем поверх. */
@@ -558,13 +558,16 @@ export function buildPrintHtml({
   tocGroups = null,
   blankAfterCover = true,
   includeThanks = true,
+  includeToc = true,
 }) {
   const allChapters = includeThanks
     ? [...chapters, buildThanksChapter(chapters.length + 1)]
     : [...chapters];
 
   let toc;
-  if (tocGroups) {
+  if (!includeToc) {
+    toc = "";
+  } else if (tocGroups) {
     const groups = tocGroups.map((g) => ({ ...g, chapters: [...g.chapters] }));
     if (includeThanks) {
       const thanks = allChapters[allChapters.length - 1];
@@ -766,7 +769,7 @@ export async function padPdfToBooklet(
         start: { x: marginX, y },
         end: { x: width - marginX, y },
         thickness: 0.35,
-        color: rgb(0.82, 0.8, 0.76),
+        color: rgb(0.78, 0.78, 0.78),
       });
       y -= lineGap;
     }
@@ -1044,9 +1047,52 @@ function printCoverHtml(title, tagline) {
   </div>`;
 }
 
-function adventureCoverHtml(adv) {
+export function adventureHasArtCover(adv) {
+  return Boolean(adv?.coverArt);
+}
+
+export function adventureCoverHtml(adv) {
   const genre = adv.genre || "Приключение";
   const tagline = adv.tagline || "Модульная настольная РПГ · только d6";
+
+  if (adv.coverArt) {
+    const logo =
+      adv.coverLogo && !adv.coverComposed
+        ? `<img class="cover-logo" src="${escapeHtml(adv.coverLogo)}" alt="">`
+        : "";
+    const subtitle = adv.coverSubtitle
+      ? `<p class="cover-subtitle">${escapeHtml(adv.coverSubtitle)}</p>`
+      : "";
+    const shade = adv.coverComposed
+      ? ""
+      : `<div class="cover-art-shade" aria-hidden="true"></div>`;
+    const artClass = adv.coverComposed
+      ? "print-adventure-cover has-art composed"
+      : "print-adventure-cover has-art";
+    return `
+  <div class="${artClass}">
+    <img class="cover-art" src="${escapeHtml(adv.coverArt)}" alt="">
+    ${shade}
+    <div class="print-adventure-cover-inner">
+      <div class="cover-top">
+        ${logo}
+        ${subtitle}
+        <p class="cover-genre">${escapeHtml(genre)}</p>
+        <h1>${escapeHtml(adv.title)}</h1>
+        <p class="cover-book">The Edge! · Приключение</p>
+      </div>
+      <div class="cover-bottom">
+        <div class="print-adventure-ornament" aria-hidden="true">
+          <span class="dot"></span><span class="line"></span>
+          <span class="dot"></span><span class="line"></span>
+          <span class="dot"></span>
+        </div>
+        <p class="tagline">${escapeHtml(tagline)}</p>
+      </div>
+    </div>
+  </div>`;
+  }
+
   return `
   <div class="print-adventure-cover">
     <div class="print-adventure-cover-inner">
@@ -1063,6 +1109,80 @@ function adventureCoverHtml(adv) {
   </div>`;
 }
 
+export function adventureBackCoverHtml(adv) {
+  if (!adv.backArt) return "";
+  const tagline = adv.tagline || "Модульная настольная РПГ · только d6";
+  const logo =
+    adv.coverLogo && !adv.coverComposed
+      ? `<img class="cover-logo cover-logo-sm" src="${escapeHtml(adv.coverLogo)}" alt="">`
+      : "";
+  const shade = adv.coverComposed
+    ? ""
+    : `<div class="cover-art-shade" aria-hidden="true"></div>`;
+  const artClass = adv.coverComposed
+    ? "print-adventure-back has-art composed"
+    : "print-adventure-back has-art";
+  return `
+  <div class="${artClass}">
+    <img class="cover-art" src="${escapeHtml(adv.backArt)}" alt="">
+    ${shade}
+    <div class="print-adventure-back-inner">
+      <div class="cover-top">
+        ${logo}
+        <p class="cover-book">The Edge!</p>
+        <h2>${escapeHtml(adv.title)}</h2>
+        <p class="blurb">${escapeHtml(tagline)}</p>
+      </div>
+      <div class="cover-bottom">
+        <p class="edition">Фан-модуль по миру Skyrim · только d6</p>
+      </div>
+    </div>
+  </div>`;
+}
+
+/** Full-bleed обложка/задник для приключений с coverArt. */
+export async function applyAdventureBleedCovers(adv, pdfPath, publicDir = PUBLIC) {
+  if (!adventureHasArtCover(adv)) return;
+
+  const front = adventureCoverHtml(adv);
+  const back = adventureBackCoverHtml(adv);
+  const frontBleedHtml = path.join(publicDir, `print-bleed-front-adv-${adv.id}.html`);
+  const backBleedHtml = back
+    ? path.join(publicDir, `print-bleed-back-adv-${adv.id}.html`)
+    : null;
+
+  fs.writeFileSync(
+    frontBleedHtml,
+    buildBleedSheetHtml({
+      title: `The Edge! — ${adv.title} — обложка`,
+      bodyClass: "print-adventure print-bleed-sheet",
+      cssHref: "css/print-adventure.css",
+      fontLinks: ADVENTURE_FONT_LINKS,
+      sheetHtml: front,
+    }),
+    "utf8"
+  );
+
+  if (back && backBleedHtml) {
+    fs.writeFileSync(
+      backBleedHtml,
+      buildBleedSheetHtml({
+        title: `The Edge! — ${adv.title} — задник`,
+        bodyClass: "print-adventure print-bleed-sheet",
+        cssHref: "css/print-adventure.css",
+        fontLinks: ADVENTURE_FONT_LINKS,
+        sheetHtml: back,
+      }),
+      "utf8"
+    );
+  }
+
+  await applyBleedCovers(pdfPath, {
+    frontHtmlPath: frontBleedHtml,
+    backHtmlPath: backBleedHtml || undefined,
+  });
+}
+
 /** PDF A5, как книги правил. */
 export const ADVENTURE_PDF_OPTS_BASE = {
   ...PRINT_A5_PDF_OPTS_BASE,
@@ -1070,6 +1190,12 @@ export const ADVENTURE_PDF_OPTS_BASE = {
 
 export function adventurePdfHeaderFooter(adv) {
   return printChromeTemplates(`The Edge! · ${adv.title}`);
+}
+
+export function adventurePdfRenderOptions(adv) {
+  return {
+    fillTocPages: adv.includeToc !== false,
+  };
 }
 
 export function modulePrintHtmlFilename(mod) {
@@ -1116,6 +1242,8 @@ export function buildAdventurePrintHtml(adv, { chapters }) {
     mainClass: "print-adventure-main",
     tocClass: "print-adventure-toc",
     simpleToc: true,
+    includeThanks: adv.includeThanks !== false,
+    includeToc: adv.includeToc !== false,
   });
 }
 

@@ -542,8 +542,13 @@ export const ADVENTURES = [
     moduleRel: "modules/skyrim-adventure-lunar.md",
     mapsRel: null,
     style: "lunar",
-    genre: "Скайрим · ложный след",
+    genre: "Скайрим",
     tagline: "Луна считает ночи. Верёвка ждёт не того",
+    coverArt: "images/covers/serebryanaya-lozh-front.png",
+    coverSubtitle: "The Elder Scrolls V",
+    coverComposed: true,
+    includeThanks: false,
+    includeToc: false,
   },
 ];
 

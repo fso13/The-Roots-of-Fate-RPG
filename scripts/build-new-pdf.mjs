@@ -22,6 +22,7 @@ import {
   buildAdventurePrintHtml,
   renderPdf,
   applyBleedCovers,
+  applyAdventureBleedCovers,
   padPdfToBooklet,
   imposeBookletPdf,
   bookletOutputPath,
@@ -30,6 +31,7 @@ import {
   adventurePrintHtmlFilename,
   ADVENTURE_PDF_OPTS_BASE,
   adventurePdfHeaderFooter,
+  adventurePdfRenderOptions,
   PRINT_A5_PDF_OPTS_BASE,
   printChromeTemplates,
 } from "../website/lib/pdf-core.mjs";
@@ -327,7 +329,9 @@ async function buildAdventurePdfs() {
     await renderPdf(outHtml, outPdf, {
       ...ADVENTURE_PDF_OPTS_BASE,
       ...adventurePdfHeaderFooter(adv),
+      ...adventurePdfRenderOptions(adv),
     });
+    await applyAdventureBleedCovers(adv, outPdf);
     console.log("Adventure PDF:", outPdf, `(${adv.style || "default"})`);
   }
 }

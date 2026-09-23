@@ -14,16 +14,17 @@
 
 :root {
   --paper: #ffffff;
-  --ink: #1a1917;
-  --ink-soft: #4a4742;
-  --rule: #1a1917;
-  --gold: #8a6f2e;
-  --accent: #8a6f2e;
-  --parchment: #b8a690;
-  --table-head: #3a3530;
-  --table-zebra: #f0eeea;
+  --ink: #000000;
+  --ink-soft: #444444;
+  --rule: #000000;
+  --gold: #111111;
+  --accent: #111111;
+  --parchment: #777777;
+  --table-head: #111111;
+  --table-zebra: #d8d8d8;
+  --inset-bg: #e4e4e4;
   --cover-bg: #ffffff;
-  --cover-ink: #1a1917;
+  --cover-ink: #000000;
   --font-display: "Exocet", "MedievalSharp", "UnifrakturMaguntia", Georgia, serif;
   --font-body: "Lora", "IM Fell English", Georgia, serif;
   --font-ui: "Source Sans 3", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -53,7 +54,7 @@ body.print-adventure {
 body.print-adventure[class*="theme-"] {
   --paper: #ffffff;
   --cover-bg: #ffffff;
-  --cover-ink: #1a1917;
+  --cover-ink: #000000;
   --accent: var(--gold);
   --font-display: "Exocet", "MedievalSharp", Georgia, serif;
   --font-body: "Lora", "IM Fell English", Georgia, serif;
@@ -152,7 +153,7 @@ body.print-adventure[class*="theme-"] {
 
 .print-adventure-ornament .line {
   flex: 1;
-  border-top: 1px solid rgba(138, 111, 46, 0.7);
+  border-top: 1px solid rgba(0, 0, 0, 0.45);
 }
 
 .print-adventure-cover .tagline {
@@ -163,6 +164,243 @@ body.print-adventure[class*="theme-"] {
   margin: 0;
   line-height: 1.45;
   letter-spacing: 0.04em;
+}
+
+/* —— Art-обложка (Skyrim и др.) —— */
+.print-adventure-cover.has-art,
+.print-adventure-back.has-art {
+  min-height: 100vh;
+  height: 100vh;
+  justify-content: flex-start;
+  align-items: stretch;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  background: #05080f;
+  color: #f4f1ea;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.print-adventure-cover.has-art::before,
+.print-adventure-cover.has-art::after,
+.print-adventure-back.has-art::before,
+.print-adventure-back.has-art::after {
+  display: none;
+}
+
+.print-adventure-cover.has-art .cover-art,
+.print-adventure-back.has-art .cover-art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 40%;
+  display: block;
+  z-index: 0;
+}
+
+.print-adventure-cover.has-art .cover-art-shade,
+.print-adventure-back.has-art .cover-art-shade {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(2, 4, 10, 0.78) 0%,
+      rgba(2, 4, 10, 0.2) 28%,
+      rgba(2, 4, 10, 0.08) 52%,
+      rgba(2, 4, 10, 0.55) 78%,
+      rgba(2, 4, 10, 0.88) 100%
+    );
+}
+
+.print-adventure-cover.has-art .print-adventure-cover-inner,
+.print-adventure-back.has-art .print-adventure-back-inner {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  min-height: 100vh;
+  width: 100%;
+  max-width: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8mm 8mm 9mm;
+  box-sizing: border-box;
+}
+
+.print-adventure-cover.has-art .cover-top,
+.print-adventure-cover.has-art .cover-bottom,
+.print-adventure-back.has-art .cover-top,
+.print-adventure-back.has-art .cover-bottom {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* На composed-обложке логотип уже вшит в PNG — только текст по центру, без плашки */
+.print-adventure-cover.has-art.composed .cover-top {
+  width: 100%;
+  max-width: 26rem;
+  padding-top: 58mm;
+  text-align: center;
+  align-items: center;
+  background: none;
+}
+
+.print-adventure-back.has-art.composed .cover-top {
+  padding-top: 46mm;
+}
+
+.print-adventure-cover.has-art.composed .cover-subtitle,
+.print-adventure-cover.has-art.composed .cover-genre,
+.print-adventure-cover.has-art.composed h1,
+.print-adventure-cover.has-art.composed .cover-book,
+.print-adventure-cover.has-art.composed .tagline {
+  text-shadow: none;
+  filter: none;
+}
+
+.print-adventure-cover.has-art .cover-logo,
+.print-adventure-back.has-art .cover-logo {
+  display: block;
+  width: min(52mm, 58%);
+  height: auto;
+  margin: 0 0 2.5mm;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.85));
+}
+
+.print-adventure-back.has-art .cover-logo-sm {
+  width: min(36mm, 42%);
+  margin-bottom: 3mm;
+}
+
+.print-adventure-cover.has-art .cover-subtitle {
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(220, 214, 200, 0.85);
+  margin: 0 0 3mm;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
+}
+
+.print-adventure-cover.has-art .cover-genre {
+  color: #d4b76a;
+  margin: 0 0 2.5mm;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.95);
+}
+
+.print-adventure-cover.has-art h1 {
+  font-size: 1.7rem;
+  color: #f3e6c0;
+  margin: 0 0 2mm;
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.95),
+    0 0 18px rgba(0, 0, 0, 0.55);
+}
+
+.print-adventure-cover.has-art .cover-book {
+  color: rgba(236, 230, 214, 0.92);
+  margin: 0;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.95);
+}
+
+.print-adventure-cover.has-art .print-adventure-ornament {
+  margin: 0 auto 2.5mm;
+}
+
+.print-adventure-cover.has-art .print-adventure-ornament .dot {
+  border-color: #d4b76a;
+}
+
+.print-adventure-cover.has-art .print-adventure-ornament .line {
+  border-top-color: rgba(212, 183, 106, 0.75);
+}
+
+.print-adventure-cover.has-art .tagline {
+  color: rgba(230, 224, 210, 0.9);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.95);
+}
+
+.print-adventure-back {
+  min-height: 100vh;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  page-break-before: always;
+  position: relative;
+  overflow: hidden;
+}
+
+.print-adventure-back.has-art h2 {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: normal;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #f3e6c0;
+  margin: 0 0 3mm;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.95);
+}
+
+.print-adventure-back.has-art .cover-book {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(236, 230, 214, 0.9);
+  margin: 0 0 2mm;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.95);
+}
+
+.print-adventure-back.has-art .blurb {
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  line-height: 1.45;
+  letter-spacing: 0.04em;
+  color: rgba(230, 224, 210, 0.9);
+  margin: 0;
+  max-width: 22rem;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.95);
+}
+
+.print-adventure-back.has-art .edition {
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(212, 183, 106, 0.9);
+  margin: 0;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.95);
+}
+
+body.print-bleed-sheet {
+  margin: 0;
+  width: 148mm;
+  height: 210mm;
+  overflow: hidden;
+  background: #05080f;
+}
+
+body.print-bleed-sheet .print-adventure-cover,
+body.print-bleed-sheet .print-adventure-back {
+  width: 148mm;
+  height: 210mm;
+  min-height: 210mm;
+  page-break-after: avoid;
+  page-break-before: avoid;
+}
+
+body.print-bleed-sheet .print-adventure-cover-inner,
+body.print-bleed-sheet .print-adventure-back-inner {
+  min-height: 210mm;
 }
 
 /* —— Поток —— */
@@ -453,17 +691,17 @@ body.print-adventure[class*="theme-"] {
 
 .print-adventure blockquote {
   margin: 0.75rem 0;
-  padding: 0.45rem 0.65rem 0.5rem 0.85rem;
-  border-left: 3px solid var(--gold);
-  border-top: 0.5px solid rgba(138, 111, 46, 0.35);
-  border-bottom: 0.5px solid rgba(138, 111, 46, 0.35);
-  border-right: none;
-  background: rgba(184, 166, 144, 0.12);
+  padding: 0.55rem 0.75rem 0.6rem 0.85rem;
+  border: none;
+  border-left: 3px solid var(--ink);
+  background: var(--inset-bg);
   color: var(--ink);
   font-style: normal;
   font-size: 0.94em;
   line-height: 1.42;
   page-break-inside: avoid;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
 }
 
 .print-adventure blockquote strong:first-child {
@@ -474,11 +712,14 @@ body.print-adventure[class*="theme-"] {
 
 .print-adventure table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 1.2px 0;
   margin: 0.65rem 0 0.85rem;
   font-size: 0.95em;
   break-inside: auto;
   page-break-inside: auto;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
 }
 
 .print-adventure thead {
@@ -499,6 +740,7 @@ body.print-adventure[class*="theme-"] {
   letter-spacing: 0.03em;
   padding: 0.4rem 0.5rem;
   text-align: left;
+  border: none;
 }
 
 .print-adventure tbody td {
@@ -508,15 +750,19 @@ body.print-adventure[class*="theme-"] {
   background: #ffffff;
 }
 
-.print-adventure tbody tr:nth-child(even) td {
+.print-adventure tbody tr:nth-child(odd) td {
   background: var(--table-zebra);
+}
+
+.print-adventure tbody tr:nth-child(even) td {
+  background: #ffffff;
 }
 
 .print-adventure pre {
   font-family: var(--font-body);
   font-size: 0.95em;
   background: transparent;
-  border-left: 3.5px solid #9a9690;
+  border-left: 3.5px solid #999999;
   padding: 0.35rem 0 0.35rem 0.75rem;
   margin: 0.6rem 0;
   white-space: pre-wrap;
@@ -562,9 +808,14 @@ body.print-adventure[class*="theme-"] {
 
 @media print {
   body.print-adventure,
-  .print-adventure-cover,
+  .print-adventure-cover:not(.has-art),
   .print-adventure-main {
     background: #ffffff !important;
+  }
+
+  .print-adventure-cover.has-art,
+  .print-adventure-back.has-art {
+    background: #05080f !important;
   }
 
   .print-adventure h2,
