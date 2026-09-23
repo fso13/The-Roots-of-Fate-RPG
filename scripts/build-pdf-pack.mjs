@@ -37,7 +37,7 @@ const MODULE_PDF_OPTS = {
   headerTemplate: "<span></span>",
   footerTemplate: `
       <div style="width:100%;font-size:8px;color:#666;text-align:center;padding:0 16mm;">
-        <span>Корни судьбы</span>
+        <span>The Edge!</span>
         <span style="float:right"><span class="pageNumber"></span> / <span class="totalPages"></span></span>
       </div>`,
 };

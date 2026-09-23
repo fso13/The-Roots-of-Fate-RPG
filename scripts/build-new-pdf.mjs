@@ -175,7 +175,8 @@ async function buildFullEdition() {
     includeAdventure: false,
     audience: "all",
     includeCustomModules: false,
-  }).filter((r) => !isReadmeFile(r));
+    includeReadme: false,
+  });
 
   const playerRels = coreRels.filter(
     (r) => CHAPTER_AUDIENCE[r] === "player" && r !== MAGIC_CHAPTER_REL
@@ -259,7 +260,11 @@ async function buildFullEdition() {
     frontHtmlPath: frontBleedHtml,
     backHtmlPath: backBleedHtml,
   });
-  const padded = await padPdfToBooklet(outPdf, { multiple: 4, reserveTrailing: 1 });
+  const padded = await padPdfToBooklet(outPdf, {
+    multiple: 4,
+    reserveTrailing: 1,
+    minNotes: 1,
+  });
   if (padded) console.log(`Booklet pad: +${padded} notes page(s) → multiple of 4`);
   const broshyura = bookletOutputPath(outPdf);
   const imposed = await imposeBookletPdf(outPdf, broshyura);

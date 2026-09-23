@@ -16,7 +16,7 @@ const HELP = `Usage: node scripts/build-pdf.mjs [options]
   --no-adventure                  Exclude adventure/*.md
 
 Книги собираются в стиле Cairn 2E Warden's Guide (A5).
-Пишутся и в koreni-sudby-kniga-*-cairn.pdf, и в основные koreni-sudby-kniga-*.pdf.
+Пишутся и в the-edge-kniga-*-cairn.pdf, и в основные the-edge-kniga-*.pdf.
 `;
 
 async function main() {

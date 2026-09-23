@@ -1,4 +1,4 @@
-# «Корни судьбы» — Книга хранителя
+# «The Edge!» — Книга хранителя
 
 Правила для ведущего: модульность, бестиарий, опциональные системы. Игрокам достаточно [Книги игрока](README-igrok.md). Приключения и дополнительные модули — отдельные PDF ниже.
 
@@ -118,9 +118,9 @@
 
 | Формат | Файл |
 |--------|------|
-| PDF, A5 · стиль Cairn — книга хранителя | [koreni-sudby-kniga-hranitelya.pdf](koreni-sudby-kniga-hranitelya.pdf) |
-| PDF, A4 portrait × 4 — ширма хранителя | [koreni-sudby-shirima-hranitelya.pdf](koreni-sudby-shirima-hranitelya.pdf) |
-| PDF, A5 (дубль) | [koreni-sudby-kniga-hranitelya-cairn.pdf](koreni-sudby-kniga-hranitelya-cairn.pdf) |
+| PDF, A5 · стиль Cairn — книга хранителя | [the-edge-kniga-hranitelya.pdf](the-edge-kniga-hranitelya.pdf) |
+| PDF, A4 portrait × 4 — ширма хранителя | [the-edge-shirima-hranitelya.pdf](the-edge-shirima-hranitelya.pdf) |
+| PDF, A5 (дубль) | [the-edge-kniga-hranitelya-cairn.pdf](the-edge-kniga-hranitelya-cairn.pdf) |
 | Markdown | [kniga-hranitelya.md](kniga-hranitelya.md) |
 
 Свежие PDF (игрок, хранитель, полное издание, приключения) — в папке [`new_pdf/`](../new_pdf/). Сборка: `npm run pdf:new`.

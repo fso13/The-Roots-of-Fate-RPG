@@ -1,4 +1,4 @@
-# «Корни судьбы» — Книга игрока
+# «The Edge!» — Книга игрока
 
 Всё, что нужно за столом игроку: ядро, бой, персонаж, магия, снаряжение и фэнтези-справочники. Правила для хранителя — в [Книге хранителя](README-hranitel.md).
 
@@ -31,8 +31,8 @@
 
 | Формат | Файл |
 |--------|------|
-| PDF, A5 · стиль Cairn | [koreni-sudby-kniga-igroka.pdf](koreni-sudby-kniga-igroka.pdf) |
-| PDF, A5 (дубль) | [koreni-sudby-kniga-igroka-cairn.pdf](koreni-sudby-kniga-igroka-cairn.pdf) |
+| PDF, A5 · стиль Cairn | [the-edge-kniga-igroka.pdf](the-edge-kniga-igroka.pdf) |
+| PDF, A5 (дубль) | [the-edge-kniga-igroka-cairn.pdf](the-edge-kniga-igroka-cairn.pdf) |
 | Markdown | [kniga-igroka.md](kniga-igroka.md) |
 
 Сборка: `npm run book:igrok` · PDF: `npm run pdf:igrok`

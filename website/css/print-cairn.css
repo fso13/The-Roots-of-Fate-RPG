@@ -502,11 +502,17 @@ body.print-bleed-sheet .print-cairn-back-inner {
   page-break-before: always;
 }
 
-/* —— Открытие главы (скрин 1) —— */
+/* —— Открытие главы: титул + арт на своей странице —— */
 .chapter-open {
-  margin: 0 0 8mm;
+  margin: 0;
   padding: 2mm 0 0;
-  page-break-after: avoid;
+  min-height: 165mm;
+  display: flex;
+  flex-direction: column;
+  page-break-after: always;
+  break-after: page;
+  page-break-inside: avoid;
+  break-inside: avoid;
 }
 
 .chapter-open-num {
@@ -578,6 +584,25 @@ body.print-bleed-sheet .print-cairn-back-inner {
   text-align: left;
   margin: 0 0 0.85rem;
   padding-top: 0;
+}
+
+.chapter-open .chapter-art {
+  margin: auto 0 2mm;
+  padding: 0;
+  background: #030201;
+  border: 1px solid var(--rule);
+  overflow: hidden;
+}
+
+.chapter-open .chapter-art img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 95mm;
+  object-fit: cover;
+  object-position: center;
+  border: none;
+  margin: 0;
 }
 
 .chapter-art {
@@ -1216,6 +1241,11 @@ body.print-bleed-sheet .print-cairn-back-inner {
 }
 
 @media print {
+  .chapter-open {
+    break-after: page;
+    page-break-after: always;
+  }
+
   .chapter-head,
   .print-cairn h2,
   .print-cairn h3 {

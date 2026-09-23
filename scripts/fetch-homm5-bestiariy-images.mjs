@@ -160,7 +160,7 @@ async function main() {
   if (!md.includes("иллюстрации — арты")) {
     md = md.replace(
       /(Ниже существа \*\*в духе\*\*[^\n]+\n\n)/,
-      `$1*Иллюстрации — арты существ из **Heroes of Might and Magic V** (Ubisoft / Nival); статы ниже — перевод в «Корни судьбы», не официальные данные игры.*\n\n`
+      `$1*Иллюстрации — арты существ из **Heroes of Might and Magic V** (Ubisoft / Nival); статы ниже — перевод в «The Edge!», не официальные данные игры.*\n\n`
     );
   }
   md = insertPortraitsIntoMd(md, portraits);

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Симуляция боя по правилам «Корни судьбы»"""
+"""Симуляция боя по правилам «The Edge!»"""
 import random
 random.seed(42)
 

@@ -5,7 +5,7 @@ import path from "path";
 import { PUBLIC, ROOT, renderPdf } from "../website/lib/pdf-core.mjs";
 
 const OUT_HTML = path.join(PUBLIC, "print-shirima-hranitelya.html");
-const OUT_PDF = path.join(PUBLIC, "koreni-sudby-shirima-hranitelya.pdf");
+const OUT_PDF = path.join(PUBLIC, "the-edge-shirima-hranitelya.pdf");
 
 const FONT_LINKS = `
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,7 +17,7 @@ function screenHtml() {
 <html lang="ru">
 <head>
   <meta charset="utf-8">
-  <title>Корни судьбы — Ширма хранителя</title>
+  <title>The Edge! — Ширма хранителя</title>
   ${FONT_LINKS}
   <link rel="stylesheet" href="css/print-screen.css">
 </head>
@@ -26,7 +26,7 @@ function screenHtml() {
 <!-- ========== ЛИСТ 1: ЯДРО ========== -->
 <section class="panel" aria-label="Лист 1 — Ядро">
   <header class="panel-head">
-    <h1>Корни судьбы · Ширма · 1/4 · Ядро</h1>
+    <h1>The Edge! · Ширма · 1/4 · Ядро</h1>
     <span class="meta">только d6 · светлый + тёмный</span>
   </header>
   <div class="cols">
@@ -98,7 +98,7 @@ function screenHtml() {
 <!-- ========== ЛИСТ 2: БОЙ ========== -->
 <section class="panel" aria-label="Лист 2 — Бой">
   <header class="panel-head">
-    <h1>Корни судьбы · Ширма · 2/4 · Бой и снаряжение</h1>
+    <h1>The Edge! · Ширма · 2/4 · Бой и снаряжение</h1>
     <span class="meta">2 ОД / раунд · урон из атаки</span>
   </header>
   <div class="cols">
@@ -187,7 +187,7 @@ function screenHtml() {
 <!-- ========== ЛИСТ 3: КРИТЫ / СОСТОЯНИЯ / РАНЫ ========== -->
 <section class="panel" aria-label="Лист 3 — Криты и состояния">
   <header class="panel-head">
-    <h1>Корни судьбы · Ширма · 3/4 · Криты, раны, состояния</h1>
+    <h1>The Edge! · Ширма · 3/4 · Криты, раны, состояния</h1>
     <span class="meta">опциональные модули</span>
   </header>
   <div class="cols">
@@ -290,7 +290,7 @@ function screenHtml() {
 <!-- ========== ЛИСТ 4: ОТРЯДЫ + ШПАРГАЛКА ========== -->
 <section class="panel" aria-label="Лист 4 — Отряды и шпаргалка">
   <header class="panel-head">
-    <h1>Корни судьбы · Ширма · 4/4 · Отряды и шпаргалка</h1>
+    <h1>The Edge! · Ширма · 4/4 · Отряды и шпаргалка</h1>
     <span class="meta">печать · A4 portrait × 4</span>
   </header>
   <div class="cols">
@@ -359,7 +359,7 @@ function screenHtml() {
       </div>
       <div class="block">
         <h2>Сборка PDF</h2>
-        <p class="note"><code>npm run pdf:shirima</code> · файл <code>koreni-sudby-shirima-hranitelya.pdf</code></p>
+        <p class="note"><code>npm run pdf:shirima</code> · файл <code>the-edge-shirima-hranitelya.pdf</code></p>
         <p class="note">Печать: A4 книжная (portrait), 4 листа. Можно согнуть в ширму или положить рядом.</p>
       </div>
     </div>

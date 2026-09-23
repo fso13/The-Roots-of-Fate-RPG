@@ -545,11 +545,17 @@ body.print-bleed-sheet .print-adventure-back-inner {
   page-break-before: always;
 }
 
-/* —— Открытие главы —— */
+/* —— Открытие главы: титул + арт на своей странице —— */
 .chapter-open {
-  margin: 0 0 8mm;
+  margin: 0;
   padding: 2mm 0 0;
-  page-break-after: avoid;
+  min-height: 165mm;
+  display: flex;
+  flex-direction: column;
+  page-break-after: always;
+  break-after: page;
+  page-break-inside: avoid;
+  break-inside: avoid;
 }
 
 .chapter-open-num {

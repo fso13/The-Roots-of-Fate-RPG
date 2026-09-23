@@ -44,7 +44,7 @@ function main() {
   const parts = [
     `<!-- Сгенерировано: npm run book:md --audience ${opts.audience} — не правьте вручную -->`,
     "",
-    readme ? readme.body : "# Корни судьбы",
+    readme ? readme.body : "# The Edge!",
     "",
     toc,
     "---",

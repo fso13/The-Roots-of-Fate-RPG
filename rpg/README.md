@@ -1,4 +1,4 @@
-# «Корни судьбы» — модульная настольная РПГ
+# «The Edge!» — модульная настольная РПГ
 
 Система рассчитана на **только d6**. Другие кубики не используются.
 
@@ -92,10 +92,10 @@
 
 | Книга | PDF (A5 · Cairn) | Markdown |
 |-------|------------------|----------|
-| Игрок | [pdf](koreni-sudby-kniga-igroka.pdf) | [md](kniga-igroka.md) |
-| Хранитель | [pdf](koreni-sudby-kniga-hranitelya.pdf) | [md](kniga-hranitelya.md) |
-| Ширма хранителя | [pdf, 4×A4 portrait](koreni-sudby-shirima-hranitelya.pdf) | — |
-| Полное издание | [pdf](koreni-sudby-polnoe-izdanie.pdf) | [md](kniga-polnaya.md) |
+| Игрок | [pdf](the-edge-kniga-igroka.pdf) | [md](kniga-igroka.md) |
+| Хранитель | [pdf](the-edge-kniga-hranitelya.pdf) | [md](kniga-hranitelya.md) |
+| Ширма хранителя | [pdf, 4×A4 portrait](the-edge-shirima-hranitelya.pdf) | — |
+| Полное издание | [pdf](the-edge-polnoe-izdanie.pdf) | [md](kniga-polnaya.md) |
 
 Сборка: `npm run book:igrok` · `book:hranitel` · `book:md` · PDF: `npm run pdf:igrok` / `pdf:hranitel` · ширма: `npm run pdf:shirima`
 

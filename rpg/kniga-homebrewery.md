@@ -2,7 +2,7 @@
 <!-- https://homebrewery.naturalcrit.com/ -->
 
 ```metadata
-title: Корни судьбы — полное издание
+title: The Edge! — полное издание
 description: Модульная настольная РПГ — только d6
 author:
 systems: []
@@ -12,7 +12,7 @@ theme: Blank
 ```
 
 ```css
-/* Корни судьбы — стиль для Homebrewery (тема Blank + A5, в духе Cairn) */
+/* The Edge! — стиль для Homebrewery (тема Blank + A5, в духе Cairn) */
 @import url("https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Lora:ital,wght@0,400;0,600;0,700;1,400&display=swap");
 
 .page {
@@ -410,7 +410,7 @@ theme: Blank
 
 {{frontCover}}
 
-# Корни судьбы — полное издание
+# The Edge! — полное издание
 
 ##### Модульная настольная ролевая игра · только d6
 
@@ -420,7 +420,7 @@ theme: Blank
 
 {{wide
 
-# «Корни судьбы» — модульная настольная РПГ
+# «The Edge!» — модульная настольная РПГ
 
 Система рассчитана на **только d6**. Другие кубики не используются.
 

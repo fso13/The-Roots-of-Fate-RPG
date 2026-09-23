@@ -224,7 +224,7 @@ export async function stampPageChrome(pdfPath, { skipPages = 2, pageMap = {}, ch
     const label = String(pageNum);
     const boxW = Math.max(11 * MM, font.widthOfTextAtSize(label, 11) + 6 * MM);
     const boxH = 8 * MM;
-    const boxY = 0;
+    const boxY = 5 * MM; // чуть выше края листа (~5 мм), чтобы не срезало при печати
     const isOdd = pageNum % 2 === 1;
     const boxX = isOdd ? width - boxW : 0;
     page.drawRectangle({
@@ -706,18 +706,24 @@ export async function applyBleedCovers(pdfPath, { frontHtmlPath, backHtmlPath, h
 /**
  * Доливает страницы до кратности `multiple` (для печати брошюрой).
  * Вставляет листы «Заметки» перед задней обложкой (`reserveTrailing` последних страниц).
+ * `minNotes` — минимум листов заметок, даже если кратность уже соблюдена.
  * @returns {number} сколько страниц добавлено
  */
 export async function padPdfToBooklet(
   pdfPath,
-  { multiple = 4, reserveTrailing = 1, label = "Заметки" } = {}
+  { multiple = 4, reserveTrailing = 1, label = "Заметки", minNotes = 0 } = {}
 ) {
   const doc = await PDFDocument.load(fs.readFileSync(pdfPath));
   doc.registerFontkit(fontkit);
   const count = doc.getPageCount();
   const rem = count % multiple;
-  if (rem === 0) return 0;
-  const need = multiple - rem;
+  let need = rem === 0 ? 0 : multiple - rem;
+  if (minNotes > need) {
+    // Добираем до minNotes, сохраняя кратность multiple
+    need = minNotes;
+    while ((count + need) % multiple !== 0) need += 1;
+  }
+  if (need === 0) return 0;
 
   const fontPath = resolveStampFontPath();
   let font;

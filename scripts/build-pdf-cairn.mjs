@@ -92,7 +92,7 @@ const HELP = `Usage: node scripts/build-pdf-cairn.mjs [options]
 
   --audience <all|player|keeper>  Какую книгу собрать (default: all)
   --output <path>                 PDF file
-  --also-main                     Также записать в koreni-sudby-kniga-*.pdf (основные файлы)
+  --also-main                     Также записать в the-edge-kniga-*.pdf (основные файлы)
   --no-adventure                  Exclude adventure/*.md
 `;
 
@@ -117,6 +117,7 @@ export async function buildCairnPdf(optsIn = {}) {
   const relFiles = listBookSources({
     includeAdventure: opts.includeAdventure,
     audience: opts.audience,
+    includeReadme: false,
   });
 
   const chapters = buildChapterList(relFiles, {
@@ -184,7 +185,11 @@ export async function buildCairnPdf(optsIn = {}) {
     frontHtmlPath: frontBleedHtml,
     backHtmlPath: backBleedHtml,
   });
-  const padded = await padPdfToBooklet(opts.output, { multiple: 4, reserveTrailing: 1 });
+  const padded = await padPdfToBooklet(opts.output, {
+    multiple: 4,
+    reserveTrailing: 1,
+    minNotes: 1,
+  });
   if (padded) console.log(`Booklet pad: +${padded} notes page(s) → multiple of 4`);
   const broshyura = bookletOutputPath(opts.output);
   const imposed = await imposeBookletPdf(opts.output, broshyura);

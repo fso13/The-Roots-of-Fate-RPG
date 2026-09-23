@@ -279,8 +279,8 @@
     applyNavFilter();
   }
 
-  window.KoreniSudby = window.KoreniSudby || {};
-  window.KoreniSudby.manifest = {
+  window.TheEdge = window.TheEdge || {};
+  window.TheEdge.manifest = {
     getConfig,
     saveConfig,
     applyNavFilter,

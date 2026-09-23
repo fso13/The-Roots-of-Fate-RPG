@@ -1,6 +1,6 @@
 # Me rpg
 
-Модульные правила настольной РПГ: каталог в папке [`rpg/`](rpg/README.md) («Корни судьбы») — единый тип кубиков, упрощённый бой, опциональные модули ран и критов, магия как атака, создание персонажа и уровни, фэнтези-дополнения (заклинания, навыки, снаряжение).
+Модульные правила настольной РПГ: каталог в папке [`rpg/`](rpg/README.md) («The Edge!») — единый тип кубиков, упрощённый бой, опциональные модули ран и критов, магия как атака, создание персонажа и уровни, фэнтези-дополнения (заклинания, навыки, снаряжение).
 
 ## Веб-сайт и GitLab Pages
 
@@ -17,9 +17,9 @@ npm run pdf:hranitel              # книга хранителя
 
 | Команда | PDF |
 |---------|-----|
-| `npm run pdf:igrok` | `koreni-sudby-kniga-igroka.pdf` (+ `-cairn.pdf`) |
-| `npm run pdf:hranitel` | `koreni-sudby-kniga-hranitelya.pdf` (+ `-cairn.pdf`) |
-| `npm run pdf:polnoe` | `koreni-sudby-polnoe-izdanie.pdf` |
+| `npm run pdf:igrok` | `the-edge-kniga-igroka.pdf` (+ `-cairn.pdf`) |
+| `npm run pdf:hranitel` | `the-edge-kniga-hranitelya.pdf` (+ `-cairn.pdf`) |
+| `npm run pdf:polnoe` | `the-edge-polnoe-izdanie.pdf` |
 | `npm run pdf:shirima` | ширма, 4×A4 |
 | `npm run pdf:all` | все книги + модули + приключения |
 

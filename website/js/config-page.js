@@ -55,7 +55,7 @@
   ];
 
   function init() {
-    const api = window.KoreniSudby && window.KoreniSudby.manifest;
+    const api = window.TheEdge && window.TheEdge.manifest;
     if (!api) return;
 
     const form = document.getElementById("config-form");

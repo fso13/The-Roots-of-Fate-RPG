@@ -673,6 +673,7 @@ export function listBookSources({
   includeAdventure = null,
   audience = "all",
   includeCustomModules = false,
+  includeReadme = true,
 } = {}) {
   const readmeRel = README_BY_AUDIENCE[audience] || README_BY_AUDIENCE.all;
   const withAdventure =
@@ -699,7 +700,7 @@ export function listBookSources({
     }
   }
 
-  if (fs.existsSync(path.join(RPG, readmeRel))) {
+  if (includeReadme && fs.existsSync(path.join(RPG, readmeRel))) {
     relFiles = orderBookFiles([readmeRel, ...relFiles], { audience });
   } else {
     relFiles = orderBookFiles(relFiles, { audience });
@@ -735,15 +736,15 @@ export const BOOK_OUTPUT = {
 };
 
 export const PDF_OUTPUT = {
-  all: "koreni-sudby-polnoe-izdanie.pdf",
-  player: "koreni-sudby-kniga-igroka.pdf",
-  keeper: "koreni-sudby-kniga-hranitelya.pdf",
+  all: "the-edge-polnoe-izdanie.pdf",
+  player: "the-edge-kniga-igroka.pdf",
+  keeper: "the-edge-kniga-hranitelya.pdf",
 };
 
 export const PDF_OUTPUT_CAIRN = {
-  all: "koreni-sudby-polnoe-izdanie-cairn.pdf",
-  player: "koreni-sudby-kniga-igroka-cairn.pdf",
-  keeper: "koreni-sudby-kniga-hranitelya-cairn.pdf",
+  all: "the-edge-polnoe-izdanie-cairn.pdf",
+  player: "the-edge-kniga-igroka-cairn.pdf",
+  keeper: "the-edge-kniga-hranitelya-cairn.pdf",
 };
 
 export const PDF_HTML_OUTPUT = {
@@ -805,11 +806,11 @@ export function adventureNewPdfFile(adv) {
 
 /** @deprecated алиас → new_pdf pack */
 export function modulePdfFile(mod) {
-  return moduleNewPdfFile(mod) || `koreni-sudby-modul-${mod.id.replace(/_/g, "-")}.pdf`;
+  return moduleNewPdfFile(mod) || `the-edge-modul-${mod.id.replace(/_/g, "-")}.pdf`;
 }
 
 export function adventurePdfFile(adv) {
-  return adventureNewPdfFile(adv) || `koreni-sudby-priklyuchenie-${adv.id}.pdf`;
+  return adventureNewPdfFile(adv) || `the-edge-priklyuchenie-${adv.id}.pdf`;
 }
 
 export function modulePdfHtmlFile(mod) {
@@ -915,7 +916,7 @@ function renderDownloadItemLi(publicDir, prefix, item, missingHint) {
   return parts.join("\n      ");
 }
 
-const PRESERVE_IN_PUBLIC = /^(koreni-sudby-.*\.pdf|print-(book|modul|priklyuchenie|shirima).*\.html)$/;
+const PRESERVE_IN_PUBLIC = /^(the-edge-.*\.pdf|print-(book|modul|priklyuchenie|shirima).*\.html)$/;
 
 /** Сохранить PDF и print-HTML перед очисткой public/. */
 export function preserveBookAssets(publicDir) {

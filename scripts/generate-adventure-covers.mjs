@@ -37,7 +37,7 @@ const covers = [
   <ellipse cx="${w * 0.52}" cy="${h * 0.62}" rx="90" ry="120" fill="#1a1c22" opacity="0.85"/>
   <rect x="${w * 0.48}" y="${h * 0.52}" width="70" height="90" rx="4" fill="#e85d04" opacity="0.35"/>
   <text x="${w / 2}" y="180" text-anchor="middle" font-family="Georgia, serif" font-size="72" fill="#f8f9fa" letter-spacing="2">Пепел слов</text>
-  <text x="${w / 2}" y="240" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" fill="#adb5bd">Корни судьбы · приключение</text>
+  <text x="${w / 2}" y="240" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" fill="#adb5bd">The Edge! · приключение</text>
   <text x="${w / 2}" y="${h - 80}" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" fill="#6c757d">Солнечный Квартал · память против огня</text>
 </svg>`,
   },
@@ -63,7 +63,7 @@ const covers = [
   <ellipse cx="${w * 0.5}" cy="${h * 0.78}" rx="280" ry="40" fill="#2d4a3e" opacity="0.5"/>
   <path d="M ${w * 0.35} ${h * 0.82} Q ${w * 0.5} ${h * 0.76} ${w * 0.65} ${h * 0.82}" fill="none" stroke="#b8c0d4" stroke-width="4" opacity="0.85"/>
   <text x="${w / 2}" y="170" text-anchor="middle" font-family="Georgia, serif" font-size="58" fill="#e8e0f0" letter-spacing="1">Зов из Чёрного шпиля</text>
-  <text x="${w / 2}" y="230" text-anchor="middle" font-family="Arial, sans-serif" font-size="26" fill="#9d8ec2">Корни судьбы · приключение</text>
+  <text x="${w / 2}" y="230" text-anchor="middle" font-family="Arial, sans-serif" font-size="26" fill="#9d8ec2">The Edge! · приключение</text>
   <text x="${w / 2}" y="${h - 80}" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" fill="#6c6578">Вестмар · сказка без хэппи-энда</text>
 </svg>`,
   },
